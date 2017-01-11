@@ -1,0 +1,15 @@
+language: node_js
+
+node_js:
+- 6.1
+
+cache:
+    directories:
+        - node_modules
+        
+install:
+    - npm install
+
+notifications:
+  email:
+  - 'aegloff@hsr.ch'
