@@ -13,6 +13,9 @@ cache:
 install:
     - npm install
 
+script:
+    - npm version
+
 notifications:
   email:
   - 'aegloff@hsr.ch'
