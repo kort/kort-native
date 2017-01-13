@@ -62,10 +62,12 @@ const styles = {
         width: 30
     },
     iconStyleUnselected: {
-        color: '#87888c'
+        color: '#87888c',
+        fontSize: 11
     },
     iconStyleSelected: {
-        color: '#3ad263'
+        color: '#3ad263',
+        fontSize: 11
     }
 };
 
