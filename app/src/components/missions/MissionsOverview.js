@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import {
-    View
-} from 'react-native';
+import LoginOverview from '../login/LoginOverview';
+
 
 class MissionsOverview extends Component {
     render() {
         return (
-            <View />
+            <LoginOverview />
         );
     }
 }

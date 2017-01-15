@@ -30,6 +30,7 @@ const RouterComponent = () => {
                             key='missionsOverview'
                             component={MissionsOverview}
                             title='Missions'
+                            initial
                             navigationBarStyle={styles.navBarStyle}
                             titleStyle={styles.navBarTitleStyle}
                         />
