@@ -45,28 +45,28 @@ const ProfileTabIcon = ({ title, selected }) => {
 };
 const styles = {
     tabIconStyle: {
-        backgroundColor: '#212327',
+        backgroundColor: 'transparent',
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
     },
     tabIconStyleUnselected: {
-        tintColor: '#87888c'
+        tintColor: '#657C8E'
     },
     tabIconStyleSelected: {
-        tintColor: '#3ad263'
+        tintColor: '#ffffff'
     },
     iconStyle: {
         height: 30,
         width: 30
     },
     iconStyleUnselected: {
-        color: '#87888c',
+        color: '#657C8E',
         fontSize: 11
     },
     iconStyleSelected: {
-        color: '#3ad263',
+        color: '#ffffff',
         fontSize: 11
     }
 };

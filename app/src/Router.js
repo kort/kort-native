@@ -70,10 +70,10 @@ const RouterComponent = () => {
 
 const styles = {
     tabBarStyle: {
-        backgroundColor: '#212327'
+        backgroundColor: '#395971'
     },
     navBarStyle: {
-        backgroundColor: '#212327'
+        backgroundColor: '#395971'
     },
     navBarTitleStyle: {
         color: 'white'
