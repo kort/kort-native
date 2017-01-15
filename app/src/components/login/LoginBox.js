@@ -2,7 +2,7 @@ import React from 'react';
 import {
     View,
     Image,
-    ScrollView
+    KeyboardAvoidingView
 } from 'react-native';
 import { 
      Button,
@@ -11,8 +11,11 @@ import {
 
 const LoginBox = ({ onLogin }) => {
         return (
-            <View style={styles.loginBoxStyle}>
-                <Image source={require('../../../assets/images/login/kortLogo.png')} />
+            <KeyboardAvoidingView style={styles.loginBoxStyle} behavior='position'>
+                <Image 
+                    source={require('../../../assets/images/login/kortLogo.png')} 
+                    style={styles.imageStyle}
+                />
                 <Input
                     imgSource={require('../../../assets/images/tabIcons/profile.png')}
                     placeHolder={'user@gmail.com'}
@@ -26,16 +29,20 @@ const LoginBox = ({ onLogin }) => {
                 <Button onPress={onLogin} style={styles.buttonStyle}>
                     Login
                     </Button>
-            </View>
+            </KeyboardAvoidingView>
         );
 };
 
 const styles = {
-        loginBoxStyle: {
+    loginBoxStyle: {
         justifyContent: 'flex-end',
-         paddingBottom: 150,
          backgroundColor: 'transparent'
     },
+     imageStyle: {
+         marginBottom: 30,
+         width: 300,
+         height: 300
+     },
      buttonStyle: {
          justifyContent: 'flex-end',
          marginTop: 30
