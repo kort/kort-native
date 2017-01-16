@@ -73,10 +73,17 @@ const styles = {
         backgroundColor: '#395971'
     },
     navBarStyle: {
-        backgroundColor: '#395971'
+        backgroundColor: '#395971',
+        borderBottomColor: '#395971'
     },
     navBarTitleStyle: {
         color: 'white'
+    },
+    barButtonTextStyle: {
+    color: '#F16B6F'
+},
+    barButtonIconStyle: {
+    tintColor: '#F16B6F'
     }
 };
 

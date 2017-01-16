@@ -6,9 +6,16 @@ import {
 class ProfileOverview extends Component {
     render() {
         return (
-            <View />
+            <View style={styles.bgColor} />
         );
     }
 }
+
+const styles = {
+    bgColor: {
+        backgroundColor: '#202931',
+        flex: 1
+    }
+};
 
 export default ProfileOverview;
