@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-    Text,
     View,
     Image,
     TouchableWithoutFeedback
@@ -13,7 +12,6 @@ class AchievementItem extends Component {
     state = { showModal: false };
 
     onRowPress() {
-        console.log('pressed '+this.props.achievement);
         // Actions.openAchievement({ achievement: this.props.achievement });
         this.setState({ showModal: true });
     }

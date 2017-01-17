@@ -2,7 +2,7 @@
     {
         "achievementId": 0,
         "achievementTitle": "10 missions solved",
-        "achievementDescription": "10 missions have to be solved",
+        "achievementDescription": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
         "achievementImageURI": "badge_template",
         "achieved": true
     },
