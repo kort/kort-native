@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import {
     View,
-    ListView,
-    Text
+    ListView
 } from 'react-native';
+import _ from 'lodash';
 import AchievementItem from './AchievementItem';
 
 class AchievementsOverview extends Component {
@@ -11,8 +11,13 @@ class AchievementsOverview extends Component {
     componentWillMount() {
         const data = require('../../../assets/data/achievements.json');
 
+        //extend data for better UI XP
+        const offset = (3 - (data.length % 3)) % 3;
+        for (let i = 0; i < offset; ++i) {
+            data.push({});
+        }
+
         this.createDataSource(data);       
-        console.log(data); 
     }
 
     componentWillReceiveProps(nextProps) {
@@ -26,11 +31,14 @@ class AchievementsOverview extends Component {
         const ds = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1 !== r2
         });
-        console.log(data);
         this.DataSource = ds.cloneWithRows(data);
     }
 
     renderRow(rowData) {
+        console.log(rowData);
+        if (_.isEmpty(rowData)) {
+            return <View style={styles.itemStyle} />;
+        }
         return <AchievementItem achievement={rowData} />;
     }
 
@@ -61,6 +69,11 @@ const styles = {
         justifyContent: 'center',
         flexDirection: 'row',
         flexWrap: 'wrap',
+    },
+    itemStyle: {
+        margin: 5,
+        height: 100,
+        width: 100
     }    
 };
 
