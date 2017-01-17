@@ -13,7 +13,8 @@ import {
             textBoxStyle, 
             buttonBoxStyle, 
             containerStyle, 
-            imageStyle } = styles;
+            imageStyle,
+            textStyle } = styles;
 
      return (
          <Modal
@@ -33,7 +34,7 @@ import {
                      </View>
                      <View style={textBoxStyle}>
 
-                         <Text>{children}</Text>
+                         <Text style={textStyle}>{children}</Text>
                      </View>
                      <View style={buttonBoxStyle}>
                          <Button onPress={onAccept}>
@@ -66,8 +67,10 @@ import {
          paddingRight: 10,
          paddingLeft: 10,
          paddingTop: 10,
-         paddingBottom: 10
-        
+         paddingBottom: 10,
+     },
+     textStyle: {
+         color: '#202931'
      },
      buttonBoxStyle: {
          height: 70,
