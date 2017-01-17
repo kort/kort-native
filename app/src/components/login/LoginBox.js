@@ -1,7 +1,6 @@
 import React from 'react';
 import {
     View,
-    Text,
     Image,
     KeyboardAvoidingView
 } from 'react-native';
