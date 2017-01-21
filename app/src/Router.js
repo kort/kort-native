@@ -7,7 +7,7 @@ import MissionsOverview from './components/missions/MissionsOverview';
 import AchievementsOverview from './components/achievements/AchievementsOverview';
 import HighscoreOverview from './components/highscore/HighscoreOverview';
 import ProfileOverview from './components/profile/ProfileOverview';
-
+import LoginOverview from './components/login/LoginOverview';
 import {
     MissionsTabIcon,
     AchievementsTabIcon,
@@ -18,8 +18,9 @@ import {
 const RouterComponent = () => {
     return (
         <Router>
+            <Scene key='auth' component={LoginOverview} hideNavBar />
 
-            <Scene key='root'>
+            <Scene key='root' animation='fade'>
                 <Scene
                     key='tabbar'
                     tabs

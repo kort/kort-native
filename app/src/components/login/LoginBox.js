@@ -1,81 +1,104 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
     View,
     Image,
-    KeyboardAvoidingView
+    Linking
 } from 'react-native';
-import ModalDropdown from 'react-native-modal-dropdown';
-import { 
-     Button,
-     Input
-} from '../common';
+import { Actions } from 'react-native-router-flux'; 
+import { GoogleSignin } from 'react-native-google-signin';
+import { ButtonWithImage } from '../common';
+import Config from '../../constants/Config';
 
+class LoginBox extends Component {
 
-const LoginBox = ({ onLogin, options, onOptionSelect, selectedOption }) => {
+    componentDidMount() {
+        GoogleSignin.hasPlayServices({ autoResolve: true }).then(() => {
+        this.configureGoogleSignIn();
+                console.log('configured');
+        });
+    }
+
+    configureGoogleSignIn() {
+        GoogleSignin.configure({
+        iosClientId: Config.GOOGLE_IOS_CLIENT_ID, 
+        })
+        .then(() => {
+            console.log('ok');
+                GoogleSignin.currentUserAsync().then((user) => {
+                console.log('USER', user);
+                this.setState({ user });
+            }).done();
+        });
+    }
+
+    signInGoogle() {
+        Actions.root();
+
+        GoogleSignin.signIn()
+        .then((user) => {
+            console.log(user);
+            this.setState({ user });
+        })
+        .catch((err) => {
+            console.log('WRONG SIGNIN', err);
+        })
+        .done();
+            console.log('success');
+            console.log(this.state.user);
+        }
+
+    signInOSM() {
+        Linking.openURL('http://localhost:5000/osm/login');
+    }
+
+    signInFacebook() {
+
+    }
+
+    render() {
         return (
-            <KeyboardAvoidingView style={styles.loginBoxStyle} behavior='position'>
+            <View style={styles.bgColor}>
                 <Image 
                     source={require('../../../assets/images/login/kortLogo.png')} 
                     style={styles.imageLogoStyle}
                 />
-                <Input
-                    imgSource={require('../../../assets/images/tabIcons/profile.png')}
-                    placeHolder={'user@gmail.com'}
-                />
-                <Input
-                    imgSource={require('../../../assets/images/tabIcons/lock.png')}
-                    placeHolder={'password'}
-                    secureTextEntry
-                />
-                <View style={styles.dropdownStyle}>
-                <Image 
-                        style={styles.providerImageStyle}
-                        source={require('../../../assets/images/login/cloud.png')}
-                />
-                    <ModalDropdown options={options} onSelect={onOptionSelect}>
-                        <Image 
-                            source={selectedOption}
-                            style={styles.imageOptionStyle} 
-                        />
-                    </ModalDropdown>
-                </View>
-                <Button onPress={onLogin} style={styles.buttonStyle}>
-                    Login
-                    </Button>
-            </KeyboardAvoidingView>
+
+
+                <ButtonWithImage 
+                    onPress={this.signInGoogle.bind(this)}
+                    imgSource={require('../../../assets/images/login/google.png')}
+                >Sign in with Google
+                </ButtonWithImage> 
+                <ButtonWithImage 
+                    onPress={this.signInOSM.bind(this)}
+                    imgSource={require('../../../assets/images/login/osm.png')}
+                >Sign in with OSM
+                </ButtonWithImage> 
+                <ButtonWithImage 
+                    onPress={this.signInFacebook.bind(this)}
+                    imgSource={require('../../../assets/images/login/facebook.png')}
+                >Sign in with Facebook
+                </ButtonWithImage>           
+            </View>
         );
-};
+    }
+}
 
 const styles = {
-    dropdownStyle: {
-        marginTop: 10,
-        alignItems: 'center',
-        flexDirection: 'row'
+    bgColor: {
+        flex: 1,
+        justifyContent: 'center'
     },
-    loginBoxStyle: {
-        justifyContent: 'flex-end',
-        backgroundColor: 'transparent',
-    },
-     imageLogoStyle: {
+    imageLogoStyle: {
          marginBottom: 30,
          width: 300,
          height: 300
      },
-    imageOptionStyle: {
-         width: 30,
-         height: 30
-     },
      buttonStyle: {
-         justifyContent: 'flex-end',
-         marginTop: 30,
-         marginBottom: 10
-     },
-     providerImageStyle: {
-        paddingLeft: 20,
-        marginRight: 10,
-        height: 30,
-        width: 30,
-        tintColor: '#657C8E'
+         color: 'black',
+        width: 312,
+        height: 48,
+        backgroundColor: 'transparent'
      }
 };
 

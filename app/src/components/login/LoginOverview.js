@@ -3,61 +3,36 @@ import {
     Modal,
     View
  } from 'react-native';
+ import { Actions } from 'react-native-router-flux';
 import LoginBox from './LoginBox';
 
 class LoginOverview extends Component {
+    constructor() {
+        super();
+        this.onLogin = this.onLogin.bind(this);
+    }
 
-    state = { 
-        showModal: true, 
-        animationType: 'none', 
-        providers: ['Google', 'Facebook', 'OSM'],
-        selectedProvider: 'Google',
-        selectedProviderImage: require('../../../assets/images/login/google.png')
-    };
-
+    state = { loggedIn: false };
 
     onLogin() {
-        this.setState({ showModal: false });
+
     }
 
-    onShow() {
-        this.setState({ animationType: 'slide' });
-    }
-
-    onOptionSelect(index, value) {
-        switch (value) {
-
-            case 'Google':
-                this.setState({ selectedProviderImage: require('../../../assets/images/login/google.png') });
-                break;
-            case 'Facebook':
-                this.setState({ selectedProviderImage: require('../../../assets/images/login/facebook.png') });
-                break;
-            case 'OSM':
-                this.setState({ selectedProviderImage: require('../../../assets/images/login/osm.png') });
-                break;
-            default:
-                this.setState({ selectedProviderImage: '' });
+    renderView() {
+        if (this.state.loggedIn) {
+            Actions.root();
+            return <View style={styles.backgroundStyle} />;
         }
+        return (
+            <LoginBox onLogin={this.onLogin} />       
+        );
     }
-    
+
     render() {
         return (
-                <Modal
-                    visible={this.state.showModal}
-                    animationType={this.state.animationType}
-                    onShow={this.onShow.bind(this)}
-                    onRequestClose={() => {}}
-                >
-                    <View style={styles.backgroundStyle} >
-                        <LoginBox
-                            onLogin={this.onLogin.bind(this)}
-                            options={this.state.providers}
-                            onOptionSelect={this.onOptionSelect.bind(this)}
-                            selectedOption={this.state.selectedProviderImage}
-                        />
-                    </View>
-         </Modal>
+            <View style={styles.backgroundStyle}>
+                {this.renderView()}    
+            </View>
         );
     }
 }
