@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { 
-    Modal,
     View
  } from 'react-native';
  import { Actions } from 'react-native-router-flux';
