@@ -56,5 +56,6 @@ fastlane/screenshots
 #
 .vscode/
 
-# js
+# custom ignors
 SecretConfig.js
+google-services.json

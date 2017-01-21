@@ -1,4 +1,4 @@
-package com.app;
+package ch.hsr.kort;
 
 import com.facebook.react.ReactActivity;
 

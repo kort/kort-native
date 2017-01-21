@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.app"
+    package="ch.hsr.kort"
     android:versionCode="1"
     android:versionName="1.0">
 
