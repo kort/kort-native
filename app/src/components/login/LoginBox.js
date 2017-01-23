@@ -8,7 +8,7 @@ import {
 import { Actions } from 'react-native-router-flux'; 
 import { GoogleSignin } from 'react-native-google-signin';
 import _ from 'lodash';
-import { ButtonWithImage, CustomWebView } from '../common';
+import { ButtonWithImage, CustomWebView, Button } from '../common';
 import Config from '../../constants/Config';
 
 class LoginBox extends Component {
@@ -98,6 +98,10 @@ class LoginBox extends Component {
 
     }
 
+    proceedWithoutLogin() {
+        Actions.root();
+    }
+
     render() {
         return (
             <View>
@@ -122,7 +126,12 @@ class LoginBox extends Component {
                     onPress={this.signInFacebook.bind(this)}
                     imgSource={require('../../../assets/images/login/facebook.png')}
                 >Sign in with Facebook
-                </ButtonWithImage>           
+                </ButtonWithImage>  
+                <Button 
+                    style={{ marginTop: 20 }}
+                    onPress={this.proceedWithoutLogin.bind(this)}
+                >Proceed without login
+                </Button>          
             </View>
            <Modal
             visible={this.state.showModal}
