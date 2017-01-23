@@ -2,20 +2,48 @@ import React, { Component } from 'react';
 import {
     View,
     Image,
-    Linking
+    Linking,
+    Modal,
 } from 'react-native';
 import { Actions } from 'react-native-router-flux'; 
 import { GoogleSignin } from 'react-native-google-signin';
-import { ButtonWithImage } from '../common';
+import { ButtonWithImage, CustomWebView } from '../common';
 import Config from '../../constants/Config';
 
 class LoginBox extends Component {
 
+    state = { showModal: false };
+
     componentDidMount() {
+        //init google play services
         GoogleSignin.hasPlayServices({ autoResolve: true }).then(() => {
         this.configureGoogleSignIn();
                 console.log('configured');
         });
+
+        //init deep linking listeners
+        Linking.addEventListener('url', this.appWokeUp);
+        Linking.getInitialURL().then((url) => {
+            if (url) {
+                this.handleURL(url);
+            }
+        }).catch(err => console.error('An error occurred', err));
+    }
+
+    componentWillUnmount() {
+        Linking.removeEventListener('url', this.appWokeUp);
+    }
+
+    appWokeUp = (event) => {
+        console.log('woke up');
+        this.handleURL(event.url);
+        this.hideModal();
+    }
+
+    handleURL(url) {
+        if (url) {
+            console.log(url);
+        }
     }
 
     configureGoogleSignIn() {
@@ -48,7 +76,14 @@ class LoginBox extends Component {
         }
 
     signInOSM() {
-        Linking.openURL('http://localhost:5000/osm/login');
+        this.setState({ 
+            showModal: true, 
+            uri: 'http://localhost:5000/osm/login' 
+        });        
+    }
+
+    hideModal() {
+        this.setState({ showModal: false });
     }
 
     signInFacebook() {
@@ -57,6 +92,7 @@ class LoginBox extends Component {
 
     render() {
         return (
+            <View>
             <View style={styles.bgColor}>
                 <Image 
                     source={require('../../../assets/images/login/kortLogo.png')} 
@@ -80,6 +116,15 @@ class LoginBox extends Component {
                 >Sign in with Facebook
                 </ButtonWithImage>           
             </View>
+           <Modal
+            visible={this.state.showModal}
+            transparent
+            animationType='slide'
+            onRequestClose={() => this.hideModal()}
+           >
+            <CustomWebView uri={this.state.uri} />
+           </Modal>
+           </View>
         );
     }
 }
