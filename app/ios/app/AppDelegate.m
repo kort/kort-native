@@ -9,6 +9,8 @@
 
 #import "AppDelegate.h"
 #import <RNGoogleSignin/RNGoogleSignin.h>
+#import <React/RCTLinkingManager.h>
+
 
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
@@ -37,7 +39,9 @@
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-  
+  if ([url.absoluteString.lowercaseString hasPrefix:@"kortapp://"]) {
+    return [RCTLinkingManager application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
+  }
   return [RNGoogleSignin application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
 }
 

@@ -40,6 +40,16 @@
 				<string>ch.hsr.kort</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>kortapp</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>kortapp</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
