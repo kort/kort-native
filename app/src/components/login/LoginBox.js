@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import { Actions } from 'react-native-router-flux'; 
 import { GoogleSignin } from 'react-native-google-signin';
+import _ from 'lodash';
 import { ButtonWithImage, CustomWebView } from '../common';
 import Config from '../../constants/Config';
 
@@ -43,6 +44,13 @@ class LoginBox extends Component {
     handleURL(url) {
         if (url) {
             console.log(url);
+            const urlPairs = _.chain(url)
+                .replace('kortapp://', '')
+                .split('?')
+                .map()
+                .value()
+                ;
+            console.log(urlPairs[1]);
         }
     }
 
