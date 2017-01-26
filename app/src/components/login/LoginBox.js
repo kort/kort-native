@@ -8,12 +8,13 @@ import {
 import { Actions } from 'react-native-router-flux'; 
 import { GoogleSignin } from 'react-native-google-signin';
 import _ from 'lodash';
-import { ButtonWithImage, CustomWebView, Button } from '../common';
+import { ButtonWithImage, CustomWebView, Button, Spinner } from '../common';
 import Config from '../../constants/Config';
+import KortAPI from '../../data/KortAPI';
 
 class LoginBox extends Component {
 
-    state = { showModal: false };
+    state = { modalMode: '' };
 
     componentDidMount() {
         //init google play services
@@ -50,56 +51,116 @@ class LoginBox extends Component {
                 .map()
                 .value()
                 ;
-            console.log(urlPairs[1]);
+            this.secretReceived(urlPairs[1]);
         }
     }
 
     configureGoogleSignIn() {
         GoogleSignin.configure({
         iosClientId: Config.GOOGLE_IOS_CLIENT_ID, 
+        webClientId: Config.GOOGLE_WEB_CLIENT_ID
         })
         .then(() => {
-            console.log('ok');
                 GoogleSignin.currentUserAsync().then((user) => {
-                console.log('USER', user);
                 this.setState({ user });
+                if (this.state.user) {
+                    console.log(GoogleSignin.currentUser());
+                    this.verifyGoogleIdToken(this.state.user.idToken);
+                }
             }).done();
         });
     }
 
     signInGoogle() {
-        Actions.root();
-
         GoogleSignin.signIn()
         .then((user) => {
-            console.log(user);
+            console.log('signing in');
             this.setState({ user });
+            console.log(this.state.user);
+            if (this.state.user) {
+                this.verifyGoogleIdToken(this.state.user.idToken);
+            }
         })
         .catch((err) => {
             console.log('WRONG SIGNIN', err);
         })
-        .done();
-            console.log('success');
-            console.log(this.state.user);
-        }
+        .done();            
+    }
+
+    verifyGoogleIdToken(token) {
+    this.setState({ modalMode: 'showSpinner' });        
+        console.log('verify ', token);
+        const api = new KortAPI();
+        api.verifyUser(token)
+            .then(response => this.secretReceived(response))
+            .catch(error => console.log(error));
+    }
+
+    secretReceived(data) {
+        console.log(data);
+        this.hideModal();
+        Actions.root();
+    }
 
     signInOSM() {
         this.setState({ 
-            showModal: true, 
-            uri: 'http://localhost:5000/osm/login' 
+            modalMode: 'showWebView', 
+            uri: `${Config.API_URL}${Config.OSM_LOGIN}`
         });        
     }
 
     hideModal() {
-        this.setState({ showModal: false });
+        this.setState({ modalMode: '' });
     }
 
     signInFacebook() {
-
+        
     }
 
     proceedWithoutLogin() {
+        this.hideModal();
         Actions.root();
+    }
+
+    onWebViewError() {
+        console.log('error');
+    }
+
+    renderModal() {
+        switch (this.state.modalMode) {
+            case 'showWebView': {
+            return (
+                <Modal
+                    visible
+                    transparent
+                    animationType='slide'
+                    onRequestClose={() => this.hideModal()}
+                >
+                    <CustomWebView 
+                        uri={this.state.uri} 
+                        error={() => this.onWebViewError()}
+                    />
+                </Modal>
+            );
+            }
+            
+            case 'showSpinner': {
+            return (    
+                <Modal
+                    visible
+                    transparent
+                    animationType='fade'
+                    onRequestClose={() => this.hideModal()}
+                >
+                    <Spinner style={styles.spinnerStyle} />
+                </Modal>);
+            }
+            default: {
+            return (
+                <View />
+            );
+            }
+        }
     }
 
     render() {
@@ -110,8 +171,6 @@ class LoginBox extends Component {
                     source={require('../../../assets/images/login/kortLogo.png')} 
                     style={styles.imageLogoStyle}
                 />
-
-
                 <ButtonWithImage 
                     onPress={this.signInGoogle.bind(this)}
                     imgSource={require('../../../assets/images/login/google.png')}
@@ -133,14 +192,8 @@ class LoginBox extends Component {
                 >Proceed without login
                 </Button>          
             </View>
-           <Modal
-            visible={this.state.showModal}
-            transparent
-            animationType='slide'
-            onRequestClose={() => this.hideModal()}
-           >
-            <CustomWebView uri={this.state.uri} />
-           </Modal>
+            
+           {this.renderModal()}
            </View>
         );
     }
@@ -155,6 +208,11 @@ const styles = {
          marginBottom: 30,
          width: 300,
          height: 300
+     },
+     spinnerStyle: {
+         backgroundColor: '#000',
+         opacity: 0.6
+
      },
      buttonStyle: {
          color: 'black',
