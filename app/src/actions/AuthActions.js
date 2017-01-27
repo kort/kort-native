@@ -10,10 +10,13 @@ import {
 } from './types';
 
 const loginUserSuccess = (dispatch, user) => {
+        console.log('user login');
+
     dispatch({ 
         type: LOGIN_USER_SUCCESS,
         payload: user 
-    });       
+    });  
+    Actions.root();     
 };
 
 const loginUserFail = (dispatch, errorMsg) => {
@@ -33,22 +36,12 @@ export const showWebView = (uri) => {
 
 export const secretReceived = (dispatch, secret) => {
     console.log('sweet secret received', secret);
-    if (dispatch) {
         dispatch({
             type: SECRET_RECEIVED,
             payload: secret
         });
-    } else {
-        Actions.root();
-        return (
-            {
-            type: SECRET_RECEIVED,
-            payload: secret
-        });
-    }
-    Actions.root();
+        loginUser(dispatch, secret);
 };
-
 
 export const verifyGoogleIdToken = (tokenId) => {
     return (dispatch) => {  
@@ -79,8 +72,7 @@ export const parseURL = (url) => {
     };
 };
 
-export const loginUser = ({ secret }) => {
-    return (dispatch) => {  
-        //TODO
-    };
+export const loginUser = (dispatch, secret) => {
+        //TODO call Kort API
+        loginUserSuccess(dispatch, secret);
 };

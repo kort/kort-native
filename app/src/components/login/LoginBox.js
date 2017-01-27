@@ -9,18 +9,15 @@ import { GoogleSignin } from 'react-native-google-signin';
 import { ModalSpinner, ModalWebView } from '../common';
 import LoginButtons from './LoginButtons';
 import Config from '../../constants/Config';
-import { loginUser, showWebView, verifyGoogleIdToken, 
-         secretReceived, parseURL } from '../../actions/AuthActions';
+import { loginUser, showWebView, verifyGoogleIdToken, parseURL } from '../../actions/AuthActions';
 
 class LoginBox extends Component {
 
     componentDidMount() {
         //init google play services
         GoogleSignin.hasPlayServices({ autoResolve: true }).then(() => {
-        this.configureGoogleSignIn();
-                console.log('configured');
+            this.configureGoogleSignIn();
         });
-
         //init deep linking listeners
         Linking.addEventListener('url', this.appWokeUp);
         Linking.getInitialURL().then((url) => {
@@ -140,5 +137,5 @@ const mapStateToProps = ({ auth }) => {
 };
 
 export default connect(mapStateToProps, { 
-    loginUser, showWebView, verifyGoogleIdToken, secretReceived, parseURL
+    loginUser, showWebView, verifyGoogleIdToken, parseURL
 })(LoginBox);
