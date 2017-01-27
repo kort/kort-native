@@ -10,7 +10,7 @@ const INITIAL_STATE = {
     kortSecret: '',
     modalMode: '',
     loading: false,
-    webViewVisible: false
+    webviewURI: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -18,7 +18,7 @@ export default (state = INITIAL_STATE, action) => {
         case LOGOUT_USER:
             return { INITIAL_STATE };
         case SHOW_WEBVIEW: 
-            return { ...state, webViewVisible: true };
+            return { ...state, webviewURI: action.payload };
         case VERIFY_GOOGLE_TOKEN_ID: 
             return { ...state, ...INITIAL_STATE, loading: true };
         case SECRET_RECEIVED: 

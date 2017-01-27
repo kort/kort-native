@@ -25,10 +25,10 @@ const loginUserFail = (dispatch, errorMsg) => {
     });
 };
 
-export const showWebView = (show) => {
+export const showWebView = (uri) => {
    return { 
         type: SHOW_WEBVIEW,
-        payload: show 
+        payload: uri 
     };   
 };
 
@@ -70,8 +70,8 @@ export const verifyGoogleIdToken = (tokenId) => {
     };
 };
 
-export const loginUser = ({ email, password }) => {
+export const loginUser = ({ secret }) => {
     return (dispatch) => {  
-    
+        //TODO
     };
 };
