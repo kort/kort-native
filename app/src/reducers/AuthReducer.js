@@ -22,7 +22,12 @@ export default (state = INITIAL_STATE, action) => {
         case VERIFY_GOOGLE_TOKEN_ID: 
             return { ...state, ...INITIAL_STATE, loading: true };
         case SECRET_RECEIVED: 
-            return { ...state, loading: false, loggedIn: true, kortSecret: action.payload, modalMode: '' };
+            return { ...state, 
+                     loading: false, 
+                     loggedIn: true, 
+                     kortSecret: action.payload, 
+                     modalMode: '' 
+                    };
         default:
             return state;
     }

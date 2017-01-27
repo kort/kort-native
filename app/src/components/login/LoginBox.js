@@ -6,11 +6,11 @@ import {
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux'; 
 import { GoogleSignin } from 'react-native-google-signin';
-import _ from 'lodash';
 import { ModalSpinner, ModalWebView } from '../common';
 import LoginButtons from './LoginButtons';
 import Config from '../../constants/Config';
-import { loginUser, showWebView, verifyGoogleIdToken, secretReceived } from '../../actions/AuthActions';
+import { loginUser, showWebView, verifyGoogleIdToken, 
+         secretReceived, parseURL } from '../../actions/AuthActions';
 
 class LoginBox extends Component {
 
@@ -25,7 +25,7 @@ class LoginBox extends Component {
         Linking.addEventListener('url', this.appWokeUp);
         Linking.getInitialURL().then((url) => {
             if (url) {
-                this.handleURL(url);
+                this.props.handleURL(url);
             }
         }).catch(err => console.error('An error occurred', err));
     }
@@ -34,23 +34,24 @@ class LoginBox extends Component {
         Linking.removeEventListener('url', this.appWokeUp);
     }
 
-    appWokeUp = (event) => {
-        console.log('woke up');
-        this.handleURL(event.url);
-        this.hideModal();
+    onWebViewError(err) {
+        console.log('error ', err);
     }
 
-    handleURL(url) {
-        if (url) {
-            console.log(url);
-            const urlPairs = _.chain(url)
-                .replace('kortapp://', '')
-                .split('?')
-                .map()
-                .value()
-                ;
-            this.props.secretReceived(null, { secret: urlPairs[1] });
-        }
+    signInOSM() {
+        this.props.showWebView(`${Config.API_URL}${Config.OSM_LOGIN}`);        
+    }
+
+    hideModal() {
+        this.props.showWebView('');
+    }
+
+    signInFacebook() {
+        //TODO
+    }
+
+    proceedWithoutLogin() {
+        Actions.root();
     }
 
     configureGoogleSignIn() {
@@ -89,24 +90,9 @@ class LoginBox extends Component {
         this.props.verifyGoogleIdToken(token);
     }
 
-    signInOSM() {
-        this.props.showWebView(`${Config.API_URL}${Config.OSM_LOGIN}`);        
-    }
-
-    hideModal() {
-        this.props.showWebView('');
-    }
-
-    signInFacebook() {
-        //TODO
-    }
-
-    proceedWithoutLogin() {
-        Actions.root();
-    }
-
-    onWebViewError(err) {
-        console.log('error ', err);
+    appWokeUp = (event) => {
+        this.props.parseURL(event.url);
+        this.hideModal();
     }
 
     renderLoadingModal() {
@@ -154,5 +140,5 @@ const mapStateToProps = ({ auth }) => {
 };
 
 export default connect(mapStateToProps, { 
-    loginUser, showWebView, verifyGoogleIdToken, secretReceived
+    loginUser, showWebView, verifyGoogleIdToken, secretReceived, parseURL
 })(LoginBox);

@@ -1,12 +1,12 @@
 import { Actions } from 'react-native-router-flux';
+import _ from 'lodash';
 import KortAPI from '../data/KortAPI';
 import { 
     LOGIN_USER_SUCCESS,
     LOGIN_USER_FAIL,
-    MODAL_MODE,
     VERIFY_GOOGLE_TOKEN_ID,
     SECRET_RECEIVED,
-    SHOW_WEBVIEW,
+    SHOW_WEBVIEW
 } from './types';
 
 const loginUserSuccess = (dispatch, user) => {
@@ -14,7 +14,6 @@ const loginUserSuccess = (dispatch, user) => {
         type: LOGIN_USER_SUCCESS,
         payload: user 
     });       
-
 };
 
 const loginUserFail = (dispatch, errorMsg) => {
@@ -30,13 +29,6 @@ export const showWebView = (uri) => {
         type: SHOW_WEBVIEW,
         payload: uri 
     };   
-};
-
-export const modalModeChanged = (modalType) => {
-    return {
-        type: MODAL_MODE,
-        payload: modalType
-    };
 };
 
 export const secretReceived = (dispatch, secret) => {
@@ -67,6 +59,23 @@ export const verifyGoogleIdToken = (tokenId) => {
             .catch(errorMsg => {
                 loginUserFail(dispatch, errorMsg);
             });
+    };
+};
+
+export const parseURL = (url) => {
+    return (dispatch) => {
+    let parsedURL = url;
+    if (url) {
+        const urlPairs = _.chain(url)
+            .replace('kortapp://', '')
+            .split('?')
+            .map()
+            .value()
+            ;
+        parsedURL = urlPairs[1];
+        console.log('parsed', parsedURL);
+        secretReceived(dispatch, { parsedURL });
+    }
     };
 };
 
