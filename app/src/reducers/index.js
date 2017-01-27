@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
+import AuthReducer from './AuthReducer';
 import MissionsReducer from './MissionsReducer';
 
 export default combineReducers({
-    missionsReducer: MissionsReducer
+    auth: AuthReducer,
+    missions: MissionsReducer
 });

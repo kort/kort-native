@@ -5,16 +5,15 @@ import {
     Linking,
     Modal,
 } from 'react-native';
+import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux'; 
 import { GoogleSignin } from 'react-native-google-signin';
 import _ from 'lodash';
 import { ButtonWithImage, CustomWebView, Button, Spinner } from '../common';
 import Config from '../../constants/Config';
-import KortAPI from '../../data/KortAPI';
+import { loginUser, showWebView, verifyGoogleIdToken, secretReceived } from '../../actions/AuthActions';
 
 class LoginBox extends Component {
-
-    state = { modalMode: '' };
 
     componentDidMount() {
         //init google play services
@@ -51,7 +50,7 @@ class LoginBox extends Component {
                 .map()
                 .value()
                 ;
-            this.secretReceived(urlPairs[1]);
+            this.props.secretReceived(null, { secret: urlPairs[1] });
         }
     }
 
@@ -88,29 +87,18 @@ class LoginBox extends Component {
     }
 
     verifyGoogleIdToken(token) {
-    this.setState({ modalMode: 'showSpinner' });        
-        console.log('verify ', token);
-        const api = new KortAPI();
-        api.verifyUser(token)
-            .then(response => this.secretReceived(response))
-            .catch(error => console.log(error));
-    }
-
-    secretReceived(data) {
-        console.log(data);
-        this.hideModal();
-        Actions.root();
+    this.props.verifyGoogleIdToken(token);
     }
 
     signInOSM() {
+        this.props.showWebView(true);
         this.setState({ 
-            modalMode: 'showWebView', 
             uri: `${Config.API_URL}${Config.OSM_LOGIN}`
         });        
     }
 
     hideModal() {
-        this.setState({ modalMode: '' });
+        this.props.showWebView(false);
     }
 
     signInFacebook() {
@@ -118,17 +106,31 @@ class LoginBox extends Component {
     }
 
     proceedWithoutLogin() {
-        this.hideModal();
         Actions.root();
     }
 
-    onWebViewError() {
-        console.log('error');
+    onWebViewError(err) {
+        console.log('error ',err);
     }
 
-    renderModal() {
-        switch (this.state.modalMode) {
-            case 'showWebView': {
+    renderLoadingModal() {
+        if (this.props.loading) {
+            return (
+                <Modal
+                    visible
+                    transparent
+                    animationType='fade'
+                    onRequestClose={() => this.hideModal()}
+                >
+                    <Spinner style={styles.spinnerStyle} />
+                </Modal>
+            );
+        }
+        return <View />;
+    }
+
+    renderWebViewModal() {
+        if (this.props.webViewVisible) {
             return (
                 <Modal
                     visible
@@ -138,29 +140,12 @@ class LoginBox extends Component {
                 >
                     <CustomWebView 
                         uri={this.state.uri} 
-                        error={() => this.onWebViewError()}
+                        error={(err) => this.onWebViewError(err)}
                     />
                 </Modal>
             );
-            }
-            
-            case 'showSpinner': {
-            return (    
-                <Modal
-                    visible
-                    transparent
-                    animationType='fade'
-                    onRequestClose={() => this.hideModal()}
-                >
-                    <Spinner style={styles.spinnerStyle} />
-                </Modal>);
-            }
-            default: {
-            return (
-                <View />
-            );
-            }
         }
+        return <View />;
     }
 
     render() {
@@ -192,8 +177,8 @@ class LoginBox extends Component {
                 >Proceed without login
                 </Button>          
             </View>
-            
-           {this.renderModal()}
+            {this.renderLoadingModal()}
+            {this.renderWebViewModal()}
            </View>
         );
     }
@@ -222,4 +207,12 @@ const styles = {
      }
 };
 
-export default LoginBox;
+const mapStateToProps = ({ auth }) => {
+    console.log(auth);
+    const { loggedIn, modalMode, kortSecret, loading, webViewVisible } = auth;
+    return { loggedIn, modalMode, kortSecret, loading, webViewVisible };
+};
+
+export default connect(mapStateToProps, { 
+    loginUser, showWebView, verifyGoogleIdToken, secretReceived
+})(LoginBox);
