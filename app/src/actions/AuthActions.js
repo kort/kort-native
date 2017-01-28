@@ -34,13 +34,13 @@ export const showWebView = (uri) => {
     };   
 };
 
-export const secretReceived = (dispatch, secret) => {
-    console.log('sweet secret received', secret);
+export const secretReceived = (dispatch, user) => {
+    console.log('user received ', user);
         dispatch({
             type: SECRET_RECEIVED,
-            payload: secret
+            payload: user.secret
         });
-        loginUser(dispatch, secret);
+        loginUser(dispatch, user);
 };
 
 export const verifyGoogleIdToken = (tokenId) => {
@@ -56,23 +56,33 @@ export const verifyGoogleIdToken = (tokenId) => {
 };
 
 export const parseURL = (url) => {
+    console.log('parse');
+    console.log(url);
     return (dispatch) => {
-    let parsedURL = url;
     if (url) {
-        const urlPairs = _.chain(url)
-            .replace('kortapp://', '')
-            .split('?')
-            .map()
+        const parameterPairs = _.chain(url)
+            .replace('kortapp://payload?', '')
+            .split('&')
+            .map(item => { if (item) return item.split('='); return false; })
+            .compact()
             .value()
             ;
-        parsedURL = urlPairs[1];
-        console.log('parsed', parsedURL);
-        secretReceived(dispatch, { parsedURL });
+        const secret = parameterPairs[0][1];
+        const userId = parameterPairs[1][1];
+        console.log('parsed', secret, userId);
+        secretReceived(dispatch, { secret, userId });
     }
     };
 };
 
-export const loginUser = (dispatch, secret) => {
-        //TODO call Kort API
-        loginUserSuccess(dispatch, secret);
+export const loginUser = (dispatch, user) => {
+        const apiSecure = new KortAPI(user.secret);
+        apiSecure.getUserinfo(user.userId)
+        .then(response => {
+            loginUserSuccess(dispatch, user.secret);
+            console.log('resp', response);
+        })
+        .catch(errorMsg => {
+                console.log(errorMsg);
+        });
 };
