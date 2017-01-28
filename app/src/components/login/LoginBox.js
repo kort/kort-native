@@ -31,8 +31,11 @@ class LoginBox extends Component {
         Linking.removeEventListener('url', this.appWokeUp);
     }
 
-    onWebViewError(err) {
-        console.log('error ', err);
+    onWebViewError(errorDomain, errorCode, errorDesc) {
+        console.log('error ', errorDomain, errorCode, errorDesc);
+        if (errorCode !== 102) {
+            this.hideModal();
+        }
     }
 
     signInOSM() {
@@ -40,6 +43,7 @@ class LoginBox extends Component {
     }
 
     hideModal() {
+        console.log('hide webview');
         this.props.showWebView('');
     }
 
@@ -92,40 +96,26 @@ class LoginBox extends Component {
         this.hideModal();
     }
 
-    renderLoadingModal() {
-        if (this.props.loading) {
-            return (
-                <ModalSpinner hideModal={() => this.hideModal()} />
-            );
-        }
-        return <View />;
-    }
-
-    renderWebViewModal() {
-        if (this.props.webviewURI) {
-            return (
-                <ModalWebView 
-                    uri={this.props.webviewURI} 
-                    error={(err) => this.onWebViewError(err)} 
-                    onRequestClose={() => this.hideModal()} 
-                />
-            );
-        }
-        return <View />;
-    }
-
     render() {
         return (
             <View>
-            <LoginButtons 
-                signInGoogle={this.signInGoogle.bind(this)} 
-                signInOSM={this.signInOSM.bind(this)} 
-                signInFacebook={this.signInFacebook.bind(this)} 
-                proceedWithoutLogin={this.proceedWithoutLogin.bind(this)} 
-            />
-            {this.renderLoadingModal()}
-            {this.renderWebViewModal()}
-           </View>
+                <LoginButtons 
+                    signInGoogle={this.signInGoogle.bind(this)} 
+                    signInOSM={this.signInOSM.bind(this)} 
+                    signInFacebook={this.signInFacebook.bind(this)} 
+                    proceedWithoutLogin={this.proceedWithoutLogin.bind(this)} 
+                />
+                <ModalSpinner 
+                    visible={this.props.loading}
+                    hideModal={() => this.hideModal()} 
+                />
+                <ModalWebView 
+                        uri={this.props.webviewURI} 
+                        error={(errorDomain, errorCode, errorDesc) => this.onWebViewError(errorDomain, errorCode, errorDesc)} 
+                        onRequestClose={() => this.hideModal()}
+                        visible={this.props.webviewURI !== ''} 
+                />           
+            </View>
         );
     }
 }

@@ -4,11 +4,11 @@ import {
 } from 'react-native';
 import { CustomWebView } from '../common';
 
-const ModalWebView = ({ uri, error, onRequestClose }) => {
+const ModalWebView = ({ uri, error, onRequestClose, visible }) => {
     console.log(uri);
     return (
         <Modal
-                    visible
+                    visible={visible}
                     transparent
                     animationType='slide'
                     onRequestClose={onRequestClose}
