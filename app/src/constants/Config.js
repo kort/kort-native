@@ -4,7 +4,7 @@ const API_VERSION = 'v0.1';
 
 export default {
 
-  API_URL: 'http://a04df801.ngrok.io',
+  API_URL: 'http://cd52634a.ngrok.io',
 
   GOOGLE: 'google',
   GOOGLE_IOS_CLIENT_ID: SecretConfig.GOOGLE_IOS_CLIENT_ID,
