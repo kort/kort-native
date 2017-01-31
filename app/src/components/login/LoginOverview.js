@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { 
     View
  } from 'react-native';
- import { Actions } from 'react-native-router-flux';
+import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
 import LoginBox from './LoginBox';
 
 class LoginOverview extends Component {
@@ -11,14 +12,13 @@ class LoginOverview extends Component {
         this.onLogin = this.onLogin.bind(this);
     }
 
-    state = { loggedIn: false };
 
     onLogin() {
 
     }
 
     renderView() {
-        if (this.state.loggedIn) {
+        if (this.props.loggedIn) {
             Actions.root();
             return <View style={styles.backgroundStyle} />;
         }
@@ -45,4 +45,9 @@ const styles = {
      }
  };
 
-export default LoginOverview;
+ const mapStateToProps = ({ auth }) => {
+    const { loggedIn, kortSecret } = auth;
+    return { loggedIn, kortSecret };
+};
+
+export default connect(mapStateToProps, {})(LoginOverview);

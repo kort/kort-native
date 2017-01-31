@@ -33,7 +33,7 @@ export const loginUser = (dispatch, user) => {
         const apiSecure = new KortAPI(user.secret);
         apiSecure.getUserinfo(user.userId)
         .then(response => {
-            loginUserSuccess(dispatch, user.secret);
+            loginUserSuccess(dispatch, user);
             console.log('resp', response);
         })
         .catch(errorMsg => {
@@ -59,7 +59,7 @@ export const secretReceived = (dispatch, user) => {
     console.log('user received ', user);
         dispatch({
             type: SECRET_RECEIVED,
-            payload: user.secret
+            payload: user
         });
         loginUser(dispatch, user);
 };

@@ -10,11 +10,10 @@ import {
 
 const INITIAL_STATE = {
     loggedIn: false,
-    kortSecret: '',
+    kortSecret: {},
     modalMode: '',
     loading: false,
-    webviewURI: '',
-    user: {}
+    webviewURI: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -31,7 +30,7 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state,
                      loading: false,
                      loggedIn: true,
-                     user: action.payload
+                     kortSecret: action.payload
                  };
         case LOGIN_USER_FAILED:
             return { ...state,
