@@ -46,8 +46,8 @@ const styles = {
  };
 
  const mapStateToProps = ({ auth }) => {
-    const { loggedIn, kortSecret } = auth;
-    return { loggedIn, kortSecret };
+    const { loggedIn } = auth;
+    return { loggedIn };
 };
 
 export default connect(mapStateToProps, {})(LoginOverview);

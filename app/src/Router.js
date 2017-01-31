@@ -5,6 +5,7 @@ import {
     Actions
 } from 'react-native-router-flux';
 import { connect } from 'react-redux';
+import { GoogleSignin } from 'react-native-google-signin';
 import MissionsOverview from './components/missions/MissionsOverview';
 import AchievementsOverview from './components/achievements/AchievementsOverview';
 import HighscoreOverview from './components/highscore/HighscoreOverview';
@@ -19,6 +20,15 @@ import {
 import { logoutUser } from './actions/AuthActions';
 
 class RouterComponent extends Component {
+
+    logout() {
+        console.log('logout');
+        Actions.pop();
+        this.props.logoutUser();
+        GoogleSignin.signOut()
+            .then(() => { console.log('out'); })
+            .catch(() => {});
+    }
     render() {
         return (
         <Router>
@@ -65,7 +75,7 @@ class RouterComponent extends Component {
                             title='Profile'                            
                             navigationBarStyle={styles.navBarStyle}
                             titleStyle={styles.navBarTitleStyle}
-                            onRight={() => { Actions.pop(); this.props.logoutUser(); }}
+                            onRight={this.logout.bind(this)}
                             rightTitle={'Logout'}
                         />
                     </Scene>
