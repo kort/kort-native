@@ -111,7 +111,8 @@ class LoginBox extends Component {
                 />
                 <ModalWebView 
                         uri={this.props.webviewURI} 
-                        error={(errorDomain, errorCode, errorDesc) => this.onWebViewError(errorDomain, errorCode, errorDesc)} 
+                        error={(errorDomain, errorCode, errorDesc) => 
+                            this.onWebViewError(errorDomain, errorCode, errorDesc)} 
                         onRequestClose={() => this.hideModal()}
                         visible={this.props.webviewURI !== ''} 
                 />           

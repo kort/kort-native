@@ -6,6 +6,8 @@ export default {
 
   API_URL: 'http://cd52634a.ngrok.io',
 
+  DEEP_LINK_URL: 'kortapp://payload?',
+
   GOOGLE: 'google',
   GOOGLE_IOS_CLIENT_ID: SecretConfig.GOOGLE_IOS_CLIENT_ID,
   GOOGLE_WEB_CLIENT_ID: SecretConfig.GOOGLE_WEB_CLIENT_ID,

@@ -4,10 +4,12 @@ import KortAPI from '../data/KortAPI';
 import { 
     LOGIN_USER_SUCCESS,
     LOGIN_USER_FAIL,
+    LOGOUT_USER,
     VERIFY_GOOGLE_TOKEN_ID,
     SECRET_RECEIVED,
     SHOW_WEBVIEW
 } from './types';
+import Config from '../constants/Config'; 
 
 const loginUserSuccess = (dispatch, user) => {
         console.log('user login');
@@ -25,6 +27,25 @@ const loginUserFail = (dispatch, errorMsg) => {
         type: LOGIN_USER_FAIL,
         payload: errorMsg
     });
+};
+
+export const loginUser = (dispatch, user) => {
+        const apiSecure = new KortAPI(user.secret);
+        apiSecure.getUserinfo(user.userId)
+        .then(response => {
+            loginUserSuccess(dispatch, user.secret);
+            console.log('resp', response);
+        })
+        .catch(errorMsg => {
+                console.log(errorMsg);
+        });
+};
+
+export const logoutUser = () => {
+    return { 
+        type: LOGOUT_USER,
+        payload: null 
+    };  
 };
 
 export const showWebView = (uri) => {
@@ -61,7 +82,7 @@ export const parseURL = (url) => {
     return (dispatch) => {
     if (url) {
         const parameterPairs = _.chain(url)
-            .replace('kortapp://payload?', '')
+            .replace(Config.DEEP_LINK_URL, '')
             .split('&')
             .map(item => { if (item) return item.split('='); return false; })
             .compact()
@@ -73,16 +94,4 @@ export const parseURL = (url) => {
         secretReceived(dispatch, { secret, userId });
     }
     };
-};
-
-export const loginUser = (dispatch, user) => {
-        const apiSecure = new KortAPI(user.secret);
-        apiSecure.getUserinfo(user.userId)
-        .then(response => {
-            loginUserSuccess(dispatch, user.secret);
-            console.log('resp', response);
-        })
-        .catch(errorMsg => {
-                console.log(errorMsg);
-        });
 };

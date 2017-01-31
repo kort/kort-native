@@ -20,7 +20,7 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case LOGOUT_USER:
-            return { INITIAL_STATE };
+            return { ...INITIAL_STATE };
         case LOGIN_USER:
             return { ...state,
                      loading: true,

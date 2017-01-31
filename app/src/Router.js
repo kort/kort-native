@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
     Scene,
-    Router
+    Router,
+    Actions
 } from 'react-native-router-flux';
+import { connect } from 'react-redux';
 import MissionsOverview from './components/missions/MissionsOverview';
 import AchievementsOverview from './components/achievements/AchievementsOverview';
 import HighscoreOverview from './components/highscore/HighscoreOverview';
@@ -14,9 +16,11 @@ import {
     HighscoreTabIcon,
     ProfileTabIcon
 } from './components/common/TabIcons';
+import { logoutUser } from './actions/AuthActions';
 
-const RouterComponent = () => {
-    return (
+class RouterComponent extends Component {
+    render() {
+        return (
         <Router>
             <Scene key='auth' component={LoginOverview} hideNavBar />
 
@@ -61,13 +65,16 @@ const RouterComponent = () => {
                             title='Profile'                            
                             navigationBarStyle={styles.navBarStyle}
                             titleStyle={styles.navBarTitleStyle}
+                            onRight={() => { Actions.pop(); this.props.logoutUser(); }}
+                            rightTitle={'Logout'}
                         />
                     </Scene>
                 </Scene>
             </Scene>
         </Router>
-    );
-};
+        );
+    }
+}
 
 const styles = {
     tabBarStyle: {
@@ -88,4 +95,4 @@ const styles = {
     }
 };
 
-export default RouterComponent;
+export default connect(null, { logoutUser })(RouterComponent);
