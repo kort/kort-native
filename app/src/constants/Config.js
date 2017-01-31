@@ -16,5 +16,8 @@ export default {
   OSM_LOGIN: '/osm/login',
 
   USER_INFO: `/${API_VERSION}/users`,
+  MISSIONS: `/${API_VERSION}/missions`,
+  HIGHSCORE: `/${API_VERSION}/highscore`,
+  ANSWER: `/${API_VERSION}/answer`,
 
 };
