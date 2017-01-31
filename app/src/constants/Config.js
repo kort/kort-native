@@ -4,6 +4,8 @@ const API_VERSION = 'v0.1';
 
 export default {
 
+  MAPBOX_ACCESS_TOKEN: SecretConfig.MAPBOX_ACCESS_TOKEN,
+
   API_URL: 'http://cd52634a.ngrok.io',
 
   DEEP_LINK_URL: 'kortapp://payload?',
