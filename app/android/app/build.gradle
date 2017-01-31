@@ -133,6 +133,8 @@ dependencies {
         exclude group: "com.google.android.gms" // very important
     }
     compile 'com.google.android.gms:play-services-auth:9.2.1' // should be at least 9.0.0
+    compile project(':reactnativemapboxgl')
+
 }
 
 // Run this once to be able to run the application with BUCK

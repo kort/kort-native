@@ -14,7 +14,7 @@ class MissionsOverview extends Component {
     render() {
         return (
             <View style={styles.bgColor}>
-                <MapView style={styles.mapStyle} />
+                <MapView style={styles.mapStyle} showsUserLocation />
             </View>
         );
     }
