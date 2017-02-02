@@ -6,6 +6,7 @@ import Mapbox, { MapView } from 'react-native-mapbox-gl';
 import { connect } from 'react-redux';
 import Config from '../../constants/Config';
 import { showMapModeFullscreen } from '../../actions/MapActions';
+import GeoLocation from '../../geolocation/GeoLocation';
 
 class Map extends Component {
 
@@ -13,6 +14,20 @@ class Map extends Component {
 
     componentDidMount() {
         Mapbox.setAccessToken(Config.MAPBOX_ACCESS_TOKEN);
+        Mapbox.setMetricsEnabled(false);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        let lastLocation = '';
+        if (this.props && this.props.currentLocation) {
+            lastLocation = this.props.currentLocation;
+        }
+
+        if (nextProps.currentLocation && (lastLocation !== nextProps.currentLocation)) {
+            console.log(nextProps.currentLocation.coords);
+            const { latitude, longitude } = nextProps.currentLocation.coords;
+            this.map.setCenterCoordinate(latitude, longitude, true, null);
+        }
     }
 
     onTap() {
@@ -35,13 +50,22 @@ class Map extends Component {
 
     }
 
+    map = null;
+
     render() {
         return (
             <View style={styles.bgColor}>
-                <MapView 
+                <GeoLocation />
+                <MapView
+                    ref={map => { this.map = map; }}                    
                     style={styles.mapStyle}
                     logoIsHidden
                     showsUserLocation
+                    initialZoomLevel={13}
+                    initialCenterCoordinate={{
+                        latitude: Config.MAPBOX_INITIAL_COORD_LATITUDE,
+                        longitude: Config.MAPBOX_INITIAL_COORD_LONGITUDE
+                    }}
                     onTap={this.onTap.bind(this)}
                     onLongPress={this.onLongPress.bind(this)}
                     onOpenAnnotation={this.onOpenAnnotation.bind(this)}
@@ -64,8 +88,9 @@ const styles = {
 };
 
 const mapStateToProps = ({ mapReducer }) => {
-    const { mapModeFullScreen } = mapReducer;
-    return { mapModeFullScreen };
+    console.log(mapReducer);
+    const { mapModeFullScreen, currentLocation } = mapReducer;
+    return { mapModeFullScreen, currentLocation };
 };
 
 

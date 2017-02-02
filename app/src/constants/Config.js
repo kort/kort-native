@@ -5,6 +5,8 @@ const API_VERSION = 'v0.1';
 export default {
 
   MAPBOX_ACCESS_TOKEN: SecretConfig.MAPBOX_ACCESS_TOKEN,
+  MAPBOX_INITIAL_COORD_LATITUDE: 47.222,
+  MAPBOX_INITIAL_COORD_LONGITUDE: 8.818,
 
   API_URL: 'http://cd52634a.ngrok.io',
 

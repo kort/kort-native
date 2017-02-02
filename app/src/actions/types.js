@@ -8,3 +8,4 @@ export const VERIFY_GOOGLE_TOKEN_ID = 'verify_google_token_id';
 export const SECRET_RECEIVED = 'secret_received';
 
 export const TOGGLE_MAPMODE_FULLSCREEN = 'toggle_mapmode_fullscreen';
+export const LOCATION_UPDATE = 'location_update';
