@@ -4,9 +4,15 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import Map from './Map';
-import { Spinner } from '../common';
+import { Spinner, Popup } from '../common';
 
 class MissionsOverview extends Component {
+
+    state = { gpsModalShowed: false };
+
+    onInfoAccept() {
+        this.setState({ gpsModalShowed: true });
+    }
 
     render() {
         return (
@@ -16,7 +22,13 @@ class MissionsOverview extends Component {
                     size='small'
                     style={this.props.mapModeFullScreen ? styles.spinnerStyleFullScreen : styles.spinnerStyleSmallScreen} 
                 />
-            </View>
+                <Popup
+                        visible={this.props.accuracyThresholdReached && !this.state.gpsModalShowed}
+                        onAccept={this.onInfoAccept.bind(this)}
+                >
+                    Your GPS signal is bad. Get outdoors.
+                </Popup>           
+             </View>
         );
     }
 }
@@ -42,8 +54,8 @@ const styles = {
 
 const mapStateToProps = ({ mapReducer }) => {
     console.log(mapReducer);
-    const { mapModeFullScreen } = mapReducer;
-    return { mapModeFullScreen };
+    const { mapModeFullScreen, accuracyThresholdReached } = mapReducer;
+    return { mapModeFullScreen, accuracyThresholdReached };
 };
 
 

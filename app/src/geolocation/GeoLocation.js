@@ -3,15 +3,16 @@ import {
     View
 } from 'react-native';
 import { connect } from 'react-redux';
-import { locationUpdate } from '../actions/MapActions';
+import { locationUpdate, locationAccuracyInsufficient } from '../actions/MapActions';
+import GPS_ACCURACY from './../constants/Config';
 
 class GeoLocation extends Component {
 
     state = {
     initialPosition: 'unknown',
     lastPosition: 'unknown',
+    accuracy: 0
   };
-
 
   componentDidMount() {
     navigator.geolocation.getCurrentPosition(
@@ -20,6 +21,12 @@ class GeoLocation extends Component {
         this.setState({ initialPosition });
         console.log(initialPosition);
         this.props.locationUpdate(initialPosition);
+        console.log(GPS_ACCURACY.constructor.name);
+        if (position.coords.accuracy > 10) {  //TODO move param to config file
+          this.props.locationAccuracyInsufficient(true);
+        } else {
+          this.props.locationAccuracyInsufficient(false);
+        }
       },
       (error) => console.log(error),
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
@@ -43,4 +50,4 @@ class GeoLocation extends Component {
     }
 }
 
-export default connect(null, { locationUpdate })(GeoLocation);
+export default connect(null, { locationUpdate, locationAccuracyInsufficient })(GeoLocation);
