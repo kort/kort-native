@@ -58,7 +58,7 @@ class Map extends Component {
                 <GeoLocation />
                 <MapView
                     ref={map => { this.map = map; }}                    
-                    style={styles.mapStyle}
+                    style={this.props.mapModeFullScreen ? styles.mapStyleFullScreen : styles.mapStyleSmallScreen}
                     logoIsHidden
                     showsUserLocation
                     initialZoomLevel={13}
@@ -80,10 +80,16 @@ const styles = {
         backgroundColor: '#202931',
         flex: 1
     },
-    mapStyle: {
-        backgroundColor: '#202931',
-        flex: 1
+    mapStyleFullScreen: {
+        flex: 1,
+        marginTop: 0,
+        marginBottom: 0,
     },
+    mapStyleSmallScreen: {
+        flex: 1,
+        marginTop: 64,
+        marginBottom: 50,
+    }
     
 };
 
