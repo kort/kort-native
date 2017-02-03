@@ -6,4 +6,4 @@ export * from './Spinner';
 export * from './ModalSpinner';
 export * from './CustomWebView';
 export * from './ModalWebView';
-
+export * from './RoundButton';

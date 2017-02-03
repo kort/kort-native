@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import Config from '../../constants/Config';
 import { showMapModeFullscreen } from '../../actions/MapActions';
 import GeoLocation from '../../geolocation/GeoLocation';
+import { RoundButton } from '../common';
 
 class Map extends Component {
 
@@ -25,8 +26,7 @@ class Map extends Component {
 
         if (nextProps.currentLocation && (lastLocation !== nextProps.currentLocation)) {
             console.log(nextProps.currentLocation.coords);
-            const { latitude, longitude } = nextProps.currentLocation.coords;
-            this.map.setCenterCoordinate(latitude, longitude, true, null);
+            this.centerMapAroundLocation(nextProps.currentLocation.coords);
         }
     }
 
@@ -50,15 +50,27 @@ class Map extends Component {
 
     }
 
+    centerMapAroundCurrentLocation() {
+        this.centerMapAroundLocation(this.props.currentLocation.coords);
+    }
+
+    centerMapAroundLocation(coords) {
+        if (coords) {
+            const { latitude, longitude } = coords;
+            this.map.setCenterCoordinate(latitude, longitude, true, null);
+        }  
+    }
+
     map = null;
 
     render() {
+        const { bgColor, mapStyleFullScreen, mapStyleSmallScreen, locBtnFullScreen, locBtnSmallScreen } = styles;
         return (
-            <View style={styles.bgColor}>
+            <View style={bgColor}>
                 <GeoLocation />
                 <MapView
                     ref={map => { this.map = map; }}                    
-                    style={this.props.mapModeFullScreen ? styles.mapStyleFullScreen : styles.mapStyleSmallScreen}
+                    style={this.props.mapModeFullScreen ? mapStyleFullScreen : mapStyleSmallScreen}
                     logoIsHidden
                     showsUserLocation
                     initialZoomLevel={13}
@@ -69,6 +81,11 @@ class Map extends Component {
                     onTap={this.onTap.bind(this)}
                     onLongPress={this.onLongPress.bind(this)}
                     onOpenAnnotation={this.onOpenAnnotation.bind(this)}
+                />
+                <RoundButton 
+                    style={this.props.mapModeFullScreen ? locBtnFullScreen : locBtnSmallScreen} 
+                    iconName='location-arrow' 
+                    onPress={this.centerMapAroundCurrentLocation.bind(this)} 
                 />
             </View>
         );
@@ -89,6 +106,16 @@ const styles = {
         flex: 1,
         marginTop: 64,
         marginBottom: 50,
+    },
+    locBtnFullScreen: {
+        position: 'absolute',
+        right: 5,
+        marginTop: 51,
+    },
+    locBtnSmallScreen: {
+        position: 'absolute',
+        right: 5,
+        marginTop: 115,
     }
     
 };
