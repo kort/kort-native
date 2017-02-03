@@ -30,16 +30,18 @@ class Map extends Component {
         }
     }
 
-    onTap() {
-        const d = new Date();
-        if (Math.abs(d.getSeconds() - this.state.now) <= 1) {
-            console.log('zoom');
-        } else {
-            console.log('fullscreen toggle');
-            this.props.showMapModeFullscreen(!this.props.mapModeFullScreen);
-        }
+    onTap(tapRegion) {
+        if (tapRegion.screenCoordY > 50) {
+            const d = new Date();
+            if (Math.abs(d.getSeconds() - this.state.now) <= 1) {
+                console.log('zoom');
+            } else {
+                console.log('fullscreen toggle');
+                this.props.showMapModeFullscreen(!this.props.mapModeFullScreen);
+            }
 
-        this.setState({ now: d.getSeconds() });
+            this.setState({ now: d.getSeconds() });
+        }   
     }
 
     onLongPress() {
