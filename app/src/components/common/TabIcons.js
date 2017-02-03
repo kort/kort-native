@@ -1,8 +1,9 @@
 /* eslint-disable react/no-multi-comp */
 import React from 'react';
-import { Text, View, Image } from 'react-native';
+import { Text, View } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-const TabIcon = ({ title, selected, icon }) => {
+const TabIcon = ({ title, selected, iconName }) => {
     const { tabIconStyle,
             tabIconStyleUnselected,
             tabIconStyleSelected,
@@ -11,37 +12,29 @@ const TabIcon = ({ title, selected, icon }) => {
             iconStyleUnselected } = styles;
     return (
         <View style={tabIconStyle}>
-        <Image 
+        <Icon 
             style={[iconStyle, selected ? tabIconStyleSelected : tabIconStyleUnselected]}
-            source={icon}
-        />
+            name={iconName} size={30} 
+        /> 
         <Text style={selected ? iconStyleSelected : iconStyleUnselected}>{title}</Text>
         </View>
     );
 };
 
 const MissionsTabIcon = ({ title, selected }) => {
-  const icon = require('../../../assets/images/tabIcons/missions.png');
-
-  return <TabIcon title={title} selected={selected} icon={icon} />;
+  return <TabIcon title={title} selected={selected} iconName='map' />;
 };
 
-const AchievementsTabIcon = ({ title, selected }) => {
-  const icon = require('../../../assets/images//tabIcons/achievements.png');
-  
-  return <TabIcon title={title} selected={selected} icon={icon} />;
+const AchievementsTabIcon = ({ title, selected }) => {  
+  return <TabIcon title={title} selected={selected} iconName='trophy' />;
 };
 
 const HighscoreTabIcon = ({ title, selected }) => {
-  const icon = require('../../../assets/images//tabIcons/highscore.png');
-  
-  return <TabIcon title={title} selected={selected} icon={icon} />;
+  return <TabIcon title={title} selected={selected} iconName='list-ol' />;
 };
 
 const ProfileTabIcon = ({ title, selected }) => {
-  const icon = require('../../../assets/images//tabIcons/profile.png');
-  
-  return <TabIcon title={title} selected={selected} icon={icon} />;
+  return <TabIcon title={title} selected={selected} iconName='user-circle-o' />;
 };
 const styles = {
     tabIconStyle: {
@@ -52,10 +45,10 @@ const styles = {
         alignItems: 'center',
     },
     tabIconStyleUnselected: {
-        tintColor: '#657C8E'
+        color: '#657C8E'
     },
     tabIconStyleSelected: {
-        tintColor: '#ffffff'
+        color: '#ffffff'
     },
     iconStyle: {
         height: 30,
