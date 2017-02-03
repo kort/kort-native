@@ -14,7 +14,7 @@ const TabIcon = ({ title, selected, iconName }) => {
         <View style={tabIconStyle}>
         <Icon 
             style={[iconStyle, selected ? tabIconStyleSelected : tabIconStyleUnselected]}
-            name={iconName} size={30} 
+            name={iconName}
         /> 
         <Text style={selected ? iconStyleSelected : iconStyleUnselected}>{title}</Text>
         </View>
@@ -51,8 +51,8 @@ const styles = {
         color: '#ffffff'
     },
     iconStyle: {
-        height: 30,
-        width: 30
+        fontSize: 28,
+        paddingBottom: 2
     },
     iconStyleUnselected: {
         color: '#657C8E',
