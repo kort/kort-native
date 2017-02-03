@@ -22,7 +22,7 @@ class GeoLocation extends Component {
         console.log(initialPosition);
         this.props.locationUpdate(initialPosition);
         console.log(GPS_ACCURACY.constructor.name);
-        if (position.coords.accuracy > 10) {  //TODO move param to config file
+        if (position.coords.accuracy > 40) {  //TODO move param to config file
           this.props.locationAccuracyInsufficient(true);
         } else {
           this.props.locationAccuracyInsufficient(false);
