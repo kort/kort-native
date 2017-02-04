@@ -3,15 +3,17 @@ import {
     View
 } from 'react-native';
 import Mapbox, { MapView } from 'react-native-mapbox-gl';
+import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import Config from '../../constants/Config';
 import { showMapModeFullscreen } from '../../actions/MapActions';
 import GeoLocation from '../../geolocation/GeoLocation';
 import { RoundButton } from '../common';
+import MissionSolver from './MissionSolver';
 
 class Map extends Component {
 
-    state = { now: 0 };
+    state = { now: 0, annotationOpen: false };
 
     componentDidMount() {
         Mapbox.setAccessToken(Config.MAPBOX_ACCESS_TOKEN);
@@ -30,8 +32,22 @@ class Map extends Component {
         }
     }
 
+    tapOnAnnotation(region, annotations) {
+        const precision = 3; //TODO according to current zoom level
+        for (const annotation of annotations) {
+            if (annotation.coordinates[0].toFixed(precision) === region.latitude.toFixed(precision)
+            && annotation.coordinates[1].toFixed(precision) === region.longitude.toFixed(precision)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     onTap(tapRegion) {
-        if (tapRegion.screenCoordY > 50) {
+        console.log('tap');
+        if (tapRegion.screenCoordY > 50 && 
+        !this.tapOnAnnotation(tapRegion, this.props.missionAnnotations) &&
+        !this.state.annotationOpen) {
             const d = new Date();
             if (Math.abs(d.getSeconds() - this.state.now) <= 1) {
                 console.log('zoom');
@@ -44,12 +60,9 @@ class Map extends Component {
         }   
     }
 
-    onLongPress() {
-
-    }
-
     onOpenAnnotation() {
-
+        console.log('open annotation');
+        Actions.missionSolver();
     }
 
     centerMapAroundCurrentLocation() {
@@ -80,9 +93,9 @@ class Map extends Component {
                         latitude: Config.MAPBOX_INITIAL_COORD_LATITUDE,
                         longitude: Config.MAPBOX_INITIAL_COORD_LONGITUDE
                     }}
-                    onTap={this.onTap.bind(this)}
-                    onLongPress={this.onLongPress.bind(this)}
                     onOpenAnnotation={this.onOpenAnnotation.bind(this)}
+                    onTap={this.onTap.bind(this)}
+                    annotations={this.props.missionAnnotations}
                 />
                 <RoundButton 
                     style={this.props.mapModeFullScreen ? locBtnFullScreen : locBtnSmallScreen} 
@@ -122,10 +135,10 @@ const styles = {
     
 };
 
-const mapStateToProps = ({ mapReducer }) => {
-    console.log(mapReducer);
+const mapStateToProps = ({ mapReducer, missionAnnotations }) => {
+    console.log(missionAnnotations);
     const { mapModeFullScreen, currentLocation } = mapReducer;
-    return { mapModeFullScreen, currentLocation };
+    return { mapModeFullScreen, currentLocation, missionAnnotations };
 };
 
 

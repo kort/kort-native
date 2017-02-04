@@ -5,6 +5,6 @@ import MapReducer from './MapReducer';
 
 export default combineReducers({
     auth: AuthReducer,
-    missions: MissionsReducer,
+    missionAnnotations: MissionsReducer,
     mapReducer: MapReducer
 });

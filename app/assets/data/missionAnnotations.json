@@ -1,0 +1,10 @@
+[{
+  "coordinates": [47.222, 8.818],
+      "type": "point",
+      "annotationImage": {
+        "source": { "uri": "https://cldup.com/CnRLZem9k9.png" },
+        "height": 30,
+        "width": 30
+      },
+      "id": "missionId_1"
+}]
