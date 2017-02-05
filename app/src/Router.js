@@ -33,6 +33,7 @@ class RouterComponent extends Component {
         return (
         <Router>
 
+
             <Scene key='root' animation='fade'>
                 <Scene
                     key='tabbar'

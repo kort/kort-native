@@ -3,13 +3,11 @@ import {
     View
 } from 'react-native';
 import Mapbox, { MapView } from 'react-native-mapbox-gl';
-import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import Config from '../../constants/Config';
 import { showMapModeFullscreen } from '../../actions/MapActions';
 import GeoLocation from '../../geolocation/GeoLocation';
 import { RoundButton } from '../common';
-import MissionSolver from './MissionSolver';
 
 class Map extends Component {
 
@@ -32,17 +30,6 @@ class Map extends Component {
         }
     }
 
-    tapOnAnnotation(region, annotations) {
-        const precision = 3; //TODO according to current zoom level
-        for (const annotation of annotations) {
-            if (annotation.coordinates[0].toFixed(precision) === region.latitude.toFixed(precision)
-            && annotation.coordinates[1].toFixed(precision) === region.longitude.toFixed(precision)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     onTap(tapRegion) {
         console.log('tap');
         if (tapRegion.screenCoordY > 50 && 
@@ -57,12 +44,26 @@ class Map extends Component {
             }
 
             this.setState({ now: d.getSeconds() });
-        }   
+        }
+        this.props.onTap();   
     }
 
-    onOpenAnnotation() {
+    onOpenAnnotation(annotation) {
         console.log('open annotation');
-        Actions.missionSolver();
+        this.props.showMapModeFullscreen(true);
+        this.props.onOpenAnnotation();
+        this.centerMapAroundLocation(annotation);
+    }
+
+    tapOnAnnotation(region, annotations) {
+        const precision = 3; //TODO according to current zoom level
+        for (const annotation of annotations) {
+            if (annotation.coordinates[0].toFixed(precision) === region.latitude.toFixed(precision)
+            && annotation.coordinates[1].toFixed(precision) === region.longitude.toFixed(precision)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     centerMapAroundCurrentLocation() {
@@ -79,7 +80,8 @@ class Map extends Component {
     map = null;
 
     render() {
-        const { bgColor, mapStyleFullScreen, mapStyleSmallScreen, locBtnFullScreen, locBtnSmallScreen } = styles;
+        const { bgColor, mapStyleFullScreen, mapStyleSmallScreen, 
+            locBtnFullScreen, locBtnSmallScreen } = styles;
         return (
             <View style={bgColor}>
                 <GeoLocation />

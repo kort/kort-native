@@ -4,24 +4,52 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import Map from './Map';
-import { Spinner, Popup } from '../common';
+import MissionSolver from './MissionSolver';
+import { Spinner, Popup, CustomSlidingView } from '../common';
+
 
 class MissionsOverview extends Component {
 
-    state = { gpsModalShowed: false };
+    state = { gpsModalShowed: false, missionActive: false };
 
     onInfoAccept() {
         this.setState({ gpsModalShowed: true });
     }
 
+    onOpenAnnotation() {
+        this.setState({ missionActive: true });
+    }
+
+    onTap() {
+        this.setState({ missionActive: false });
+    }
+
+    renderMission() {
+        if (this.state.missionActive) {
+            return (
+                <CustomSlidingView
+                    heights={[100, 400]}
+                >
+                    <MissionSolver />
+                </CustomSlidingView>
+            );
+        }
+        return <View />;
+    }
+
     render() {
+        const { bgColor, spinnerFullScreen, spinnerSmallScreen } = styles;
         return (
-            <View style={styles.bgColor}>
-                <Map />
+            <View style={bgColor}>
+                <Map 
+                    onTap={this.onTap.bind(this)}
+                    onOpenAnnotation={this.onOpenAnnotation.bind(this)} 
+                />
                 <Spinner
                     size='small'
-                    style={this.props.mapModeFullScreen ? styles.spinnerStyleFullScreen : styles.spinnerStyleSmallScreen} 
+                    style={this.props.mapModeFullScreen ? spinnerFullScreen : spinnerSmallScreen} 
                 />
+                {this.renderMission()}
                 <Popup
                         visible={this.props.accuracyThresholdReached && !this.state.gpsModalShowed}
                         onAccept={this.onInfoAccept.bind(this)}
@@ -34,12 +62,12 @@ class MissionsOverview extends Component {
 }
 
 const styles = {
-    spinnerStyleFullScreen: {
+    spinnerFullScreen: {
         position: 'absolute',
         paddingTop: 20,
         paddingLeft: 10
     },
-    spinnerStyleSmallScreen: {
+    spinnerSmallScreen: {
         position: 'absolute',
         paddingTop: 74,
         paddingBottom: 60,
