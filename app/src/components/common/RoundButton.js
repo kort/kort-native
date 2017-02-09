@@ -3,7 +3,7 @@ import {
     View,
     TouchableOpacity
 } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const RoundButton = ({ onPress, style, iconName }) => {
     const { buttonStyle, iconStyle } = styles;
