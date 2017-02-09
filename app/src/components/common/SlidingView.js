@@ -49,10 +49,28 @@ export default class extends Component {
     containerHeight: new Animated.Value(this.props.heights[0])
   }
 
-  componentWillReceiveProps({ heights }) {
+  componentWillReceiveProps({ heights, clickEvent }) {
     if (this.props.heights.toString() !== heights.toString()) {
       this.animate(this.heights[0]);
     }
+
+    if (clickEvent === 'open') {
+      this.openView();
+    } else if (clickEvent === 'close') {
+      this.closeView();
+    }
+  }
+
+  openView() {
+    this.state.containerHeight.setValue(this.props.heights[1]);
+    this.setState({ clickEvent: 'open' });
+    this.props.isOpen(true);
+  }
+
+  closeView() {
+    this.state.containerHeight.setValue(this.props.heights[0]);
+    this.setState({ clickEvent: 'close' });
+    this.props.isOpen(false);
   }
 
   prevHeight;
@@ -88,6 +106,11 @@ export default class extends Component {
     const { heights, prevHeight, animate } = this;
     const currentHeight = this.state.containerHeight._value;
     const prevIndex = heights.indexOf(prevHeight);
+
+    if (this.state.clickEvent !== '') {
+      this.setState({ clickEvent: '' });
+      return;
+    }
 
     if (currentHeight - prevHeight >= this.props.threshold) {
       this.props.isOpen(true);
