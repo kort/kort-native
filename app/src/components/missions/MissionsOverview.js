@@ -5,7 +5,8 @@ import {
 import { connect } from 'react-redux';
 import Map from './Map';
 import MissionSolver from './MissionSolver';
-import { Spinner, Popup, CustomSlidingView } from '../common';
+import MissionView from './MissionView';
+import { Spinner, Popup } from '../common';
 
 
 class MissionsOverview extends Component {
@@ -27,11 +28,11 @@ class MissionsOverview extends Component {
     renderMission() {
         if (this.state.missionActive) {
             return (
-                <CustomSlidingView
+                <MissionView
                     heights={[100, 400]}
                 >
                     <MissionSolver />
-                </CustomSlidingView>
+                </MissionView>
             );
         }
         return <View />;
@@ -81,7 +82,6 @@ const styles = {
 
 
 const mapStateToProps = ({ mapReducer }) => {
-    console.log(mapReducer);
     const { mapModeFullScreen, accuracyThresholdReached } = mapReducer;
     return { mapModeFullScreen, accuracyThresholdReached };
 };

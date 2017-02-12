@@ -7,4 +7,7 @@ export * from './ModalSpinner';
 export * from './CustomWebView';
 export * from './ModalWebView';
 export * from './RoundButton';
+export * from './KortCoin';
+export * from './CustomSelectionView';
 export * from './CustomSlidingView';
+

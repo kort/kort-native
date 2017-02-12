@@ -5,7 +5,7 @@ import {
     Image
 } from 'react-native';
 
-const Input = ({ value, onChangeText, placeHolder, secureTextEntry, imgSource }) => {
+const Input = ({ value, onChangeText, placeHolder, secureTextEntry, imgSource, keyboardType }) => {
     const { containerStyle, imageStyle, inputStyle } = styles;
 
     return (
@@ -18,6 +18,7 @@ const Input = ({ value, onChangeText, placeHolder, secureTextEntry, imgSource })
                 autoCorrect={false}
                 placeholder={placeHolder}
                 secureTextEntry={secureTextEntry}
+                keyboardType={keyboardType}
             />
         </View>
     );

@@ -52,7 +52,14 @@ class Map extends Component {
         console.log('open annotation');
         this.props.showMapModeFullscreen(true);
         this.props.onOpenAnnotation();
-        this.centerMapAroundLocation(annotation);
+
+        // this.map.getCenterCoordinateZoomLevel(data => {
+        //     // does not work when map rotated
+        //             const zoom = data.zoomLevel;
+        //             const lat = annotation.latitude-0.01;   //TODO according to zoom level
+        //             const lon = annotation.longitude;
+        //             this.map.setCenterCoordinate(lat, lon, true, null);
+        // });
     }
 
     tapOnAnnotation(region, annotations) {
@@ -101,7 +108,7 @@ class Map extends Component {
                 />
                 <RoundButton 
                     style={this.props.mapModeFullScreen ? locBtnFullScreen : locBtnSmallScreen} 
-                    iconName='location-arrow' 
+                    iconName='my-location' 
                     onPress={this.centerMapAroundCurrentLocation.bind(this)} 
                 />
             </View>

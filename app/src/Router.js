@@ -29,9 +29,11 @@ class RouterComponent extends Component {
             .then(() => { console.log('out'); })
             .catch(() => {});
     }
+    // <Scene key='auth' component={LoginOverview} hideNavBar />
     render() {
         return (
         <Router>
+
 
 
             <Scene key='root' animation='fade'>

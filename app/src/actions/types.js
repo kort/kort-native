@@ -10,3 +10,5 @@ export const SECRET_RECEIVED = 'secret_received';
 export const TOGGLE_MAPMODE_FULLSCREEN = 'toggle_mapmode_fullscreen';
 export const LOCATION_UPDATE = 'location_update';
 export const LOCATION_ACCURACY_INSUFFICIENT = 'location_accuracy_insufficient';
+
+export const ANSWER_MODAL_VISIBLE = 'anwer_modal_visible';

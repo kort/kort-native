@@ -46,6 +46,7 @@
 		B540C2AC1E3201CD0006E107 /* GoogleSignIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B540C2A51E3201CD0006E107 /* GoogleSignIn.framework */; };
 		B540C2AD1E3201CD0006E107 /* GoogleSymbolUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B540C2A61E3201CD0006E107 /* GoogleSymbolUtilities.framework */; };
 		B540C2AE1E3201CD0006E107 /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B540C2A71E3201CD0006E107 /* GoogleUtilities.framework */; };
+		B58A49681E4C5BC0003D98B8 /* BritannicBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B58A494B1E4C5BBA003D98B8 /* BritannicBold.ttf */; };
 		B5E4DC941E40C52300F60511 /* Mapbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5E4DC931E40C52300F60511 /* Mapbox.framework */; };
 		B5E4DC951E40C52300F60511 /* Mapbox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B5E4DC931E40C52300F60511 /* Mapbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B5E4DC981E40C56F00F60511 /* libRCTMapboxGL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5E4DC7E1E40C4D500F60511 /* libRCTMapboxGL.a */; };
@@ -316,6 +317,7 @@
 		B540C2A51E3201CD0006E107 /* GoogleSignIn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSignIn.framework; sourceTree = "<group>"; };
 		B540C2A61E3201CD0006E107 /* GoogleSymbolUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSymbolUtilities.framework; sourceTree = "<group>"; };
 		B540C2A71E3201CD0006E107 /* GoogleUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleUtilities.framework; sourceTree = "<group>"; };
+		B58A494B1E4C5BBA003D98B8 /* BritannicBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BritannicBold.ttf; sourceTree = "<group>"; };
 		B5E4DC701E40C4D500F60511 /* RCTMapboxGL.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTMapboxGL.xcodeproj; path = "../node_modules/react-native-mapbox-gl/ios/RCTMapboxGL.xcodeproj"; sourceTree = "<group>"; };
 		B5E4DC931E40C52300F60511 /* Mapbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Mapbox.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -544,6 +546,7 @@
 		B53B1FE51E448D6D003CD811 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				B58A494B1E4C5BBA003D98B8 /* BritannicBold.ttf */,
 				B53B1FE61E448D6D003CD811 /* Entypo.ttf */,
 				B53B1FE71E448D6D003CD811 /* EvilIcons.ttf */,
 				B53B1FE81E448D6D003CD811 /* FontAwesome.ttf */,
@@ -955,6 +958,7 @@
 				B53B1FF61E448D6D003CD811 /* MaterialIcons.ttf in Resources */,
 				B53B1FF91E448D6D003CD811 /* Zocial.ttf in Resources */,
 				B53B1FF41E448D6D003CD811 /* Ionicons.ttf in Resources */,
+				B58A49681E4C5BC0003D98B8 /* BritannicBold.ttf in Resources */,
 				B53B1FF81E448D6D003CD811 /* SimpleLineIcons.ttf in Resources */,
 				B53B1FF01E448D6D003CD811 /* Entypo.ttf in Resources */,
 				B540C2AB1E3201CD0006E107 /* GoogleSignIn.bundle in Resources */,
