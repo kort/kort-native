@@ -103,8 +103,10 @@ class CustomSelectionView extends Component {
             width: ScreenWidth - 80,
             backgroundColor: '#ffffff',
             maxHeight: ScreenHeight - 300,
-            borderRadius: 5,
-            overflow: 'hidden',
+			borderRadius: 10,
+			borderWidth: 1,
+			borderColor: '#657C8E',
+		    overflow: 'hidden',
         },
         option: {
             width: ScreenWidth - 80,

@@ -5,16 +5,39 @@ import {
     KeyboardAvoidingView
 } from 'react-native';
 import { connect } from 'react-redux';
+import { answerSet } from '../../actions/AnswerSelectionActions';
 import AnswerSelection from './AnswerSelection';
 import { Input, 
         Button,
-        KortCoin } from '../common';
+        KortCoin,
+        Popup } from '../common';
 
 class MissionSolver extends Component {
 
     state = {
-        freeTextAvailable: false,
-        optionsAvailable: true
+        showModal: false,
+        modalText: ''
+    }
+
+    solveMission() {
+        if (this.props.answer !== '') {
+            this.setState({ 
+                showModal: true,
+                modalText: 'Congratulations! You have earned additional Koins.' 
+            });
+        } else {
+            this.setState({ 
+                showModal: true,
+                modalText: 'Please enter a valid answer!' 
+            });
+        }
+    }
+
+    confirmUnsolvable() {
+        this.setState({ 
+            showModal: true,
+            modalText: 'Do you really want to set this mission as unsolvable? It will be hidden from now on.' 
+        });
     }
 
     renderAnswerSelection() {
@@ -29,10 +52,23 @@ class MissionSolver extends Component {
                 <Input
                     placeHolder='Type in your answer'
                     keyboardType='default'
+                    value={this.props.answer}
+                    onChangeText={value => this.props.answerSet(value)}
                 />
             );
         }
         return <View />;
+    }
+
+    renderModal() {
+                return (
+                <Popup 
+                    onAccept={() => this.setState({ showModal: false })}
+                    visible={this.state.showModal}
+                >
+                    {this.state.modalText}
+                </Popup>
+            );
     }
 
     render() {
@@ -48,10 +84,18 @@ class MissionSolver extends Component {
                     {this.renderAnswerSelection()}
                     {this.renderAnswerFreetext()}
                     <View style={buttonsStyle}>
-                        <Button>Complete Mission</Button>
-                        <Button>Unable to solve</Button>
+                        <Button
+                            onPress={this.solveMission.bind(this)}
+                        >Complete Mission
+                        </Button>
+                        <Button
+                            onPress={this.confirmUnsolvable.bind(this)}
+                        >
+                            Unable to solve
+                        </Button>
                     </View>
                </View>
+               {this.renderModal()}
             </View>
         );
     }
@@ -93,9 +137,9 @@ const styles = {
 
 const mapStateToProps = ({ answerReducer }) => {
     console.log('answer', answerReducer);
-    const { selectionAvailable, freetextAvailable } = answerReducer;
-    return { selectionAvailable, freetextAvailable };
+    const { selectionAvailable, freetextAvailable, answer } = answerReducer;
+    return { selectionAvailable, freetextAvailable, answer };
 };
 
 
-export default connect(mapStateToProps, {})(MissionSolver);
+export default connect(mapStateToProps, { answerSet })(MissionSolver);

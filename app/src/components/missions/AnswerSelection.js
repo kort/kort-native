@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {} from 'react-native';
 import { connect } from 'react-redux';
-import { answerModalVisible, selectedAnswer, freetextAvailable } from '../../actions/AnswerSelectionActions';
+import { answerModalVisible, selectedAnswer, freetextAvailable, answerSet } from '../../actions/AnswerSelectionActions';
 import { CustomSelectionView } from '../common';
 
 class AnswerSelection extends Component {
@@ -10,8 +10,10 @@ class AnswerSelection extends Component {
         this.props.selectedAnswer(answer);
         if (answer.value === 0) {
             this.props.freetextAvailable(true);
+            this.props.answerSet('');
         } else {
             this.props.freetextAvailable(false);
+            this.props.answerSet(answer.name);
         }
     }
 
@@ -44,8 +46,6 @@ class AnswerSelection extends Component {
                 options={options} 
                 onSelection={(answer) => this.answerSelected(answer)}
                 style={styles.selectionViewStyle}
-                iconSize={20}
-                iconColor="#eee"
                 isOpen={(v) => this.isOpen(v)}
             />
         );
@@ -65,5 +65,5 @@ const styles = {
 };
 
 export default connect(null, 
-{ answerModalVisible, selectedAnswer, freetextAvailable })(AnswerSelection);
+{ answerModalVisible, selectedAnswer, freetextAvailable, answerSet })(AnswerSelection);
 

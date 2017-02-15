@@ -2,14 +2,16 @@ import {
     ANSWER_MODAL_VISIBLE,
     SELECTED_ANSWER,
     ANSWER_FREETEXT_AVAILABLE,
-    ANSWER_SELECTION_AVAILABLE
+    ANSWER_SELECTION_AVAILABLE,
+    ANSWER_SET
  } from '../actions/types';
 
 const INITIAL_STATE = {
     answerModalVisible: false,
     selectedAnswer: null,
     selectionAvailable: true,
-    freetextAvailable: false
+    freetextAvailable: false,
+    answer: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -22,6 +24,8 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, selectionAvailable: action.payload };
         case ANSWER_FREETEXT_AVAILABLE:
             return { ...state, freetextAvailable: action.payload };
+        case ANSWER_SET:
+            return { ...state, answer: action.payload };
         default:
             return state;
     }
