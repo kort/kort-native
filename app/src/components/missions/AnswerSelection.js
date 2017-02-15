@@ -1,26 +1,30 @@
 import React, { Component } from 'react';
 import {} from 'react-native';
 import { connect } from 'react-redux';
-import { answerModalVisible } from '../../actions/AnswerSelectionActions';
+import { answerModalVisible, selectedAnswer, freetextAvailable } from '../../actions/AnswerSelectionActions';
 import { CustomSelectionView } from '../common';
 
 class AnswerSelection extends Component {
 
-    returnDataOnSelection(e){
-        console.log('Value : ' + e.value + ' Name : ' + e.name);
-  }
-
-    state = {
-        modalVisible: false
+    returnDataOnSelection(answer) {
+        this.props.selectedAnswer(answer);
+        if (answer.value === 0) {
+            this.props.freetextAvailable(true);
+        } else {
+            this.props.freetextAvailable(false);
+        }
     }
 
     isOpen(v) {
-        console.log('is open', v);
         this.props.answerModalVisible(v);
     }
 
     render() {
         const options = [
+      {
+        name: 'other:',
+        value: 0,
+      },
       {
         name: 'Italian',
         value: 1,
@@ -36,18 +40,17 @@ class AnswerSelection extends Component {
     ];
         return (
             <CustomSelectionView 
-        title='Choose your answer'
-        options={options} 
-        onSelection={(e) => this.returnDataOnSelection(e)}
-        style={styles.selectionViewStyle}
-        iconSize={20}
-        iconColor="#eee"
-        isOpen={(v) => this.isOpen(v)}
+                title='Choose your answer'
+                options={options} 
+                onSelection={(e) => this.returnDataOnSelection(e)}
+                style={styles.selectionViewStyle}
+                iconSize={20}
+                iconColor="#eee"
+                isOpen={(v) => this.isOpen(v)}
             />
         );
     }
 }
-
 
 const styles = {
     bgColor: {
@@ -61,5 +64,5 @@ const styles = {
     },
 };
 
-export default connect(null, { answerModalVisible })(AnswerSelection);
+export default connect(null, { answerModalVisible, selectedAnswer, freetextAvailable })(AnswerSelection);
 

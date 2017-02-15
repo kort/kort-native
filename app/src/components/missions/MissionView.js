@@ -61,7 +61,6 @@ class MissionView extends Component {
         >
         <View>
             {this.renderIcon()}
-
             {this.props.children}
         </View>
         </CustomSlidingView>

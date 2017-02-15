@@ -1,16 +1,14 @@
 import React from 'react';
 import {
     TextInput,
-    View,
-    Image
+    View
 } from 'react-native';
 
-const Input = ({ value, onChangeText, placeHolder, secureTextEntry, imgSource, keyboardType }) => {
-    const { containerStyle, imageStyle, inputStyle } = styles;
+const Input = ({ value, onChangeText, placeHolder, secureTextEntry, keyboardType }) => {
+    const { containerStyle, inputStyle } = styles;
 
     return (
         <View style={containerStyle}>
-            <Image style={imageStyle} source={imgSource} />
             <TextInput 
                 value={value}
                 onChangeText={onChangeText}
@@ -29,15 +27,10 @@ const styles = {
         color: '#ffffff',
         paddingRight: 5,
         paddingLeft: 5,
-        fontSize: 18,
+        fontSize: 20,
         lineHeight: 23,
-        flex: 2
-    },
-    imageStyle: {
-        paddingLeft: 20,
-        height: 30,
-        width: 30,
-        tintColor: '#657C8E'
+        flex: 2,
+        textAlign: 'center'
     },
     containerStyle: {
         height: 40,

@@ -2,29 +2,52 @@ import React, { Component } from 'react';
 import {
     View,
     Text,
-    KeyboardAvoidingView,
-    Picker,
-    Image
+    KeyboardAvoidingView
 } from 'react-native';
+import { connect } from 'react-redux';
+import AnswerSelection from './AnswerSelection';
 import { Input, 
         Button,
         KortCoin } from '../common';
-import AnswerSelection from './AnswerSelection';
 
 class MissionSolver extends Component {
 
-    state = { language: '' }
-   
+    state = {
+        freeTextAvailable: false,
+        optionsAvailable: true
+    }
+
+    renderAnswerSelection() {
+        if (this.props.selectionAvailable) {
+            return <AnswerSelection />;
+        }
+        return <View />;
+    }
+    renderAnswerFreetext() {
+        if (this.props.freetextAvailable) {
+            return (
+                <Input
+                    placeHolder='Type in your answer'
+                    keyboardType='default'
+                />
+            );
+        }
+        return <View />;
+    }
+
     render() {
+        const { bgColor, missionTextStyle, headerStyle,
+            containerStyle, buttonsStyle } = styles;
         return (
-            <View style={styles.bgColor}>
-                <View style={styles.headerStyle}>
+            <View style={bgColor}>
+                <View style={headerStyle}>
                      <KortCoin>100</KortCoin>
-                    <Text style={styles.missionTextStyle}>What type of cuisine is offered at this place?</Text>
+                    <Text style={missionTextStyle}>What type of cuisine is offered at this place?</Text>
                 </View>
-                <View style={styles.containerStyle} >
-                    <AnswerSelection id={123123} />
-                    <View style={styles.buttonsStyle}>
+                <View style={containerStyle} >
+                    {this.renderAnswerSelection()}
+                    {this.renderAnswerFreetext()}
+                    <View style={buttonsStyle}>
                         <Button>Complete Mission</Button>
                         <Button>Unable to solve</Button>
                     </View>
@@ -68,4 +91,11 @@ const styles = {
     }
 };
 
-export default MissionSolver;
+const mapStateToProps = ({ answerReducer }) => {
+    console.log('answer', answerReducer);
+    const { selectionAvailable, freetextAvailable } = answerReducer;
+    return { selectionAvailable, freetextAvailable };
+};
+
+
+export default connect(mapStateToProps, {})(MissionSolver);
