@@ -14,6 +14,7 @@ class Map extends Component {
     state = { now: 0, annotationOpen: false };
 
     componentDidMount() {
+        console.log(Config.MAPBOX_ACCESS_TOKEN);
         Mapbox.setAccessToken(Config.MAPBOX_ACCESS_TOKEN);
         Mapbox.setMetricsEnabled(false);
     }

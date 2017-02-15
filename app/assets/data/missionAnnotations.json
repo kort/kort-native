@@ -1,8 +1,8 @@
 [{
-  "coordinates": [47.222, 8.818],
+  "coordinates": [46.807812, 9.838413],
       "type": "point",
       "annotationImage": {
-        "source": { "uri": "https://cldup.com/CnRLZem9k9.png" },
+        "source": { "uri": "mission_cuisine" },
         "height": 30,
         "width": 30
       },

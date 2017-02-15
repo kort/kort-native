@@ -80,6 +80,7 @@ const styles = {
         textAlign: 'center',
         justifyContent: 'center',
         backgroundColor: '#395971',
+        color: 'white'
         
     }
 };
