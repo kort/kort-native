@@ -1,4 +1,4 @@
-// customized  SelectionVie
+// customized  SelectionView
 // credits to thinnakrit --> https://github.com/thinnakrit/React-Native-Selection
 
 import React, { Component } from 'react';
