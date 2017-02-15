@@ -46,7 +46,8 @@ class CustomSlidingView extends Component {
   }
 
   state = {
-    containerHeight: new Animated.Value(this.props.heights[0])
+    containerHeight: new Animated.Value(this.props.heights[0]),
+    clickEvent: ''
   }
 
   componentWillReceiveProps({ heights, clickEvent }) {
@@ -62,13 +63,15 @@ class CustomSlidingView extends Component {
   }
 
   openView() {
-    this.state.containerHeight.setValue(this.props.heights[1]);
+    // this.state.containerHeight.setValue(this.props.heights[1]);
+    this.animate(this.heights[1]);
     this.setState({ clickEvent: 'open' });
     this.props.isOpen(true);
   }
 
   closeView() {
-    this.state.containerHeight.setValue(this.props.heights[0]);
+    // this.state.containerHeight.setValue(this.props.heights[0]);
+    this.animate(this.heights[0]);
     this.setState({ clickEvent: 'close' });
     this.props.isOpen(false);
   }
@@ -82,7 +85,6 @@ class CustomSlidingView extends Component {
   }
 
   handleTouchMove = ({ nativeEvent }) => {
-    console.log(this.props.lockSlider);
     if (this.props.lockSlider) {
       return;
     }
