@@ -33,7 +33,7 @@ const styles = {
         textAlign: 'center'
     },
     containerStyle: {
-        height: 40,
+        height: 45,
         flexDirection: 'row',
         alignItems: 'center'
     }

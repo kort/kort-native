@@ -6,7 +6,7 @@ import { CustomSelectionView } from '../common';
 
 class AnswerSelection extends Component {
 
-    returnDataOnSelection(answer) {
+    answerSelected(answer) {
         this.props.selectedAnswer(answer);
         if (answer.value === 0) {
             this.props.freetextAvailable(true);
@@ -42,7 +42,7 @@ class AnswerSelection extends Component {
             <CustomSelectionView 
                 title='Choose your answer'
                 options={options} 
-                onSelection={(e) => this.returnDataOnSelection(e)}
+                onSelection={(answer) => this.answerSelected(answer)}
                 style={styles.selectionViewStyle}
                 iconSize={20}
                 iconColor="#eee"
@@ -64,5 +64,6 @@ const styles = {
     },
 };
 
-export default connect(null, { answerModalVisible, selectedAnswer, freetextAvailable })(AnswerSelection);
+export default connect(null, 
+{ answerModalVisible, selectedAnswer, freetextAvailable })(AnswerSelection);
 

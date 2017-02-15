@@ -94,7 +94,7 @@ class CustomSelectionView extends Component {
 			marginLeft: 40,
 			marginTop: 5,
 			marginBottom: 5,
-			borderColor: '#ccc',
+			borderColor: '#657C8E',
 			borderWidth: 1,
 			padding: 10,
 			backgroundColor: '#ffffff',
@@ -110,10 +110,15 @@ class CustomSelectionView extends Component {
             width: ScreenWidth - 80,
             padding: 10,
             borderBottomWidth: 1,
-            borderBottomColor: '#cccccc',
+            borderBottomColor: '#657C8E',
             flexDirection: 'row',
-            margin: 5,
+            margin: 0,
+			backgroundColor: '#ffffff'
         },
+		optionText: {
+			fontSize: 20,
+			color: '#657C8E'
+		},
         text: {
 			fontSize: 20,
             color: 'white',
@@ -151,7 +156,7 @@ class CustomSelectionView extends Component {
 						style={{
 							width: ScreenWidth,
 							height: ScreenHeight,
-							backgroundColor: 'rgba(0,0,0,0.8)',
+							backgroundColor: 'rgba(0,0,0,0.5)',
 							alignItems: 'center',
 							justifyContent: 'center'
 						}}
@@ -167,7 +172,7 @@ class CustomSelectionView extends Component {
 	    								<TouchableOpacity key={k} onPress={()=> this.onSelected(data.name, data.value)}>
 			    							<View style={styles.option}>
                                                 {icon}
-			    								<Text >{data.name}</Text>
+			    								<Text style={styles.optionText} >{data.name}</Text>
 			    							</View>
 		    							</TouchableOpacity>
 			    					)
