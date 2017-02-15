@@ -87,7 +87,7 @@ import {
          marginRight: 50,
      },
      containerStyle: {
-         backgroundColor: 'rgba(0, 0, 0, 0.5)',
+         backgroundColor: 'rgba(0, 0, 0, 0.6)',
          position: 'relative',
          flex: 1,
          justifyContent: 'center'

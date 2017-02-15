@@ -158,7 +158,7 @@ class CustomSelectionView extends Component {
 						style={{
 							width: ScreenWidth,
 							height: ScreenHeight,
-							backgroundColor: 'rgba(0,0,0,0.5)',
+							backgroundColor: 'rgba(0,0,0,0.6)',
 							alignItems: 'center',
 							justifyContent: 'center'
 						}}
