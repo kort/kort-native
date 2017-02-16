@@ -37,7 +37,7 @@ class MissionSolver extends Component {
             this.setState({ 
                 showModal: true,
                 modalConfirm: false,
-                modalText: 'Congratulations! You have earned 100 additional Koins.',
+                modalText: 'Congratulations! You have earned 100 additional Koins. Once your answer is validated you will get another 100 Koins.',
                 modalType: 'win'
             });
         } else {
@@ -81,9 +81,8 @@ class MissionSolver extends Component {
 
     renderModalHeader() {
         if (this.state.modalType === 'win') {
-            return <KortCoin>100</KortCoin>;
+            return <KortCoin animated>100</KortCoin>;
         }
-        return null;
     }
 
     renderModal() {

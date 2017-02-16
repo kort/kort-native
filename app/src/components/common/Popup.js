@@ -103,6 +103,7 @@ import {
          paddingLeft: 10,
          paddingTop: 10,
          paddingBottom: 10,
+         backgroundColor: 'transparent'
      },
      textStyle: {
          color: '#202931'
