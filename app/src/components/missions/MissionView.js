@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
-    View
+    View,
+    TouchableWithoutFeedback
 } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -25,26 +26,30 @@ class MissionView extends Component {
     renderIcon() {
         if (this.state.isOpen) {
             return (
-                    <View style={styles.drawerStyle}>
+                    <TouchableWithoutFeedback 
+                        style={styles.drawerStyle}
+                        onPress={this.closeView.bind(this)}
+                    >
                         <Icon 
                             style={styles.iconStyle} 
                             size={30} 
                             name='arrow-drop-down' 
-                            onPress={this.closeView.bind(this)}
                         />
-                    </View>
+                    </TouchableWithoutFeedback>
                 )
             ;
         }
             return (
-                    <View style={styles.drawerStyle}>
+                    <TouchableWithoutFeedback 
+                        style={styles.drawerStyle}
+                        onPress={this.openView.bind(this)}
+                    >
                         <Icon 
                             style={styles.iconStyle} 
                             size={30} 
                             name='arrow-drop-up'
-                            onPress={this.openView.bind(this)}
                         />
-                    </View>)
+                    </TouchableWithoutFeedback>)
             ; 
     }
 
