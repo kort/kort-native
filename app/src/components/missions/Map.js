@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
-    View
+    View,
+    Platform
 } from 'react-native';
 import Mapbox, { MapView } from 'react-native-mapbox-gl';
 import { connect } from 'react-redux';
@@ -120,7 +121,7 @@ class Map extends Component {
 const styles = {
     bgColor: {
         backgroundColor: '#202931',
-        flex: 1
+        flex: 1,
     },
     mapStyleFullScreen: {
         flex: 1,
@@ -129,7 +130,7 @@ const styles = {
     },
     mapStyleSmallScreen: {
         flex: 1,
-        marginTop: 64,
+        marginTop: (Platform.OS === 'ios') ? 64 : 54,
         marginBottom: 50,
     },
     locBtnFullScreen: {
