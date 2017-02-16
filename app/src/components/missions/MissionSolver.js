@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import {
     View,
-    Text,
-    KeyboardAvoidingView
+    Text
 } from 'react-native';
 import { connect } from 'react-redux';
 import { answerSet, answerModalVisible } from '../../actions/AnswerSelectionActions';
@@ -105,7 +104,7 @@ class MissionSolver extends Component {
     }
 
     render() {
-        const { bgColor, missionTextStyle, headerStyle, buttonBoxStyle,
+        const { bgColor, missionTextStyle, headerStyle,
             containerStyle, unsolvableButtonStyle, completeMissionButtonStyle } = styles;
         return (
             <View style={bgColor}>
@@ -116,7 +115,6 @@ class MissionSolver extends Component {
                 <View style={containerStyle} >
                     {this.renderAnswerSelection()}
                     {this.renderAnswerFreetext()}
-                    <View style={buttonBoxStyle}>
                         <Button
                             onPress={this.solveMission.bind(this)}
                             style={completeMissionButtonStyle}
@@ -128,7 +126,6 @@ class MissionSolver extends Component {
                         >
                             Unable to solve
                         </Button>
-                    </View>
                </View>
                {this.renderModal()}
             </View>
@@ -154,27 +151,24 @@ const styles = {
     },
     containerStyle: {
         flex: 1,
-        height: 300,
         alignSelf: 'stretch',
         alignItems: 'center',
         backgroundColor: 'transparent',
+        justifyContent: 'space-between',
+        marginBottom: 40,
     },
     bgColor: {
         backgroundColor: '#395971',
         alignItems: 'center',
         height: 300,
     },
-    buttonBoxStyle: {
-        flex: 1,
-        justifyContent: 'space-between'
-    },
     completeMissionButtonStyle: {
-        alignSelf: 'stretch',
+        alignSelf: 'center',
+        justifyContent: 'center',
         backgroundColor: '#fff',
         borderRadius: 5,
         borderWidth: 1,
         borderColor: '#657C8E',
-        marginTop: 10,
         marginLeft: 5,
         marginRight: 5,
         height: 50,
@@ -182,7 +176,6 @@ const styles = {
     },
     unsolvableButtonStyle: {
         alignSelf: 'center',
-        marginBottom: 40,
         width: 150, 
     }
 };

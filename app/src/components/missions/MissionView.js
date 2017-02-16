@@ -5,7 +5,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { CustomSlidingView } from '../common';
+import { CustomSlidingView, CustomKeyboardAvoidingView } from '../common';
 
 class MissionView extends Component {
 
@@ -55,6 +55,7 @@ class MissionView extends Component {
 
     render() {
         return (
+        <CustomKeyboardAvoidingView>
         <CustomSlidingView
             threshold={5}
             tension={50}
@@ -69,6 +70,7 @@ class MissionView extends Component {
             {this.props.children}
         </View>
         </CustomSlidingView>
+        </CustomKeyboardAvoidingView>
         );
     }
 }
