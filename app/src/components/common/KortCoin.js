@@ -57,14 +57,14 @@ const styles = {
         color: '#C89E1E',
         textAlign: 'center',
         fontSize: 25,
-        marginLeft: 10,
-        marginRight: 10,
+        marginLeft: 0,
+        marginRight: 0,
         fontFamily: 'Britannic-BoldT.',
     },
     koinStyle: {
         justifyContent: 'center',
-        height: 70,
-        width: 70,
+        height: 60,
+        width: 60,
         alignSelf: 'center',
     },
 };

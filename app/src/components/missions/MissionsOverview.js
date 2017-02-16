@@ -29,7 +29,7 @@ class MissionsOverview extends Component {
         if (this.state.missionActive) {
             return (
                 <MissionView
-                    heights={[100, 400]}
+                    heights={[100, 300]}
                 >
                     <MissionSolver />
                 </MissionView>

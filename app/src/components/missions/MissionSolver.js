@@ -162,7 +162,7 @@ const styles = {
     bgColor: {
         backgroundColor: '#395971',
         alignItems: 'center',
-        height: 400,
+        height: 300,
     },
     completeMissionButtonStyle: {
         alignSelf: 'stretch',
@@ -170,16 +170,16 @@ const styles = {
         borderRadius: 5,
         borderWidth: 1,
         borderColor: '#657C8E',
-        marginTop: 30,
+        marginTop: 10,
         marginLeft: 5,
         marginRight: 5,
-        height: 80,
+        height: 50,
         width: 300,
         justifyContent: 'center'
     },
     unsolvableButtonStyle: {
         alignSelf: 'center',
-        marginTop: 30,
+        marginTop: 10,
         width: 150, 
     }
 };

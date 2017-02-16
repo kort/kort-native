@@ -75,11 +75,9 @@ class MissionView extends Component {
 
 const styles = {
     drawerStyle: {
-        backgroundColor: '#395971',
         height: 20
     },
     iconStyle: {
-        borderRadius: 10,
         alignSelf: 'stretch',
         textAlign: 'center',
         justifyContent: 'center',
