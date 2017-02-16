@@ -5,7 +5,7 @@ import {
     KeyboardAvoidingView
 } from 'react-native';
 import { connect } from 'react-redux';
-import { answerSet } from '../../actions/AnswerSelectionActions';
+import { answerSet, answerModalVisible } from '../../actions/AnswerSelectionActions';
 import AnswerSelection from './AnswerSelection';
 import { Input, 
         Button,
@@ -23,6 +23,7 @@ class MissionSolver extends Component {
 
     onModalConfirm() {
         this.setState({ showModal: false });
+        this.props.answerModalVisible(false);
         if (this.state.modalType === 'unsolvable') {
             console.log('hide mission');
         }
@@ -30,10 +31,12 @@ class MissionSolver extends Component {
 
     onModalDecline() {
         this.setState({ showModal: false });  
+        this.props.answerModalVisible(false);
     }
 
     solveMission() {
         if (this.props.answer !== '') {
+            this.props.answerModalVisible(true);
             this.setState({ 
                 showModal: true,
                 modalConfirm: false,
@@ -41,6 +44,7 @@ class MissionSolver extends Component {
                 modalType: 'win'
             });
         } else {
+            this.props.answerModalVisible(true);
             this.setState({ 
                 showModal: true,
                 modalConfirm: false,
@@ -51,6 +55,7 @@ class MissionSolver extends Component {
     }
 
     confirmUnsolvable() {
+        this.props.answerModalVisible(true);
         this.setState({ 
             showModal: true,
             modalConfirm: true,
@@ -186,4 +191,4 @@ const mapStateToProps = ({ answerReducer }) => {
 };
 
 
-export default connect(mapStateToProps, { answerSet })(MissionSolver);
+export default connect(mapStateToProps, { answerSet, answerModalVisible })(MissionSolver);
