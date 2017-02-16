@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { 
     Text,
     View,
@@ -7,45 +7,80 @@ import {
  } from 'react-native';
  import { Button } from './Button';
 
- const Popup = ({ children, imageURI, visible, onAccept }) => {
-    const { boxStyle,
-            imageBoxStyle,
-            textBoxStyle, 
-            buttonBoxStyle, 
-            containerStyle, 
-            imageStyle,
-            textStyle } = styles;
+ class Popup extends Component {
 
-     return (
-         <Modal
-            visible={visible}
-            transparent
-            animationType='fade'
-            onRequestClose={() => {}}
-         >
-             <View style={containerStyle}>
-                 <View style={boxStyle}>
-                     <View style={imageBoxStyle}>
-                         <Image
-                             source={{ uri: imageURI }}
-                             style={imageStyle}
-                             defaultSource={{ uri: 'placeholderBadge' }}
-                         />
-                     </View>
-                     <View style={textBoxStyle}>
+//  ({ children, imageURI, visible, onAccept, confirm }) =>
+        
+    renderConfirmButton() {
+        if (this.props.confirm) {
+            return (
+                <Button 
+                    onPress={this.props.onDecline}
+                    style={styles.buttonStyle}
+                >
+                    No
+                </Button>
+            );
+        }
+    }
 
-                         <Text style={textStyle}>{children}</Text>
-                     </View>
-                     <View style={buttonBoxStyle}>
-                         <Button onPress={onAccept}>
-                             OK
-                    </Button>
-                     </View>
-                 </View>
-             </View>
-         </Modal>
-     );
- };
+    renderHeader() {
+        if (this.props.imageURI) {
+            return (
+                <View style={styles.imageBoxStyle}>
+                    <Image
+                        source={{ uri: this.props.imageURI }}
+                        style={styles.imageStyle}
+                        defaultSource={{ uri: 'placeholderBadge' }}
+                    />
+                </View>
+            );
+        } else if (this.props.children) {
+            return (
+                <View style={styles.imageBoxStyle}>
+                    {this.props.children}
+                </View>
+            );
+        }
+    }
+
+    render() {
+        const { boxStyle,
+                textBoxStyle, 
+                buttonBoxStyle, 
+                containerStyle, 
+                buttonStyle,
+                textStyle } = styles;
+        return (
+            <Modal
+                visible={this.props.visible}
+                transparent
+                animationType='fade'
+                onRequestClose={() => {}}
+            >
+                <View style={containerStyle}>
+                    <View style={boxStyle}>
+                        {this.renderHeader()}
+                        <View style={textBoxStyle}>
+
+                            <Text style={textStyle}>{this.props.message}</Text>
+                        </View>
+                        <View style={buttonBoxStyle}>
+                            <Button
+                                onPress={this.props.onAccept}
+                                style={buttonStyle}
+                            >
+                                OK
+                            </Button>
+                            {this.renderConfirmButton()}
+                        </View>
+                    </View>
+                </View>
+            </Modal>
+        );
+    }
+ 
+}
 
  const styles = {
      imageStyle: {
@@ -72,10 +107,14 @@ import {
      textStyle: {
          color: '#202931'
      },
+     buttonStyle: {
+        flex: 1,
+     },
      buttonBoxStyle: {
-         height: 70,
+         height: 60,
          paddingTop: 10,
-         paddingBottom: 10
+         paddingBottom: 10,
+         flexDirection: 'row',
      },
      boxStyle: {
          backgroundColor: '#FFFFFF',

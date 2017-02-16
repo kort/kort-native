@@ -36,9 +36,8 @@ class AchievementItem extends Component {
                         visible={this.state.showModal}
                         onAccept={this.onAccept.bind(this)}
                         imageURI={achievementImageURI}
-                    >
-                    {achievementDescription}
-                    </Popup>
+                        message={achievementDescription}
+                    />
                 </View>
         );
     }

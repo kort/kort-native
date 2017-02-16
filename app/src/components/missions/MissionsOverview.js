@@ -54,9 +54,8 @@ class MissionsOverview extends Component {
                 <Popup
                         visible={this.props.accuracyThresholdReached && !this.state.gpsModalShowed}
                         onAccept={this.onInfoAccept.bind(this)}
-                >
-                    Your GPS signal is bad. Get outdoors.
-                </Popup>           
+                        message='Your GPS signal is bad. Get outdoors.'
+                />       
              </View>
         );
     }

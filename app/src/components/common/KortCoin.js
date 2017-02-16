@@ -29,6 +29,7 @@ const styles = {
         justifyContent: 'center',
         height: 70,
         width: 70,
+        alignSelf: 'center'
     },
 };
 
