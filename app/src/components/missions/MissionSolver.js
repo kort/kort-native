@@ -105,7 +105,7 @@ class MissionSolver extends Component {
     }
 
     render() {
-        const { bgColor, missionTextStyle, headerStyle,
+        const { bgColor, missionTextStyle, headerStyle, buttonBoxStyle,
             containerStyle, unsolvableButtonStyle, completeMissionButtonStyle } = styles;
         return (
             <View style={bgColor}>
@@ -116,7 +116,7 @@ class MissionSolver extends Component {
                 <View style={containerStyle} >
                     {this.renderAnswerSelection()}
                     {this.renderAnswerFreetext()}
-                    <View>
+                    <View style={buttonBoxStyle}>
                         <Button
                             onPress={this.solveMission.bind(this)}
                             style={completeMissionButtonStyle}
@@ -164,6 +164,10 @@ const styles = {
         alignItems: 'center',
         height: 300,
     },
+    buttonBoxStyle: {
+        flex: 1,
+        justifyContent: 'space-between'
+    },
     completeMissionButtonStyle: {
         alignSelf: 'stretch',
         backgroundColor: '#fff',
@@ -175,11 +179,10 @@ const styles = {
         marginRight: 5,
         height: 50,
         width: 300,
-        justifyContent: 'center'
     },
     unsolvableButtonStyle: {
         alignSelf: 'center',
-        marginTop: 10,
+        marginBottom: 40,
         width: 150, 
     }
 };
