@@ -1,0 +1,70 @@
+[
+{
+    "id" : "mission_id_123",
+    "type" : {
+        "name": "default",
+        "inputType": "",
+        "options": [
+                    {
+                        "name": "other:",
+                        "value": 0
+                    },
+                    {
+                        "name": "Italian",
+                        "value": 1
+                    },
+                    {
+                        "name": "Chinese",
+                        "value": 2
+                    },
+                    {
+                        "name": "Swiss",
+                        "value": 3
+                    },
+                    {
+                        "name": "Thai",
+                        "value": 4
+                    }],
+        "constraints": {
+            "re": ""
+        }
+    },
+    "question": "What type of cuisine is offered at this place?",
+    "lat": 46.887812,
+    "lon": 9.858413,
+    "koinReward": 50,
+    "image": "mission_cuisine"
+},
+{
+    "id" : "mission_id_223",
+    "type" : {
+        "name": "numeric",
+        "inputType": "",
+        "options": [
+                    {
+                        "name": "other:",
+                        "value": 0
+                    },
+                    {
+                        "name": "1",
+                        "value": 1
+                    },
+                    {
+                        "name": "2",
+                        "value": 2
+                    },
+                    {
+                        "name": "3",
+                        "value": 3
+                    }],
+        "constraints": {
+            "re": ""
+        }
+    },
+    "question": "How many floors has this building?",
+    "lat": 46.807812,
+    "lon": 9.838413,
+    "koinReward": 100,
+    "image": "mission_cuisine"
+}
+]

@@ -39,7 +39,7 @@ class MissionSolver extends Component {
             this.setState({ 
                 showModal: true,
                 modalConfirm: false,
-                modalText: 'Congratulations! You have earned 100 additional Koins. Once your answer is validated you will get another 100 Koins.',
+                modalText: `Congratulations! You have earned ${this.props.activeMission.koinReward} additional Koins. Once your answer is validated you will get another ${this.props.activeMission.koinReward} Koins.`,
                 modalType: 'win'
             });
         } else {
@@ -65,7 +65,7 @@ class MissionSolver extends Component {
 
     renderAnswerSelection() {
         if (this.props.selectionAvailable) {
-            return <AnswerSelection />;
+            return <AnswerSelection options={this.props.activeMission.type.options} />;
         }
         return <View />;
     }
@@ -85,7 +85,7 @@ class MissionSolver extends Component {
 
     renderModalHeader() {
         if (this.state.modalType === 'win') {
-            return <KortCoin animated>100</KortCoin>;
+            return <KortCoin animated>{this.props.activeMission.koinReward}</KortCoin>;
         }
     }
 
@@ -109,8 +109,8 @@ class MissionSolver extends Component {
         return (
             <View style={bgColor}>
                 <View style={headerStyle}>
-                     <KortCoin>100</KortCoin>
-                    <Text style={missionTextStyle}>What type of cuisine is offered at this place?</Text>
+                     <KortCoin>{this.props.activeMission.koinReward}</KortCoin>
+                    <Text style={missionTextStyle}>{this.props.activeMission.question}</Text>
                 </View>
                 <View style={containerStyle} >
                     {this.renderAnswerSelection()}
@@ -180,10 +180,11 @@ const styles = {
     }
 };
 
-const mapStateToProps = ({ answerReducer }) => {
-    console.log('answer', answerReducer);
+const mapStateToProps = ({ answerReducer, missionReducer }) => {
+    console.log('mission', missionReducer);
     const { selectionAvailable, freetextAvailable, answer } = answerReducer;
-    return { selectionAvailable, freetextAvailable, answer };
+    const { activeMission } = missionReducer;
+    return { selectionAvailable, freetextAvailable, answer, activeMission };
 };
 
 

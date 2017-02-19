@@ -6,7 +6,7 @@ import AnswerReducer from './AnswerReducer';
 
 export default combineReducers({
     auth: AuthReducer,
-    missionAnnotations: MissionsReducer,
+    missionReducer: MissionsReducer,
     mapReducer: MapReducer,
     answerReducer: AnswerReducer
 });

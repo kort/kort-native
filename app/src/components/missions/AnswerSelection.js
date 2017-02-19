@@ -22,28 +22,10 @@ class AnswerSelection extends Component {
     }
 
     render() {
-        const options = [
-      {
-        name: 'other:',
-        value: 0,
-      },
-      {
-        name: 'Italian',
-        value: 1,
-      },
-      {
-        name: 'Chinese',
-        value: 2,
-      },
-      {
-        name: 'Thai',
-        value: 3,
-      },
-    ];
         return (
             <CustomSelectionView 
                 title='Choose your answer'
-                options={options} 
+                options={this.props.options} 
                 onSelection={(answer) => this.answerSelected(answer)}
                 style={styles.selectionViewStyle}
                 isOpen={(v) => this.isOpen(v)}

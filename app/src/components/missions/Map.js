@@ -7,6 +7,7 @@ import Mapbox, { MapView } from 'react-native-mapbox-gl';
 import { connect } from 'react-redux';
 import Config from '../../constants/Config';
 import { showMapModeFullscreen } from '../../actions/MapActions';
+import { downloadMissions, startMission } from '../../actions/MissionActions';
 import GeoLocation from '../../geolocation/GeoLocation';
 import { RoundButton } from '../common';
 
@@ -18,6 +19,9 @@ class Map extends Component {
         console.log(Config.MAPBOX_ACCESS_TOKEN);
         Mapbox.setAccessToken(Config.MAPBOX_ACCESS_TOKEN);
         Mapbox.setMetricsEnabled(false);
+
+        //TODO move this to other area
+        this.props.downloadMissions();
     }
 
     componentWillReceiveProps(nextProps) {
@@ -51,7 +55,7 @@ class Map extends Component {
     }
 
     onOpenAnnotation(annotation) {
-        console.log('open annotation');
+        this.props.startMission(annotation.id);
         this.props.showMapModeFullscreen(true);
         this.props.onOpenAnnotation();
 
@@ -146,11 +150,13 @@ const styles = {
     
 };
 
-const mapStateToProps = ({ mapReducer, missionAnnotations }) => {
-    console.log(missionAnnotations);
+const mapStateToProps = ({ mapReducer, missionReducer }) => {
+    console.log(missionReducer);
     const { mapModeFullScreen, currentLocation } = mapReducer;
+    const { missionAnnotations } = missionReducer;
     return { mapModeFullScreen, currentLocation, missionAnnotations };
 };
 
 
-export default connect(mapStateToProps, { showMapModeFullscreen })(Map);
+export default connect(mapStateToProps, 
+    { showMapModeFullscreen, downloadMissions, startMission })(Map);
