@@ -1,0 +1,4 @@
+#ignore the following files, which are not really of part of kort native
+
+src/components/common/CustomSelectionView.js
+src/components/common/CustomSlidingView.js
