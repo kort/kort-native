@@ -27,17 +27,26 @@ class AchievementItem extends Component {
                 <View style={styles.itemStyle}>
                     <TouchableWithoutFeedback onPress={this.onRowPress.bind(this)}>
                         <Image
-                            style={styles.badgeAchievedStyle}
+                            style={styles.badgeStyle}
                             source={{ uri: achievementImageURI }}
                             defaultSource={{ uri: 'placeholderBadge' }}
-                        />
+                        >
+                        <View style={this.props.achieved ? styles.achievedStyle : {}} />
+                        </Image>
                     </TouchableWithoutFeedback>
                     <Popup
                         visible={this.state.showModal}
                         onAccept={this.onAccept.bind(this)}
-                        imageURI={achievementImageURI}
                         message={achievementDescription}
-                    />
+                    >
+                        <Image
+                            style={styles.badgeStyle}
+                            source={{ uri: achievementImageURI }}
+                            defaultSource={{ uri: 'placeholderBadge' }}
+                        >
+                            <View style={this.props.achieved ? styles.achievedStyle : {}} />
+                        </Image>
+                    </Popup>
                 </View>
         );
     }
@@ -50,11 +59,17 @@ const styles = {
         height: 100,
         width: 100
     },
-    badgeAchievedStyle: {
-        marginLeft: 10,
+    badgeStyle: {
+        alignSelf: 'center',
         marginTop: 10,
         width: 80,
-        height: 80
+        height: 80,
+    },
+    achievedStyle: {
+        width: 80,
+        height: 80,
+        borderRadius: 40,
+        backgroundColor: 'rgba(0, 0, 0, 0.2)',
     }
 };
 
