@@ -4,7 +4,10 @@ import {
     Text
 } from 'react-native';
 import { connect } from 'react-redux';
-import { answerSet, answerModalVisible } from '../../actions/AnswerSelectionActions';
+import _ from 'lodash';
+import { answerSet, 
+         answerModalVisible, 
+         setFreetextAvailable } from '../../actions/AnswerSelectionActions';
 import AnswerSelection from './AnswerSelection';
 import { Input, 
         Button,
@@ -18,6 +21,15 @@ class MissionSolver extends Component {
         modalConfirm: false,
         modalText: '',
         modalType: ''
+    }
+
+    componentDidMount() {
+        //reset answer
+        this.props.answerSet('');
+
+        if (_.isEmpty(this.props.activeMission.options)) {
+            this.props.setFreetextAvailable(this.props.activeMission.inputType.name);
+        }
     }
 
     onModalConfirm() {
@@ -63,24 +75,46 @@ class MissionSolver extends Component {
         });
     }
 
-    renderAnswerSelection() {
-        if (this.props.selectionAvailable) {
-            return <AnswerSelection options={this.props.activeMission.type.options} />;
-        }
-        return <View />;
+    createListItem(index, item) {
+        return { value: index, name: item };
     }
+
+    determineKeyboardType() {
+        switch (this.props.freetextType) {
+            case 'text':
+                return 'default';
+            case 'number':
+                return 'numeric';
+            default:
+                return '';
+        }
+    }
+
+    renderAnswerSelection() {
+        if (!_.isEmpty(this.props.activeMission.inputType.options)) {
+            const options = _.map(this.props.activeMission.inputType.options, 
+                (item, index) => { return { value: index, name: item }; });
+            if (this.props.activeMission.inputType.name !== 'select') {
+                options.unshift({ value: -1, name: 'other:' });
+            }
+            return <AnswerSelection options={options} />;
+        }
+        return null;
+    }
+
     renderAnswerFreetext() {
-        if (this.props.freetextAvailable) {
+        const keyboardType = this.determineKeyboardType();
+        if (keyboardType !== '') {
             return (
                 <Input
                     placeHolder='Type in your answer'
-                    keyboardType='default'
+                    keyboardType={keyboardType}
                     value={this.props.answer}
                     onChangeText={value => this.props.answerSet(value)}
                 />
             );
-        }
-        return <View />;
+        }   
+        return null;
     }
 
     renderModalHeader() {
@@ -182,10 +216,11 @@ const styles = {
 
 const mapStateToProps = ({ answerReducer, missionReducer }) => {
     console.log('mission', missionReducer);
-    const { selectionAvailable, freetextAvailable, answer } = answerReducer;
+    const { freetextType, answer } = answerReducer;
     const { activeMission } = missionReducer;
-    return { selectionAvailable, freetextAvailable, answer, activeMission };
+    return { freetextType, answer, activeMission };
 };
 
 
-export default connect(mapStateToProps, { answerSet, answerModalVisible })(MissionSolver);
+export default connect(mapStateToProps, 
+{ answerSet, answerModalVisible, setFreetextAvailable })(MissionSolver);

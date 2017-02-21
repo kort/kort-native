@@ -13,7 +13,6 @@ export const LOCATION_ACCURACY_INSUFFICIENT = 'location_accuracy_insufficient';
 
 export const ANSWER_MODAL_VISIBLE = 'anwer_modal_visible';
 export const SELECTED_ANSWER = 'selected_answer';
-export const ANSWER_SELECTION_AVAILABLE = 'answer_selection_available';
 export const ANSWER_FREETEXT_AVAILABLE = 'answer_freetext_available';
 export const ANSWER_SET = 'answer_set';
 

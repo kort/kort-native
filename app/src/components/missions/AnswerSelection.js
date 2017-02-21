@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
 import {} from 'react-native';
 import { connect } from 'react-redux';
-import { answerModalVisible, selectedAnswer, freetextAvailable, answerSet } from '../../actions/AnswerSelectionActions';
+import { answerModalVisible, 
+         selectedAnswer, 
+         setFreetextAvailable, 
+         answerSet } from '../../actions/AnswerSelectionActions';
 import { CustomSelectionView } from '../common';
 
 class AnswerSelection extends Component {
 
     answerSelected(answer) {
         this.props.selectedAnswer(answer);
-        if (answer.value === 0) {
-            this.props.freetextAvailable(true);
+        if (answer.value === -1) {
+            this.props.setFreetextAvailable(this.props.activeMission.inputType.name);
             this.props.answerSet('');
         } else {
-            this.props.freetextAvailable(false);
+            this.props.setFreetextAvailable('');
             this.props.answerSet(answer.name);
         }
     }
@@ -46,6 +49,11 @@ const styles = {
     },
 };
 
-export default connect(null, 
-{ answerModalVisible, selectedAnswer, freetextAvailable, answerSet })(AnswerSelection);
+const mapStateToProps = ({ missionReducer }) => {
+    const { activeMission } = missionReducer;
+    return { activeMission };
+};
+
+export default connect(mapStateToProps, 
+{ answerModalVisible, selectedAnswer, setFreetextAvailable, answerSet })(AnswerSelection);
 
