@@ -46,12 +46,15 @@ class MissionSolver extends Component {
     }
 
     solveMission() {
-        if (this.props.answer !== '') {
+        const mission = this.props.activeMission;
+        const validationMessage = this.validateInput() ? '' : 
+            mission.inputType.constraints.description;
+        if (this.props.answer !== '' && validationMessage === '') {
             this.props.answerModalVisible(true);
             this.setState({ 
                 showModal: true,
                 modalConfirm: false,
-                modalText: `Congratulations! You have earned ${this.props.activeMission.koinReward} additional Koins. Once your answer is validated you will get another ${this.props.activeMission.koinReward} Koins.`,
+                modalText: `Congratulations! You have earned ${mission.koinReward} additional Koins. Once your answer is validated you will get another ${mission.koinReward} Koins.`,
                 modalType: 'win'
             });
         } else {
@@ -59,7 +62,7 @@ class MissionSolver extends Component {
             this.setState({ 
                 showModal: true,
                 modalConfirm: false,
-                modalText: 'Please enter a valid answer!',
+                modalText: `Please enter a valid answer!\n\n${validationMessage}`,
                 modalType: 'validation'
             });
         }
@@ -73,6 +76,18 @@ class MissionSolver extends Component {
             modalText: 'Do you really want to set this mission as unsolvable? It will be hidden from now on.',
             modalType: 'unsolvable' 
         });
+    }
+
+    validateInput() {
+        const { re, upperBound, lowerBound } = this.props.activeMission.inputType.constraints;
+            if (re) {
+                const regex = new RegExp(re);
+                return regex.test(this.props.answer);
+            } else if (upperBound && lowerBound) {
+                return lowerBound <= parseFloat(this.props.answer) && 
+                    parseFloat(this.props.answer) <= upperBound;
+            }
+        return true;
     }
 
     createListItem(index, item) {

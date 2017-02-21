@@ -6,9 +6,10 @@
         "name": "text",
         "options": [ "Italian", "Chinese", "Italian", "Swiss", "Thai" ],
         "constraints": {
-            "re": "",
-            "lowerBound": "",
-            "upperBound": ""
+            "description": "",
+            "re": null,
+            "lowerBound": null,
+            "upperBound": null
         }
     },
     "question": "What type of cuisine is offered at this place?",
@@ -25,7 +26,8 @@
         "name": "number",
         "options": [],
         "constraints": {
-            "re": "",
+            "description": "Number must be between 1 and 100",
+            "re": null,
             "lowerBound": 1,
             "upperBound": 100
         }
@@ -43,9 +45,10 @@
         "name": "select",
         "options": ["30", "50", "80"],
         "constraints": {
-            "re": "",
-            "lowerBound": 1,
-            "upperBound": 100
+            "description": "",
+            "re": null,
+            "lowerBound": null,
+            "upperBound": null
         }
     },
     "question": "What is the speed limit of this road?",
