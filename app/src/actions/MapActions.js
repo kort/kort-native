@@ -2,7 +2,8 @@ import { Actions } from 'react-native-router-flux';
 import { 
     TOGGLE_MAPMODE_FULLSCREEN,
     LOCATION_UPDATE,
-    LOCATION_ACCURACY_INSUFFICIENT
+    LOCATION_ACCURACY_INSUFFICIENT,
+    MARGIN_BOTTOM_CHANGED
 } from './types';
 
 export const showMapModeFullscreen = (show) => {
@@ -10,6 +11,13 @@ export const showMapModeFullscreen = (show) => {
     return { 
         type: TOGGLE_MAPMODE_FULLSCREEN,
         payload: show 
+    };  
+};
+
+export const setMarginBottom = (margin) => {
+    return { 
+        type: MARGIN_BOTTOM_CHANGED,
+        payload: margin 
     };  
 };
 

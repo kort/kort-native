@@ -10,6 +10,7 @@ export const SECRET_RECEIVED = 'secret_received';
 export const TOGGLE_MAPMODE_FULLSCREEN = 'toggle_mapmode_fullscreen';
 export const LOCATION_UPDATE = 'location_update';
 export const LOCATION_ACCURACY_INSUFFICIENT = 'location_accuracy_insufficient';
+export const MARGIN_BOTTOM_CHANGED = 'margin_bottom_changed';
 
 export const ANSWER_MODAL_VISIBLE = 'anwer_modal_visible';
 export const SELECTED_ANSWER = 'selected_answer';

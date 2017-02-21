@@ -24,9 +24,7 @@ class MissionSolver extends Component {
     }
 
     componentDidMount() {
-        //reset answer
         this.props.answerSet('');
-
         if (_.isEmpty(this.props.activeMission.options)) {
             this.props.setFreetextAvailable(this.props.activeMission.inputType.name);
         }
@@ -36,7 +34,7 @@ class MissionSolver extends Component {
         this.setState({ showModal: false });
         this.props.answerModalVisible(false);
         if (this.state.modalType === 'unsolvable') {
-            console.log('hide mission');
+            console.log('hide mission'); //TODO
         }
     }
 

@@ -6,7 +6,7 @@ import {
 import Mapbox, { MapView } from 'react-native-mapbox-gl';
 import { connect } from 'react-redux';
 import Config from '../../constants/Config';
-import { showMapModeFullscreen } from '../../actions/MapActions';
+import { showMapModeFullscreen, setMarginBottom } from '../../actions/MapActions';
 import { downloadMissions, startMission } from '../../actions/MissionActions';
 import GeoLocation from '../../geolocation/GeoLocation';
 import { RoundButton } from '../common';
@@ -47,6 +47,7 @@ class Map extends Component {
             } else {
                 console.log('fullscreen toggle');
                 this.props.showMapModeFullscreen(!this.props.mapModeFullScreen);
+                this.props.setMarginBottom(this.props.mapModeFullScreen ? 50 : 0);
             }
 
             this.setState({ now: d.getSeconds() });
@@ -58,6 +59,8 @@ class Map extends Component {
         this.props.startMission(annotation.id);
         this.props.showMapModeFullscreen(true);
         this.props.onOpenAnnotation();
+
+        this.setState({ bottomMargin: 300 });
 
         // this.map.getCenterCoordinateZoomLevel(data => {
         //     // does not work when map rotated
@@ -100,7 +103,7 @@ class Map extends Component {
                 <GeoLocation />
                 <MapView
                     ref={map => { this.map = map; }}                    
-                    style={this.props.mapModeFullScreen ? mapStyleFullScreen : mapStyleSmallScreen}
+                    style={[this.props.mapModeFullScreen ? mapStyleFullScreen : mapStyleSmallScreen, { marginBottom: this.props.marginBottom }]}
                     logoIsHidden
                     showsUserLocation
                     initialZoomLevel={13}
@@ -124,18 +127,16 @@ class Map extends Component {
 
 const styles = {
     bgColor: {
-        backgroundColor: '#202931',
+        backgroundColor: '#395971',
         flex: 1,
     },
     mapStyleFullScreen: {
         flex: 1,
         marginTop: 0,
-        marginBottom: 0,
     },
     mapStyleSmallScreen: {
         flex: 1,
         marginTop: (Platform.OS === 'ios') ? 64 : 54,
-        marginBottom: 50,
     },
     locBtnFullScreen: {
         position: 'absolute',
@@ -152,11 +153,11 @@ const styles = {
 
 const mapStateToProps = ({ mapReducer, missionReducer }) => {
     console.log(missionReducer);
-    const { mapModeFullScreen, currentLocation } = mapReducer;
+    const { mapModeFullScreen, currentLocation, marginBottom } = mapReducer;
     const { missionAnnotations } = missionReducer;
-    return { mapModeFullScreen, currentLocation, missionAnnotations };
+    return { mapModeFullScreen, currentLocation, marginBottom, missionAnnotations };
 };
 
 
 export default connect(mapStateToProps, 
-    { showMapModeFullscreen, downloadMissions, startMission })(Map);
+    { showMapModeFullscreen, downloadMissions, setMarginBottom, startMission })(Map);

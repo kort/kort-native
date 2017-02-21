@@ -6,6 +6,8 @@ import {
   Dimensions,
   Animated
 } from 'react-native';
+import { connect } from 'react-redux';
+import { setMarginBottom } from '../../actions/MapActions';
 
 const deviceWidth = Dimensions.get('window').width;
 const deviceHeight = Dimensions.get('window').height;
@@ -89,9 +91,13 @@ class CustomSlidingView extends Component {
       return;
     }
     const newHeight = this.prevHeight + (this.oldY - nativeEvent.pageY);
-
+    
     const minHeight = this.heights[0];
     const maxHeight = this.heights.slice(-1)[0];
+
+    if (newHeight <= maxHeight) {
+          this.props.setMarginBottom(newHeight);
+    } 
 
     if (newHeight > minHeight && newHeight < maxHeight) {
       this.state.containerHeight.setValue(newHeight);
@@ -99,6 +105,7 @@ class CustomSlidingView extends Component {
   }
 
   animate = (height, callback) => {
+    this.props.setMarginBottom(height);
     Animated.spring(this.state.containerHeight, {
       toValue: height,
       tension: this.props.tension,
@@ -149,4 +156,4 @@ class CustomSlidingView extends Component {
 
 }
 
-export { CustomSlidingView };
+export default connect(null, { setMarginBottom })(CustomSlidingView);
