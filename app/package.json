@@ -15,6 +15,7 @@
     "react-native-mapbox-gl": "^5.1.0",
     "react-native-rest-client": "^0.1.1",
     "react-native-router-flux": "^3.37.0",
+    "react-native-segmented-control-tab": "^2.0.1",
     "react-native-vector-icons": "^4.0.0",
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",
