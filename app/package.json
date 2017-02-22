@@ -11,6 +11,7 @@
     "lodash": "^4.17.4",
     "react": "15.4.2",
     "react-native": "0.40.0",
+    "react-native-animatable": "^1.1.0",
     "react-native-google-signin": "^0.8.1",
     "react-native-mapbox-gl": "^5.1.0",
     "react-native-rest-client": "^0.1.1",

@@ -132,7 +132,7 @@ class MissionSolver extends Component {
 
     renderModalHeader() {
         if (this.state.modalType === 'win') {
-            return <KortCoin animated>{this.props.activeMission.koinReward}</KortCoin>;
+            return <KortCoin animationStyle='win'>{this.props.activeMission.koinReward}</KortCoin>;
         }
     }
 
@@ -156,7 +156,7 @@ class MissionSolver extends Component {
         return (
             <View style={bgColor}>
                 <View style={headerStyle}>
-                     <KortCoin>{this.props.activeMission.koinReward}</KortCoin>
+                     <KortCoin animationStyle='pulse'>{this.props.activeMission.koinReward}</KortCoin>
                     <Text style={missionTextStyle}>{this.props.activeMission.question}</Text>
                 </View>
                 <View style={containerStyle} >

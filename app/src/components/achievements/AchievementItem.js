@@ -4,7 +4,7 @@ import {
     Image,
     TouchableWithoutFeedback
 } from 'react-native';
-import { Actions } from 'react-native-router-flux';
+import * as Animatable from 'react-native-animatable';
 import { Popup } from '../common/';
 
 class AchievementItem extends Component {
@@ -39,13 +39,14 @@ class AchievementItem extends Component {
                         onAccept={this.onAccept.bind(this)}
                         message={achievementDescription}
                     >
-                        <Image
+                        <Animatable.Image
+                            animation="shake" easing="ease-out" iterationCount="infinite"
                             style={styles.badgeStyle}
                             source={{ uri: achievementImageURI }}
                             defaultSource={{ uri: 'placeholderBadge' }}
                         >
                             <View style={this.props.achieved ? styles.achievedStyle : {}} />
-                        </Image>
+                        </Animatable.Image>
                     </Popup>
                 </View>
         );

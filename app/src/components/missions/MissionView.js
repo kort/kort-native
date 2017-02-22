@@ -6,6 +6,7 @@ import {
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { CustomKeyboardAvoidingView, CustomSlidingView } from '../common';
+import * as Animatable from 'react-native-animatable';
 
 class MissionView extends Component {
 
@@ -56,6 +57,7 @@ class MissionView extends Component {
     render() {
         return (
         <CustomKeyboardAvoidingView>
+        <Animatable.View animation="slideInUp" iterationCount={1} >
         <CustomSlidingView
             threshold={5}
             tension={50}
@@ -70,6 +72,7 @@ class MissionView extends Component {
             {this.props.children}
         </View>
         </CustomSlidingView>
+        </Animatable.View>
         </CustomKeyboardAvoidingView>
         );
     }

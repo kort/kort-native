@@ -1,51 +1,50 @@
 import React, { Component } from 'react';
 import {
-    Animated,
         Text,
-        TouchableWithoutFeedback
+        Image
      } from 'react-native';
+import * as Animatable from 'react-native-animatable';
 
 class KortCoin extends Component {
-
-    state = {
-        bounceValue: new Animated.Value(0)
-    }
-    
-    componentDidMount() {
-        this.animate();
-    }
-
-    animate() {
-        if (this.props.animated) {
-            this.state.bounceValue.setValue(2.0);
-            Animated.spring(
-            this.state.bounceValue,
-            {
-                toValue: 1.0,
-                friction: 0.5,
-            }
-        ).start();
-        }
-    }
-
-    render() {
-        const animatedStyle = {
-            transform: [                       
-            { scale: this.state.bounceValue },
-          ]
-        };
-        return (
-            <TouchableWithoutFeedback
-                onPress={this.animate.bind(this)}
-            >
-                <Animated.Image
-                    style={[styles.koinStyle, this.props.animated ? animatedStyle : {}]}
+    renderKoin() {
+        if (this.props.animationStyle === 'pulse') {
+            return (
+                <Animatable.Image
+                    animation="pulse" easing="ease-out" iterationCount="infinite" 
+                    style={[styles.koinStyle]}
                     source={{ uri: 'koin' }}
                     defaultSource={{ uri: 'placeholderBadge' }}
                 >
                 <Text style={styles.amountStyle}>{this.props.children}</Text>
-                </Animated.Image>
-            </TouchableWithoutFeedback>
+                </Animatable.Image>
+            );
+        }
+        else if (this.props.animationStyle === 'win') {
+            return (
+                <Animatable.Image
+                    animation="tada" easing="ease-out" iterationCount="infinite" 
+                    style={[styles.koinStyle]}
+                    source={{ uri: 'koin' }}
+                    defaultSource={{ uri: 'placeholderBadge' }}
+                >
+                <Text style={styles.amountStyle}>{this.props.children}</Text>
+                </Animatable.Image>
+            );
+        } 
+        return (
+            <Image
+                style={[styles.koinStyle]}
+                source={{ uri: 'koin' }}
+                defaultSource={{ uri: 'placeholderBadge' }}
+            >
+                <Text style={styles.amountStyle}>{this.props.children}</Text>
+            </Image>
+            );
+    }
+
+    render() {
+        return (
+            this.renderKoin()
         );
     }
     

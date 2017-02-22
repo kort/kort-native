@@ -8,7 +8,6 @@ import MissionSolver from './MissionSolver';
 import MissionView from './MissionView';
 import { Spinner, Popup } from '../common';
 
-
 class MissionsOverview extends Component {
 
     state = { gpsModalShowed: false, missionActive: false };
