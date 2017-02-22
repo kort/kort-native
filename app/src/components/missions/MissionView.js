@@ -5,8 +5,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { CustomKeyboardAvoidingView } from '../common';
-import CustomSlidingView from '../common/CustomSlidingView';
+import { CustomKeyboardAvoidingView, CustomSlidingView } from '../common';
 
 class MissionView extends Component {
 
