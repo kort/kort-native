@@ -6,7 +6,7 @@ import {
 import Mapbox, { MapView } from 'react-native-mapbox-gl';
 import { connect } from 'react-redux';
 import Config from '../../constants/Config';
-import { showMapModeFullscreen, setMarginBottom } from '../../actions/MapActions';
+import { showMapModeFullscreen } from '../../actions/MapActions';
 import { downloadMissions, startMission } from '../../actions/MissionActions';
 import GeoLocation from '../../geolocation/GeoLocation';
 import { RoundButton } from '../common';
@@ -47,7 +47,6 @@ class Map extends Component {
             } else {
                 console.log('fullscreen toggle');
                 this.props.showMapModeFullscreen(!this.props.mapModeFullScreen);
-                this.props.setMarginBottom(this.props.mapModeFullScreen ? 50 : 0);
             }
 
             this.setState({ now: d.getSeconds() });
@@ -59,19 +58,22 @@ class Map extends Component {
     }
 
     onOpenAnnotation(annotation) {
-        this.setState({ currentMission: annotation.id, annotationOpen: true });
-        this.props.startMission(annotation.id);
-        this.props.showMapModeFullscreen(true);
-        this.props.onOpenAnnotation();
-        
+        if (this.state.currentMission !== annotation.id) {
+            this.setState({ currentMission: annotation.id, annotationOpen: true });
+            this.props.startMission(annotation.id);
+            this.props.showMapModeFullscreen(true);
+            this.props.onOpenAnnotation();
 
-        // this.map.getCenterCoordinateZoomLevel(data => {
-        //     // does not work when map rotated
-        //             const zoom = data.zoomLevel;
-        //             const lat = annotation.latitude-0.01;   //TODO according to zoom level
-        //             const lon = annotation.longitude;
-        //             this.map.setCenterCoordinate(lat, lon, true, null);
-        // });
+            //check if mission behind mission panel below center
+            //TOOD handle rotation
+            this.map.getCenterCoordinateZoomLevel(data => {
+                this.map.getDirection(direction => {
+                    if (annotation.latitude < data.latitude && direction === 0) {
+                    this.map.setCenterCoordinate(annotation.latitude, annotation.longitude, true, null);
+                    }
+                });
+            });
+        }
     }
 
     onRegionDidChange() {
@@ -113,7 +115,7 @@ class Map extends Component {
                 <GeoLocation />
                 <MapView
                     ref={map => { this.map = map; }}                    
-                    style={[this.props.mapModeFullScreen ? mapStyleFullScreen : mapStyleSmallScreen, { }]}
+                    style={this.props.mapModeFullScreen ? mapStyleFullScreen : mapStyleSmallScreen}
                     logoIsHidden
                     showsUserLocation
                     initialZoomLevel={13}
@@ -166,11 +168,11 @@ const styles = {
 
 const mapStateToProps = ({ mapReducer, missionReducer }) => {
     console.log(missionReducer);
-    const { mapModeFullScreen, currentLocation, marginBottom } = mapReducer;
+    const { mapModeFullScreen, currentLocation } = mapReducer;
     const { missionAnnotations, activeMission } = missionReducer;
-    return { mapModeFullScreen, currentLocation, marginBottom, missionAnnotations, activeMission };
+    return { mapModeFullScreen, currentLocation, missionAnnotations, activeMission };
 };
 
 
 export default connect(mapStateToProps, 
-    { showMapModeFullscreen, downloadMissions, setMarginBottom, startMission })(Map);
+    { showMapModeFullscreen, downloadMissions, startMission })(Map);
