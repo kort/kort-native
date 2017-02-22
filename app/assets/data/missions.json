@@ -38,7 +38,7 @@
     "lat": 46.807812,
     "lon": 9.838413,
     "koinReward": 100,
-    "image": "mission_cuisine"
+    "image": "mission_floors"
 },
 {
     "id" : "mission_id_3",
@@ -58,6 +58,6 @@
     "lat": 46.807812,
     "lon": 9.848413,
     "koinReward": 1,
-    "image": "mission_cuisine"
+    "image": "mission_road"
 }
 ]
