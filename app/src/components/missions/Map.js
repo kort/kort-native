@@ -60,8 +60,6 @@ class Map extends Component {
         this.props.showMapModeFullscreen(true);
         this.props.onOpenAnnotation();
 
-        this.setState({ bottomMargin: 300 });
-
         // this.map.getCenterCoordinateZoomLevel(data => {
         //     // does not work when map rotated
         //             const zoom = data.zoomLevel;

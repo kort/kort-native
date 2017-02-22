@@ -95,7 +95,7 @@ class CustomSlidingView extends Component {
     const minHeight = this.heights[0];
     const maxHeight = this.heights.slice(-1)[0];
 
-    if (newHeight <= maxHeight) {
+    if (newHeight <= maxHeight && newHeight >= minHeight) {
           this.props.setMarginBottom(newHeight);
     } 
 
