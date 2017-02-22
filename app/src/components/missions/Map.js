@@ -52,13 +52,18 @@ class Map extends Component {
 
             this.setState({ now: d.getSeconds() });
         }
-        this.props.onTap();   
+
+        //close mission
+        this.props.onTap(); 
+        this.setState({ annotationOpen: false, activeMission: {} });  
     }
 
     onOpenAnnotation(annotation) {
+        this.setState({ currentMission: annotation.id, annotationOpen: true });
         this.props.startMission(annotation.id);
         this.props.showMapModeFullscreen(true);
         this.props.onOpenAnnotation();
+        
 
         // this.map.getCenterCoordinateZoomLevel(data => {
         //     // does not work when map rotated
@@ -67,6 +72,13 @@ class Map extends Component {
         //             const lon = annotation.longitude;
         //             this.map.setCenterCoordinate(lat, lon, true, null);
         // });
+    }
+
+    onRegionDidChange() {
+        console.log('region changed');
+        if (this.state.annotationOpen) {
+            this.map.selectAnnotation(this.props.activeMission.id);
+        }
     }
 
     tapOnAnnotation(region, annotations) {
@@ -101,7 +113,7 @@ class Map extends Component {
                 <GeoLocation />
                 <MapView
                     ref={map => { this.map = map; }}                    
-                    style={[this.props.mapModeFullScreen ? mapStyleFullScreen : mapStyleSmallScreen, { marginBottom: this.props.marginBottom }]}
+                    style={[this.props.mapModeFullScreen ? mapStyleFullScreen : mapStyleSmallScreen, { }]}
                     logoIsHidden
                     showsUserLocation
                     initialZoomLevel={13}
@@ -110,6 +122,7 @@ class Map extends Component {
                         longitude: Config.MAPBOX_INITIAL_COORD_LONGITUDE
                     }}
                     onOpenAnnotation={this.onOpenAnnotation.bind(this)}
+                    onRegionDidChange={this.onRegionDidChange.bind(this)}
                     onTap={this.onTap.bind(this)}
                     annotations={this.props.missionAnnotations}
                 />
@@ -131,10 +144,12 @@ const styles = {
     mapStyleFullScreen: {
         flex: 1,
         marginTop: 0,
+        marginBottom: 0
     },
     mapStyleSmallScreen: {
         flex: 1,
         marginTop: (Platform.OS === 'ios') ? 64 : 54,
+        marginBottom: 50
     },
     locBtnFullScreen: {
         position: 'absolute',
@@ -152,8 +167,8 @@ const styles = {
 const mapStateToProps = ({ mapReducer, missionReducer }) => {
     console.log(missionReducer);
     const { mapModeFullScreen, currentLocation, marginBottom } = mapReducer;
-    const { missionAnnotations } = missionReducer;
-    return { mapModeFullScreen, currentLocation, marginBottom, missionAnnotations };
+    const { missionAnnotations, activeMission } = missionReducer;
+    return { mapModeFullScreen, currentLocation, marginBottom, missionAnnotations, activeMission };
 };
 
 
