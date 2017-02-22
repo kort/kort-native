@@ -36,7 +36,7 @@ export const createMissionAnnotations = (dispatch, data) => {
         annotations.push({
             id: mission.id,
             type: 'point',
-            title: 'Mission',
+            title: mission.title,
             coordinates: [parseFloat(mission.lat), parseFloat(mission.lon)],
             annotationImage: {
                 source: { uri: `${mission.image}` },

@@ -38,6 +38,7 @@ class Map extends Component {
 
     onTap(tapRegion) {
         console.log('tap');
+        // register tap which is not on side panel as well as any annotation
         if (tapRegion.screenCoordY > 50 && 
         !this.tapOnAnnotation(tapRegion, this.props.missionAnnotations) &&
         !this.state.annotationOpen) {
@@ -48,10 +49,8 @@ class Map extends Component {
                 console.log('fullscreen toggle');
                 this.props.showMapModeFullscreen(!this.props.mapModeFullScreen);
             }
-
             this.setState({ now: d.getSeconds() });
         }
-
         //close mission
         this.props.onTap(); 
         this.setState({ annotationOpen: false, activeMission: {} });  

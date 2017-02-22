@@ -2,6 +2,7 @@
 {
     "id" : "mission_id_1",
     "type": "mission_cuisine",
+    "title": "Missing Cuisine",
     "inputType" : {
         "name": "text",
         "options": [ "Italian", "Chinese", "Italian", "Swiss", "Thai" ],
@@ -22,6 +23,7 @@
 {
     "id" : "mission_id_2",
     "type": "mission_building_floors",
+    "title": "Missing Building Information",
     "inputType" : {
         "name": "number",
         "options": [],
@@ -41,6 +43,7 @@
 {
     "id" : "mission_id_3",
     "type": "mission_speed_limit",
+    "title": "Missing Speed Limit",
     "inputType" : {
         "name": "select",
         "options": ["30", "50", "80"],
