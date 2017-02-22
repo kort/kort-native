@@ -35,7 +35,7 @@
         }
     },
     "question": "How many floors has this building?",
-    "lat": 46.807812,
+    "lat": 46.887812,
     "lon": 9.838413,
     "koinReward": 100,
     "image": "mission_floors"
@@ -57,6 +57,86 @@
     "question": "What is the speed limit of this road?",
     "lat": 46.807812,
     "lon": 9.848413,
+    "koinReward": 1,
+    "image": "mission_speed"
+},
+{
+    "id" : "mission_id_4",
+    "type": "mission_religion",
+    "title": "Missing Religion Type",
+    "inputType" : {
+        "name": "select",
+        "options": ["Hindu", "Christian", "Spaghetti Monster"],
+        "constraints": {
+            "description": "",
+            "re": null,
+            "lowerBound": null,
+            "upperBound": null
+        }
+    },
+    "question": "What type of religion is practised?",
+    "lat": 46.817812,
+    "lon": 9.852413,
+    "koinReward": 1,
+    "image": "mission_religion"
+},
+{
+    "id" : "mission_id_5",
+    "type": "mission_language",
+    "title": "Missing Language",
+    "inputType" : {
+        "name": "select",
+        "options": ["English", "German", "Italian"],
+        "constraints": {
+            "description": "",
+            "re": null,
+            "lowerBound": null,
+            "upperBound": null
+        }
+    },
+    "question": "What language is spoken here?",
+    "lat": 46.802812,
+    "lon": 9.848213,
+    "koinReward": 1,
+    "image": "mission_language"
+},
+{
+    "id" : "mission_id_6",
+    "type": "mission_poi",
+    "title": "Missing Name",
+    "inputType" : {
+        "name": "text",
+        "options": [],
+        "constraints": {
+            "description": "",
+            "re": null,
+            "lowerBound": null,
+            "upperBound": null
+        }
+    },
+    "question": "What is the name of this place?",
+    "lat": 46.797812,
+    "lon": 9.84413,
+    "koinReward": 1,
+    "image": "mission_poi"
+},
+{
+    "id" : "mission_id_7",
+    "type": "mission_poi",
+    "title": "Missing Road Name",
+    "inputType" : {
+        "name": "text",
+        "options": [],
+        "constraints": {
+            "description": "",
+            "re": null,
+            "lowerBound": null,
+            "upperBound": null
+        }
+    },
+    "question": "What is the name of this road?",
+    "lat": 46.687812,
+    "lon": 9.84413,
     "koinReward": 1,
     "image": "mission_road"
 }
