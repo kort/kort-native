@@ -32,6 +32,7 @@ class GeoLocation extends Component {
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
     );
     this.watchID = navigator.geolocation.watchPosition((position) => {
+      this.props.locationUpdate(position);
       const lastPosition = position;
       this.setState({ lastPosition });
     });
