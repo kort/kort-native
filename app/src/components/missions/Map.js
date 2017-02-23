@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import Config from '../../constants/Config';
 import { showMapModeFullscreen } from '../../actions/MapActions';
 import { downloadMissions, startMission } from '../../actions/MissionActions';
+import { downloadAchievements } from '../../actions/AchievementsActions';
 import GeoLocation from '../../geolocation/GeoLocation';
 import { RoundButton } from '../common';
 
@@ -23,6 +24,7 @@ class Map extends Component {
 
         //TODO move this to other area
         this.props.downloadMissions();
+        this.props.downloadAchievements();
     }
 
     componentWillReceiveProps(nextProps) {
@@ -177,4 +179,4 @@ const mapStateToProps = ({ mapReducer, missionReducer }) => {
 
 
 export default connect(mapStateToProps, 
-    { showMapModeFullscreen, downloadMissions, startMission })(Map);
+    { showMapModeFullscreen, downloadMissions, startMission, downloadAchievements })(Map);

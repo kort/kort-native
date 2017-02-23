@@ -3,13 +3,14 @@ import {
     View,
     ListView
 } from 'react-native';
+import { connect } from 'react-redux';
 import _ from 'lodash';
 import AchievementItem from './AchievementItem';
 
 class AchievementsOverview extends Component {
 
     componentWillMount() {
-        const data = require('../../../assets/data/achievements.json');
+        const data = this.props.achievements;
 
         //extend data for better UI XP
         const offset = (3 - (data.length % 3)) % 3;
@@ -78,5 +79,9 @@ const styles = {
 };
 
 
-export default AchievementsOverview;
+const mapStateToProps = ({ achievementsReducer }) => {
+    const { achievements } = achievementsReducer;
+    return { achievements };
+};
 
+export default connect(mapStateToProps, { })(AchievementsOverview);

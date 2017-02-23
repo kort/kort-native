@@ -19,3 +19,5 @@ export const ANSWER_SET = 'answer_set';
 export const GET_MISSIONS = 'get_missions';
 export const GET_MISSION_ANNOTATIONS = 'get_mission_annotations';
 export const START_MISSION = 'start_mission';
+
+export const GET_ACHIEVEMENTS = 'get_achievements';
