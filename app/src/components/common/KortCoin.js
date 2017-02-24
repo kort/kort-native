@@ -1,44 +1,29 @@
 import React, { Component } from 'react';
 import {
-        Text,
-        Image
+        Text
      } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 
 class KortCoin extends Component {
+
     renderKoin() {
-        if (this.props.animationStyle === 'pulse') {
-            return (
-                <Animatable.Image
-                    animation="pulse" easing="ease-out" iterationCount="infinite" 
-                    style={[styles.koinStyle]}
-                    source={{ uri: 'koin' }}
-                    defaultSource={{ uri: 'placeholderBadge' }}
-                >
-                <Text style={styles.amountStyle}>{this.props.children}</Text>
-                </Animatable.Image>
-            );
+        let animationEffect = '';
+        if (this.props.animationStyle === 'normal') {
+            animationEffect = 'pulse';
+        } else if (this.props.animationStyle === 'win') {
+            animationEffect = 'jello';
         }
-        else if (this.props.animationStyle === 'win') {
-            return (
-                <Animatable.Image
-                    animation="tada" easing="ease-out" iterationCount="infinite" 
-                    style={[styles.koinStyle]}
-                    source={{ uri: 'koin' }}
-                    defaultSource={{ uri: 'placeholderBadge' }}
-                >
-                <Text style={styles.amountStyle}>{this.props.children}</Text>
-                </Animatable.Image>
-            );
-        } 
         return (
-            <Image
+            <Animatable.Image
+                animation={animationEffect} 
+                easing="ease-out" 
+                iterationCount="infinite" 
                 style={[styles.koinStyle]}
                 source={{ uri: 'koin' }}
                 defaultSource={{ uri: 'placeholderBadge' }}
             >
                 <Text style={styles.amountStyle}>{this.props.children}</Text>
-            </Image>
+            </Animatable.Image>
             );
     }
 
