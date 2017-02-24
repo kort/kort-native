@@ -123,8 +123,8 @@ class LoginBox extends Component {
 
 const mapStateToProps = ({ auth }) => {
     console.log(auth);
-    const { loggedIn, modalMode, kortSecret, loading, webviewURI } = auth;
-    return { loggedIn, modalMode, kortSecret, loading, webviewURI };
+    const { loggedIn, modalMode, loading, webviewURI } = auth;
+    return { loggedIn, modalMode, loading, webviewURI };
 };
 
 export default connect(mapStateToProps, { 

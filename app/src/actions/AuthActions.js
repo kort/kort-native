@@ -31,9 +31,9 @@ const loginUserFail = (dispatch, errorMsg) => {
 
 export const loginUser = (dispatch, user) => {
         const apiSecure = new KortAPI(user.secret);
-        apiSecure.getUserinfo(user.userId)
+        apiSecure.getUserinfo(user.id)
         .then(response => {
-            loginUserSuccess(dispatch, user);
+            loginUserSuccess(dispatch, response);
             console.log('resp', response);
         })
         .catch(errorMsg => {
@@ -89,9 +89,9 @@ export const parseURL = (url) => {
             .value()
             ;
         const secret = parameterPairs[0][1];
-        const userId = parameterPairs[1][1];
-        console.log('parsed', secret, userId);
-        secretReceived(dispatch, { secret, userId });
+        const id = parameterPairs[1][1];
+        console.log('parsed', secret, id);
+        secretReceived(dispatch, { secret, id });
     }
     };
 };

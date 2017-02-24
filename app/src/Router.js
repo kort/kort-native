@@ -34,6 +34,8 @@ class RouterComponent extends Component {
         return (
         <Router>
 
+            <Scene key='auth' component={LoginOverview} hideNavBar />
+
             <Scene key='root' animation='fade'>
                 <Scene
                     key='tabbar'
