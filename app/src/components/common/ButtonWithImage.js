@@ -14,7 +14,7 @@ const ButtonWithImage = ({ onPress, children, style, imgSource }) => {
             onPress={onPress}
         >
             <Image 
-                source={imgSource} 
+                source={{ uri: imgSource }}
                 style={imgStyle}
             />
             <Text style={textStyle}>{children}</Text>

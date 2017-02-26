@@ -14,17 +14,17 @@ const LoginButtons = ({ signInGoogle, signInOSM, signInFacebook, proceedWithoutL
                 />
                 <ButtonWithImage 
                     onPress={signInGoogle}
-                    imgSource={require('../../../assets/images/login/google.png')}
+                    imgSource={'google'}
                 >Sign in with Google
                 </ButtonWithImage> 
                 <ButtonWithImage 
                     onPress={signInOSM}
-                    imgSource={require('../../../assets/images/login/osm.png')}
+                    imgSource={'osm'}
                 >Sign in with OSM
                 </ButtonWithImage> 
                 <ButtonWithImage 
                     onPress={signInFacebook}
-                    imgSource={require('../../../assets/images/login/facebook.png')}
+                    imgSource={'facebook'}
                 >Sign in with Facebook
                 </ButtonWithImage>  
                 <Button 
