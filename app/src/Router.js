@@ -101,7 +101,6 @@ const styles = {
 };
 
 const mapStateToProps = ({ authReducer }) => {
-    console.log('ROUTER: ', authReducer.loggedIn);
     const { loggedIn } = authReducer;
     return { loggedIn };
 };

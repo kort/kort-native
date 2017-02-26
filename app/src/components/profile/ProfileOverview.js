@@ -102,7 +102,7 @@ class ProfileOverview extends Component {
                     <RefreshControl
                         refreshing={this.props.loading}
                         onRefresh={this.onRefresh.bind(this)}
-                        colors={['white']}
+                        colors={['#202931', 'white']}
                         tintColor='white'
                     />}
             >
@@ -125,11 +125,8 @@ const styles = {
         justifyContent: 'space-between',
         marginRight: 30
     },
-    categoryStyle: {
-        flexDirection: 'row',
-                paddingBottom: 20,
-    },
     bodyStyle: {
+        flex: 1,
         flexDirection: 'row',
         borderColor: 'white',
         borderWidth: 1,
