@@ -144,8 +144,9 @@ const styles = {
     },
     headerBoxStyle: {
         marginTop: 20,
+        paddingBottom: 20,
+        paddingTop: 20,
         marginBottom: 20,
-        height: 100,
         paddingLeft: 20,
         paddingRight: 20,
         flexDirection: 'row',
