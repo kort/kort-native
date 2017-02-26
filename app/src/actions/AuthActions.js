@@ -12,14 +12,16 @@ import {
 } from './types';
 import Config from '../constants/Config'; 
 
-const loginUserSuccess = (dispatch, user) => {
+const loginUserSuccess = (dispatch, user, popToMissions) => {
         console.log('user login');
 
     dispatch({ 
         type: LOGIN_USER_SUCCESS,
         payload: user 
     });  
-    Actions.root();     
+    if (popToMissions) {
+        Actions.root();
+    }
 };
 
 const loginUserFail = (dispatch, errorMsg) => {
@@ -30,11 +32,11 @@ const loginUserFail = (dispatch, errorMsg) => {
     });
 };
 
-export const loginUser = (dispatch, user) => {
+export const loginUser = (dispatch, user, popToMissions) => {
         const apiSecure = new KortAPI(user.secret);
         apiSecure.getUserinfo(user.id)
         .then(response => {
-            loginUserSuccess(dispatch, response);
+            loginUserSuccess(dispatch, response, popToMissions);
             console.log('resp', response);
         })
         .catch(errorMsg => {
@@ -65,7 +67,13 @@ export const secretReceived = (dispatch, user) => {
             type: SECRET_RECEIVED,
             payload: user
         });
-        loginUser(dispatch, user);
+        loginUser(dispatch, user, true);
+};
+
+export const updateUser = (user) => {
+    return (dispatch) => {  
+        loginUser(dispatch, user, false);
+    };
 };
 
 export const verifyGoogleIdToken = (tokenId) => {

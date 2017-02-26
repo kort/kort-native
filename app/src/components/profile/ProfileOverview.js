@@ -12,13 +12,20 @@ import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { KortCoin } from '../common';
+import { updateUser } from '../../actions/AuthActions';
 
 class ProfileOverview extends Component {
 
-    state = { refreshing: false };
-
     componentDidMount() {
         Actions.refresh({ rightTitle: this.props.loggedIn ? 'Logout' : 'Login' });
+    }
+
+    onRefresh() {
+        if (!this.props.loggedIn) {
+            Actions.pop();
+        } else {
+            this.props.updateUser(this.props.user);
+        }
     }
 
     renderProviderImage() {
@@ -87,26 +94,13 @@ class ProfileOverview extends Component {
         return <Text style={[styles.textStyle, { paddingTop: 100, alignSelf: 'center' }]}>Please log in</Text>;
     }
 
-    onRefresh() {
-
-        if (!this.props.loggedIn) {
-            Actions.pop();
-        }
-
-        this.setState({ refreshing: true });
-
-        //     fetchData().then(() => {
-        // this.setState({refreshing: false});
-        // });
-    }
-
     render() {
         return (
             <ScrollView 
                 style={styles.bgColor}
                 refreshControl={
                     <RefreshControl
-                        refreshing={this.state.refreshing}
+                        refreshing={this.props.loading}
                         onRefresh={this.onRefresh.bind(this)}
                         colors={['white']}
                         tintColor='white'
@@ -190,9 +184,9 @@ const styles = {
 
 const mapStateToProps = ({ authReducer }) => {
     console.log(authReducer);
-    const { user, loggedIn } = authReducer;
-    return { user, loggedIn };
+    const { user, loggedIn, loading } = authReducer;
+    return { user, loggedIn, loading };
 };
 
 
-export default connect(mapStateToProps, { })(ProfileOverview);
+export default connect(mapStateToProps, { updateUser })(ProfileOverview);
