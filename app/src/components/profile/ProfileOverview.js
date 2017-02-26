@@ -12,10 +12,37 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { KortCoin } from '../common';
 
 class ProfileOverview extends Component {
-    render() {
+
+    renderProviderImage() {
         return (
-            <ScrollView style={styles.bgColor}>
-            
+            <Image 
+                source={{ uri: this.props.user.oauth_provider }}
+                style={styles.providerImageStyle}
+            />
+        );
+    }
+
+    renderMissionsToday() {
+        let starName = 'star';
+        if (this.props.user.mission_count_today < 6) {
+            starName = 'star-half-o';
+        }
+        if (this.props.user.mission_count_today < 3) {
+            starName = 'star-o';
+        }
+        console.log(starName);
+        return (
+            <FontAwesome 
+                style={{ color: '#a1a336', alignSelf: 'center' }}
+                size={60} 
+                name={starName}
+            />
+        );
+    }
+
+    renderProfileView() {
+        if (this.props.loggedIn) {
+            return (
                 <View style={styles.userViewStyle}>
                     <View style={styles.headerBoxStyle}>
                         <Image
@@ -23,56 +50,69 @@ class ProfileOverview extends Component {
                             style={styles.imageStyle}
                             defaultSource={{ uri: 'placeholderBadge' }}
                         >
-                        <Image 
-                            source={require('../../../assets/images/login/osm.png')}
-                            style={styles.providerImageStyle}
-                        />
+                        {this.renderProviderImage()}
                         </Image>
                         <View style={styles.usernameBoxStyle}>
-                            <Text style={styles.textHeaderStyle}>user1024</Text>
+                            <Text style={styles.textStyle}>{this.props.user.username}</Text>
                         </View>
                     </View>
 
                 <View style={styles.bodyStyle}>
-                    <View style={styles.categoryStyle}>
+                    <View style={styles.iconStyle}>
                         <KortCoin>K</KortCoin>
-                        <Text style={styles.textStyle}>122 koins</Text>
-                    </View>
-                    <View style={styles.categoryStyle}>
                         <Icon 
-                            style={{ color: '#90201E' }}
+                            style={{ color: '#90201E', alignSelf: 'center' }}
                             size={60} 
                             name='map-marker-multiple' 
                         />
-                        <Text style={styles.textStyle}>122 missions</Text>
+                        {this.renderMissionsToday()}
                     </View>
-                    <View style={styles.categoryStyle}>
-                        <FontAwesome 
-                            style={{ color: '#a1a336' }}
-                            size={66} 
-                            name='star-half-o' 
-                        />
-                        <Text style={styles.textStyle}>2 missions today</Text>
+                    <View style={styles.descriptionStyle}>
+                        <Text style={styles.textStyle}>{this.props.user.koin_count} koins</Text>
+                        <Text style={styles.textStyle}>{this.props.user.mission_count} missions</Text>
+                        <Text style={styles.textStyle}>{this.props.user.mission_count_today} missions today</Text>
                     </View>
                 </View>
             </View>
+            );
+        } 
+        return <Text style={[styles.textStyle, { paddingTop: 100, alignSelf: 'center' }]}>Please log in</Text>;
+    }
 
+    render() {
+        return (
+            <ScrollView style={styles.bgColor}>
+                {this.renderProfileView()}
             </ScrollView>
         );
     }
 }
 
 const styles = {
+    descriptionStyle: {
+        height: 250,
+        justifyContent: 'space-between',
+        paddingBottom: 20,
+        paddingTop: 20
+    },
+    iconStyle: {
+        width: 60,
+        height: 250,
+        justifyContent: 'space-between',
+        marginRight: 30
+    },
     categoryStyle: {
         flexDirection: 'row',
                 paddingBottom: 20,
     },
     bodyStyle: {
+        flexDirection: 'row',
         borderColor: 'white',
         borderWidth: 1,
         paddingLeft: 30,
         paddingRight: 20,
         paddingTop: 20,
+        paddingBottom: 20,
     },
     usernameBoxStyle: {
         flex: 1,
@@ -99,15 +139,8 @@ const styles = {
         height: 15,
         width: 15,
     },
-    textHeaderStyle: {
-        color: 'white',
-        textAlign: 'left',
-        fontSize: 20,
-    },
     textStyle: {
-        marginLeft: 30,
         color: 'white',
-        alignSelf: 'center',
         textAlign: 'left',
         fontSize: 20,
     },
@@ -127,8 +160,8 @@ const styles = {
 
 const mapStateToProps = ({ authReducer }) => {
     console.log(authReducer);
-    const { user } = authReducer;
-    return { user };
+    const { user, loggedIn } = authReducer;
+    return { user, loggedIn };
 };
 
 

@@ -121,9 +121,9 @@ class LoginBox extends Component {
     }
 }
 
-const mapStateToProps = ({ auth }) => {
-    console.log(auth);
-    const { loggedIn, modalMode, loading, webviewURI } = auth;
+const mapStateToProps = ({ authReducer }) => {
+    console.log(authReducer);
+    const { loggedIn, modalMode, loading, webviewURI } = authReducer;
     return { loggedIn, modalMode, loading, webviewURI };
 };
 

@@ -45,8 +45,8 @@ const styles = {
      }
  };
 
- const mapStateToProps = ({ auth }) => {
-    const { loggedIn } = auth;
+ const mapStateToProps = ({ authReducer }) => {
+    const { loggedIn } = authReducer;
     return { loggedIn };
 };
 

@@ -6,7 +6,7 @@ import AnswerReducer from './AnswerReducer';
 import AchievementsReducer from './AchievementsReducer';
 
 export default combineReducers({
-    auth: AuthReducer,
+    authReducer: AuthReducer,
     missionReducer: MissionsReducer,
     mapReducer: MapReducer,
     answerReducer: AnswerReducer,
