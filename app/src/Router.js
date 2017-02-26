@@ -5,7 +5,6 @@ import {
     Actions
 } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { GoogleSignin } from 'react-native-google-signin';
 import MissionsOverview from './components/missions/MissionsOverview';
 import AchievementsOverview from './components/achievements/AchievementsOverview';
 import HighscoreOverview from './components/highscore/HighscoreOverview';
@@ -21,14 +20,13 @@ import { logoutUser } from './actions/AuthActions';
 
 class RouterComponent extends Component {
 
-    logout() {
-        console.log('logout');
+    logInOrOut() {
+        if (this.props.loggedIn) {
+            this.props.logoutUser();
+        }
         Actions.pop();
-        this.props.logoutUser();
-        GoogleSignin.signOut()
-            .then(() => { console.log('out'); })
-            .catch(() => {});
     }
+
     // <Scene key='auth' component={LoginOverview} hideNavBar />
     render() {
         return (
@@ -77,8 +75,9 @@ class RouterComponent extends Component {
                             title='Profile'                            
                             navigationBarStyle={styles.navBarStyle}
                             titleStyle={styles.navBarTitleStyle}
-                            onRight={this.logout.bind(this)}
-                            rightTitle={'Logout'}
+                            onRight={this.logInOrOut.bind(this)}
+                            rightTitle=''
+                            rightButtonTextStyle={styles.navBarTitleStyle}
                         />
                     </Scene>
                 </Scene>
@@ -99,12 +98,12 @@ const styles = {
     navBarTitleStyle: {
         color: 'white'
     },
-    barButtonTextStyle: {
-    color: '#F16B6F'
-},
-    barButtonIconStyle: {
-    tintColor: '#F16B6F'
-    }
 };
 
-export default connect(null, { logoutUser })(RouterComponent);
+const mapStateToProps = ({ authReducer }) => {
+    console.log('ROUTER: ', authReducer.loggedIn);
+    const { loggedIn } = authReducer;
+    return { loggedIn };
+};
+
+export default connect(mapStateToProps, { logoutUser })(RouterComponent);

@@ -4,14 +4,22 @@ import {
     View,
     Image,
     Text,
-    ScrollView
+    ScrollView,
+    RefreshControl
 } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { KortCoin } from '../common';
 
 class ProfileOverview extends Component {
+
+    state = { refreshing: false };
+
+    componentDidMount() {
+        Actions.refresh({ rightTitle: this.props.loggedIn ? 'Logout' : 'Login' });
+    }
 
     renderProviderImage() {
         return (
@@ -79,9 +87,31 @@ class ProfileOverview extends Component {
         return <Text style={[styles.textStyle, { paddingTop: 100, alignSelf: 'center' }]}>Please log in</Text>;
     }
 
+    onRefresh() {
+
+        if (!this.props.loggedIn) {
+            Actions.pop();
+        }
+
+        this.setState({ refreshing: true });
+
+        //     fetchData().then(() => {
+        // this.setState({refreshing: false});
+        // });
+    }
+
     render() {
         return (
-            <ScrollView style={styles.bgColor}>
+            <ScrollView 
+                style={styles.bgColor}
+                refreshControl={
+                    <RefreshControl
+                        refreshing={this.state.refreshing}
+                        onRefresh={this.onRefresh.bind(this)}
+                        colors={['white']}
+                        tintColor='white'
+                    />}
+            >
                 {this.renderProfileView()}
             </ScrollView>
         );

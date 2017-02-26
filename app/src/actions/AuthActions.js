@@ -1,5 +1,6 @@
 import { Actions } from 'react-native-router-flux';
 import _ from 'lodash';
+import { GoogleSignin } from 'react-native-google-signin';
 import KortAPI from '../data/KortAPI';
 import { 
     LOGIN_USER_SUCCESS,
@@ -42,6 +43,9 @@ export const loginUser = (dispatch, user) => {
 };
 
 export const logoutUser = () => {
+    GoogleSignin.signOut()
+        .then(() => { console.log('out'); })
+        .catch(() => {});
     return { 
         type: LOGOUT_USER,
         payload: null 
