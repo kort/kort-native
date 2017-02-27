@@ -53,10 +53,9 @@ class AchievementItem extends Component {
         const { achievementImageURI, achievementDescription, 
             achieved, achievementDate } = this.props.achievement;
         return (  
+            <TouchableWithoutFeedback onPress={this.onRowPress.bind(this)}>
                 <View style={styles.itemStyle}>
-                    <TouchableWithoutFeedback onPress={this.onRowPress.bind(this)}>
                         {this.renderImage(achievementImageURI, achieved)}
-                    </TouchableWithoutFeedback>
                     <Popup
                         visible={this.state.showModal}
                         onAccept={this.onAccept.bind(this)}
@@ -67,6 +66,8 @@ class AchievementItem extends Component {
                             this.renderImage(achievementImageURI)}
                     </Popup>
                 </View>
+            </TouchableWithoutFeedback>
+
         );
     }
 }
