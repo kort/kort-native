@@ -31,11 +31,13 @@ class MissionView extends Component {
                         style={styles.drawerStyle}
                         onPress={this.closeView.bind(this)}
                     >
-                        <Icon 
-                            style={styles.iconStyle} 
-                            size={30} 
-                            name='arrow-drop-down' 
-                        />
+                        <View>
+                            <Icon 
+                                style={styles.iconStyle} 
+                                size={30} 
+                                name='arrow-drop-down' 
+                            />
+                        </View>
                     </TouchableWithoutFeedback>
                 )
             ;
@@ -45,11 +47,13 @@ class MissionView extends Component {
                         style={styles.drawerStyle}
                         onPress={this.openView.bind(this)}
                     >
-                        <Icon 
-                            style={styles.iconStyle} 
-                            size={30} 
-                            name='arrow-drop-up'
-                        />
+                        <View>
+                            <Icon 
+                                style={styles.iconStyle} 
+                                size={30} 
+                                name='arrow-drop-up'
+                            />
+                        </View>
                     </TouchableWithoutFeedback>)
             ; 
     }
@@ -57,7 +61,7 @@ class MissionView extends Component {
     render() {
         return (
         <CustomKeyboardAvoidingView>
-        <Animatable.View animation="slideInUp" iterationCount={1} >
+        <View animation="slideInUp" iterationCount={1} >
         <CustomSlidingView
             threshold={5}
             tension={50}
@@ -72,7 +76,7 @@ class MissionView extends Component {
             {this.props.children}
         </View>
         </CustomSlidingView>
-        </Animatable.View>
+        </View>
         </CustomKeyboardAvoidingView>
         );
     }
