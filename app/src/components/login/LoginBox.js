@@ -123,8 +123,8 @@ class LoginBox extends Component {
 
 const mapStateToProps = ({ authReducer }) => {
     console.log(authReducer);
-    const { loggedIn, modalMode, loading, webviewURI } = authReducer;
-    return { loggedIn, modalMode, loading, webviewURI };
+    const { loggedIn, loading, webviewURI } = authReducer;
+    return { loggedIn, loading, webviewURI };
 };
 
 export default connect(mapStateToProps, { 

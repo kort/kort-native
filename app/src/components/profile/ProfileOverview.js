@@ -11,8 +11,8 @@ import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { KortCoin } from '../common';
-import { updateUser } from '../../actions/AuthActions';
+import { KortCoin, Popup } from '../common';
+import { updateUser, showConfirmModal, logoutUser } from '../../actions/AuthActions';
 
 class ProfileOverview extends Component {
 
@@ -26,6 +26,11 @@ class ProfileOverview extends Component {
         } else {
             this.props.updateUser(this.props.user);
         }
+    }
+
+    logout() {
+        this.props.logoutUser();
+        Actions.pop();
     }
 
     renderProviderImage() {
@@ -88,6 +93,19 @@ class ProfileOverview extends Component {
                         <Text style={styles.textStyle}>{this.props.user.mission_count_today} missions today</Text>
                     </View>
                 </View>
+                <Popup 
+                    onAccept={this.logout.bind(this)}
+                    visible={this.props.showConfirm}
+                    confirm
+                    onDecline={() => this.props.showConfirmModal(false)}
+                    message='Do you really want to logout?'
+                >
+                    <Icon 
+                            style={{ color: '#395971', alignSelf: 'center' }}
+                            size={60} 
+                            name='logout' 
+                    />                
+                </Popup>    
             </View>
             );
         } 
@@ -186,9 +204,9 @@ const styles = {
 
 const mapStateToProps = ({ authReducer }) => {
     console.log(authReducer);
-    const { user, loggedIn, loading } = authReducer;
-    return { user, loggedIn, loading };
+    const { user, loggedIn, loading, showConfirm } = authReducer;
+    return { user, loggedIn, loading, showConfirm };
 };
 
 
-export default connect(mapStateToProps, { updateUser })(ProfileOverview);
+export default connect(mapStateToProps, { updateUser, logoutUser, showConfirmModal })(ProfileOverview);

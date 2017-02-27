@@ -5,12 +5,13 @@ import {
     LOGOUT_USER,
     SHOW_WEBVIEW,
     VERIFY_GOOGLE_TOKEN_ID,
-    SECRET_RECEIVED
+    SECRET_RECEIVED,
+    SHOW_CONFIRM_LOGOUT_MODAL
  } from '../actions/types';
 
 const INITIAL_STATE = {
     loggedIn: false,
-    modalMode: '',
+    showConfirm: false,
     loading: false,
     webviewURI: '',
     user: {}
@@ -26,7 +27,6 @@ export default (state = INITIAL_STATE, action) => {
                      loggedIn: false
                  };
         case LOGIN_USER_SUCCESS:
-            console.log('logged in ', action.payload);
             return { ...state,
                      loading: false,
                      loggedIn: true,
@@ -45,9 +45,10 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, 
                      loading: true, 
                      loggedIn: false, 
-                     user: action.payload, 
-                     modalMode: '' 
+                     user: action.payload
                     };
+        case SHOW_CONFIRM_LOGOUT_MODAL:
+            return { ...state, showConfirm: action.payload };
         default:
             return state;
     }

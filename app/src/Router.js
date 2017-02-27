@@ -16,15 +16,16 @@ import {
     HighscoreTabIcon,
     ProfileTabIcon
 } from './components/common/TabIcons';
-import { logoutUser } from './actions/AuthActions';
+import { showConfirmModal } from './actions/AuthActions';
 
 class RouterComponent extends Component {
 
     logInOrOut() {
         if (this.props.loggedIn) {
-            this.props.logoutUser();
+            this.props.showConfirmModal(true);        
+        } else {
+            Actions.pop();
         }
-        Actions.pop();
     }
 
     // <Scene key='auth' component={LoginOverview} hideNavBar />
@@ -105,4 +106,4 @@ const mapStateToProps = ({ authReducer }) => {
     return { loggedIn };
 };
 
-export default connect(mapStateToProps, { logoutUser })(RouterComponent);
+export default connect(mapStateToProps, { showConfirmModal })(RouterComponent);

@@ -8,7 +8,8 @@ import {
     LOGOUT_USER,
     VERIFY_GOOGLE_TOKEN_ID,
     SECRET_RECEIVED,
-    SHOW_WEBVIEW
+    SHOW_WEBVIEW,
+    SHOW_CONFIRM_LOGOUT_MODAL
 } from './types';
 import Config from '../constants/Config'; 
 
@@ -58,6 +59,13 @@ export const showWebView = (uri) => {
    return { 
         type: SHOW_WEBVIEW,
         payload: uri 
+    };   
+};
+
+export const showConfirmModal = (show) => {
+   return { 
+        type: SHOW_CONFIRM_LOGOUT_MODAL,
+        payload: show 
     };   
 };
 
