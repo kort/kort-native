@@ -1,16 +1,17 @@
 import React from 'react';
 import {
-  View,
-  Image
+  View
 } from 'react-native';
+import * as Animatable from 'react-native-animatable';
 import { Button, ButtonWithImage } from '../common';
 
 const LoginButtons = ({ signInGoogle, signInOSM, signInFacebook, proceedWithoutLogin }) => {
     return (
             <View style={styles.bgColor}>
-                <Image 
-                    source={require('../../../assets/images/login/kortLogo.png')} 
+                <Animatable.Image
+                    animation="fadeIn" easing="ease-out" iterationCount={1}
                     style={styles.imageLogoStyle}
+                    source={{ uri: 'kortLogo' }}
                 />
                 <ButtonWithImage 
                     onPress={signInGoogle}

@@ -48,7 +48,7 @@ class ProfileOverview extends Component {
         console.log(starName);
         return (
             <FontAwesome 
-                style={{ color: '#a1a336', alignSelf: 'center' }}
+                style={{ color: '#fae975', alignSelf: 'center' }}
                 size={60} 
                 name={starName}
             />
@@ -76,7 +76,7 @@ class ProfileOverview extends Component {
                     <View style={styles.iconStyle}>
                         <KortCoin>K</KortCoin>
                         <Icon 
-                            style={{ color: '#90201E', alignSelf: 'center' }}
+                            style={{ color: '#EF0000', alignSelf: 'center' }}
                             size={60} 
                             name='map-marker-multiple' 
                         />
@@ -128,7 +128,9 @@ const styles = {
     bodyStyle: {
         flex: 1,
         flexDirection: 'row',
-        borderColor: 'white',
+        backgroundColor: '#395971',
+        borderColor: '#657C8E',
+        borderRadius: 5,
         borderWidth: 1,
         paddingLeft: 30,
         paddingRight: 20,
@@ -147,7 +149,9 @@ const styles = {
         paddingLeft: 20,
         paddingRight: 20,
         flexDirection: 'row',
-        borderColor: 'white',
+        backgroundColor: '#395971',
+        borderColor: '#657C8E',
+        borderRadius: 5,
         borderWidth: 1
     },
     imageStyle: {
