@@ -61,7 +61,7 @@ class MissionView extends Component {
     render() {
         return (
         <CustomKeyboardAvoidingView>
-        <View animation="slideInUp" iterationCount={1} >
+        
         <CustomSlidingView
             threshold={5}
             tension={50}
@@ -71,12 +71,11 @@ class MissionView extends Component {
             clickEvent={this.state.clickEvent}
             lockSlider={this.props.answerModalVisible}
         >
-        <View>
+        <Animatable.View animation="slideInUp" easing="ease-out">
             {this.renderIcon()}
             {this.props.children}
-        </View>
+        </Animatable.View>
         </CustomSlidingView>
-        </View>
         </CustomKeyboardAvoidingView>
         );
     }
