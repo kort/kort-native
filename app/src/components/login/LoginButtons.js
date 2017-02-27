@@ -11,7 +11,7 @@ const LoginButtons = ({ signInGoogle, signInOSM, signInFacebook, proceedWithoutL
                 <Animatable.Image
                     animation="fadeIn" easing="ease-out" iterationCount={1}
                     style={styles.imageLogoStyle}
-                    source={{ uri: 'kortLogo' }}
+                    source={{ uri: 'kort_logo' }}
                 />
                 <ButtonWithImage 
                     onPress={signInGoogle}
