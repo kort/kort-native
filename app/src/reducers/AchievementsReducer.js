@@ -3,7 +3,8 @@ import {
  } from '../actions/types';
 
 const INITIAL_STATE = {
-    achievements: {}
+    achievements: {},
+    loading: false
 };
 
 export default (state = INITIAL_STATE, action) => {

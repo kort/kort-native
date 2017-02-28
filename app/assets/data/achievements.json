@@ -111,5 +111,77 @@
         "achievementImageURI": "https://dl.dropboxusercontent.com/s/5tweb7373w78gac/fix_count_1.png",
         "achieved": false,
         "achievementDate": ""
+    },
+            {
+        "achievementId": 0,
+        "achievementTitle": "10 missions solved",
+        "achievementDescription": "10 missions have to be solved",
+        "achievementImageURI": "highscore_place_1",
+        "achieved": true,       
+        "achievementDate": "27.12.2016"
+    },
+        {
+        "achievementId": 0,
+        "achievementTitle": "10 missions solved",
+        "achievementDescription": "10 missions have to be solved",
+        "achievementImageURI": "highscore_place_2",
+        "achieved": false,
+        "achievementDate": ""
+    },
+        {
+        "achievementId": 0,
+        "achievementTitle": "10 missions solved",
+        "achievementDescription": "10 missions have to be solved",
+        "achievementImageURI": "highscore_place_3",
+        "achieved": true,
+        "achievementDate": "27.12.2016"
+    },
+        {
+        "achievementId": 0,
+        "achievementTitle": "10 missions solved",
+        "achievementDescription": "10 missions have to be solved",
+        "achievementImageURI": "vote_count_1",
+        "achieved": true,
+        "achievementDate": "27.12.2016"
+    },
+        {
+        "achievementId": 0,
+        "achievementTitle": "10 missions solved",
+        "achievementDescription": "10 missions have to be solved",
+        "achievementImageURI": "vote_count_10",
+        "achieved": true,
+        "achievementDate": "27.12.2016"
+    },
+        {
+        "achievementId": 0,
+        "achievementTitle": "10 missions solved",
+        "achievementDescription": "10 missions have to be solved",
+        "achievementImageURI": "vote_count_100",
+        "achieved": true,
+        "achievementDate": "27.12.2016"
+    },
+        {
+        "achievementId": 0,
+        "achievementTitle": "10 missions solved",
+        "achievementDescription": "10 missions have to be solved",
+        "achievementImageURI": "vote_count_1000",
+        "achieved": false,
+        "achievementDate": ""
+    },  
+    {
+        "achievementId": 0,
+        "achievementTitle": "10 missions solved",
+        "achievementDescription": "10 missions have to be solved",
+        "achievementImageURI": "https://dl.dropboxusercontent.com/s/qollxwkjdi7llhk/badge_template.png",
+        "achieved": false,
+        "achievementDate": ""
+    },
+        {
+        "achievementId": 0,
+        "achievementTitle": "10 missions solved",
+        "achievementDescription": "10 missions have to be solved",
+        "achievementImageURI": "https://dl.dropboxusercontent.com/s/5tweb7373w78gac/fix_count_1.png",
+        "achieved": false,
+        "achievementDate": ""
     }
 ]

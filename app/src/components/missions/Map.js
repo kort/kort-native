@@ -24,7 +24,6 @@ class Map extends Component {
 
         //TODO move this to other area
         this.props.downloadMissions();
-        this.props.downloadAchievements();
     }
 
     componentWillReceiveProps(nextProps) {

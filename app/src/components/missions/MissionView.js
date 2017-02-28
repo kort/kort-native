@@ -71,7 +71,7 @@ class MissionView extends Component {
             clickEvent={this.state.clickEvent}
             lockSlider={this.props.answerModalVisible}
         >
-        <Animatable.View animation="slideInUp" easing="ease-out">
+        <Animatable.View animation="slideInUp" easing="ease-in-expo">
             {this.renderIcon()}
             {this.props.children}
         </Animatable.View>

@@ -1,42 +1,25 @@
 import React, { Component } from 'react';
 import {
     View,
-    ListView
+    ListView,
+    RefreshControl
 } from 'react-native';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import AchievementItem from './AchievementItem';
+import { downloadAchievements } from '../../actions/AchievementsActions';
 
 class AchievementsOverview extends Component {
 
     componentWillMount() {
-        const data = this.props.achievements;
-
-        //extend data for better UI XP
-        const offset = (3 - (data.length % 3)) % 3;
-        for (let i = 0; i < offset; ++i) {
-            data.push({});
-        }
-
-        this.createDataSource(data);       
+        this.props.downloadAchievements();
     }
 
-    componentWillReceiveProps(nextProps) {
-        // nextProps are the next set of props that this component
-        // will be rendered with
-        // this.props is still the old set of props
-        this.createDataSource(nextProps);
-    }
-
-    createDataSource(data) {
-        const ds = new ListView.DataSource({
-            rowHasChanged: (r1, r2) => r1 !== r2
-        });
-        this.DataSource = ds.cloneWithRows(data);
+    onRefresh() {
+        this.props.downloadAchievements();
     }
 
     renderRow(rowData) {
-        console.log(rowData);
         if (_.isEmpty(rowData)) {
             return <View style={styles.itemStyle} />;
         }
@@ -48,9 +31,17 @@ class AchievementsOverview extends Component {
             <View style={styles.bgColor}>
                 <ListView 
                     contentContainerStyle={styles.list}
-                    dataSource={this.DataSource}
-                    renderRow={this.renderRow}
+                    dataSource={this.props.dataSource}
+                    renderRow={(rowData) => this.renderRow(rowData)}
                     initialListSize={15}
+                    enableEmptySections
+                    refreshControl={
+                    <RefreshControl
+                        refreshing={this.props.loading}
+                        onRefresh={this.onRefresh.bind(this)}
+                        colors={['#202931', 'white']}
+                        tintColor='white'
+                    />}
                 />
             </View>
         );
@@ -78,10 +69,16 @@ const styles = {
     }    
 };
 
+const dataSource = new ListView.DataSource({
+  rowHasChanged: (r1, r2) => r1 !== r2,
+});
 
 const mapStateToProps = ({ achievementsReducer }) => {
-    const { achievements } = achievementsReducer;
-    return { achievements };
+    const { achievements, loading } = achievementsReducer;
+    return {
+        dataSource: dataSource.cloneWithRows(achievements), 
+        loading
+    };
 };
 
-export default connect(mapStateToProps, { })(AchievementsOverview);
+export default connect(mapStateToProps, { downloadAchievements })(AchievementsOverview);
