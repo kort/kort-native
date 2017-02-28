@@ -1,7 +1,8 @@
 import React from 'react';
 import {
     View,
-    TouchableOpacity
+    TouchableOpacity,
+    Platform
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -26,9 +27,9 @@ const styles = {
         color: '#395971'
     },
     buttonStyle: {
-        width: 34,
-        height: 34,
-        borderRadius: 17,
+        width: (Platform.OS === 'ios') ? 34 : 42,
+        height: (Platform.OS === 'ios') ? 34 : 42,
+        borderRadius: (Platform.OS === 'ios') ? 17 : 21,
         backgroundColor: 'white',
         opacity: 0.8,
         alignItems: 'center',

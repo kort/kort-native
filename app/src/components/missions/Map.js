@@ -158,13 +158,13 @@ const styles = {
     },
     locBtnFullScreen: {
         position: 'absolute',
-        right: 5,
-        marginTop: 51,
+        right: (Platform.OS === 'ios') ? 5 : 13,
+        marginTop: (Platform.OS === 'ios') ? 51 : 72,
     },
     locBtnSmallScreen: {
         position: 'absolute',
-        right: 5,
-        marginTop: 115,
+        right: (Platform.OS === 'ios') ? 5 : 13,
+        marginTop: (Platform.OS === 'ios') ? 115 : 126,
     }
     
 };
