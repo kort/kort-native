@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {
     View,
     Platform,
-    Dimensions
+    Dimensions,
+    PixelRatio
 } from 'react-native';
 import Mapbox, { MapView } from 'react-native-mapbox-gl';
 import { connect } from 'react-redux';
@@ -39,7 +40,6 @@ class Map extends Component {
     }
 
     onTap(tapRegion) {
-        console.log('tap', tapRegion.screenCoordX, deviceWidth);
         // register tap which is not on side panel as well as any annotation
         if (tapRegion.screenCoordY > 50 && tapRegion.screenCoordX < deviceWidth - 50 &&
         !this.tapOnAnnotation(tapRegion, this.props.missionAnnotations) &&
@@ -139,7 +139,7 @@ class Map extends Component {
     }
 }
 
-const deviceWidth = Dimensions.get('window').width;
+const deviceWidth = Dimensions.get('window').width * PixelRatio.get();
 
 const styles = {
     bgColor: {
