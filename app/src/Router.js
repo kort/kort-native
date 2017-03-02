@@ -5,6 +5,7 @@ import {
     Actions
 } from 'react-native-router-flux';
 import { connect } from 'react-redux';
+import Showcase from './components/showcase/Showcase';
 import MissionsOverview from './components/missions/MissionsOverview';
 import AchievementsOverview from './components/achievements/AchievementsOverview';
 import HighscoreOverview from './components/highscore/HighscoreOverview';
@@ -26,6 +27,10 @@ class RouterComponent extends Component {
         } else {
             Actions.pop();
         }
+    }
+
+    showShowcase() {
+        Actions.showcase();
     }
 
     // <Scene key='auth' component={LoginOverview} hideNavBar />
@@ -51,7 +56,7 @@ class RouterComponent extends Component {
                             titleStyle={styles.navBarTitleStyle}
                             leftButtonImage={{ uri: 'kort_logo_small' }}
                             leftButtonIconStyle={styles.logoStyle}
-                            onLeft={() => {}}
+                            onLeft={() => this.showShowcase()}
                         />
                     </Scene>
                     <Scene key='achievements' title='Achievements' icon={AchievementsTabIcon}>
@@ -63,7 +68,7 @@ class RouterComponent extends Component {
                             titleStyle={styles.navBarTitleStyle}
                             leftButtonImage={{ uri: 'kort_logo_small' }}
                             leftButtonIconStyle={styles.logoStyle}
-                            onLeft={() => {}}
+                            onLeft={() => this.showShowcase()}
                         />
                     </Scene>
                     <Scene key='highscore' title='Highscore' icon={HighscoreTabIcon}>
@@ -75,7 +80,7 @@ class RouterComponent extends Component {
                             titleStyle={styles.navBarTitleStyle}
                             leftButtonImage={{ uri: 'kort_logo_small' }}
                             leftButtonIconStyle={styles.logoStyle}
-                            onLeft={() => {}}
+                            onLeft={() => this.showShowcase()}
                         />
                     </Scene>
                     <Scene key='profile' title='Profile' icon={ProfileTabIcon}>
@@ -87,7 +92,7 @@ class RouterComponent extends Component {
                             titleStyle={styles.navBarTitleStyle}
                             leftButtonImage={{ uri: 'kort_logo_small' }}
                             leftButtonIconStyle={styles.logoStyle}
-                            onLeft={() => {}}
+                            onLeft={() => this.showShowcase()}
                             onRight={this.logInOrOut.bind(this)}
                             rightTitle=''
                             rightButtonTextStyle={styles.navBarTitleStyle}
@@ -95,6 +100,8 @@ class RouterComponent extends Component {
                     </Scene>
                 </Scene>
             </Scene>
+
+            <Scene key='showcase' component={Showcase} hideNavBar animation='fade' />
         </Router>
         );
     }
