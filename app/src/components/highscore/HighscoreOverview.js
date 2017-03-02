@@ -6,13 +6,12 @@ import {
 import SegmentedControlTab from 'react-native-segmented-control-tab';
 import HighscoreList from './HighscoreList';
 import { connect } from 'react-redux';
-import { downloadHighscore } from '../../actions/HighscoreActions';
+import { tabChanged } from '../../actions/HighscoreActions';
 
 class HighscoreOverview extends Component {
 
     changeTab(index) {
-        console.log('change tab ', tabCategories[index]);
-        this.props.downloadHighscore();
+        this.props.tabChanged(index);
     }
 
     render() {
@@ -26,13 +25,15 @@ class HighscoreOverview extends Component {
                     values={tabCategories}
                     onTabPress={index => this.changeTab(index)}
                     />
-                    <HighscoreList style={styles.listStyle} />
+                    <HighscoreList 
+                        style={styles.listStyle} 
+                    />
             </View>
         );
     }
 }
 
-const tabCategories = ['Day', 'Week', 'Month', 'Year'];
+const tabCategories = ['Day', 'Week', 'Month', 'All Time'];
 
 const styles = {
     bgColor: {
@@ -61,8 +62,9 @@ const styles = {
         backgroundColor: '#395971'
     },
     listStyle: {
-        flex: 1
+        flex: 1,
+
     }
 };
 
-export default connect(null, { downloadHighscore })(HighscoreOverview);
+export default connect(null, { tabChanged })(HighscoreOverview);

@@ -24,3 +24,4 @@ export const START_MISSION = 'start_mission';
 export const GET_ACHIEVEMENTS = 'get_achievements';
 
 export const GET_HIGHSCORE = 'get_highscore';
+export const TAB_CHANGED = 'tab_changed';

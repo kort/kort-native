@@ -4,21 +4,28 @@ import {
         RefreshControl
      } from 'react-native';
 import { connect } from 'react-redux';
-import _ from 'lodash';
 import { downloadHighscore } from '../../actions/HighscoreActions';
 import HighscoreListItem from './HighscoreListItem';
 
 
 class HighscoreList extends Component {
-
+    
      componentWillMount() {
-         console.log('component load');
-        this.props.downloadHighscore();
+        this.props.downloadHighscore(this.props.currentTab);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.currentTab !== this.props.currentTab) {
+            this.props.downloadHighscore(nextProps.currentTab);
+            this.scrollview.scrollTo({ x: 0, y: 0, animated: true });
+        }
     }
 
     onRefresh() {
-        this.props.downloadHighscore();
+        this.props.downloadHighscore(this.props.currentTab);
     }
+
+    scrollview = null;    
 
     renderRow(rowData) {
         return <HighscoreListItem data={rowData} />;
@@ -27,18 +34,19 @@ class HighscoreList extends Component {
     render() {
         return (
             <ListView 
+                ref={scrollview => { this.scrollview = scrollview; }}
                 contentContainerStyle={styles.list}
-                    dataSource={this.props.dataSource}
-                    renderRow={(rowData) => this.renderRow(rowData)}
-                initialListSize={15}
+                dataSource={this.props.dataSource}
+                renderRow={(rowData) => this.renderRow(rowData)}
+                initialListSize={10}
                 enableEmptySections
                 refreshControl={
-                <RefreshControl
-                    refreshing={this.props.loading}
-                    onRefresh={this.onRefresh.bind(this)}
-                    colors={['#202931', 'white']}
-                    tintColor='white'
-                />}
+                    <RefreshControl
+                        refreshing={this.props.loading}
+                        onRefresh={this.onRefresh.bind(this)}
+                        colors={['#202931', 'white']}
+                        tintColor='white'
+                    />}
             />        
         );
     }
@@ -46,8 +54,8 @@ class HighscoreList extends Component {
 }
 
 const styles = {
-    list: {
-        flex: 1
+    list: { 
+        paddingBottom: 60,        
     }
 };
 
@@ -56,10 +64,11 @@ const dataSource = new ListView.DataSource({
 });
 
 const mapStateToProps = ({ highscoreReducer }) => {
-    const { highscore, loading } = highscoreReducer;
+    const { highscore, loading, currentTab } = highscoreReducer;
     return {
         dataSource: dataSource.cloneWithRows(highscore), 
-        loading
+        loading,
+        currentTab
     };
 };
 
