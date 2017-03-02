@@ -49,6 +49,9 @@ class RouterComponent extends Component {
                             initial
                             navigationBarStyle={styles.navBarStyle}
                             titleStyle={styles.navBarTitleStyle}
+                            leftButtonImage={{ uri: 'kort_logo_small' }}
+                            leftButtonIconStyle={styles.logoStyle}
+                            onLeft={() => {}}
                         />
                     </Scene>
                     <Scene key='achievements' title='Achievements' icon={AchievementsTabIcon}>
@@ -58,6 +61,9 @@ class RouterComponent extends Component {
                             title='Achievements'
                             navigationBarStyle={styles.navBarStyle}
                             titleStyle={styles.navBarTitleStyle}
+                            leftButtonImage={{ uri: 'kort_logo_small' }}
+                            leftButtonIconStyle={styles.logoStyle}
+                            onLeft={() => {}}
                         />
                     </Scene>
                     <Scene key='highscore' title='Highscore' icon={HighscoreTabIcon}>
@@ -67,6 +73,9 @@ class RouterComponent extends Component {
                             title='Highscore'
                             navigationBarStyle={styles.navBarStyle}
                             titleStyle={styles.navBarTitleStyle}
+                            leftButtonImage={{ uri: 'kort_logo_small' }}
+                            leftButtonIconStyle={styles.logoStyle}
+                            onLeft={() => {}}
                         />
                     </Scene>
                     <Scene key='profile' title='Profile' icon={ProfileTabIcon}>
@@ -76,6 +85,9 @@ class RouterComponent extends Component {
                             title='Profile'                            
                             navigationBarStyle={styles.navBarStyle}
                             titleStyle={styles.navBarTitleStyle}
+                            leftButtonImage={{ uri: 'kort_logo_small' }}
+                            leftButtonIconStyle={styles.logoStyle}
+                            onLeft={() => {}}
                             onRight={this.logInOrOut.bind(this)}
                             rightTitle=''
                             rightButtonTextStyle={styles.navBarTitleStyle}
@@ -99,6 +111,11 @@ const styles = {
     navBarTitleStyle: {
         color: 'white'
     },
+    logoStyle: { 
+        marginLeft: 5, 
+        height: 40, 
+        width: 48 
+    }
 };
 
 const mapStateToProps = ({ authReducer }) => {
