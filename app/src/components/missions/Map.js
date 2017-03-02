@@ -102,11 +102,17 @@ class Map extends Component {
     centerMapAroundLocation(coords) {
         if (coords) {
             const { latitude, longitude } = coords;
-            this.map.setCenterCoordinate(latitude, longitude, true, null);
+            this.map.getCenterCoordinateZoomLevel(data => {
+                const initialZoom = Config.MAPBOX_INITIAL_ZOOM_LEVEL;
+                const zoom = initialZoom > data.zoomLevel ? initialZoom : data.zoomLevel;
+                this.map.setCenterCoordinateZoomLevel(latitude, longitude, 
+                zoom, true, null);
+            });   
         }  
     }
 
     map = null;
+
 
     render() {
         const { bgColor, mapStyleFullScreen, mapStyleSmallScreen, 
@@ -128,6 +134,7 @@ class Map extends Component {
                     onRegionDidChange={this.onRegionDidChange.bind(this)}
                     onTap={this.onTap.bind(this)}
                     annotations={this.props.missionAnnotations}
+                    styleURL={styleURL}
                 />
                 <RoundButton 
                     style={this.props.mapModeFullScreen ? locBtnFullScreen : locBtnSmallScreen} 
@@ -138,6 +145,8 @@ class Map extends Component {
         );
     }
 }
+
+const styleURL = Config.MAPBOX_STYLE_URL ? Config.MAPBOX_STYLE_URL : Mapbox.mapStyles.streets;
 
 const deviceWidth = Dimensions.get('window').width * PixelRatio.get();
 
