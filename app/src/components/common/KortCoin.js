@@ -11,7 +11,7 @@ class KortCoin extends Component {
         if (this.props.animationStyle === 'normal') {
             animationEffect = 'pulse';
         } else if (this.props.animationStyle === 'win') {
-            animationEffect = 'jello';
+            animationEffect = 'flipInY';
         }
         return (
             <Animatable.Image
