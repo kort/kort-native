@@ -11,7 +11,7 @@ export default {
   MAPBOX_INITIAL_ZOOM_LEVEL: 14,
   MAPBOX_ANNOTATION_SIZE: 30,
 
-  API_URL: 'http://4dfe0ae1.ngrok.io',
+  API_URL: 'http://689f3a55.ngrok.io',
 
   DEEP_LINK_URL: 'kortapp://payload?',
 
