@@ -6,15 +6,16 @@ import {
 } from 'react-native';
 import { Button } from '../common';
 
-const ShowcaseItem = ({ title, description, buttonText, buttonAction }) => {
-    const { infoStyle, imageStyle, titleStyle, descriptionStyle, buttonStyle, image } = styles;
+const ShowcaseItem = ({ title, description, buttonText, buttonAction, children, bordered }) => {
+    const { infoStyle, iconStyle, titleStyle, descriptionStyle, buttonStyle } = styles;
 
     return (
         <View style={infoStyle}>
-            <Image 
-                style={imageStyle}
-                source={{ uri: image }}
-            />
+            <View 
+                style={iconStyle}
+            >
+            {children}
+            </View>
             <Text style={titleStyle}>{title}</Text>
             <Text style={descriptionStyle}>{description}</Text>
             <Button 
@@ -27,17 +28,24 @@ const ShowcaseItem = ({ title, description, buttonText, buttonAction }) => {
 };
 
 const styles = {
+    iconStyle: {
+        width: 200,
+        height: 200,
+        marginBottom: 20,
+        justifyContent: 'flex-end',
+    },
     imageStyle: {
         width: 150,
         height: 250,
         borderWidth: 1,
         borderRadius: 5,
         borderColor: '#657C8E',
-        marginBottom: 20
+        marginBottom: 20,
+        justifyContent: 'flex-end'
     },
     buttonStyle: {
         alignSelf: 'center',
-        width: 150,
+        width: 200,
     },
     titleStyle: {
         color: 'white',

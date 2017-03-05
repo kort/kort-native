@@ -2,12 +2,15 @@ import React, { Component } from 'react';
 import {
     View,
     ScrollView,
-    Dimensions
+    Dimensions,
+    Image
 } from 'react-native';
 import {
     Actions
 } from 'react-native-router-flux';
 import PageControl from 'react-native-page-control';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import IconFA from 'react-native-vector-icons/FontAwesome';
 import ShowcaseItem from './ShowcaseItem';
 
 class Showcase extends Component {
@@ -57,8 +60,13 @@ class Showcase extends Component {
                             description='Solve missions in order to collect Koins.'
                             buttonText='Next'
                             buttonAction={this.showNextPage.bind(this)}
-                            image='kort_logo_small'
-                        />
+                        >
+                            <IconFA 
+                                style={{ color: '#657C8E', alignSelf: 'center' }}
+                                size={200} 
+                                name='map' 
+                            />
+                        </ShowcaseItem>
                     </View>
                     <View style={[{ width: deviceWidth }, styles.pageStyle]}>
                         <ShowcaseItem 
@@ -66,8 +74,13 @@ class Showcase extends Component {
                             description='Try to reach all the achievements.'
                             buttonText='Next'
                             buttonAction={this.showNextPage.bind(this)}
-                            image='kort_logo_small'
-                        />                    
+                        >
+                            <IconFA 
+                                style={{ color: '#657C8E', alignSelf: 'center' }}
+                                size={200} 
+                                name='trophy' 
+                            />
+                        </ShowcaseItem>                    
                     </View>
                     <View style={[{ width: deviceWidth }, styles.pageStyle]}>
                         <ShowcaseItem 
@@ -75,8 +88,13 @@ class Showcase extends Component {
                             description='By solving missions you have the change to get into the highscore. Can you make it?'
                             buttonText='Next'
                             buttonAction={this.showNextPage.bind(this)}
-                            image='kort_logo_small'
-                        />                    
+                        >
+                            <IconFA 
+                                style={{ color: '#657C8E', alignSelf: 'center' }}
+                                size={200} 
+                                name='list-ol' 
+                            />
+                        </ShowcaseItem>                    
                     </View>
                     <View style={[{ width: deviceWidth }, styles.pageStyle]}>
                         <ShowcaseItem 
@@ -84,8 +102,13 @@ class Showcase extends Component {
                             description='Your provided answers are validated and written back to OpenStreetMap.'
                             buttonText="Let's start!"
                             buttonAction={this.hideShowcase.bind(this)}
-                            image='kort_logo_small'
-                        />
+                        >
+                            <Icon 
+                                style={{ color: '#657C8E', alignSelf: 'center' }}
+                                size={200} 
+                                name='google-maps' 
+                            />
+                        </ShowcaseItem>
                     </View>
                 </ScrollView>
                 <PageControl 
