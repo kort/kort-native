@@ -16,7 +16,7 @@ import { RoundButton } from '../common';
 
 class Map extends Component {
 
-    state = { now: 0, annotationOpen: false };
+    state = { firstTapAt: 0, annotationOpen: false, annotationOpenedAt: 0, regionChange: false };
 
     componentDidMount() {
         console.log(Config.MAPBOX_ACCESS_TOKEN);
@@ -39,28 +39,52 @@ class Map extends Component {
         }
     }
 
-    onTap(tapRegion) {
-        // register tap which is not on side panel as well as any annotation
-        if (tapRegion.screenCoordY > 50 && tapRegion.screenCoordX < deviceWidth - 50 &&
-        !this.tapOnAnnotation(tapRegion, this.props.missionAnnotations) &&
-        !this.state.annotationOpen) {
-            const d = new Date();
-            if (Math.abs(d.getSeconds() - this.state.now) <= 1) {
-                console.log('zoom');
-            } else {
-                console.log('fullscreen toggle');
-                this.props.showMapModeFullscreen(!this.props.mapModeFullScreen);
-            }
-            this.setState({ now: d.getSeconds() });
+    onTap() {
+        console.log('tap');       
+        const d = new Date();
+        const now = d.getTime();
+        if (now - this.state.firstTapAt > 500) {
+            setTimeout(() => {
+                this.toggleFullscreen();
+            }, 500);        
         }
-        //close mission
         this.props.onTap(); 
-        this.setState({ annotationOpen: false, activeMission: {} });  
+        this.setState({ firstTapAt: d.getTime(), annotationOpen: false, activeMission: {} }); 
+    }
+
+    onRegionDidChange() {
+        console.log('region changed');
+        if (this.state.annotationOpen) {
+            this.setState({ regionChange: true });
+            this.map.selectAnnotation(this.props.activeMission.id);
+        }
     }
 
     onOpenAnnotation(annotation) {
+        const d = new Date();
+        this.setState({ annotationOpenedAt: d.getTime() });
+
         if (this.state.currentMission !== annotation.id) {
-            this.setState({ currentMission: annotation.id, annotationOpen: true });
+            this.handleAnnotationOpen(annotation);
+        } else {
+            if (!this.state.regionChange && !this.state.annotationOpen) {
+                this.handleAnnotationOpen(annotation);
+            }
+            this.setState({ regionChange: false });
+        }
+    }
+
+    toggleFullscreen() {
+        const d = new Date();
+        const now = d.getTime();
+        // 500ms between taps for not zooming, 500ms for not toggling when clicking on annotation
+        if (now - this.state.firstTapAt > 500 && now - this.state.annotationOpenedAt > 500) {
+            this.props.showMapModeFullscreen(!this.props.mapModeFullScreen);
+        }
+    }
+
+    handleAnnotationOpen(annotation) {
+        this.setState({ currentMission: annotation.id, annotationOpen: true });
             this.props.startMission(annotation.id);
             this.props.showMapModeFullscreen(true);
             this.props.onOpenAnnotation();
@@ -70,29 +94,10 @@ class Map extends Component {
             this.map.getCenterCoordinateZoomLevel(data => {
                 this.map.getDirection(direction => {
                     if (annotation.latitude < data.latitude && direction === 0) {
-                    this.map.setCenterCoordinate(annotation.latitude, annotation.longitude, true, null);
+                        this.map.setCenterCoordinate(annotation.latitude, annotation.longitude, true, null);
                     }
                 });
             });
-        }
-    }
-
-    onRegionDidChange() {
-        console.log('region changed');
-        if (this.state.annotationOpen) {
-            this.map.selectAnnotation(this.props.activeMission.id);
-        }
-    }
-
-    tapOnAnnotation(region, annotations) {
-        const precision = 3; //TODO according to current zoom level
-        for (const annotation of annotations) {
-            if (annotation.coordinates[0].toFixed(precision) === region.latitude.toFixed(precision)
-            && annotation.coordinates[1].toFixed(precision) === region.longitude.toFixed(precision)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     centerMapAroundCurrentLocation() {
@@ -112,7 +117,6 @@ class Map extends Component {
     }
 
     map = null;
-
 
     render() {
         const { bgColor, mapStyleFullScreen, mapStyleSmallScreen, 
