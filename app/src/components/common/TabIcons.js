@@ -36,6 +36,11 @@ const HighscoreTabIcon = ({ title, selected }) => {
 const ProfileTabIcon = ({ title, selected }) => {
   return <TabIcon title={title} selected={selected} iconName='user-circle-o' />;
 };
+
+const SettingsTabIcon = ({ title, selected }) => {
+  return <TabIcon title={title} selected={selected} iconName='gear' />;
+};
+
 const styles = {
     tabIconStyle: {
         backgroundColor: 'transparent',
@@ -64,4 +69,4 @@ const styles = {
     }
 };
 
-module.exports = { MissionsTabIcon, AchievementsTabIcon, HighscoreTabIcon, ProfileTabIcon };
+module.exports = { MissionsTabIcon, AchievementsTabIcon, HighscoreTabIcon, ProfileTabIcon, SettingsTabIcon };

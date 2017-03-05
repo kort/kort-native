@@ -10,12 +10,14 @@ import MissionsOverview from './components/missions/MissionsOverview';
 import AchievementsOverview from './components/achievements/AchievementsOverview';
 import HighscoreOverview from './components/highscore/HighscoreOverview';
 import ProfileOverview from './components/profile/ProfileOverview';
+import SettingsOverview from './components/settings/SettingsOverview';
 import LoginOverview from './components/login/LoginOverview';
 import {
     MissionsTabIcon,
     AchievementsTabIcon,
     HighscoreTabIcon,
-    ProfileTabIcon
+    ProfileTabIcon,
+    SettingsTabIcon
 } from './components/common/TabIcons';
 import { showConfirmModal } from './actions/AuthActions';
 
@@ -96,6 +98,18 @@ class RouterComponent extends Component {
                             onRight={this.logInOrOut.bind(this)}
                             rightTitle=''
                             rightButtonTextStyle={styles.navBarTitleStyle}
+                        />
+                    </Scene>
+                    <Scene key='settings' title='Settings' icon={SettingsTabIcon}>
+                        <Scene
+                            key='settingsOverview'
+                            component={SettingsOverview}
+                            title='Settings'                            
+                            navigationBarStyle={styles.navBarStyle}
+                            titleStyle={styles.navBarTitleStyle}
+                            leftButtonImage={{ uri: 'kort_logo_small' }}
+                            leftButtonIconStyle={styles.logoStyle}
+                            onLeft={() => this.showShowcase()}
                         />
                     </Scene>
                 </Scene>
