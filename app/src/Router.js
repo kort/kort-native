@@ -11,6 +11,7 @@ import AchievementsOverview from './components/achievements/AchievementsOverview
 import HighscoreOverview from './components/highscore/HighscoreOverview';
 import ProfileOverview from './components/profile/ProfileOverview';
 import SettingsOverview from './components/settings/SettingsOverview';
+import About from './components/settings/About';
 import LoginOverview from './components/login/LoginOverview';
 import {
     MissionsTabIcon,
@@ -110,6 +111,14 @@ class RouterComponent extends Component {
                             leftButtonImage={{ uri: 'kort_logo_small' }}
                             leftButtonIconStyle={styles.logoStyle}
                             onLeft={() => this.showShowcase()}
+                        />
+                        <Scene
+                                key='about'
+                                component={About}
+                                title='About'
+                                navigationBarStyle={styles.navBarStyle}
+                                titleStyle={styles.navBarTitleStyle}
+                                leftButtonIconStyle={{ tintColor: 'white' }}
                         />
                     </Scene>
                 </Scene>
