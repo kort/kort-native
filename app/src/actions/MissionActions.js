@@ -21,8 +21,7 @@ export const startMission = (id) => {
 
     return {
         type: START_MISSION,
-        payload0: mission,
-        payload1: annotations
+        payload: [mission, annotations]
     };
 };
 
