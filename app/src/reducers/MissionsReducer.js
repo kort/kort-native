@@ -18,7 +18,7 @@ export default (state = INITIAL_STATE, action) => {
         case GET_MISSION_ANNOTATIONS:
             return { ...state, missionAnnotations: action.payload };
         case START_MISSION:
-            return { ...state, activeMission: action.payload };
+            return { ...state, activeMission: action.payload0, missionAnnotations: action.payload1 };
         default:
             return state;
     }

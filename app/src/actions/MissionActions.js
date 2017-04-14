@@ -11,15 +11,18 @@ export const downloadMissions = () => {
     //TODO call API with lat, lon, radius
     return (dispatch) => {
         updateMissions(dispatch, missionsData);
-        createMissionAnnotations(dispatch, missionsData);
+        getMissionAnnotations(dispatch, missionsData);
     };
 };
 
 export const startMission = (id) => {
     const mission = _.find(missionsData, { id });
+    const annotations = createMissionAnnotations(missionsData, id);
+
     return {
         type: START_MISSION,
-        payload: mission
+        payload0: mission,
+        payload1: annotations
     };
 };
 
@@ -30,14 +33,33 @@ export const updateMissions = (dispatch, data) => {
     });
 };
 
-export const createMissionAnnotations = (dispatch, data) => {
+export const getMissionAnnotations = (dispatch, data) => {
+    const annotations = createMissionAnnotations(data, null);
+    dispatch({
+        type: GET_MISSION_ANNOTATIONS,
+        payload: annotations
+    });
+};
+
+export const createMissionAnnotations = (data, highlightedFeature) => {
     const annotations = [];
     for (const mission of data) {
+        if (highlightedFeature === mission.id && mission.geomType !== 'point') {
+                annotations.push({
+                id: 'geom',
+                type: mission.geomType,
+                coordinates: mission.coordinates,
+                strokeColor: '#395971',
+                strokeAlpha: 0.6,
+                fillAlpha: 0.6,
+                fillColor: '#395971'
+            });
+        }
         annotations.push({
             id: mission.id,
             type: 'point',
             title: mission.title,
-            coordinates: [parseFloat(mission.lat), parseFloat(mission.lon)],
+            coordinates: mission.annotationCoordinate,
             annotationImage: {
                 source: { uri: `${mission.image}` },
                 width: Config.MAPBOX_ANNOTATION_SIZE,
@@ -45,8 +67,5 @@ export const createMissionAnnotations = (dispatch, data) => {
             },
         });
     }
-    dispatch({
-        type: GET_MISSION_ANNOTATIONS,
-        payload: annotations
-    });
+    return annotations;
 };

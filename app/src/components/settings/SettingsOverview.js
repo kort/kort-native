@@ -31,6 +31,8 @@ class SettingsOverview extends Component {
                         switchOnValueChange={this.onValueChange.bind(this)}
                         hasSwitch
                         title='Send Statistics'
+                        titleInfo='Earn additional Koins'
+                        titleInfoStyle={{ fontSize: 12 }}
                     />
                     <SettingsList.Header 
                         headerText='Info' 
