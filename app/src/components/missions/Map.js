@@ -28,7 +28,6 @@ class Map extends Component {
         this.props.downloadMissions();
 
         store.get(SETTINGS).then(settings => {
-            console.log('from disk', settings);
             if (settings !== null) {
                 this.setState(settings);
                 Mapbox.setMetricsEnabled(settings.stats);

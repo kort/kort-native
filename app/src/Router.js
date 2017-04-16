@@ -5,6 +5,7 @@ import {
     Actions
 } from 'react-native-router-flux';
 import { connect } from 'react-redux';
+import store from 'react-native-simple-store';
 import Showcase from './components/showcase/Showcase';
 import MissionsOverview from './components/missions/MissionsOverview';
 import AchievementsOverview from './components/achievements/AchievementsOverview';
@@ -21,8 +22,22 @@ import {
     SettingsTabIcon
 } from './components/common/TabIcons';
 import { showConfirmModal } from './actions/AuthActions';
+import { SHOWCASE_SHOWN } from './storage/StorageKeys';
 
 class RouterComponent extends Component {
+
+    componentWillMount() {
+        store.get(SHOWCASE_SHOWN).then(obj => {
+            if (obj !== null) {
+                if (!obj.showcaseShown) {
+                    this.showShowcase();
+                    store.update(SHOWCASE_SHOWN, { showcaseShown: true });
+                }
+            } else {
+                store.update(SHOWCASE_SHOWN, { showcaseShown: true });
+            }           
+        });       
+    }
 
     logInOrOut() {
         if (this.props.loggedIn) {
@@ -36,7 +51,6 @@ class RouterComponent extends Component {
         Actions.showcase();
     }
 
-    // <Scene key='auth' component={LoginOverview} hideNavBar />
     render() {
         return (
         <Router>
