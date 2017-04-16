@@ -5,14 +5,28 @@ import {
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import SettingsList from 'react-native-settings-list';
+import store from 'react-native-simple-store';
+import { SETTINGS } from '../../storage/StorageKeys';
 
 class SettingsOverview extends Component {
 
-    state = { switchValue: false };
+    state = { stats: false, mapRotation: false };
 
-    onValueChange(value) {
-        console.log('switch ', value);
-        this.setState({ switchValue: value });
+    componentDidMount() {
+        store.get(SETTINGS).then(settings => {
+            console.log('ls', settings);
+            if (settings !== null) {
+                this.setState(settings);
+            }
+        });  
+    }
+
+    switchChanged(obj) {
+        console.log('switch changed', obj);
+        this.setState(obj);
+        console.log('saving ', obj);
+        
+        store.update(SETTINGS, obj);
     }
     render() {
         return (
@@ -27,12 +41,19 @@ class SettingsOverview extends Component {
                     />
                     <SettingsList.Item
                         hasNavArrow={false}
-                        switchState={this.state.switchValue}
-                        switchOnValueChange={this.onValueChange.bind(this)}
+                        switchState={this.state.stats}
+                        switchOnValueChange={(value) => this.switchChanged({ stats: value })}
                         hasSwitch
                         title='Send Statistics'
                         titleInfo='Earn additional Koins'
                         titleInfoStyle={{ fontSize: 12 }}
+                    />
+                    <SettingsList.Item
+                        hasNavArrow={false}
+                        switchState={this.state.mapRotation}
+                        switchOnValueChange={(value) => this.switchChanged({ mapRotation: value })}
+                        hasSwitch
+                        title='Allow Map Rotation'
                     />
                     <SettingsList.Header 
                         headerText='Info' 
@@ -76,6 +97,5 @@ const styles = {
     },
     borderColor: '#395971'
 };
-
 
 export default (SettingsOverview);

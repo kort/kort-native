@@ -7,24 +7,35 @@ import {
 } from 'react-native';
 import Mapbox, { MapView } from 'react-native-mapbox-gl';
 import { connect } from 'react-redux';
+import store from 'react-native-simple-store';
 import Config from '../../constants/Config';
 import { showMapModeFullscreen } from '../../actions/MapActions';
 import { downloadMissions, startMission } from '../../actions/MissionActions';
 import { downloadAchievements } from '../../actions/AchievementsActions';
 import GeoLocation from '../../geolocation/GeoLocation';
 import { RoundButton } from '../common';
+import { SETTINGS } from '../../storage/StorageKeys';
 
 class Map extends Component {
 
-    state = { firstTapAt: 0, annotationOpen: false, annotationOpenedAt: 0, regionChange: false };
+    state = { firstTapAt: 0, annotationOpen: false, annotationOpenedAt: 0, regionChange: false, mapRotation: false };
 
     componentDidMount() {
         console.log(Config.MAPBOX_ACCESS_TOKEN);
         Mapbox.setAccessToken(Config.MAPBOX_ACCESS_TOKEN);
-        Mapbox.setMetricsEnabled(false);
 
         //TODO move this to other area
         this.props.downloadMissions();
+
+        store.get(SETTINGS).then(settings => {
+            console.log('from disk', settings);
+            if (settings !== null) {
+                this.setState(settings);
+                Mapbox.setMetricsEnabled(settings.stats);
+            } else {
+                Mapbox.setMetricsEnabled(false);
+            }           
+        });       
     }
 
     componentWillReceiveProps(nextProps) {
@@ -139,6 +150,8 @@ class Map extends Component {
                     onTap={this.onTap.bind(this)}
                     annotations={this.props.missionAnnotations}
                     styleURL={styleURL}
+                    attributionButtonIsHidden
+                    rotateEnabled={this.state.mapRotation}
                 />
                 <RoundButton 
                     style={this.props.mapModeFullScreen ? locBtnFullScreen : locBtnSmallScreen} 
