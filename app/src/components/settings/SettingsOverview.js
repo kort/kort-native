@@ -14,7 +14,6 @@ class SettingsOverview extends Component {
 
     componentDidMount() {
         store.get(SETTINGS).then(settings => {
-            console.log('ls', settings);
             if (settings !== null) {
                 this.setState(settings);
             }
@@ -22,12 +21,12 @@ class SettingsOverview extends Component {
     }
 
     switchChanged(obj) {
-        console.log('switch changed', obj);
-        this.setState(obj);
-        console.log('saving ', obj);
-        
+        this.setState(obj);        
         store.update(SETTINGS, obj);
+
+        //TODO show message that changes are available after restart
     }
+
     render() {
         return (
             <View style={styles.bgColor} >

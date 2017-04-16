@@ -1,2 +1,2 @@
-export const SETTINGS = 'settingss';
+export const SETTINGS = 'settings';
 export const USER = 'user';
