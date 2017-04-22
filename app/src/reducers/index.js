@@ -5,6 +5,7 @@ import MapReducer from './MapReducer';
 import AnswerReducer from './AnswerReducer';
 import AchievementsReducer from './AchievementsReducer';
 import HighscoreReducer from './HighscoreReducer';
+import SettingsReducer from './SettingsReducer';
 
 export default combineReducers({
     authReducer: AuthReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
     mapReducer: MapReducer,
     answerReducer: AnswerReducer,
     achievementsReducer: AchievementsReducer,
-    highscoreReducer: HighscoreReducer
+    highscoreReducer: HighscoreReducer,
+    settingsReducer: SettingsReducer
 });
