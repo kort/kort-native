@@ -5,7 +5,6 @@ import {
     Actions
 } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import store from 'react-native-simple-store';
 import Showcase from './components/showcase/Showcase';
 import MissionsOverview from './components/missions/MissionsOverview';
 import AchievementsOverview from './components/achievements/AchievementsOverview';
@@ -21,23 +20,9 @@ import {
     ProfileTabIcon,
     SettingsTabIcon
 } from './components/common/TabIcons';
-import { showConfirmModal } from './actions/AuthActions';
-import { SHOWCASE_SHOWN } from './storage/StorageKeys';
+import { showConfirmModal, loginUserSilently, initUser, logoutUser } from './actions/AuthActions';
 
 class RouterComponent extends Component {
-
-    componentWillMount() {
-        store.get(SHOWCASE_SHOWN).then(obj => {
-            if (obj !== null) {
-                if (!obj.showcaseShown) {
-                    this.showShowcase();
-                    store.update(SHOWCASE_SHOWN, { showcaseShown: true });
-                }
-            } else {
-                store.update(SHOWCASE_SHOWN, { showcaseShown: true });
-            }           
-        });       
-    }
 
     logInOrOut() {
         if (this.props.loggedIn) {
@@ -56,7 +41,6 @@ class RouterComponent extends Component {
         <Router>
 
             <Scene key='auth' component={LoginOverview} hideNavBar />
-
             <Scene key='root' animation='fade'>
                 <Scene
                     key='tabbar'
@@ -167,4 +151,5 @@ const mapStateToProps = ({ authReducer }) => {
     return { loggedIn };
 };
 
-export default connect(mapStateToProps, { showConfirmModal })(RouterComponent);
+export default connect(mapStateToProps, { 
+    showConfirmModal, loginUserSilently, initUser, logoutUser })(RouterComponent);
