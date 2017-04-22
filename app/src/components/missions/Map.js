@@ -18,26 +18,18 @@ import { SETTINGS } from '../../storage/StorageKeys';
 
 class Map extends Component {
 
-    state = { firstTapAt: 0, annotationOpen: false, annotationOpenedAt: 0, regionChange: false, mapRotation: false };
+    state = { firstTapAt: 0, annotationOpen: false, annotationOpenedAt: 0, regionChange: false };
 
     componentDidMount() {
         console.log(Config.MAPBOX_ACCESS_TOKEN);
         Mapbox.setAccessToken(Config.MAPBOX_ACCESS_TOKEN);
 
         //TODO move this to other area
-        this.props.downloadMissions();
-
-        store.get(SETTINGS).then(settings => {
-            if (settings !== null) {
-                this.setState(settings);
-                Mapbox.setMetricsEnabled(settings.stats);
-            } else {
-                Mapbox.setMetricsEnabled(false);
-            }           
-        });       
+        this.props.downloadMissions(); 
     }
 
     componentWillReceiveProps(nextProps) {
+        console.log('rec props', nextProps);
         let lastLocation = '';
         if (this.props && this.props.currentLocation) {
             lastLocation = this.props.currentLocation;
@@ -47,13 +39,17 @@ class Map extends Component {
             console.log(nextProps.currentLocation.coords);
             this.centerMapAroundLocation(nextProps.currentLocation.coords);
         }
+
+        // detect metric changes
+        if (this.props.stats !== nextProps.stats) {
+            Mapbox.setMetricsEnabled(nextProps.stats);
+        }
     }
 
     onTap() {
         console.log('tap');       
         const d = new Date();
         const now = d.getTime();
-        console.log(now - this.state.firstTapAt);
         if (now - this.state.firstTapAt > 500) {
             setTimeout(() => {
                 this.toggleFullscreen();
@@ -88,7 +84,6 @@ class Map extends Component {
     toggleFullscreen() {
         const d = new Date();
         const now = d.getTime();
-        console.log('fullscreen', now - this.state.firstTapAt, now - this.state.annotationOpenedAt);
         // 500ms between taps for not zooming, 500ms for not toggling when clicking on annotation
         if (now - this.state.annotationOpenedAt > 500) {
             if (now - this.state.firstTapAt > 500 && Platform.OS === 'ios') {
@@ -106,7 +101,6 @@ class Map extends Component {
             this.props.onOpenAnnotation();
 
             //check if mission behind mission panel below center
-            //TOOD handle rotation
             this.map.getCenterCoordinateZoomLevel(data => {
                 this.map.getDirection(direction => {
                     if (annotation.latitude < data.latitude && direction === 0) {
@@ -156,7 +150,7 @@ class Map extends Component {
                     annotations={this.props.missionAnnotations}
                     styleURL={styleURL}
                     attributionButtonIsHidden
-                    rotateEnabled={this.state.mapRotation}
+                    rotateEnabled={this.props.mapRotation}
                 />
                 <RoundButton 
                     style={this.props.mapModeFullScreen ? locBtnFullScreen : locBtnSmallScreen} 
@@ -200,11 +194,13 @@ const styles = {
     
 };
 
-const mapStateToProps = ({ mapReducer, missionReducer }) => {
+const mapStateToProps = ({ mapReducer, missionReducer, settingsReducer }) => {
+    console.log('settings red', settingsReducer);
     console.log(missionReducer);
     const { mapModeFullScreen, currentLocation } = mapReducer;
     const { missionAnnotations, activeMission } = missionReducer;
-    return { mapModeFullScreen, currentLocation, missionAnnotations, activeMission };
+    const { stats, mapRotation } = settingsReducer;
+    return { mapModeFullScreen, currentLocation, missionAnnotations, activeMission, stats, mapRotation };
 };
 
 
