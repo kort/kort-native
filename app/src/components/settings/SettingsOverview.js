@@ -3,29 +3,12 @@ import {
     View,
     Platform
 } from 'react-native';
+import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import SettingsList from 'react-native-settings-list';
-import store from 'react-native-simple-store';
-import { SETTINGS } from '../../storage/StorageKeys';
+import { mapRotationChanged, statsChanged } from '../../actions/SettingsActions';
 
 class SettingsOverview extends Component {
-
-    state = { stats: false, mapRotation: false };
-
-    componentDidMount() {
-        store.get(SETTINGS).then(settings => {
-            if (settings !== null) {
-                this.setState(settings);
-            }
-        });  
-    }
-
-    switchChanged(obj) {
-        this.setState(obj);        
-        store.update(SETTINGS, obj);
-
-        //TODO show message that changes are available after restart
-    }
 
     render() {
         return (
@@ -40,8 +23,8 @@ class SettingsOverview extends Component {
                     />
                     <SettingsList.Item
                         hasNavArrow={false}
-                        switchState={this.state.stats}
-                        switchOnValueChange={(value) => this.switchChanged({ stats: value })}
+                        switchState={this.props.stats}
+                        switchOnValueChange={(value) => this.props.statsChanged(value)}
                         hasSwitch
                         title='Send Statistics'
                         titleInfo='Earn additional Koins'
@@ -49,8 +32,8 @@ class SettingsOverview extends Component {
                     />
                     <SettingsList.Item
                         hasNavArrow={false}
-                        switchState={this.state.mapRotation}
-                        switchOnValueChange={(value) => this.switchChanged({ mapRotation: value })}
+                        switchState={this.props.mapRotation}
+                        switchOnValueChange={(value) => this.props.mapRotationChanged(value)}
                         hasSwitch
                         title='Allow Map Rotation'
                     />
@@ -97,4 +80,11 @@ const styles = {
     borderColor: '#395971'
 };
 
-export default (SettingsOverview);
+const mapStateToProps = ({ settingsReducer }) => {
+    console.log('settings red', settingsReducer);
+    const { stats, mapRotation } = settingsReducer;
+    return { stats, mapRotation };
+};
+
+
+export default connect(mapStateToProps, { mapRotationChanged, statsChanged })(SettingsOverview);

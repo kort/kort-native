@@ -25,3 +25,6 @@ export const GET_ACHIEVEMENTS = 'get_achievements';
 
 export const GET_HIGHSCORE = 'get_highscore';
 export const TAB_CHANGED = 'tab_changed';
+
+export const MAP_ROTATION_CHANGED = 'mapRotationChanged';
+export const STATS_CHANGED = 'statsChanged';
