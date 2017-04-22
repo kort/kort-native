@@ -1,8 +1,11 @@
 import { Actions } from 'react-native-router-flux';
 import _ from 'lodash';
 import { GoogleSignin } from 'react-native-google-signin';
+import store from 'react-native-simple-store';
+import { USER } from '../storage/StorageKeys';
 import KortAPI from '../data/KortAPI';
 import { 
+    LOGIN_USER,
     LOGIN_USER_SUCCESS,
     LOGIN_USER_FAIL,
     LOGOUT_USER,
@@ -14,7 +17,8 @@ import {
 import Config from '../constants/Config'; 
 
 const loginUserSuccess = (dispatch, user, popToMissions) => {
-        console.log('user login');
+    console.log('user login', user);
+    store.update(USER, user);
 
     dispatch({ 
         type: LOGIN_USER_SUCCESS,
@@ -46,6 +50,8 @@ export const loginUser = (dispatch, user, popToMissions) => {
 };
 
 export const logoutUser = () => {
+    store.delete(USER);
+    
     GoogleSignin.signOut()
         .then(() => { console.log('out'); })
         .catch(() => {});
@@ -113,5 +119,13 @@ export const parseURL = (url) => {
         console.log('parsed', secret, id);
         secretReceived(dispatch, { secret, id });
     }
+    };
+};
+
+export const loginUserSilently = (user) => {
+    return (dispatch) => {
+        dispatch({ type: LOGIN_USER });
+        console.log('login user silently');
+        loginUser(dispatch, user, false);
     };
 };

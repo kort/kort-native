@@ -10,7 +10,7 @@ import {
  } from '../actions/types';
 
 const INITIAL_STATE = {
-    loggedIn: false,
+    loggedIn: null,
     showConfirm: false,
     loading: false,
     webviewURI: '',
@@ -20,7 +20,7 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case LOGOUT_USER:
-            return { ...INITIAL_STATE };
+            return { ...INITIAL_STATE, loggedIn: false };
         case LOGIN_USER:
             return { ...state,
                      loading: true,

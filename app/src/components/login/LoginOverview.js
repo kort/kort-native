@@ -5,25 +5,19 @@ import {
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import LoginBox from './LoginBox';
+import AppLoader from '../../AppLoader';
 
 class LoginOverview extends Component {
-    constructor() {
-        super();
-        this.onLogin = this.onLogin.bind(this);
-    }
-
-
-    onLogin() {
-
-    }
 
     renderView() {
-        if (this.props.loggedIn) {
+        if (this.props.loggedIn == null) {
+            return <AppLoader />;
+        } else if (this.props.loggedIn) {
             Actions.root();
-            return <View style={styles.backgroundStyle} />;
+            return null;
         }
         return (
-            <LoginBox onLogin={this.onLogin} />       
+            <LoginBox onLogin={this.onLogin} />            
         );
     }
 
