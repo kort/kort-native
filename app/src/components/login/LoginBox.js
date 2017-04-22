@@ -22,7 +22,7 @@ class LoginBox extends Component {
         Linking.addEventListener('url', this.appWokeUp);
         Linking.getInitialURL().then((url) => {
             if (url) {
-                this.props.handleURL(url);
+                this.props.parseURL(url);
             }
         }).catch(err => console.error('An error occurred', err));
     }
@@ -128,5 +128,4 @@ const mapStateToProps = ({ authReducer }) => {
 };
 
 export default connect(mapStateToProps, { 
-    loginUser, showWebView, verifyGoogleIdToken, parseURL
-})(LoginBox);
+    loginUser, showWebView, verifyGoogleIdToken, parseURL })(LoginBox);
