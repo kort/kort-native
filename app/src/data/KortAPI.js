@@ -11,6 +11,7 @@ export default class KortAPI extends RestClient {
       simulatedDelay: 2000
     });
   }
+  
 
   verifyUser(tokenId) {
     return this.POST(Config.GOOGLE_VERIFY, { tokenId });
@@ -19,6 +20,10 @@ export default class KortAPI extends RestClient {
   getUserinfo(userId) {
     console.log(`${Config.USER_INFO}/${userId}`);
     return this.GET(`${Config.USER_INFO}/${userId}`);
+  }
+
+  getMissions(lat, lon, radius) {
+    return this.GET(Config.MISSIONS, { lat, lon, radius });
   }
  
 }

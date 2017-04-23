@@ -37,18 +37,26 @@ class MissionsOverview extends Component {
         return <View />;
     }
 
+    renderSpinner() {
+        if (this.props.missionsLoading) {
+            return (
+                <Spinner
+                    size='small'
+                    style={this.props.mapModeFullScreen ? styles.spinnerFullScreen : styles.spinnerSmallScreen} 
+                />
+            );
+        }
+        return null;
+    }
+
     render() {
-        const { bgColor, spinnerFullScreen, spinnerSmallScreen } = styles;
         return (
-            <View style={bgColor}>
+            <View style={styles.bgColor}>
                 <Map 
                     onTap={this.onTap.bind(this)}
                     onOpenAnnotation={this.onOpenAnnotation.bind(this)} 
                 />
-                <Spinner
-                    size='small'
-                    style={this.props.mapModeFullScreen ? spinnerFullScreen : spinnerSmallScreen} 
-                />
+                {this.renderSpinner()}
                 {this.renderMission()}
                 <Popup
                         visible={this.props.accuracyThresholdReached && !this.state.gpsModalShowed}
@@ -79,9 +87,10 @@ const styles = {
 };
 
 
-const mapStateToProps = ({ mapReducer }) => {
+const mapStateToProps = ({ mapReducer, missionReducer }) => {
     const { mapModeFullScreen, accuracyThresholdReached } = mapReducer;
-    return { mapModeFullScreen, accuracyThresholdReached };
+    const { missionsLoading } = missionReducer;
+    return { mapModeFullScreen, accuracyThresholdReached, missionsLoading };
 };
 
 

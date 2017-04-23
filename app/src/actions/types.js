@@ -17,8 +17,9 @@ export const SELECTED_ANSWER = 'selected_answer';
 export const ANSWER_FREETEXT_AVAILABLE = 'answer_freetext_available';
 export const ANSWER_SET = 'answer_set';
 
-export const GET_MISSIONS = 'get_missions';
-export const GET_MISSION_ANNOTATIONS = 'get_mission_annotations';
+export const MISSIONS_DOWNLOAD = 'missions_download';
+export const MISSIONS_DOWNLOADED_SUCCESS = 'missions_downloaded_success';
+export const MISSIONS_DOWNLOADED_ERROR = 'missions_downloaded_error';
 export const START_MISSION = 'start_mission';
 
 export const GET_ACHIEVEMENTS = 'get_achievements';

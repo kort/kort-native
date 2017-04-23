@@ -7,14 +7,12 @@ import {
 } from 'react-native';
 import Mapbox, { MapView } from 'react-native-mapbox-gl';
 import { connect } from 'react-redux';
-import store from 'react-native-simple-store';
 import Config from '../../constants/Config';
 import { showMapModeFullscreen } from '../../actions/MapActions';
 import { downloadMissions, startMission } from '../../actions/MissionActions';
 import { downloadAchievements } from '../../actions/AchievementsActions';
 import GeoLocation from '../../geolocation/GeoLocation';
 import { RoundButton } from '../common';
-import { SETTINGS } from '../../storage/StorageKeys';
 
 class Map extends Component {
 
@@ -25,7 +23,7 @@ class Map extends Component {
         Mapbox.setAccessToken(Config.MAPBOX_ACCESS_TOKEN);
 
         //TODO move this to other area
-        this.props.downloadMissions(); 
+        this.props.downloadMissions(47.2, 8.2, Config.RADIUS_FOR_MISSION_FETCHING); 
     }
 
     componentWillReceiveProps(nextProps) {
@@ -96,7 +94,7 @@ class Map extends Component {
 
     handleAnnotationOpen(annotation) {
         this.setState({ currentMission: annotation.id, annotationOpen: true });
-            this.props.startMission(annotation.id);
+            this.props.startMission(this.props.missionsData, annotation.id);
             this.props.showMapModeFullscreen(true);
             this.props.onOpenAnnotation();
 
@@ -198,9 +196,9 @@ const mapStateToProps = ({ mapReducer, missionReducer, settingsReducer }) => {
     console.log('settings red', settingsReducer);
     console.log(missionReducer);
     const { mapModeFullScreen, currentLocation } = mapReducer;
-    const { missionAnnotations, activeMission } = missionReducer;
+    const { missionAnnotations, activeMission, missionsData } = missionReducer;
     const { stats, mapRotation } = settingsReducer;
-    return { mapModeFullScreen, currentLocation, missionAnnotations, activeMission, stats, mapRotation };
+    return { mapModeFullScreen, currentLocation, missionAnnotations, activeMission, missionsData, stats, mapRotation };
 };
 
 
