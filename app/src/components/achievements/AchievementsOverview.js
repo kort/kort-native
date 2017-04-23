@@ -7,16 +7,21 @@ import {
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import AchievementItem from './AchievementItem';
-import { downloadAchievements } from '../../actions/AchievementsActions';
+import { downloadAchievements, clearErrorMsg } from '../../actions/AchievementsActions';
+import { Spinner, Popup } from '../common';
 
 class AchievementsOverview extends Component {
 
     componentWillMount() {
-        this.props.downloadAchievements();
+        this.props.downloadAchievements(false);
+    }
+
+    onAccept() {
+        this.props.clearErrorMsg();
     }
 
     onRefresh() {
-        this.props.downloadAchievements();
+        this.props.downloadAchievements(true);
     }
 
     renderRow(rowData) {
@@ -26,9 +31,22 @@ class AchievementsOverview extends Component {
         return <AchievementItem achievement={rowData} />;
     }
 
+    renderSpinner() {
+        if (this.props.downloading) {
+            return (
+                <Spinner
+                    size='large'
+                    style={styles.spinnerStyle}
+                />
+            );
+        }
+        return null;
+    }
+
     render() {
         return (
             <View style={styles.bgColor}>
+                {this.renderSpinner()}
                 <ListView 
                     contentContainerStyle={styles.list}
                     dataSource={this.props.dataSource}
@@ -42,6 +60,11 @@ class AchievementsOverview extends Component {
                         colors={['#202931', 'white']}
                         tintColor='white'
                     />}
+                />
+                <Popup
+                    visible={this.props.errorMsg !== null}
+                    onAccept={this.onAccept.bind(this)}
+                    message='There was an error connecting to the server. Check your connectivity.'
                 />
             </View>
         );
@@ -66,6 +89,15 @@ const styles = {
         margin: 5,
         height: 100,
         width: 100
+    },
+    spinnerStyle: {
+        position: 'absolute', 
+        top: 0, 
+        left: 0, 
+        right: 0, 
+        bottom: 0, 
+        justifyContent: 'center', 
+        alignItems: 'center'
     }    
 };
 
@@ -74,11 +106,13 @@ const dataSource = new ListView.DataSource({
 });
 
 const mapStateToProps = ({ achievementsReducer }) => {
-    const { achievements, loading } = achievementsReducer;
+    const { achievements, loading, downloading, errorMsg } = achievementsReducer;
     return {
         dataSource: dataSource.cloneWithRows(achievements), 
-        loading
+        loading,
+        downloading,
+        errorMsg
     };
 };
 
-export default connect(mapStateToProps, { downloadAchievements })(AchievementsOverview);
+export default connect(mapStateToProps, { downloadAchievements, clearErrorMsg })(AchievementsOverview);

@@ -11,6 +11,10 @@ import { Spinner, Popup } from '../common';
 
 class HighscoreOverview extends Component {
 
+    onAccept() {
+        this.props.clearErrorMsg();
+    }
+
     changeTab(index) {
         this.props.tabChanged(index);
     }
@@ -25,10 +29,6 @@ class HighscoreOverview extends Component {
             );
         }
         return null;
-    }
-
-    onInfoAccept() {
-        this.props.clearErrorMsg();
     }
 
     render() {
@@ -48,7 +48,7 @@ class HighscoreOverview extends Component {
                 />
                 <Popup
                         visible={this.props.errorMsg !== null}
-                        onAccept={this.onInfoAccept.bind(this)}
+                        onAccept={this.onAccept.bind(this)}
                         message='There was an error connecting to the server. Check your connectivity.'
                 />
             </View>

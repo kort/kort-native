@@ -23,7 +23,10 @@ export const MISSIONS_DOWNLOADED_ERROR = 'missions_downloaded_error';
 export const MISSIONS_CLEAR_ERROR_MSG = 'missions_clear_error_msg';
 export const START_MISSION = 'start_mission';
 
-export const GET_ACHIEVEMENTS = 'get_achievements';
+export const ACHIEVEMENTS_DOWNLOAD = 'achievements_download';
+export const ACHIEVEMENTS_DOWNLOADED_SUCCESS = 'achievements_downloaded_success';
+export const ACHIEVEMENTS_DOWNLOADED_ERROR = 'achievements_downloaded_error';
+export const ACHIEVEMENTS_CLEAR_ERROR_MSG = 'achievements_clear_error_msg';
 
 export const HIGHSCORE_DOWNLOAD = 'highscore_download';
 export const HIGHSCORE_DOWNLOADED_SUCCESS = 'highscore_downloaded_success';
