@@ -23,6 +23,7 @@ export default class KortAPI extends RestClient {
   }
 
   getMissions(lat, lon, radius) {
+    console.log('get missions', lat, lon, radius);
     return this.GET(Config.MISSIONS, { lat, lon, radius });
   }
  

@@ -10,7 +10,8 @@ const INITIAL_STATE = {
     activeMission: {},
     missionAnnotations: [],
     missionsData: [],
-    missionsLoading: false
+    missionsLoading: false,
+    coordsOfDownload: { latitude: 0, longitude: 0 }
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -20,9 +21,15 @@ export default (state = INITIAL_STATE, action) => {
         case MISSIONS_DOWNLOADED_ERROR:
             return { ...state, missionsLoading: false };
         case MISSIONS_DOWNLOADED_SUCCESS:
-            return { ...state, missionsLoading: false, missionsData: action.payload, missionAnnotations: createMissionAnnotations(action.payload, null) };
+            return { ...state, 
+                missionsLoading: false, 
+                missionsData: action.payload[0], 
+                missionAnnotations: createMissionAnnotations(action.payload[0], null), 
+                coordsOfDownload: action.payload[1] };
         case START_MISSION:
-            return { ...state, activeMission: action.payload[0], missionAnnotations: createMissionAnnotations(action.payload[1], action.payload[2]) };
+            return { ...state, 
+                activeMission: action.payload[0], 
+                missionAnnotations: createMissionAnnotations(action.payload[1], action.payload[2]) };
         default:
             return state;
     }

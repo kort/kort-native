@@ -12,6 +12,7 @@ import { showMapModeFullscreen } from '../../actions/MapActions';
 import { downloadMissions, startMission } from '../../actions/MissionActions';
 import { downloadAchievements } from '../../actions/AchievementsActions';
 import GeoLocation from '../../geolocation/GeoLocation';
+import CoordinateCalculations from '../../geolocation/CoordinateCalculations';
 import { RoundButton } from '../common';
 
 class Map extends Component {
@@ -21,13 +22,17 @@ class Map extends Component {
     componentDidMount() {
         console.log(Config.MAPBOX_ACCESS_TOKEN);
         Mapbox.setAccessToken(Config.MAPBOX_ACCESS_TOKEN);
-
-        //TODO move this to other area
-        this.props.downloadMissions(47.2, 8.2, Config.RADIUS_FOR_MISSION_FETCHING); 
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log('rec props', nextProps);
+        //fetch missions if location has changed
+        if (nextProps.currentLocation.coords) {
+            if (!this.props.missionsLoading && CoordinateCalculations.calculateDistance(this.props.coordsOfDownload, nextProps.currentLocation.coords) 
+            > Config.DISTANCE_DIFF_IN_M_FOR_MISSION_FETCHING) {
+                this.props.downloadMissions(nextProps.currentLocation.coords, Config.RADIUS_IN_M_FOR_MISSION_FETCHING); 
+            }
+        }
+        
         let lastLocation = '';
         if (this.props && this.props.currentLocation) {
             lastLocation = this.props.currentLocation;
@@ -196,9 +201,9 @@ const mapStateToProps = ({ mapReducer, missionReducer, settingsReducer }) => {
     console.log('settings red', settingsReducer);
     console.log(missionReducer);
     const { mapModeFullScreen, currentLocation } = mapReducer;
-    const { missionAnnotations, activeMission, missionsData } = missionReducer;
+    const { missionAnnotations, activeMission, missionsData, missionsLoading, coordsOfDownload } = missionReducer;
     const { stats, mapRotation } = settingsReducer;
-    return { mapModeFullScreen, currentLocation, missionAnnotations, activeMission, missionsData, stats, mapRotation };
+    return { mapModeFullScreen, currentLocation, missionAnnotations, activeMission, missionsData, missionsLoading, coordsOfDownload, stats, mapRotation };
 };
 
 

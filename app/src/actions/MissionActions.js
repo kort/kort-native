@@ -7,16 +7,16 @@ import {
 } from './types';
 import KortAPI from '../data/KortAPI';
 
-export const downloadMissions = (lat, lon, radius) => {
+export const downloadMissions = (coordinate, radius) => {
+    const { latitude, longitude } = coordinate;
     return (dispatch) => {
-        console.log('download missions');
         dispatch({ type: MISSIONS_DOWNLOAD, payload: null });
         const api = new KortAPI();
-        api.getMissions(lat, lon, radius)
+        api.getMissions(latitude, longitude, radius)
             .then(data => {
                 dispatch({
                     type: MISSIONS_DOWNLOADED_SUCCESS,
-                    payload: data
+                    payload: [data, { latitude, longitude }]
                 });
             })
             .catch(errorMsg => {    
