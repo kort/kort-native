@@ -12,7 +12,6 @@ export default class KortAPI extends RestClient {
     });
   }
   
-
   verifyUser(tokenId) {
     return this.POST(Config.GOOGLE_VERIFY, { tokenId });
   }
@@ -23,8 +22,16 @@ export default class KortAPI extends RestClient {
   }
 
   getMissions(lat, lon, radius) {
-    console.log('get missions', lat, lon, radius);
     return this.GET(Config.MISSIONS, { lat, lon, radius });
+  }
+
+  getHighscore(type, limit) {
+    console.log(type, limit);
+    return this.GET(Config.HIGHSCORE, { type, limit });
+  }
+
+  getAchievements() {
+    return this.GET(Config.ACHIEVEMENTS);
   }
  
 }

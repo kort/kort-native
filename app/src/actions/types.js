@@ -20,12 +20,15 @@ export const ANSWER_SET = 'answer_set';
 export const MISSIONS_DOWNLOAD = 'missions_download';
 export const MISSIONS_DOWNLOADED_SUCCESS = 'missions_downloaded_success';
 export const MISSIONS_DOWNLOADED_ERROR = 'missions_downloaded_error';
-export const CLEAR_ERROR_MSG = 'clear_error_msg';
+export const MISSIONS_CLEAR_ERROR_MSG = 'missions_clear_error_msg';
 export const START_MISSION = 'start_mission';
 
 export const GET_ACHIEVEMENTS = 'get_achievements';
 
-export const GET_HIGHSCORE = 'get_highscore';
+export const HIGHSCORE_DOWNLOAD = 'highscore_download';
+export const HIGHSCORE_DOWNLOADED_SUCCESS = 'highscore_downloaded_success';
+export const HIGHSCORE_DOWNLOADED_ERROR = 'highscore_downloaded_error';
+export const HIGHSCORE_CLEAR_ERROR_MSG = 'highscore_clear_error_msg';
 export const TAB_CHANGED = 'tab_changed';
 
 export const MAP_ROTATION_CHANGED = 'mapRotationChanged';

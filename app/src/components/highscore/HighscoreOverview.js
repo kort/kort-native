@@ -6,7 +6,8 @@ import {
 import SegmentedControlTab from 'react-native-segmented-control-tab';
 import HighscoreList from './HighscoreList';
 import { connect } from 'react-redux';
-import { tabChanged } from '../../actions/HighscoreActions';
+import { tabChanged, clearErrorMsg } from '../../actions/HighscoreActions';
+import { Spinner, Popup } from '../common';
 
 class HighscoreOverview extends Component {
 
@@ -14,20 +15,42 @@ class HighscoreOverview extends Component {
         this.props.tabChanged(index);
     }
 
+    renderSpinner() {
+        if (this.props.downloading) {
+            return (
+                <Spinner
+                    size='large'
+                    style={styles.spinnerStyle}
+                />
+            );
+        }
+        return null;
+    }
+
+    onInfoAccept() {
+        this.props.clearErrorMsg();
+    }
+
     render() {
         return (
             <View style={styles.bgColor} >
-                    <SegmentedControlTab
+                {this.renderSpinner()}
+                <SegmentedControlTab
                     tabsContainerStyle={styles.tabsContainerStyle}
                     tabStyle={styles.tabStyle}
                     activeTabStyle={styles.activeTabStyle}
                     tabTextStyle={styles.tabTextStyle}
                     values={tabCategories}
                     onTabPress={index => this.changeTab(index)}
-                    />
-                    <HighscoreList 
-                        style={styles.listStyle} 
-                    />
+                />
+                <HighscoreList 
+                    style={styles.listStyle} 
+                />
+                <Popup
+                        visible={this.props.errorMsg !== null}
+                        onAccept={this.onInfoAccept.bind(this)}
+                        message='There was an error connecting to the server. Check your connectivity.'
+                />
             </View>
         );
     }
@@ -64,7 +87,21 @@ const styles = {
     listStyle: {
         flex: 1,
 
+    },
+    spinnerStyle: {
+        position: 'absolute', 
+        top: 0, 
+        left: 0, 
+        right: 0, 
+        bottom: 0, 
+        justifyContent: 'center', 
+        alignItems: 'center'
     }
 };
 
-export default connect(null, { tabChanged })(HighscoreOverview);
+const mapStateToProps = ({ highscoreReducer }) => {
+    const { downloading, errorMsg } = highscoreReducer;
+    return { downloading, errorMsg };
+};
+
+export default connect(mapStateToProps, { tabChanged, clearErrorMsg })(HighscoreOverview);

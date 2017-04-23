@@ -11,18 +11,18 @@ import HighscoreListItem from './HighscoreListItem';
 class HighscoreList extends Component {
     
      componentWillMount() {
-        this.props.downloadHighscore(this.props.currentTab);
+        this.props.downloadHighscore(this.props.currentTab, false);
     }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.currentTab !== this.props.currentTab) {
-            this.props.downloadHighscore(nextProps.currentTab);
+            this.props.downloadHighscore(nextProps.currentTab, false);
             this.scrollview.scrollTo({ x: 0, y: 0, animated: true });
         }
     }
 
     onRefresh() {
-        this.props.downloadHighscore(this.props.currentTab);
+        this.props.downloadHighscore(this.props.currentTab, true);
     }
 
     scrollview = null;    
