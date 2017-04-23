@@ -20,6 +20,7 @@ export const ANSWER_SET = 'answer_set';
 export const MISSIONS_DOWNLOAD = 'missions_download';
 export const MISSIONS_DOWNLOADED_SUCCESS = 'missions_downloaded_success';
 export const MISSIONS_DOWNLOADED_ERROR = 'missions_downloaded_error';
+export const CLEAR_ERROR_MSG = 'clear_error_msg';
 export const START_MISSION = 'start_mission';
 
 export const GET_ACHIEVEMENTS = 'get_achievements';

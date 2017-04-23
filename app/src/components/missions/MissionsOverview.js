@@ -7,13 +7,15 @@ import Map from './Map';
 import MissionSolver from './MissionSolver';
 import MissionView from './MissionView';
 import { Spinner, Popup } from '../common';
+import { clearErrorMsg } from '../../actions/MissionActions';
 
 class MissionsOverview extends Component {
 
-    state = { gpsModalShowed: false, missionActive: false };
+    state = { showModal: false, missionActive: false };
 
     onInfoAccept() {
-        this.setState({ gpsModalShowed: true });
+        this.setState({ showModal: false });
+        this.props.clearErrorMsg();
     }
 
     onOpenAnnotation() {
@@ -59,10 +61,15 @@ class MissionsOverview extends Component {
                 {this.renderSpinner()}
                 {this.renderMission()}
                 <Popup
-                        visible={this.props.accuracyThresholdReached && !this.state.gpsModalShowed}
+                        visible={this.props.accuracyThresholdReached && !this.state.showModal}
                         onAccept={this.onInfoAccept.bind(this)}
                         message='Your GPS signal is bad. Get outdoors.'
-                />       
+                />  
+                <Popup
+                        visible={this.props.errorMsg !== null && !this.state.showModal}
+                        onAccept={this.onInfoAccept.bind(this)}
+                        message='There was an error connecting to the server. Check your connectivity.'
+                />     
              </View>
         );
     }
@@ -89,9 +96,9 @@ const styles = {
 
 const mapStateToProps = ({ mapReducer, missionReducer }) => {
     const { mapModeFullScreen, accuracyThresholdReached } = mapReducer;
-    const { missionsLoading } = missionReducer;
-    return { mapModeFullScreen, accuracyThresholdReached, missionsLoading };
+    const { missionsLoading, errorMsg } = missionReducer;
+    return { mapModeFullScreen, accuracyThresholdReached, missionsLoading, errorMsg };
 };
 
 
-export default connect(mapStateToProps, {})(MissionsOverview);
+export default connect(mapStateToProps, { clearErrorMsg })(MissionsOverview);

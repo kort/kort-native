@@ -2,6 +2,7 @@ import {
     MISSIONS_DOWNLOAD,
     MISSIONS_DOWNLOADED_SUCCESS,
     MISSIONS_DOWNLOADED_ERROR,
+    CLEAR_ERROR_MSG,
     START_MISSION
  } from '../actions/types';
 import Config from '../constants/Config';
@@ -11,7 +12,8 @@ const INITIAL_STATE = {
     missionAnnotations: [],
     missionsData: [],
     missionsLoading: false,
-    coordsOfDownload: { latitude: 0, longitude: 0 }
+    coordsOfDownload: { latitude: 0, longitude: 0 },
+    errorMsg: null
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -19,7 +21,7 @@ export default (state = INITIAL_STATE, action) => {
         case MISSIONS_DOWNLOAD:
             return { ...state, missionsLoading: true };        
         case MISSIONS_DOWNLOADED_ERROR:
-            return { ...state, missionsLoading: false };
+            return { ...state, missionsLoading: false, errorMsg: action.payload };
         case MISSIONS_DOWNLOADED_SUCCESS:
             return { ...state, 
                 missionsLoading: false, 
@@ -30,6 +32,8 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, 
                 activeMission: action.payload[0], 
                 missionAnnotations: createMissionAnnotations(action.payload[1], action.payload[2]) };
+        case CLEAR_ERROR_MSG:
+            return { ...state, errorMsg: null };  
         default:
             return state;
     }

@@ -27,7 +27,7 @@ class Map extends Component {
     componentWillReceiveProps(nextProps) {
         //fetch missions if location has changed
         if (nextProps.currentLocation.coords) {
-            if (!this.props.missionsLoading && CoordinateCalculations.calculateDistance(this.props.coordsOfDownload, nextProps.currentLocation.coords) 
+            if (!this.props.missionsLoading && this.props.errorMsg === null && CoordinateCalculations.calculateDistance(this.props.coordsOfDownload, nextProps.currentLocation.coords) 
             > Config.DISTANCE_DIFF_IN_M_FOR_MISSION_FETCHING) {
                 this.props.downloadMissions(nextProps.currentLocation.coords, Config.RADIUS_IN_M_FOR_MISSION_FETCHING); 
             }
@@ -198,12 +198,10 @@ const styles = {
 };
 
 const mapStateToProps = ({ mapReducer, missionReducer, settingsReducer }) => {
-    console.log('settings red', settingsReducer);
-    console.log(missionReducer);
     const { mapModeFullScreen, currentLocation } = mapReducer;
-    const { missionAnnotations, activeMission, missionsData, missionsLoading, coordsOfDownload } = missionReducer;
+    const { missionAnnotations, activeMission, missionsData, missionsLoading, coordsOfDownload, errorMsg } = missionReducer;
     const { stats, mapRotation } = settingsReducer;
-    return { mapModeFullScreen, currentLocation, missionAnnotations, activeMission, missionsData, missionsLoading, coordsOfDownload, stats, mapRotation };
+    return { mapModeFullScreen, currentLocation, missionAnnotations, activeMission, missionsData, missionsLoading, coordsOfDownload, errorMsg, stats, mapRotation };
 };
 
 

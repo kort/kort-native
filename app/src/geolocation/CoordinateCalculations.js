@@ -6,6 +6,7 @@ class CoordinateCalculations
     /**
      * calculates distance between two point objects 
      * {latitude, longitude} and returns value in m
+     *  inspired by http://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula
      */
    static calculateDistance = (p1, p2) => {
         const p = 0.017453292519943295;    // Math.PI / 180
