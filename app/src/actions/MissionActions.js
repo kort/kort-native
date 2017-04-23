@@ -3,7 +3,7 @@ import {
     MISSIONS_DOWNLOAD,
     MISSIONS_DOWNLOADED_SUCCESS,
     MISSIONS_DOWNLOADED_ERROR,
-    CLEAR_ERROR_MSG,
+    MISSIONS_CLEAR_ERROR_MSG,
     START_MISSION
 } from './types';
 import KortAPI from '../data/KortAPI';
@@ -39,7 +39,7 @@ export const startMission = (data, id) => {
 
 export const clearErrorMsg = () => {
     return {
-        type: CLEAR_ERROR_MSG,
+        type: MISSIONS_CLEAR_ERROR_MSG,
         payload: null
     };
 };

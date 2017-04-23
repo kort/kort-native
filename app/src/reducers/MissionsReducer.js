@@ -2,7 +2,7 @@ import {
     MISSIONS_DOWNLOAD,
     MISSIONS_DOWNLOADED_SUCCESS,
     MISSIONS_DOWNLOADED_ERROR,
-    CLEAR_ERROR_MSG,
+    MISSIONS_CLEAR_ERROR_MSG,
     START_MISSION
  } from '../actions/types';
 import Config from '../constants/Config';
@@ -32,7 +32,7 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, 
                 activeMission: action.payload[0], 
                 missionAnnotations: createMissionAnnotations(action.payload[1], action.payload[2]) };
-        case CLEAR_ERROR_MSG:
+        case MISSIONS_CLEAR_ERROR_MSG:
             return { ...state, errorMsg: null };  
         default:
             return state;
