@@ -15,6 +15,9 @@ class MissionsOverview extends Component {
 
     onInfoAccept() {
         this.setState({ showModal: false });
+    }
+
+    onAccept() {
         this.props.clearErrorMsg();
     }
 
@@ -66,8 +69,8 @@ class MissionsOverview extends Component {
                         message='Your GPS signal is bad. Get outdoors.'
                 />  
                 <Popup
-                        visible={this.props.errorMsg !== null && !this.state.showModal}
-                        onAccept={this.onInfoAccept.bind(this)}
+                        visible={this.props.errorMsg !== null}
+                        onAccept={this.onAccept.bind(this)}
                         message='There was an error connecting to the server. Check your connectivity.'
                 />     
              </View>
