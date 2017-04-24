@@ -4,12 +4,12 @@ import {
 } from 'react-native';
 import { Spinner } from '../common';
 
-const ModalSpinner = ({ hideModal, visible }) => {
+const ModalSpinner = ({ hideModal, visible, animate }) => {
     return (
         <Modal
             visible={visible}
             transparent
-            animationType='fade'
+            animationType={animate ? 'fade' : 'none'}
             onRequestClose={() => hideModal()}
         >
             <Spinner style={styles.spinnerStyle} />

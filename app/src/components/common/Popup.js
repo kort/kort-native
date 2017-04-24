@@ -8,8 +8,6 @@ import {
  import { Button } from './Button';
 
  class Popup extends Component {
-
-//  ({ children, imageURI, visible, onAccept, confirm }) =>
         
     renderConfirmButton() {
         if (this.props.confirm) {
