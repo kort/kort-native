@@ -7,7 +7,8 @@ import KortAPI from '../data/KortAPI';
 import { 
     LOGIN_USER,
     LOGIN_USER_SUCCESS,
-    LOGIN_USER_FAIL,
+    LOGIN_USER_FAILED,
+    LOGIN_USER_CLEAR_ERROR_MSG,
     LOGOUT_USER,
     VERIFY_GOOGLE_TOKEN_ID,
     SECRET_RECEIVED,
@@ -30,9 +31,8 @@ const loginUserSuccess = (dispatch, user, popToMissions) => {
 };
 
 const loginUserFail = (dispatch, errorMsg) => {
-    console.log(errorMsg);
     dispatch({
-        type: LOGIN_USER_FAIL,
+        type: LOGIN_USER_FAILED,
         payload: errorMsg
     });
 };
@@ -45,7 +45,7 @@ export const loginUser = (dispatch, user, popToMissions) => {
             console.log('resp', response);
         })
         .catch(errorMsg => {
-                console.log(errorMsg);
+            loginUserFail(dispatch, errorMsg);
         });
 };
 
@@ -127,5 +127,12 @@ export const loginUserSilently = (user) => {
         dispatch({ type: LOGIN_USER });
         console.log('login user silently');
         loginUser(dispatch, user, false);
+    };
+};
+
+export const clearErrorMsg = () => {
+    return {
+        type: LOGIN_USER_CLEAR_ERROR_MSG,
+        payload: null
     };
 };

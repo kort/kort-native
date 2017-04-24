@@ -2,6 +2,7 @@ export const LOGOUT_USER = 'logout_user';
 export const LOGIN_USER = 'login_user';
 export const LOGIN_USER_SUCCESS = 'login_user_success';
 export const LOGIN_USER_FAILED = 'login_user_failed';
+export const LOGIN_USER_CLEAR_ERROR_MSG = 'login_clear_error_msg';
 
 export const SHOW_WEBVIEW = 'show_webview';
 export const VERIFY_GOOGLE_TOKEN_ID = 'verify_google_token_id';

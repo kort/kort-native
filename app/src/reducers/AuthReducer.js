@@ -2,6 +2,7 @@ import {
     LOGIN_USER,
     LOGIN_USER_SUCCESS,
     LOGIN_USER_FAILED,
+    LOGIN_USER_CLEAR_ERROR_MSG,
     LOGOUT_USER,
     SHOW_WEBVIEW,
     VERIFY_GOOGLE_TOKEN_ID,
@@ -14,7 +15,8 @@ const INITIAL_STATE = {
     showConfirm: false,
     loading: false,
     webviewURI: '',
-    user: {}
+    user: {},
+    errorMsg: null
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -36,7 +38,10 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state,
                      loading: false,
                      loggedIn: false,
+                     errorMsg: action.payload
                  };
+        case LOGIN_USER_CLEAR_ERROR_MSG:
+            return { ...state, errorMsg: null }; 
         case SHOW_WEBVIEW: 
             return { ...state, webviewURI: action.payload };
         case VERIFY_GOOGLE_TOKEN_ID: 

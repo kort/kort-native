@@ -6,10 +6,10 @@ import {
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux'; 
 import { GoogleSignin } from 'react-native-google-signin';
-import { ModalSpinner, ModalWebView } from '../common';
+import { ModalSpinner, ModalWebView, Popup } from '../common';
 import LoginButtons from './LoginButtons';
 import Config from '../../constants/Config';
-import { loginUser, showWebView, verifyGoogleIdToken, parseURL } from '../../actions/AuthActions';
+import { loginUser, showWebView, verifyGoogleIdToken, parseURL, clearErrorMsg } from '../../actions/AuthActions';
 
 class LoginBox extends Component {
 
@@ -29,6 +29,10 @@ class LoginBox extends Component {
 
     componentWillUnmount() {
         Linking.removeEventListener('url', this.appWokeUp);
+    }
+
+    onAccept() {
+        this.props.clearErrorMsg();
     }
 
     onWebViewError(errorDomain, errorCode, errorDesc) {
@@ -115,17 +119,21 @@ class LoginBox extends Component {
                             this.onWebViewError(errorDomain, errorCode, errorDesc)} 
                         onRequestClose={() => this.hideModal()}
                         visible={this.props.webviewURI !== ''} 
-                />           
+                />    
+                <Popup
+                        visible={this.props.errorMsg !== null}
+                        onAccept={this.onAccept.bind(this)}
+                        message='There was an error connecting to the server. Check your connectivity.'
+                />       
             </View>
         );
     }
 }
 
 const mapStateToProps = ({ authReducer }) => {
-    console.log(authReducer);
-    const { loggedIn, loading, webviewURI } = authReducer;
-    return { loggedIn, loading, webviewURI };
+    const { loggedIn, loading, webviewURI, errorMsg } = authReducer;
+    return { loggedIn, loading, webviewURI, errorMsg };
 };
 
 export default connect(mapStateToProps, { 
-    loginUser, showWebView, verifyGoogleIdToken, parseURL })(LoginBox);
+    loginUser, showWebView, verifyGoogleIdToken, parseURL, clearErrorMsg })(LoginBox);
