@@ -17,7 +17,7 @@ import {
 } from './types';
 import Config from '../constants/Config'; 
 
-const loginUserSuccess = (dispatch, user, popToMissions) => {
+const loginUserSuccess = (dispatch, user) => {
     console.log('user login', user);
     store.update(USER, user);
 
@@ -25,9 +25,8 @@ const loginUserSuccess = (dispatch, user, popToMissions) => {
         type: LOGIN_USER_SUCCESS,
         payload: user 
     });  
-    if (popToMissions) {
-        Actions.root();
-    }
+
+    Actions.root();
 };
 
 const loginUserFail = (dispatch, errorMsg) => {
@@ -37,11 +36,11 @@ const loginUserFail = (dispatch, errorMsg) => {
     });
 };
 
-export const loginUser = (dispatch, user, popToMissions) => {
+export const loginUser = (dispatch, user) => {
         const apiSecure = new KortAPI(user.secret);
         apiSecure.getUserinfo(user.id)
         .then(response => {
-            loginUserSuccess(dispatch, response, popToMissions);
+            loginUserSuccess(dispatch, response);
             console.log('resp', response);
         })
         .catch(errorMsg => {
@@ -81,12 +80,12 @@ export const secretReceived = (dispatch, user) => {
             type: SECRET_RECEIVED,
             payload: user
         });
-        loginUser(dispatch, user, true);
+        loginUser(dispatch, user);
 };
 
 export const updateUser = (user) => {
     return (dispatch) => {  
-        loginUser(dispatch, user, false);
+        loginUser(dispatch, user);
     };
 };
 
@@ -125,8 +124,7 @@ export const parseURL = (url) => {
 export const loginUserSilently = (user) => {
     return (dispatch) => {
         dispatch({ type: LOGIN_USER });
-        console.log('login user silently');
-        loginUser(dispatch, user, false);
+        loginUser(dispatch, user);
     };
 };
 

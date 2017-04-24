@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { 
     View
  } from 'react-native';
-import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import LoginBox from './LoginBox';
 import AppLoader from '../../AppLoader';
@@ -13,7 +12,6 @@ class LoginOverview extends Component {
         if (this.props.loggedIn == null) {
             return <AppLoader />;
         } else if (this.props.loggedIn) {
-            Actions.root();
             return null;
         }
         return (
