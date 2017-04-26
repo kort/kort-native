@@ -37,3 +37,4 @@ export const TAB_CHANGED = 'tab_changed';
 
 export const MAP_ROTATION_CHANGED = 'mapRotationChanged';
 export const STATS_CHANGED = 'statsChanged';
+export const APP_SETTINGS_LOADED = 'app_settings_loaded';

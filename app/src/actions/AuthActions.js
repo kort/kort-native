@@ -122,6 +122,7 @@ export const parseURL = (url) => {
 };
 
 export const loginUserSilently = (user) => {
+    console.log('login user silently');
     return (dispatch) => {
         dispatch({ type: LOGIN_USER });
         loginUser(dispatch, user);
