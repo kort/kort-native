@@ -13,6 +13,7 @@ import { Input,
         Button,
         KortCoin,
         Popup } from '../common';
+import OpeningHours from './OpeningHours';
 
 class MissionSolver extends Component {
 
@@ -104,6 +105,11 @@ class MissionSolver extends Component {
     }
 
     renderAnswerSelection() {
+        //TODO handle different types of mission in a nicer way
+        if (this.props.activeMission.type === 'mission_opening_hours') {
+            return <OpeningHours />;
+        }
+
         if (!_.isEmpty(this.props.activeMission.inputType.options)) {
             const options = _.map(this.props.activeMission.inputType.options, 
                 (item, index) => { return { value: index, name: item }; });
