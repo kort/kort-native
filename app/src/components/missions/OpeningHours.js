@@ -3,27 +3,47 @@ import {
     View,
     Text,
     TouchableOpacity,
+    TouchableWithoutFeedback,
     Modal
 } from 'react-native';
+import _ from 'lodash';
 import DateTimePicker from 'react-native-modal-datetime-picker';
-import SelectMultiple from 'react-native-select-multiple'
-
-const days = ['Monday', 'Tuesday', 'Wednesday','Thursday','Friday','Saturday','Sunday'];
+import SelectMultiple from 'react-native-select-multiple';
+import abbrevDays from 'abbrev-weekday-range';
+import OpeningHoursRepresentation from '../../date/OpeningHoursRepresentation';
+const days = [
+    { value: 0, label: 'Monday' },
+    { value: 1, label: 'Tuesday' },
+    { value: 2, label: 'Wednesday' },
+    { value: 3, label: 'Thursday' },
+    { value: 4, label: 'Friday' },
+    { value: 5, label: 'Saturday' },
+    { value: 6, label: 'Sunday' }
+];
 
 
 class OpeningHours extends Component {
 
     state = {
         isDateTimePickerVisible: false,
-        modalVisible: false
+        modalVisible: false,
+        fromTime: 'From',
+        toTime: 'To',
+        day: 'Days'
     };
  
     _showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
     
     _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
-    
-    _handleDatePicked = (date) => {
-        console.log('A date has been picked: ', date);
+
+    _handleDatePickedFrom = (date) => {
+        this.setState({ fromTime: `${date.getHours()} : ${date.getMinutes()}` });
+        this._hideDateTimePicker();
+    };
+
+    _handleDatePickedTo = (date) => {
+        console.log(date, this.state.toTime);
+        this.setState({ toTime: `${date.getHours()} : ${date.getMinutes()}` });
         this._hideDateTimePicker();
     };
 
@@ -37,11 +57,28 @@ class OpeningHours extends Component {
     this.setState({ selectedDays });
   }
 
+  renderSelectedDays() {
+      let daysToShow = _(this.state.selectedDays)
+        .map('value')
+        .value();
+              console.log(this.state.selectedDays, daysToShow);
+
+        let daysDisplay = '';
+        if (_.isEmpty(daysToShow)) {
+            daysDisplay = 'Days';
+        } else {
+            daysDisplay = OpeningHoursRepresentation(daysToShow);
+        }
+        return (
+            <Text>{daysDisplay}</Text>
+        );
+  };
+
     render() {
         return (
             <View style={{ flex: 1, flexDirection: 'row' }}>
                 <TouchableOpacity onPress={this._showModal}>
-                <Text>Days</Text>
+                    {this.renderSelectedDays()}
                 </TouchableOpacity>
                 <Modal
                     visible={this.state.modalVisible}
@@ -49,6 +86,7 @@ class OpeningHours extends Component {
                     animationType='fade'
                     onRequestClose={() => {}}
                 >
+                                <TouchableWithoutFeedback onPress={() => this._hideModal()} >
                 <View style={styles.containerStyle}>
                     <View style={styles.optionsStyle}>
                     <SelectMultiple
@@ -56,32 +94,32 @@ class OpeningHours extends Component {
                         selectedItems={this.state.selectedDays}
                         onSelectionsChange={this.onSelectionsChange}
                     />
-                    <TouchableOpacity onPress={this._hideModal}>
-                        <Text>OK</Text>
-                    </TouchableOpacity>
                     </View>
                 </View>
+                                </TouchableWithoutFeedback>
+
             </Modal>              
                 <TouchableOpacity onPress={this._showDateTimePicker}>
-                <Text>From</Text>
-                </TouchableOpacity>
+                <Text>{this.state.fromTime}</Text>
                 <DateTimePicker
-                isVisible={this.state.isDateTimePickerVisible}
-                onConfirm={this._handleDatePicked}
-                onCancel={this._hideDateTimePicker}
-                mode='time'
-                titleIOS='From'
+                    isVisible={this.state.isDateTimePickerVisible}
+                    onConfirm={this._handleDatePickedFrom}
+                    onCancel={this._hideDateTimePicker}
+                    mode='time'
+                    titleIOS='From'
                 />
+                </TouchableOpacity>
+                <Text> - </Text>
                 <TouchableOpacity onPress={this._showDateTimePicker}>
-                <Text>To</Text>
-                </TouchableOpacity>
                 <DateTimePicker
-                isVisible={this.state.isDateTimePickerVisible}
-                onConfirm={this._handleDatePicked}
-                onCancel={this._hideDateTimePicker}
-                mode='time'
-                titleIOS='To'
+                    isVisible={this.state.isDateTimePickerVisible}
+                    onConfirm={this._handleDatePickedTo}
+                    onCancel={this._hideDateTimePicker}
+                    mode='time'
+                    titleIOS='To'
                 />
+                <Text>{this.state.toTime}</Text>
+                </TouchableOpacity>
             </View>
         );
     }
@@ -103,8 +141,8 @@ const styles = {
          justifyContent: 'center'
      },
      optionsStyle: {
-         height: 300
-     }
+         height: 400
+     },
 };
 
 export default (OpeningHours);
