@@ -7,10 +7,10 @@ import {
     Modal
 } from 'react-native';
 import _ from 'lodash';
-import DateTimePicker from 'react-native-modal-datetime-picker';
 import SelectMultiple from 'react-native-select-multiple';
-import abbrevDays from 'abbrev-weekday-range';
 import OpeningHoursRepresentation from '../../date/OpeningHoursRepresentation';
+import { TimeRangeSelection } from '../common';
+
 const days = [
     { value: 0, label: 'Monday' },
     { value: 1, label: 'Tuesday' },
@@ -31,37 +31,18 @@ class OpeningHours extends Component {
         toTime: 'To',
         day: 'Days'
     };
- 
-    _showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
-    
-    _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
-
-    _handleDatePickedFrom = (date) => {
-        this.setState({ fromTime: `${date.getHours()} : ${date.getMinutes()}` });
-        this._hideDateTimePicker();
-    };
-
-    _handleDatePickedTo = (date) => {
-        console.log(date, this.state.toTime);
-        this.setState({ toTime: `${date.getHours()} : ${date.getMinutes()}` });
-        this._hideDateTimePicker();
-    };
-
-    _showModal = () => this.setState({ modalVisible: true });
-
-    _hideModal = () => this.setState({ modalVisible: false });
-
 
     onSelectionsChange = (selectedDays) => {
-    // selectedFruits is array of { label, value } 
-    this.setState({ selectedDays });
-  }
+        this.setState({ selectedDays });
+    }
+
+    showModal = () => this.setState({ modalVisible: true });
+    hideModal = () => this.setState({ modalVisible: false });
 
   renderSelectedDays() {
-      let daysToShow = _(this.state.selectedDays)
+      const daysToShow = _(this.state.selectedDays)
         .map('value')
         .value();
-              console.log(this.state.selectedDays, daysToShow);
 
         let daysDisplay = '';
         if (_.isEmpty(daysToShow)) {
@@ -72,12 +53,12 @@ class OpeningHours extends Component {
         return (
             <Text>{daysDisplay}</Text>
         );
-  };
+  }
 
     render() {
         return (
             <View style={{ flex: 1, flexDirection: 'row' }}>
-                <TouchableOpacity onPress={this._showModal}>
+                <TouchableOpacity onPress={this.showModal}>
                     {this.renderSelectedDays()}
                 </TouchableOpacity>
                 <Modal
@@ -86,7 +67,7 @@ class OpeningHours extends Component {
                     animationType='fade'
                     onRequestClose={() => {}}
                 >
-                                <TouchableWithoutFeedback onPress={() => this._hideModal()} >
+                                <TouchableWithoutFeedback onPress={() => this.hideModal()} >
                 <View style={styles.containerStyle}>
                     <View style={styles.optionsStyle}>
                     <SelectMultiple
@@ -98,28 +79,8 @@ class OpeningHours extends Component {
                 </View>
                                 </TouchableWithoutFeedback>
 
-            </Modal>              
-                <TouchableOpacity onPress={this._showDateTimePicker}>
-                <Text>{this.state.fromTime}</Text>
-                <DateTimePicker
-                    isVisible={this.state.isDateTimePickerVisible}
-                    onConfirm={this._handleDatePickedFrom}
-                    onCancel={this._hideDateTimePicker}
-                    mode='time'
-                    titleIOS='From'
-                />
-                </TouchableOpacity>
-                <Text> - </Text>
-                <TouchableOpacity onPress={this._showDateTimePicker}>
-                <DateTimePicker
-                    isVisible={this.state.isDateTimePickerVisible}
-                    onConfirm={this._handleDatePickedTo}
-                    onCancel={this._hideDateTimePicker}
-                    mode='time'
-                    titleIOS='To'
-                />
-                <Text>{this.state.toTime}</Text>
-                </TouchableOpacity>
+            </Modal>  
+                <TimeRangeSelection />            
             </View>
         );
     }
