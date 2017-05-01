@@ -19,7 +19,7 @@ function generateBoolArray(weekdays) {
     }
     return boolArray;
 }
-
+    
 function handleWeekdayRange(weekdays) {
     const boolArray = generateBoolArray(weekdays);
 

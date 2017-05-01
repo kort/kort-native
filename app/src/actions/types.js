@@ -38,3 +38,10 @@ export const TAB_CHANGED = 'tab_changed';
 export const MAP_ROTATION_CHANGED = 'mapRotationChanged';
 export const STATS_CHANGED = 'statsChanged';
 export const APP_SETTINGS_LOADED = 'app_settings_loaded';
+
+export const SHOW_FROM_TIME_MODAL = 'show_from_time_modal';
+export const SHOW_TO_TIME_MODAL = 'show_to_time_modal';
+export const SHOW_DAYS_SELECTION_MODAL = 'show_days_modal';
+export const FROM_TIME = 'from_time';
+export const TO_TIME = 'to_time';
+export const DAYS = 'days';

@@ -13,7 +13,7 @@ import { Input,
         Button,
         KortCoin,
         Popup } from '../common';
-import OpeningHours from './OpeningHours';
+import OpeningHours from './types/OpeningHours';
 
 class MissionSolver extends Component {
 

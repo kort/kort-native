@@ -11,4 +11,3 @@ export * from './KortCoin';
 export * from './CustomSelectionView';
 export * from './CustomKeyboardAvoidingView';
 export * from './CustomSlidingView';
-export * from './TimeRangeSelection';

@@ -3,6 +3,7 @@ import AuthReducer from './AuthReducer';
 import MissionsReducer from './MissionsReducer';
 import MapReducer from './MapReducer';
 import AnswerReducer from './AnswerReducer';
+import OpeningHoursReducer from './OpeningHoursReducer';
 import AchievementsReducer from './AchievementsReducer';
 import HighscoreReducer from './HighscoreReducer';
 import SettingsReducer from './SettingsReducer';
@@ -12,6 +13,7 @@ export default combineReducers({
     missionReducer: MissionsReducer,
     mapReducer: MapReducer,
     answerReducer: AnswerReducer,
+    openingHoursReducer: OpeningHoursReducer,
     achievementsReducer: AchievementsReducer,
     highscoreReducer: HighscoreReducer,
     settingsReducer: SettingsReducer

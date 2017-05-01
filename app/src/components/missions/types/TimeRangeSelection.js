@@ -4,56 +4,34 @@ import {
     TouchableOpacity,
     Text
 } from 'react-native';
+import { connect } from 'react-redux';
 import DateTimePicker from 'react-native-modal-datetime-picker';
+import { setFromTime, 
+    setToTime, showFromTimeModal, showToTimeModal } from '../../../actions/OpeningHoursActions';
 
-/**
- * props: onPress, onConfirmFrom, onConfirmTo, onCancel, fromText, toText
- * 
- */
  class TimeRangeSelection extends Component {
 
-    state = {
-        isFromDateTimePickerVisible: false,
-        isToDateTimePickerVisible: false,
-        fromTime: 'From',
-        toTime: 'To',
-    };
-
     handleDatePickedFrom = (date) => {
-        this.setState({ fromTime: `${date.getHours()} : ${date.getMinutes()}` });
-        this.setState({ isFromDateTimePickerVisible: false });    
+        this.props.setFromTime(`${date.getHours()} : ${date.getMinutes()}`);
     };
 
     handleDatePickedTo = (date) => {
-        console.log(date, this.state.toTime);
-        this.setState({ toTime: `${date.getHours()} : ${date.getMinutes()}` });
-        this.setState({ isToDateTimePickerVisible: false });   
+        this.props.setToTime(`${date.getHours()} : ${date.getMinutes()}`);  
     };
 
-    showFromModal() {
-        this.setState({ isFromDateTimePickerVisible: true });    
-    }
-
-    showToModal() {
-        this.setState({ isToDateTimePickerVisible: true });    
-    }
-
-    hideFromModal() {
-        this.setState({ isFromDateTimePickerVisible: false });    
-    }
-
-    hideToModal() {
-        this.setState({ isToDateTimePickerVisible: false });    
-    }
+    showFromModal = () => this.props.showFromTimeModal(true);
+    showToModal = () => this.props.showToTimeModal(true);
+    hideFromModal = () => this.props.showFromTimeModal(false);
+    hideToModal = () => this.props.showToTimeModal(false);
 
     render() {
         const { containerStyle } = styles;
         return (
         <View style={containerStyle}>
             <TouchableOpacity onPress={this.showFromModal.bind(this)} style={styles.redStyle}>
-                <Text>{this.state.fromTime}</Text>
+                <Text>{this.props.fromTime}</Text>
                 <DateTimePicker
-                    isVisible={this.state.isFromDateTimePickerVisible}
+                    isVisible={this.props.fromTimeModalVisible}
                     onConfirm={this.handleDatePickedFrom.bind(this)}
                     onCancel={this.hideFromModal.bind(this)}
                     mode='time'
@@ -63,13 +41,13 @@ import DateTimePicker from 'react-native-modal-datetime-picker';
                 <Text> - </Text>
                 <TouchableOpacity onPress={this.showToModal.bind(this)}>
                 <DateTimePicker
-                    isVisible={this.state.isToDateTimePickerVisible}
+                    isVisible={this.props.toTimeModalVisible}
                     onConfirm={this.handleDatePickedTo.bind(this)}
                     onCancel={this.hideToModal.bind(this)}
                     mode='time'
                     titleIOS='To'
                 />
-                <Text>{this.state.toTime}</Text>
+                <Text>{this.props.toTime}</Text>
                 </TouchableOpacity>
         </View>
     );
@@ -88,4 +66,10 @@ const styles = {
     }
 };
 
-export { TimeRangeSelection };
+const mapStateToProps = ({ openingHoursReducer }) => {
+    const { fromTimeModalVisible, toTimeModalVisible, fromTime, toTime } = openingHoursReducer;
+    return { fromTimeModalVisible, toTimeModalVisible, fromTime, toTime };
+};
+
+export default connect(mapStateToProps, 
+{ setFromTime, setToTime, showFromTimeModal, showToTimeModal })(TimeRangeSelection);
