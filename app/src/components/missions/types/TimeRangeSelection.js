@@ -12,11 +12,11 @@ import { setFromTime,
  class TimeRangeSelection extends Component {
 
     handleDatePickedFrom = (date) => {
-        this.props.setFromTime(`${date.getHours()} : ${date.getMinutes()}`);
+        this.props.setFromTime(`${date.getHours()}:${date.getMinutes()}`);
     };
 
     handleDatePickedTo = (date) => {
-        this.props.setToTime(`${date.getHours()} : ${date.getMinutes()}`);  
+        this.props.setToTime(`${date.getHours()}:${date.getMinutes()}`);  
     };
 
     showFromModal = () => this.props.showFromTimeModal(true);
@@ -28,7 +28,7 @@ import { setFromTime,
         const { containerStyle } = styles;
         return (
         <View style={containerStyle}>
-            <TouchableOpacity onPress={this.showFromModal.bind(this)} style={styles.redStyle}>
+            <TouchableOpacity onPress={this.showFromModal.bind(this)}>
                 <Text>{this.props.fromTime}</Text>
                 <DateTimePicker
                     isVisible={this.props.fromTimeModalVisible}
@@ -38,7 +38,7 @@ import { setFromTime,
                     titleIOS='From'
                 />
                 </TouchableOpacity>
-                <Text> - </Text>
+                <Text>-</Text>
                 <TouchableOpacity onPress={this.showToModal.bind(this)}>
                 <DateTimePicker
                     isVisible={this.props.toTimeModalVisible}
@@ -55,14 +55,8 @@ import { setFromTime,
 }
 
 const styles = {
-    redStyle: {
-        backgroundColor: 'red'
-    },
     containerStyle: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        paddingBottom: 10,
-        paddingTop: 10
+        flexDirection: 'row'
     }
 };
 

@@ -7,7 +7,6 @@ import {
     TouchableOpacity
  } from 'react-native';
 import SelectMultiple from 'react-native-select-multiple';
-import _ from 'lodash';
 import { connect } from 'react-redux';
 import { showDaysSelectionModal, setDays } from '../../../actions/OpeningHoursActions';
 
@@ -52,9 +51,8 @@ import { showDaysSelectionModal, setDays } from '../../../actions/OpeningHoursAc
      containerStyle: {
          backgroundColor: 'rgba(0, 0, 0, 0.6)',
          position: 'relative',
-                 alignItems: 'center',
-        flex: 1,
-
+         alignItems: 'center',
+         flex: 1,
          justifyContent: 'center'
      },
      optionsStyle: {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
-    View
+    View,
+    Text
 } from 'react-native';
 import TimeRangeSelection from './TimeRangeSelection';
 import DaySelection from './DaySelection';
@@ -15,27 +16,71 @@ const days = [
     { value: 6, label: 'Sunday' }
 ];
 
-
 class OpeningHours extends Component {
 
     render() {
+        const { rowStyle, dayColStyle, deleteColStyle, timeColStyle } = styles;
         return (
             <View>
-                <DaySelection
+                {/*<DaySelection
                     options={days}
                 />
-                <TimeRangeSelection />            
+                <TimeRangeSelection />            */}
+                <View style={rowStyle}>
+                <View style={deleteColStyle}><Text>X</Text></View>
+                <View style={dayColStyle}>
+                    <DaySelection
+                    options={days}
+                    />
+                </View>
+                <View style={timeColStyle}>
+                    <TimeRangeSelection />
+                </View>
+                <View style={timeColStyle}>
+                    <TimeRangeSelection />
+                </View>
+                </View>
+                <View style={rowStyle}>
+                <View style={deleteColStyle}><Text>X</Text></View>
+                <View style={dayColStyle}><Text>Mo,Do,Fr,Su</Text></View>
+                <View style={timeColStyle}><Text>08:00-12:00</Text></View>
+                <View style={timeColStyle}><Text>+</Text></View>
+                </View>
+                <View style={rowStyle}>
+                <View style={deleteColStyle}><Text>X</Text></View>
+                <View style={dayColStyle}><Text>Mo,Do,Fr,Su</Text></View>
+                <View style={timeColStyle}><Text>08:00-12:00</Text></View>
+                <View style={timeColStyle}><Text>+</Text></View>
+                </View>
+                <View style={rowStyle}>
+                <View style={deleteColStyle}><Text>X</Text></View>
+                <View style={dayColStyle}><Text>Mo,Do,Fr,Su</Text></View>
+                <View style={timeColStyle}><Text>08:00-12:00</Text></View>
+                <View style={timeColStyle}><Text>+</Text></View>
+                </View>
             </View>
         );
     }
 }
 
 const styles = {
-    bgColor: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#395971',
-        flex: 1,
+    rowStyle: {
+        backgroundColor: 'red',
+        flexDirection: 'row',
+        paddingBottom: 2,
+        paddingTop: 2,
+    },
+    deleteColStyle: {
+        backgroundColor: 'green',
+        width: 30,
+    },
+    dayColStyle: {
+        backgroundColor: 'yellow',
+        width: 100
+    },
+    timeColStyle: {
+        backgroundColor: 'cyan',
+        width: 100
     }
 };
 
