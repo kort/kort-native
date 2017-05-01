@@ -30,7 +30,7 @@ export default (state = INITIAL_STATE, action) => {
             case TO_TIME:
             return { ...state, toTime: action.payload, toTimeModalVisible: false };
         case DAYS:
-            return { ...state, days: action.payload[0], formattedDays: action.payload[1] };
+            return { ...state, days: action.payload[0], formattedDays: action.payload[1] !== '' ? action.payload[1] : INITIAL_STATE.formattedDays };
         default:
             return state;
     }
