@@ -11,12 +11,20 @@ import { setFromTime,
 
  class TimeRangeSelection extends Component {
 
+    get2DigitMinutes = (date) => {
+        return (date.getMinutes() < 10 ? '0' : '') + date.getMinutes();
+    };
+
+    get2DigitHours = (date) => {
+        return (date.getHours() < 10 ? '0' : '') + date.getHours();
+    };
+
     handleDatePickedFrom = (date) => {
-        this.props.setFromTime(`${date.getHours()}:${date.getMinutes()}`);
+        this.props.setFromTime(`${this.get2DigitHours(date)}:${this.get2DigitMinutes(date)}`);
     };
 
     handleDatePickedTo = (date) => {
-        this.props.setToTime(`${date.getHours()}:${date.getMinutes()}`);  
+        this.props.setToTime(`${this.get2DigitHours(date)}:${this.get2DigitMinutes(date)}`);  
     };
 
     showFromModal = () => this.props.showFromTimeModal(true);
