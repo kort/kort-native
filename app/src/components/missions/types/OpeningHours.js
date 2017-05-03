@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import {
     View,
-    Text
+    Text,
+    ListView
 } from 'react-native';
+import { connect } from 'react-redux';
 import TimeRangeSelection from './TimeRangeSelection';
 import DaySelection from './DaySelection';
 import { ButtonWithIcon } from '../../common';
+import { showDaysSelectionModal, setDays, setFromTime, 
+    setToTime, showFromTimeModal, showToTimeModal, addNewEntry } from '../../../actions/OpeningHoursActions';
 
 const days = [
     { value: 0, label: 'Monday' },
@@ -19,11 +23,23 @@ const days = [
 
 class OpeningHours extends Component {
 
-    render() {
+    renderTimeRange(timeRangeData, row, col) {
+        return (
+            <View style={styles.timeColStyle}>
+                    <TimeRangeSelection
+                        data={timeRangeData}
+                        row={row}
+                        col={col}
+                    />
+                </View>
+        );
+    }
+
+    renderRow(rowData) {
+        console.log('row', rowData);
         const { rowStyle, dayColStyle, deleteColStyle, timeColStyle } = styles;
         return (
-            <View>
-                <View style={rowStyle}>
+            <View style={rowStyle}>
                     <View style={deleteColStyle}>
                         <ButtonWithIcon 
                             iconName='ios-remove-circle' 
@@ -33,74 +49,66 @@ class OpeningHours extends Component {
                     <View style={dayColStyle}>
                         <DaySelection
                         options={days}
+                        data={rowData}
                         />
                     </View>
-                    <View style={timeColStyle}>
-                        <TimeRangeSelection />
-                    </View>
-                    <View style={timeColStyle}>
-                        <TimeRangeSelection />
-                    </View>
-                    </View>
-                <View style={rowStyle}>
-                    <View style={deleteColStyle}>
-                        <ButtonWithIcon 
+                    {this.renderTimeRange(rowData.timeRangeEntries[0], rowData.row, 0)}
+                    {this.renderTimeRange(rowData.timeRangeEntries[1], rowData.row, 1)}
+                </View>
+        );
+    }
+
+    render() {
+        return (
+            
+            <View>
+            <ListView 
+                dataSource={this.props.dataSource}
+                renderRow={(rowData) => this.renderRow(rowData)}
+                enableEmptySections
+            /> 
+            <ButtonWithIcon 
                             iconName='ios-add-circle' 
-                            onPress={() => console.log('add')} 
+                            onPress={() => this.props.addNewEntry()} 
                         />
-                    </View>
-                    <View style={dayColStyle}><Text>Mo,Do,Fr,Su</Text></View>
-                    <View style={timeColStyle}><Text>08:00-12:00</Text></View>
-                    <View style={timeColStyle}>
-                        <ButtonWithIcon 
-                            iconName='ios-add-circle' 
-                            onPress={() => console.log('add')} 
-                        />
-                    </View>                   
-                </View>
-                <View style={rowStyle}>
-                <View style={deleteColStyle}><Text>X</Text></View>
-                <View style={dayColStyle}><Text>Mo,Do,Fr,Su</Text></View>
-                <View style={timeColStyle}><Text>08:00-12:00</Text></View>
-                <View style={timeColStyle}><Text>+</Text></View>
-                </View>
-                <View style={rowStyle}>
-                <View style={deleteColStyle}><Text>X</Text></View>
-                <View style={dayColStyle}><Text>Mo,Do,Fr,Su</Text></View>
-                <View style={timeColStyle}><Text>08:00-12:00</Text></View>
-                <View style={timeColStyle}><Text>+</Text></View>
-                </View>
             </View>
         );
     }
 }
 
+const dataSource = new ListView.DataSource({
+  rowHasChanged: (r1, r2) => r1 !== r2,
+});
+
 const styles = {
     rowStyle: {
-        backgroundColor: 'red',
         flexDirection: 'row',
         paddingBottom: 2,
         paddingTop: 2,
         height: 30
     },
     deleteColStyle: {
-        backgroundColor: 'green',
         width: 30,
         alignItems: 'center',
         justifyContent: 'center'
     },
     dayColStyle: {
-        backgroundColor: 'yellow',
         width: 100,
         alignItems: 'center',
         justifyContent: 'center'
     },
     timeColStyle: {
-        backgroundColor: 'cyan',
         width: 100,
         alignItems: 'center',
         justifyContent: 'center'
     }
 };
 
-export default (OpeningHours);
+const mapStateToProps = ({ openingHoursReducer }) => {
+    console.log('oh reducer', openingHoursReducer);
+    const { entries } = openingHoursReducer;
+    return { dataSource: dataSource.cloneWithRows(entries) };
+};
+
+export default connect(mapStateToProps, 
+{showDaysSelectionModal, setDays, setFromTime, setToTime, showFromTimeModal, showToTimeModal, addNewEntry })(OpeningHours);
