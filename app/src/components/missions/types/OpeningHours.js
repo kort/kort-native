@@ -11,16 +11,6 @@ import { ButtonWithIcon } from '../../common';
 import { showDaysSelectionModal, setDays, setFromTime, 
     setToTime, showFromTimeModal, showToTimeModal, addNewEntry, removeEntry, addNewTimeRange } from '../../../actions/OpeningHoursActions';
 
-const days = [
-    { value: 0, label: 'Monday' },
-    { value: 1, label: 'Tuesday' },
-    { value: 2, label: 'Wednesday' },
-    { value: 3, label: 'Thursday' },
-    { value: 4, label: 'Friday' },
-    { value: 5, label: 'Saturday' },
-    { value: 6, label: 'Sunday' }
-];
-
 class OpeningHours extends Component {
 
     renderTimeRange(timeRangeData, row, col) {
@@ -37,7 +27,7 @@ class OpeningHours extends Component {
 
     renderRow(rowData) {
         console.log('row', rowData);
-        const { rowStyle, dayColStyle, deleteColStyle, timeColStyle } = styles;
+        const { rowStyle, dayColStyle, deleteColStyle } = styles;
         return (
             <View style={rowStyle}>
                     <View style={deleteColStyle}>
@@ -48,7 +38,6 @@ class OpeningHours extends Component {
                     </View>
                     <View style={dayColStyle}>
                         <DaySelection
-                        options={days}
                         data={rowData}
                         />
                     </View>

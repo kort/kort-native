@@ -11,15 +11,17 @@ import SelectMultiple from 'react-native-select-multiple';
 import { showDaysSelectionModal, setDays } from '../../../actions/OpeningHoursActions';
 import { answerModalVisible } from '../../../actions/AnswerSelectionActions';
 
+const days = [
+    { value: 0, label: 'Monday' },
+    { value: 1, label: 'Tuesday' },
+    { value: 2, label: 'Wednesday' },
+    { value: 3, label: 'Thursday' },
+    { value: 4, label: 'Friday' },
+    { value: 5, label: 'Saturday' },
+    { value: 6, label: 'Sunday' }
+];
+
  class DaySelection extends Component {
-
-
-
-    // onSelectionsChange = (selectedDays) => {
-    //     this.props.setDays(selectedDays, 0);
-    // }
-    // showModal = () => this.props.showDaysSelectionModal(true);
-    // hideModal = () => this.props.showDaysSelectionModal(false);
 
     onSelectionsChange = (selectedDays) => {
         this.props.setDays(selectedDays, this.props.data.row);
@@ -35,7 +37,6 @@ import { answerModalVisible } from '../../../actions/AnswerSelectionActions';
     }
 
     render() {
-        console.log('days',this.props.data.days);
         return (
             <View>
                 <TouchableOpacity 
@@ -53,7 +54,7 @@ import { answerModalVisible } from '../../../actions/AnswerSelectionActions';
                 <View style={styles.containerStyle}>
                     <View style={styles.optionsStyle}>
                     <SelectMultiple
-                        items={this.props.options}
+                        items={days}
                         selectedItems={this.props.data.days}
                         onSelectionsChange={this.onSelectionsChange}
                     />
