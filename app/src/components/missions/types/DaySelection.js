@@ -34,7 +34,7 @@ import { showDaysSelectionModal, setDays } from '../../../actions/OpeningHoursAc
                 <TouchableOpacity 
                     onPress={this.showModal}
                 >
-                    <Text>{this.props.data.formattedDays ? this.props.data.formattedDays : 'Days'}</Text>
+                    <Text style={styles.textStyle}>{this.props.data.formattedDays ? this.props.data.formattedDays : 'Days'}</Text>
                 </TouchableOpacity>
                 <Modal
                     visible={this.props.data.daysSelectionModalVisible}
@@ -72,6 +72,10 @@ import { showDaysSelectionModal, setDays } from '../../../actions/OpeningHoursAc
      optionsStyle: {
          height: 400
      },
+     textStyle: {
+         color: 'white',
+         fontSize: 16
+     }
  };
 
 

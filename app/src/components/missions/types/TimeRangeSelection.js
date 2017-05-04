@@ -46,11 +46,11 @@ import { setFromTime,
 
     render() {
         console.log('time range data', this.props.data);
-        const { containerStyle } = styles;
+        const { containerStyle, textStyle } = styles;
         return (
         <View style={containerStyle}>
             <TouchableOpacity onPress={this.showFromModal.bind(this)}>
-                <Text>{this.props.data.fromTime}</Text>
+                <Text style={textStyle}>{this.props.data.fromTime}</Text>
                 <DateTimePicker
                     isVisible={this.props.data.fromTimeModalVisible}
                     onConfirm={this.handleDatePickedFrom.bind(this)}
@@ -59,7 +59,7 @@ import { setFromTime,
                     titleIOS='From'
                 />
                 </TouchableOpacity>
-                <Text>-</Text>
+                <Text style={textStyle}>-</Text>
                 <TouchableOpacity onPress={this.showToModal.bind(this)}>
                 <DateTimePicker
                     isVisible={this.props.data.toTimeModalVisible}
@@ -68,7 +68,7 @@ import { setFromTime,
                     mode='time'
                     titleIOS='To'
                 />
-                <Text>{this.props.data.toTime}</Text>
+                <Text style={textStyle}>{this.props.data.toTime}</Text>
                 </TouchableOpacity>
         </View>
     );
@@ -78,7 +78,11 @@ import { setFromTime,
 const styles = {
     containerStyle: {
         flexDirection: 'row'
-    }
+    },
+    textStyle: {
+         color: 'white',
+         fontSize: 16
+     }
 };
 
 export default connect(null, 

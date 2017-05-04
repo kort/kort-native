@@ -61,10 +61,12 @@ class OpeningHours extends Component {
     renderAddButtonOrTimeRange(timeRangeEntries, row) {
         if (timeRangeEntries.length === 1) {
             return (
-                <ButtonWithIcon 
-                            iconName='ios-add-circle' 
-                            onPress={() => this.props.addNewTimeRange(row)} 
-                />
+                 <View style={styles.timeColStyle}>
+                    <ButtonWithIcon 
+                                iconName='ios-add-circle' 
+                                onPress={() => this.props.addNewTimeRange(row)} 
+                    />
+                </View>
             );
         }
         return (
@@ -75,7 +77,7 @@ class OpeningHours extends Component {
     render() {
         return (
             
-            <View>
+            <View style={styles.openingHoursStyle}>
             <ListView 
                 dataSource={this.props.dataSource}
                 renderRow={(rowData) => this.renderRow(rowData)}
@@ -95,6 +97,9 @@ const dataSource = new ListView.DataSource({
 });
 
 const styles = {
+    openingHoursStyle: {
+        height: 100,
+    },
     rowStyle: {
         flexDirection: 'row',
         paddingBottom: 2,
