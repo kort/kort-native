@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-const ButtonWithIcon = ({ onPress, iconName }) => {
+const ButtonWithIcon = ({ onPress, iconName, size }) => {
     const { buttonStyle } = styles;
 
     return (
@@ -14,7 +14,7 @@ const ButtonWithIcon = ({ onPress, iconName }) => {
         >
             <Ionicons 
                 style={{ color: '#FFFFFF', alignSelf: 'center' }}
-                size={30} 
+                size={size} 
                 name={iconName} 
             />
         </TouchableOpacity>

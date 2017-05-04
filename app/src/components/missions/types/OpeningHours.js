@@ -34,6 +34,7 @@ class OpeningHours extends Component {
                         <ButtonWithIcon 
                             iconName='ios-remove-circle' 
                             onPress={() => this.props.removeEntry(rowData.row)} 
+                            size={30}
                         />
                     </View>
                     <View style={dayColStyle}>
@@ -54,6 +55,7 @@ class OpeningHours extends Component {
                     <ButtonWithIcon 
                                 iconName='ios-add-circle' 
                                 onPress={() => this.props.addNewTimeRange(row)} 
+                                size={30}
                     />
                 </View>
             );
@@ -75,6 +77,7 @@ class OpeningHours extends Component {
             <ButtonWithIcon 
                             iconName='ios-add-circle' 
                             onPress={() => this.props.addNewEntry()} 
+                            size={30}
                         />
             </View>
         );
