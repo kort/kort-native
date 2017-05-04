@@ -2,6 +2,7 @@ import _ from 'lodash';
 import { 
     ADD_NEW_OH_ENTRY,
     DELETE_OH_ENTRY,
+    ADD_NEW_OH_TIME_RANGE,
     SHOW_FROM_TIME_MODAL,
     SHOW_TO_TIME_MODAL,
     SHOW_DAYS_SELECTION_MODAL,
@@ -14,6 +15,13 @@ import OpeningHoursRepresentation from '../date/OpeningHoursRepresentation';
 export const addNewEntry = () => {
     return { 
         type: ADD_NEW_OH_ENTRY
+    };  
+};
+
+export const addNewTimeRange = (row) => {
+    return { 
+        type: ADD_NEW_OH_TIME_RANGE,
+        index: row
     };  
 };
 

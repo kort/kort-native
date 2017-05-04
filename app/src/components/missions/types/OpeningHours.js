@@ -9,7 +9,7 @@ import TimeRangeSelection from './TimeRangeSelection';
 import DaySelection from './DaySelection';
 import { ButtonWithIcon } from '../../common';
 import { showDaysSelectionModal, setDays, setFromTime, 
-    setToTime, showFromTimeModal, showToTimeModal, addNewEntry, removeEntry } from '../../../actions/OpeningHoursActions';
+    setToTime, showFromTimeModal, showToTimeModal, addNewEntry, removeEntry, addNewTimeRange } from '../../../actions/OpeningHoursActions';
 
 const days = [
     { value: 0, label: 'Monday' },
@@ -53,8 +53,22 @@ class OpeningHours extends Component {
                         />
                     </View>
                     {this.renderTimeRange(rowData.timeRangeEntries[0], rowData.row, 0)}
-                    {this.renderTimeRange(rowData.timeRangeEntries[1], rowData.row, 1)}
+                    {this.renderAddButtonOrTimeRange(rowData.timeRangeEntries, rowData.row)}
                 </View>
+        );
+    }
+
+    renderAddButtonOrTimeRange(timeRangeEntries, row) {
+        if (timeRangeEntries.length === 1) {
+            return (
+                <ButtonWithIcon 
+                            iconName='ios-add-circle' 
+                            onPress={() => this.props.addNewTimeRange(row)} 
+                />
+            );
+        }
+        return (
+            this.renderTimeRange(timeRangeEntries[1], row, 1)
         );
     }
 
@@ -105,10 +119,9 @@ const styles = {
 };
 
 const mapStateToProps = ({ openingHoursReducer }) => {
-    console.log('oh reducer', openingHoursReducer);
     const { entries } = openingHoursReducer;
     return { dataSource: dataSource.cloneWithRows(entries) };
 };
 
 export default connect(mapStateToProps, 
-{showDaysSelectionModal, setDays, setFromTime, setToTime, showFromTimeModal, showToTimeModal, addNewEntry, removeEntry })(OpeningHours);
+{showDaysSelectionModal, setDays, setFromTime, setToTime, showFromTimeModal, showToTimeModal, addNewEntry, removeEntry, addNewTimeRange })(OpeningHours);

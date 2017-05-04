@@ -1,6 +1,7 @@
 import {
     ADD_NEW_OH_ENTRY,
     DELETE_OH_ENTRY,
+    ADD_NEW_OH_TIME_RANGE,
     SHOW_FROM_TIME_MODAL,
     SHOW_TO_TIME_MODAL,
     SHOW_DAYS_SELECTION_MODAL,
@@ -17,7 +18,7 @@ import {
 };
 
 const INITIAL_STATE_INSTANCE = {
-    timeRangeEntries: [INITIAL_STATE_TIME_RANGE_INSTANCE, INITIAL_STATE_TIME_RANGE_INSTANCE],
+    timeRangeEntries: [INITIAL_STATE_TIME_RANGE_INSTANCE],
     days: [],
     formattedDays: null,
     daysSelectionModalVisible: false
@@ -34,6 +35,11 @@ const createNewEntry = (elementNr) => {
    return newEntry;
 };
 
+const createNewTimeRange = () => {
+    const newEntry = Object.assign({}, INITIAL_STATE_TIME_RANGE_INSTANCE);
+   return newEntry;
+};
+
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case ADD_NEW_OH_ENTRY:
@@ -47,6 +53,13 @@ export default (state = INITIAL_STATE, action) => {
                 entries: [...state.entries.filter(
                     (el) => { return el.row !== action.payload; }
             )] };
+        case ADD_NEW_OH_TIME_RANGE:
+                    return { ...state, 
+            entries: state.entries.map(
+                    (entry) => entry.row === action.index ? { ...entry, 
+                        timeRangeEntries: [...entry.timeRangeEntries, INITIAL_STATE_TIME_RANGE_INSTANCE], 
+                     } : entry, action.index)
+             };
         case SHOW_FROM_TIME_MODAL:
             return { ...state, 
                 entries: state.entries.map(
@@ -57,7 +70,6 @@ export default (state = INITIAL_STATE, action) => {
                     } : entry, action.index[0])
                 };
         case SHOW_TO_TIME_MODAL:
-        console.log('show to time', state, action);
             return { ...state, 
                 entries: state.entries.map(
                     (entry) => entry.row === action.index[0] ? { ...entry, 
@@ -110,6 +122,5 @@ function findWithAttr(array, attr, value) {
             return i;
         }
     }
-    console.log('nothing found for ', array, attr, value);
     return -1;
 }
