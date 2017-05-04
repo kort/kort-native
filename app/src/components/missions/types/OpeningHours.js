@@ -104,7 +104,7 @@ const styles = {
         justifyContent: 'center'
     },
     dayColStyle: {
-        width: 100,
+        width: 120,
         alignItems: 'center',
         justifyContent: 'center'
     },
