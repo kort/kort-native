@@ -19,7 +19,8 @@ const days = [
     { value: 4, label: 'Friday' },
     { value: 5, label: 'Saturday' },
     { value: 6, label: 'Sunday' },
-    { value: 10, label: 'Public Holiday' }
+    { value: 10, label: 'Public Holiday' },
+    { value: 11, label: 'Open 24/7' }
 ];
 
  class DaySelection extends Component {

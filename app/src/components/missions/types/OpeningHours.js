@@ -15,7 +15,7 @@ class OpeningHours extends Component {
 
     renderTimeRange(timeRangeData, row, col) {
         return (
-            <View style={styles.timeColStyle}>
+            <View style={styles.timeColStyle} key={`r${row}c${col}`}>
                     <TimeRangeSelection
                         data={timeRangeData}
                         row={row}
@@ -23,6 +23,14 @@ class OpeningHours extends Component {
                     />
                 </View>
         );
+    }
+
+    renderTimeRangeEntries(rowData) {
+        if (rowData.days.length !== 0 && rowData.days[0].value !== 11) {
+                return [this.renderTimeRange(rowData.timeRangeEntries[0], rowData.row, 0), 
+                    this.renderAddButtonOrTimeRange(rowData.timeRangeEntries, rowData.row)];
+        }
+        return null;
     }
 
     renderRow(rowData) {
@@ -42,8 +50,7 @@ class OpeningHours extends Component {
                         data={rowData}
                         />
                     </View>
-                    {this.renderTimeRange(rowData.timeRangeEntries[0], rowData.row, 0)}
-                    {this.renderAddButtonOrTimeRange(rowData.timeRangeEntries, rowData.row)}
+                    {this.renderTimeRangeEntries(rowData)}
                 </View>
         );
     }
@@ -51,7 +58,7 @@ class OpeningHours extends Component {
     renderAddButtonOrTimeRange(timeRangeEntries, row) {
         if (timeRangeEntries.length === 1) {
             return (
-                 <View style={styles.timeColStyle}>
+                 <View style={styles.timeColStyle} key={`v${row}`}>
                     <ButtonWithIcon 
                                 iconName='ios-add-circle' 
                                 onPress={() => this.props.addNewTimeRange(row)} 
@@ -69,16 +76,16 @@ class OpeningHours extends Component {
         return (
             
             <View style={styles.openingHoursStyle}>
-            <ListView 
-                dataSource={this.props.dataSource}
-                renderRow={(rowData) => this.renderRow(rowData)}
-                enableEmptySections
-            /> 
-            <ButtonWithIcon 
-                            iconName='ios-add-circle' 
-                            onPress={() => this.props.addNewEntry()} 
-                            size={30}
-                        />
+                <ListView 
+                    dataSource={this.props.dataSource}
+                    renderRow={(rowData) => this.renderRow(rowData)}
+                    enableEmptySections
+                /> 
+                <ButtonWithIcon 
+                                iconName='ios-add-circle' 
+                                onPress={() => this.props.addNewEntry()} 
+                                size={30}
+                />
             </View>
         );
     }

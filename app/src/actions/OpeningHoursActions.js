@@ -99,24 +99,33 @@ export const setDays = (value, row) => {
     const dayValues = _(value)
         .map('value')
         .value();
+    let rawValue = value;
+    let formattedDays = '';
     let additionalValues = '';
-    const weekArray = removeFromArray(dayValues, 10);
-    if (dayValues.length !== weekArray.length) {
-        if (weekArray.length !== 0) {
+    const index = dayValues.indexOf(10);
+    if (index !== -1) {
+        dayValues.splice(index, 1);
+        if (dayValues.length !== 0) {
             additionalValues = ',';
         }
         additionalValues += 'PH';
     }
+    if (dayValues.indexOf(11) !== -1) {
+        rawValue = removeExcept(value, 11);
+        formattedDays = '24/7';
+    } else {
+        formattedDays = `${OpeningHoursRepresentation(dayValues)}${additionalValues}`;
+    }
     return { 
         type: DAYS,
         payload: {
-            value,
-            formattedDays: `${OpeningHoursRepresentation(weekArray)}${additionalValues}`,
+            value: rawValue,
+            formattedDays,
             index: row
         }
     };  
 };
 
-const removeFromArray = (array, element) => {
-    return array.filter(e => e !== element);
+const removeExcept = (array, element) => {
+    return array.filter(e => e.value === element);
 };
