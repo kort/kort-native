@@ -33,7 +33,7 @@ class MissionsOverview extends Component {
         if (this.state.missionActive) {
             return (
                 <MissionView
-                    heights={[100, 300]}
+                    heights={[100, this.props.missionViewHeight]}
                 >
                     <MissionSolver />
                 </MissionView>
@@ -99,8 +99,8 @@ const styles = {
 
 const mapStateToProps = ({ mapReducer, missionReducer }) => {
     const { mapModeFullScreen, accuracyThresholdReached } = mapReducer;
-    const { missionsLoading, errorMsg } = missionReducer;
-    return { mapModeFullScreen, accuracyThresholdReached, missionsLoading, errorMsg };
+    const { missionsLoading, errorMsg, missionViewHeight } = missionReducer;
+    return { mapModeFullScreen, accuracyThresholdReached, missionsLoading, errorMsg, missionViewHeight };
 };
 
 

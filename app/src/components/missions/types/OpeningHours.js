@@ -98,7 +98,7 @@ const dataSource = new ListView.DataSource({
 
 const styles = {
     openingHoursStyle: {
-        height: 100,
+        height: 180,
     },
     rowStyle: {
         flexDirection: 'row',

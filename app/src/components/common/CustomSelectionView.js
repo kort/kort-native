@@ -102,7 +102,7 @@ class CustomSelectionView extends Component {
         body: {
             width: ScreenWidth - 80,
             backgroundColor: '#ffffff',
-            maxHeight: ScreenHeight - 300,
+            maxHeight: ScreenHeight - this.props.missionHeight,
 			borderRadius: 10,
 			borderWidth: 1,
 			borderColor: '#657C8E',

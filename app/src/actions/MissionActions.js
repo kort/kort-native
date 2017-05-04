@@ -17,7 +17,10 @@ export const downloadMissions = (coordinate, radius) => {
             .then(data => {
                 dispatch({
                     type: MISSIONS_DOWNLOADED_SUCCESS,
-                    payload: [data, { latitude, longitude }]
+                    payload: {
+                        data,
+                        coords: { latitude, longitude }
+                    }
                 });
             })
             .catch(errorMsg => {    
@@ -33,8 +36,20 @@ export const startMission = (data, id) => {
     const mission = _.find(data, { id });
     return {
         type: START_MISSION,
-        payload: [mission, data, id]
+        payload: {
+            mission,
+            data,
+            id,
+            height: determineMissionHeight(mission)
+        }
     };
+};
+
+const determineMissionHeight = (mission) => {
+    if (mission.type === 'mission_opening_hours') {
+        return 400;
+    }
+    return 300;
 };
 
 export const clearErrorMsg = () => {

@@ -160,7 +160,7 @@ class MissionSolver extends Component {
         const { bgColor, missionTextStyle, headerStyle,
             containerStyle, unsolvableButtonStyle, completeMissionButtonStyle } = styles;
         return (
-            <View style={bgColor}>
+            <View style={[bgColor, { height: this.props.missionViewHeight }]}>
                 <View style={headerStyle}>
                      <KortCoin animationStyle='normal'>{this.props.activeMission.koinReward}</KortCoin>
                     <Text style={missionTextStyle}>{this.props.activeMission.question}</Text>
@@ -236,8 +236,8 @@ const styles = {
 const mapStateToProps = ({ answerReducer, missionReducer }) => {
     console.log('mission', missionReducer);
     const { freetextType, answer } = answerReducer;
-    const { activeMission } = missionReducer;
-    return { freetextType, answer, activeMission };
+    const { activeMission, missionViewHeight } = missionReducer;
+    return { freetextType, answer, activeMission, missionViewHeight };
 };
 
 

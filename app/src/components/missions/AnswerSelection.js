@@ -32,6 +32,7 @@ class AnswerSelection extends Component {
                 onSelection={(answer) => this.answerSelected(answer)}
                 style={styles.selectionViewStyle}
                 isOpen={(v) => this.isOpen(v)}
+                missionHeight={this.props.missionViewHeight}
             />
         );
     }
@@ -50,8 +51,8 @@ const styles = {
 };
 
 const mapStateToProps = ({ missionReducer }) => {
-    const { activeMission } = missionReducer;
-    return { activeMission };
+    const { activeMission, missionViewHeight } = missionReducer;
+    return { activeMission, missionViewHeight };
 };
 
 export default connect(mapStateToProps, 

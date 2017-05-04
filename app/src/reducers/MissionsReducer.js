@@ -13,11 +13,12 @@ const INITIAL_STATE = {
     missionsData: [],
     missionsLoading: false,
     coordsOfDownload: { latitude: 0, longitude: 0 },
-    errorMsg: null
+    errorMsg: null,
+    missionViewHeight: 300
 };
 
 export default (state = INITIAL_STATE, action) => {
-    switch (action.type) {
+    switch (action.type) {        
         case MISSIONS_DOWNLOAD:
             return { ...state, missionsLoading: true };        
         case MISSIONS_DOWNLOADED_ERROR:
@@ -25,13 +26,14 @@ export default (state = INITIAL_STATE, action) => {
         case MISSIONS_DOWNLOADED_SUCCESS:
             return { ...state, 
                 missionsLoading: false, 
-                missionsData: action.payload[0], 
-                missionAnnotations: createMissionAnnotations(action.payload[0], null), 
-                coordsOfDownload: action.payload[1] };
+                missionsData: action.payload.data, 
+                missionAnnotations: createMissionAnnotations(action.payload.data, null), 
+                coordsOfDownload: action.payload.coords };
         case START_MISSION:
             return { ...state, 
-                activeMission: action.payload[0], 
-                missionAnnotations: createMissionAnnotations(action.payload[1], action.payload[2]) };
+                activeMission: action.payload.mission, 
+                missionViewHeight: action.payload.height,
+                missionAnnotations: createMissionAnnotations(action.payload.data, action.payload.id) };
         case MISSIONS_CLEAR_ERROR_MSG:
             return { ...state, errorMsg: null };  
         default:
