@@ -56,60 +56,60 @@ export default (state = INITIAL_STATE, action) => {
         case ADD_NEW_OH_TIME_RANGE:
                     return { ...state, 
             entries: state.entries.map(
-                    (entry) => entry.row === action.index ? { ...entry, 
-                        timeRangeEntries: [...entry.timeRangeEntries, INITIAL_STATE_TIME_RANGE_INSTANCE], 
-                     } : entry, action.index)
+                    (entry) => entry.row === action.payload ? { ...entry, 
+                        timeRangeEntries: [...entry.timeRangeEntries, createNewTimeRange()], 
+                     } : entry, action.payload)
              };
         case SHOW_FROM_TIME_MODAL:
             return { ...state, 
                 entries: state.entries.map(
-                    (entry) => entry.row === action.index[0] ? { ...entry, 
-                    timeRangeEntries: state.entries[findWithAttr(state.entries, 'row', action.index[0])].timeRangeEntries.map(
-                    (timeRangeEntry, j) => j === action.index[1] ? { ...timeRangeEntry, fromTimeModalVisible: action.payload }
-                    : timeRangeEntry, action.index[1])   
-                    } : entry, action.index[0])
+                    (entry) => entry.row === action.payload.index.row ? { ...entry, 
+                    timeRangeEntries: state.entries[findWithAttr(state.entries, 'row', action.payload.index.row)].timeRangeEntries.map(
+                    (timeRangeEntry, j) => j === action.payload.index.col ? { ...timeRangeEntry, fromTimeModalVisible: action.payload.value }
+                    : timeRangeEntry, action.payload.index.col)   
+                    } : entry, action.payload.index.row)
                 };
         case SHOW_TO_TIME_MODAL:
             return { ...state, 
                 entries: state.entries.map(
-                    (entry) => entry.row === action.index[0] ? { ...entry, 
-                    timeRangeEntries: state.entries[findWithAttr(state.entries, 'row', action.index[0])].timeRangeEntries.map(
-                    (timeRangeEntry, j) => j === action.index[1] ? { ...timeRangeEntry, toTimeModalVisible: action.payload }
-                    : timeRangeEntry, action.index[1])    
-                    } : entry, action.index[0])
+                    (entry) => entry.row === action.payload.index.row ? { ...entry, 
+                    timeRangeEntries: state.entries[findWithAttr(state.entries, 'row', action.payload.index.row)].timeRangeEntries.map(
+                    (timeRangeEntry, j) => j === action.payload.index.col ? { ...timeRangeEntry, toTimeModalVisible: action.payload.value }
+                    : timeRangeEntry, action.payload.index.col)    
+                    } : entry, action.payload.index.row)
                 };
         case SHOW_DAYS_SELECTION_MODAL:
             return { ...state, 
             entries: state.entries.map(
-                    (entry) => entry.row === action.index ? { ...entry, 
-                        daysSelectionModalVisible: action.payload, 
-                     } : entry, action.index)
+                    (entry) => entry.row === action.payload.index ? { ...entry, 
+                        daysSelectionModalVisible: action.payload.value, 
+                     } : entry, action.payload.index)
              };
         case FROM_TIME:
             return { ...state, 
                 entries: state.entries.map(
-                    (entry) => entry.row === action.index[0] ? { ...entry, 
-                    timeRangeEntries: state.entries[findWithAttr(state.entries, 'row', action.index[0])].timeRangeEntries.map(
-                    (timeRangeEntry, j) => j === action.index[1] ? { ...timeRangeEntry, fromTime: action.payload, fromTimeModalVisible: false }
-                    : timeRangeEntry, action.index[1])    
-                    } : entry, action.index[0])
+                    (entry) => entry.row === action.payload.index.row ? { ...entry, 
+                    timeRangeEntries: state.entries[findWithAttr(state.entries, 'row', action.payload.index.row)].timeRangeEntries.map(
+                    (timeRangeEntry, j) => j === action.payload.index.col ? { ...timeRangeEntry, fromTime: action.payload.value, fromTimeModalVisible: false }
+                    : timeRangeEntry, action.payload.index.col)    
+                    } : entry, action.payload.index.row)
                 };
             case TO_TIME:
             return { ...state, 
                 entries: state.entries.map(
-                    (entry) => entry.row === action.index[0] ? { ...entry,
-                    timeRangeEntries: state.entries[findWithAttr(state.entries, 'row', action.index[0])].timeRangeEntries.map(
-                    (timeRangeEntry, j) => j === action.index[1] ? { ...timeRangeEntry, toTime: action.payload, toTimeModalVisible: false }
-                    : timeRangeEntry, action.index[1])
-                    } : entry, action.index[0])
+                    (entry) => entry.row === action.payload.index.row ? { ...entry,
+                    timeRangeEntries: state.entries[findWithAttr(state.entries, 'row', action.payload.index.row)].timeRangeEntries.map(
+                    (timeRangeEntry, j) => j === action.payload.index.col ? { ...timeRangeEntry, toTime: action.payload.value, toTimeModalVisible: false }
+                    : timeRangeEntry, action.payload.index.col)
+                    } : entry, action.payload.index.row)
                 };
         case DAYS:
             return { ...state,
                 entries: state.entries.map(
-                    (entry) => entry.row === action.index ? { ...entry, 
-                        days: action.payload[0], 
-                        formattedDays: action.payload[1] !== '' ? action.payload[1] : INITIAL_STATE.formattedDays
-                     } : entry, action.index)
+                    (entry) => entry.row === action.payload.index ? { ...entry, 
+                        days: action.payload.value, 
+                        formattedDays: action.payload.formattedDays !== '' ? action.payload.formattedDays : INITIAL_STATE.formattedDays
+                     } : entry, action.payload.index)
                 };
         default:
             return state;
