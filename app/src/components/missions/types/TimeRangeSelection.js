@@ -8,6 +8,8 @@ import { connect } from 'react-redux';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import { setFromTime, 
     setToTime, showFromTimeModal, showToTimeModal } from '../../../actions/OpeningHoursActions';
+import { answerModalVisible } from '../../../actions/AnswerSelectionActions';
+
 
  class TimeRangeSelection extends Component {
 
@@ -29,10 +31,22 @@ import { setFromTime,
             this.props.row, this.props.col);  
     };
 
-    showFromModal = () => this.props.showFromTimeModal(true, this.props.row, this.props.col);
-    showToModal = () => this.props.showToTimeModal(true, this.props.row, this.props.col);
-    hideFromModal = () => this.props.showFromTimeModal(false, this.props.row, this.props.col);
-    hideToModal = () => this.props.showToTimeModal(false, this.props.row, this.props.col);
+    showFromModal = () =>  {
+        this.props.showFromTimeModal(true, this.props.row, this.props.col);
+        this.props.answerModalVisible(true);
+    }
+    showToModal = () => {
+        this.props.showToTimeModal(true, this.props.row, this.props.col);
+        this.props.answerModalVisible(true);
+    }
+    hideFromModal = () => {
+        this.props.showFromTimeModal(false, this.props.row, this.props.col);
+        this.props.answerModalVisible(false);
+    }
+    hideToModal = () => {
+        this.props.showToTimeModal(false, this.props.row, this.props.col);
+        this.props.answerModalVisible(false);
+    }
 
     getDateFromString(timeString) {
         const time = timeString.split(':');
@@ -86,4 +100,4 @@ const styles = {
 };
 
 export default connect(null, 
-{ setFromTime, setToTime, showFromTimeModal, showToTimeModal })(TimeRangeSelection);
+{ setFromTime, setToTime, showFromTimeModal, showToTimeModal, answerModalVisible })(TimeRangeSelection);

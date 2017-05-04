@@ -9,6 +9,7 @@ import {
  import { connect } from 'react-redux';
 import SelectMultiple from 'react-native-select-multiple';
 import { showDaysSelectionModal, setDays } from '../../../actions/OpeningHoursActions';
+import { answerModalVisible } from '../../../actions/AnswerSelectionActions';
 
  class DaySelection extends Component {
 
@@ -24,8 +25,14 @@ import { showDaysSelectionModal, setDays } from '../../../actions/OpeningHoursAc
         this.props.setDays(selectedDays, this.props.data.row);
     }
 
-    showModal = () => this.props.showDaysSelectionModal(true, this.props.data.row);
-    hideModal = () => this.props.showDaysSelectionModal(false, this.props.data.row);
+    showModal = () => {
+        this.props.showDaysSelectionModal(true, this.props.data.row);
+        this.props.answerModalVisible(true);
+    }
+    hideModal = () => {
+        this.props.showDaysSelectionModal(false, this.props.data.row);
+        this.props.answerModalVisible(false);
+    }
 
     render() {
         console.log('days',this.props.data.days);
@@ -79,4 +86,4 @@ import { showDaysSelectionModal, setDays } from '../../../actions/OpeningHoursAc
  };
 
 
-export default connect(null, {showDaysSelectionModal, setDays })(DaySelection);
+export default connect(null, {showDaysSelectionModal, setDays, answerModalVisible })(DaySelection);
