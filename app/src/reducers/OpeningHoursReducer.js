@@ -1,5 +1,6 @@
 import {
     ADD_NEW_OH_ENTRY,
+    DELETE_OH_ENTRY,
     SHOW_FROM_TIME_MODAL,
     SHOW_TO_TIME_MODAL,
     SHOW_DAYS_SELECTION_MODAL,
@@ -23,11 +24,12 @@ const INITIAL_STATE_INSTANCE = {
 };
 
 const INITIAL_STATE = {
-    entries: []
+    entries: [],
+    elementRowCounter: 0
 };
 
 const createNewEntry = (elementNr) => {
-    const newEntry = INITIAL_STATE_INSTANCE;
+    const newEntry = Object.assign({}, INITIAL_STATE_INSTANCE);
     newEntry.row = elementNr;
    return newEntry;
 };
@@ -35,21 +37,31 @@ const createNewEntry = (elementNr) => {
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case ADD_NEW_OH_ENTRY:
-            return { ...state, entries: [...state.entries, createNewEntry(state.entries.length)] };
+            return { ...state, 
+                entries: [...state.entries, 
+                createNewEntry(
+                state.elementRowCounter)],
+                elementRowCounter: state.elementRowCounter + 1 };
+        case DELETE_OH_ENTRY:
+            return { ...state, 
+                entries: [...state.entries.filter(
+                    (el) => { return el.row !== action.payload; }
+            )] };
         case SHOW_FROM_TIME_MODAL:
             return { ...state, 
                 entries: state.entries.map(
-                    (entry, i) => i === action.index[0] ? { ...entry, 
-                                timeRangeEntries: state.entries[action.index[0]].timeRangeEntries.map(
+                    (entry) => entry.row === action.index[0] ? { ...entry, 
+                    timeRangeEntries: state.entries[findWithAttr(state.entries, 'row', action.index[0])].timeRangeEntries.map(
                     (timeRangeEntry, j) => j === action.index[1] ? { ...timeRangeEntry, fromTimeModalVisible: action.payload }
-                    : timeRangeEntry, action.index[1])    
+                    : timeRangeEntry, action.index[1])   
                     } : entry, action.index[0])
                 };
         case SHOW_TO_TIME_MODAL:
+        console.log('show to time', state, action);
             return { ...state, 
                 entries: state.entries.map(
-                    (entry, i) => i === action.index[0] ? { ...entry, 
-                                timeRangeEntries: state.entries[action.index[0]].timeRangeEntries.map(
+                    (entry) => entry.row === action.index[0] ? { ...entry, 
+                    timeRangeEntries: state.entries[findWithAttr(state.entries, 'row', action.index[0])].timeRangeEntries.map(
                     (timeRangeEntry, j) => j === action.index[1] ? { ...timeRangeEntry, toTimeModalVisible: action.payload }
                     : timeRangeEntry, action.index[1])    
                     } : entry, action.index[0])
@@ -57,15 +69,15 @@ export default (state = INITIAL_STATE, action) => {
         case SHOW_DAYS_SELECTION_MODAL:
             return { ...state, 
             entries: state.entries.map(
-                    (entry, i) => i === action.index ? { ...entry, 
+                    (entry) => entry.row === action.index ? { ...entry, 
                         daysSelectionModalVisible: action.payload, 
                      } : entry, action.index)
              };
         case FROM_TIME:
             return { ...state, 
                 entries: state.entries.map(
-                    (entry, i) => i === action.index[0] ? { ...entry, 
-                                timeRangeEntries: state.entries[action.index[0]].timeRangeEntries.map(
+                    (entry) => entry.row === action.index[0] ? { ...entry, 
+                    timeRangeEntries: state.entries[findWithAttr(state.entries, 'row', action.index[0])].timeRangeEntries.map(
                     (timeRangeEntry, j) => j === action.index[1] ? { ...timeRangeEntry, fromTime: action.payload, fromTimeModalVisible: false }
                     : timeRangeEntry, action.index[1])    
                     } : entry, action.index[0])
@@ -73,8 +85,8 @@ export default (state = INITIAL_STATE, action) => {
             case TO_TIME:
             return { ...state, 
                 entries: state.entries.map(
-                    (entry, i) => i === action.index[0] ? { ...entry,
-                    timeRangeEntries: state.entries[action.index[0]].timeRangeEntries.map(
+                    (entry) => entry.row === action.index[0] ? { ...entry,
+                    timeRangeEntries: state.entries[findWithAttr(state.entries, 'row', action.index[0])].timeRangeEntries.map(
                     (timeRangeEntry, j) => j === action.index[1] ? { ...timeRangeEntry, toTime: action.payload, toTimeModalVisible: false }
                     : timeRangeEntry, action.index[1])
                     } : entry, action.index[0])
@@ -82,7 +94,7 @@ export default (state = INITIAL_STATE, action) => {
         case DAYS:
             return { ...state,
                 entries: state.entries.map(
-                    (entry, i) => i === action.index ? { ...entry, 
+                    (entry) => entry.row === action.index ? { ...entry, 
                         days: action.payload[0], 
                         formattedDays: action.payload[1] !== '' ? action.payload[1] : INITIAL_STATE.formattedDays
                      } : entry, action.index)
@@ -91,3 +103,13 @@ export default (state = INITIAL_STATE, action) => {
             return state;
     }
 };
+
+function findWithAttr(array, attr, value) {
+    for (let i = 0; i < array.length; i += 1) {
+        if (array[i][attr] === value) {
+            return i;
+        }
+    }
+    console.log('nothing found for ', array, attr, value);
+    return -1;
+}

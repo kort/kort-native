@@ -45,6 +45,7 @@ import { setFromTime,
     }
 
     render() {
+        console.log('time range data', this.props.data);
         const { containerStyle } = styles;
         return (
         <View style={containerStyle}>

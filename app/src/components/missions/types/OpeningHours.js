@@ -9,7 +9,7 @@ import TimeRangeSelection from './TimeRangeSelection';
 import DaySelection from './DaySelection';
 import { ButtonWithIcon } from '../../common';
 import { showDaysSelectionModal, setDays, setFromTime, 
-    setToTime, showFromTimeModal, showToTimeModal, addNewEntry } from '../../../actions/OpeningHoursActions';
+    setToTime, showFromTimeModal, showToTimeModal, addNewEntry, removeEntry } from '../../../actions/OpeningHoursActions';
 
 const days = [
     { value: 0, label: 'Monday' },
@@ -43,7 +43,7 @@ class OpeningHours extends Component {
                     <View style={deleteColStyle}>
                         <ButtonWithIcon 
                             iconName='ios-remove-circle' 
-                            onPress={() => console.log('remove')} 
+                            onPress={() => this.props.removeEntry(rowData.row)} 
                         />
                     </View>
                     <View style={dayColStyle}>
@@ -111,4 +111,4 @@ const mapStateToProps = ({ openingHoursReducer }) => {
 };
 
 export default connect(mapStateToProps, 
-{showDaysSelectionModal, setDays, setFromTime, setToTime, showFromTimeModal, showToTimeModal, addNewEntry })(OpeningHours);
+{showDaysSelectionModal, setDays, setFromTime, setToTime, showFromTimeModal, showToTimeModal, addNewEntry, removeEntry })(OpeningHours);

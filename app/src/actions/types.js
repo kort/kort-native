@@ -40,6 +40,7 @@ export const STATS_CHANGED = 'statsChanged';
 export const APP_SETTINGS_LOADED = 'app_settings_loaded';
 
 export const ADD_NEW_OH_ENTRY = 'add_new_oh_entry';
+export const DELETE_OH_ENTRY = 'delete_new_oh_entry';
 export const SHOW_FROM_TIME_MODAL = 'show_from_time_modal';
 export const SHOW_TO_TIME_MODAL = 'show_to_time_modal';
 export const SHOW_DAYS_SELECTION_MODAL = 'show_days_modal';
