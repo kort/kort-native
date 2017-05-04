@@ -14,7 +14,7 @@ const ButtonWithIcon = ({ onPress, iconName }) => {
         >
             <Ionicons 
                 style={{ color: '#FFFFFF', alignSelf: 'center' }}
-                size={25} 
+                size={30} 
                 name={iconName} 
             />
         </TouchableOpacity>
