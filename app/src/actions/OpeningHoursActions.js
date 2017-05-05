@@ -11,7 +11,7 @@ import {
     FROM_TIME,
     DAYS
 } from './types';
-import OpeningHoursRepresentation from '../date/OpeningHoursRepresentation';
+import WeekdayRepresentation from '../date/WeekdayRepresentation';
 
 export const addNewEntry = () => {
     return { 
@@ -121,7 +121,7 @@ export const setDays = (value, row) => {
         rawValue = removeExcept(value, 11);
         formattedDays = '24/7';
     } else {
-        formattedDays = `${OpeningHoursRepresentation(dayValues)}${additionalValues}`;
+        formattedDays = `${WeekdayRepresentation(dayValues)}${additionalValues}`;
     }
     return { 
         type: DAYS,

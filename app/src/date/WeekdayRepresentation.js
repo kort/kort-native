@@ -4,7 +4,7 @@
  * representation
  * @param {*} weekdays 
  */
-const OpeningHoursRepresentation = (weekdays) => {
+const WeekdayRepresentation = (weekdays) => {
     return (
         handleWeekdayRange(weekdays)
     );
@@ -65,4 +65,4 @@ function handleWeekdayRange(weekdays) {
      return output;
 }
 
-export default OpeningHoursRepresentation;
+export default WeekdayRepresentation;

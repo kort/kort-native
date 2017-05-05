@@ -107,7 +107,10 @@ class MissionSolver extends Component {
     renderAnswerSelection() {
         //TODO handle different types of mission in a nicer way
         if (this.props.activeMission.type === 'mission_opening_hours') {
-            return <OpeningHours />;
+            return <OpeningHours 
+                setAnswer={value => this.props.answerSet(value)}
+                answer={this.props.answer}
+            />;
         }
 
         if (!_.isEmpty(this.props.activeMission.inputType.options)) {

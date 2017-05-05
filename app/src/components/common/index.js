@@ -12,3 +12,4 @@ export * from './CustomSelectionView';
 export * from './CustomKeyboardAvoidingView';
 export * from './CustomSlidingView';
 export * from './ButtonWithIcon';
+export * from './ModalMultiInput';

@@ -9,11 +9,20 @@ import ModalDropdown from 'react-native-modal-dropdown';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import TimeRangeSelection from './TimeRangeSelection';
 import DaySelection from './DaySelection';
-import { ButtonWithIcon } from '../../common';
+import { ButtonWithIcon, Button, ModalMultiInput } from '../../common';
 import { showDaysSelectionModal, setDays, setFromTime, 
     setToTime, showFromTimeModal, showToTimeModal, addNewEntry, removeEntry, addNewTimeRange, setOpenEnd } from '../../../actions/OpeningHoursActions';
 
 class OpeningHours extends Component {
+
+    state={ showEditModal: false };
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.entries) {
+            console.log('set answer' , nextProps.entries);
+                    // this.props.setAnswer(text)
+        }
+    }
 
     onSelectOption(idx, value, row) {
         if (idx === '1') {
@@ -27,6 +36,10 @@ class OpeningHours extends Component {
         const newStyle = style;
         newStyle.height = 60;
         return style;
+    }
+
+    editOpeningHoursText() {
+        this.setState({ showEditModal: true });
     }
 
     renderDropdownRow(rowData) {
@@ -105,20 +118,45 @@ class OpeningHours extends Component {
         return (this.renderTimeRange(timeRangeEntries[1], row, 1));
     }
 
+    renderEditButton() {
+        if (this.props.entries.length > 0) {
+            return (
+                <Button 
+                        style={styles.buttonStyle}
+                        onPress={this.editOpeningHoursText.bind(this)}
+                >Edit Text
+                </Button>
+            );
+        }
+        return null;
+    }
+
     render() {
         return (
-            
             <View style={styles.openingHoursStyle}>
                 <ListView 
                     dataSource={this.props.dataSource}
                     renderRow={(rowData) => this.renderRow(rowData)}
                     enableEmptySections
-                /> 
-                <ButtonWithIcon 
+                />
+                <View style={{ flexDirection: 'row' }}>
+                    <View style={styles.deleteColStyle}>
+                    <ButtonWithIcon 
                                 iconName='ios-add-circle' 
                                 onPress={() => this.props.addNewEntry()} 
                                 size={30}
-                />
+                    />
+                    </View>
+                    <View style={styles.dayColStyle}>
+                        {this.renderEditButton()}
+                    </View>
+                    <ModalMultiInput 
+                        visible={this.state.showEditModal}
+                        onPress={() => this.setState({ showEditModal: false })}
+                        value={this.props.answer}
+                        onChangeText={(text) => this.props.setAnswer(text)}
+                    />
+                </View>
             </View>
         );
     }
@@ -129,6 +167,10 @@ const dataSource = new ListView.DataSource({
 });
 
 const styles = {
+    buttonStyle: {
+        alignSelf: 'center',
+        width: 100, 
+    },
     rowTextStyle: {
         paddingTop: 5,
         color: '#395971',
@@ -140,9 +182,9 @@ const styles = {
     },
     rowStyle: {
         flexDirection: 'row',
-        paddingBottom: 2,
-        paddingTop: 2,
-        height: 30
+        paddingBottom: 1,
+        paddingTop: 1,
+        height: 34
     },
     deleteColStyle: {
         width: 30,
@@ -163,7 +205,7 @@ const styles = {
 
 const mapStateToProps = ({ openingHoursReducer }) => {
     const { entries } = openingHoursReducer;
-    return { dataSource: dataSource.cloneWithRows(entries) };
+    return { dataSource: dataSource.cloneWithRows(entries), entries };
 };
 
 export default connect(mapStateToProps, 
