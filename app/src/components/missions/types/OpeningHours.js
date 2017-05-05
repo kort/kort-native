@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
     View,
+    Text,
     ListView
 } from 'react-native';
 import { connect } from 'react-redux';
@@ -24,8 +25,16 @@ class OpeningHours extends Component {
 
     adjustDropdownFrame(style) {
         const newStyle = style;
-        newStyle.height = 70;
+        newStyle.height = 60;
         return style;
+    }
+
+    renderDropdownRow(rowData) {
+        return (
+            <Text style={styles.rowTextStyle}>
+                {rowData}
+            </Text>
+        );
     }
 
     renderTimeRange(timeRangeData, row, col) {
@@ -80,7 +89,9 @@ class OpeningHours extends Component {
                     <ModalDropdown 
                         options={['New Time Entry', 'Open End']}
                         animated={false}
+                        showsVerticalScrollIndicator={false}
                         adjustFrame={style => this.adjustDropdownFrame(style)}
+                        renderRow={this.renderDropdownRow.bind(this)}
                         onSelect={(idx, value) => this.onSelectOption(idx, value, row)}
                     >
                         <Ionicons 
@@ -119,6 +130,12 @@ const dataSource = new ListView.DataSource({
 });
 
 const styles = {
+    rowTextStyle: {
+        paddingTop: 5,
+        color: '#395971',
+        height: 30,
+        fontWeight: 'bold'
+    },
     openingHoursStyle: {
         height: 180,
     },
