@@ -4,6 +4,7 @@ import {
     DELETE_OH_ENTRY,
     ADD_NEW_OH_TIME_RANGE,
     SET_OPEN_END,
+    MANUALLY_EDITED,
     SHOW_FROM_TIME_MODAL,
     SHOW_TO_TIME_MODAL,
     SHOW_DAYS_SELECTION_MODAL,
@@ -25,6 +26,15 @@ export const setOpenEnd = (row) => {
         payload: row
     };  
 };
+
+
+export const setManuallyEdited = (edited) => {
+    return { 
+        type: MANUALLY_EDITED,
+        payload: edited
+    };  
+};
+
 export const addNewTimeRange = (row) => {
     return { 
         type: ADD_NEW_OH_TIME_RANGE,

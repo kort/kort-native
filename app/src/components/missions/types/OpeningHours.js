@@ -9,20 +9,14 @@ import ModalDropdown from 'react-native-modal-dropdown';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import TimeRangeSelection from './TimeRangeSelection';
 import DaySelection from './DaySelection';
+import OpeningHoursRepresentation from '../../../date/OpeningHoursRepresentation';
 import { ButtonWithIcon, Button, ModalMultiInput } from '../../common';
 import { showDaysSelectionModal, setDays, setFromTime, 
-    setToTime, showFromTimeModal, showToTimeModal, addNewEntry, removeEntry, addNewTimeRange, setOpenEnd } from '../../../actions/OpeningHoursActions';
+    setToTime, showFromTimeModal, showToTimeModal, addNewEntry, removeEntry, addNewTimeRange, setOpenEnd, setManuallyEdited } from '../../../actions/OpeningHoursActions';
 
 class OpeningHours extends Component {
 
     state={ showEditModal: false };
-
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.entries) {
-            console.log('set answer' , nextProps.entries);
-                    // this.props.setAnswer(text)
-        }
-    }
 
     onSelectOption(idx, value, row) {
         if (idx === '1') {
@@ -39,6 +33,10 @@ class OpeningHours extends Component {
     }
 
     editOpeningHoursText() {
+        console.log('edit oh text', this.props.manuallyEdited);
+        if (!this.props.manuallyEdited) {
+            this.props.setAnswer(OpeningHoursRepresentation(this.props.entries));
+        }
         this.setState({ showEditModal: true });
     }
 
@@ -124,11 +122,30 @@ class OpeningHours extends Component {
                 <Button 
                         style={styles.buttonStyle}
                         onPress={this.editOpeningHoursText.bind(this)}
-                >Edit Text
+                >Edit Result
                 </Button>
             );
         }
         return null;
+    }
+
+    renderResetButton() {
+        if (this.props.manuallyEdited) {
+            return (
+                <Button 
+                        style={styles.buttonStyle}
+                        onPress={() => this.props.setManuallyEdited(false)}
+                >Reset
+                </Button>
+            );
+        }
+        return null;
+    }
+
+    manuallyEdited(text) {
+        console.log('manually edited');
+        this.props.setManuallyEdited(true);
+        this.props.setAnswer(text);
     }
 
     render() {
@@ -150,11 +167,14 @@ class OpeningHours extends Component {
                     <View style={styles.dayColStyle}>
                         {this.renderEditButton()}
                     </View>
+                    <View style={styles.dayColStyle}>
+                        {this.renderResetButton()}
+                    </View>
                     <ModalMultiInput 
                         visible={this.state.showEditModal}
                         onPress={() => this.setState({ showEditModal: false })}
                         value={this.props.answer}
-                        onChangeText={(text) => this.props.setAnswer(text)}
+                        onChangeText={this.manuallyEdited.bind(this)}
                     />
                 </View>
             </View>
@@ -204,9 +224,9 @@ const styles = {
 };
 
 const mapStateToProps = ({ openingHoursReducer }) => {
-    const { entries } = openingHoursReducer;
-    return { dataSource: dataSource.cloneWithRows(entries), entries };
+    const { entries, manuallyEdited } = openingHoursReducer;
+    return { dataSource: dataSource.cloneWithRows(entries), entries, manuallyEdited };
 };
 
 export default connect(mapStateToProps, 
-{ showDaysSelectionModal, setDays, setFromTime, setToTime, showFromTimeModal, showToTimeModal, addNewEntry, removeEntry, addNewTimeRange, setOpenEnd })(OpeningHours);
+{ showDaysSelectionModal, setDays, setFromTime, setToTime, showFromTimeModal, showToTimeModal, addNewEntry, removeEntry, addNewTimeRange, setOpenEnd, setManuallyEdited })(OpeningHours);

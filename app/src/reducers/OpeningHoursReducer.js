@@ -3,6 +3,7 @@ import {
     DELETE_OH_ENTRY,
     ADD_NEW_OH_TIME_RANGE,
     SET_OPEN_END,
+    MANUALLY_EDITED,
     SHOW_FROM_TIME_MODAL,
     SHOW_TO_TIME_MODAL,
     SHOW_DAYS_SELECTION_MODAL,
@@ -28,7 +29,8 @@ const INITIAL_STATE_INSTANCE = {
 
 const INITIAL_STATE = {
     entries: [],
-    elementRowCounter: 0
+    elementRowCounter: 0,
+    manuallyEdited: false
 };
 
 const createNewEntry = (elementNr) => {
@@ -44,6 +46,8 @@ const createNewTimeRange = () => {
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
+        case MANUALLY_EDITED:
+        return { ...state, manuallyEdited: action.payload };
         case ADD_NEW_OH_ENTRY:
             return { ...state, 
                 entries: [...state.entries, 
