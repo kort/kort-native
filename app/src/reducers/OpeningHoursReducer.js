@@ -2,6 +2,7 @@ import {
     ADD_NEW_OH_ENTRY,
     DELETE_OH_ENTRY,
     ADD_NEW_OH_TIME_RANGE,
+    SET_OPEN_END,
     SHOW_FROM_TIME_MODAL,
     SHOW_TO_TIME_MODAL,
     SHOW_DAYS_SELECTION_MODAL,
@@ -15,6 +16,7 @@ import {
     toTime: 'To',
     fromTimeModalVisible: false,
     toTimeModalVisible: false,
+    openEnd: false
 };
 
 const INITIAL_STATE_INSTANCE = {
@@ -60,6 +62,15 @@ export default (state = INITIAL_STATE, action) => {
                         timeRangeEntries: [...entry.timeRangeEntries, createNewTimeRange()], 
                      } : entry, action.payload)
              };
+        case SET_OPEN_END:
+            return { ...state, 
+                entries: state.entries.map(
+                    (entry) => entry.row === action.payload ? { ...entry, 
+                    timeRangeEntries: state.entries[findWithAttr(state.entries, 'row', action.payload)].timeRangeEntries.map(
+                    (timeRangeEntry, j) => j === 0 ? { ...timeRangeEntry, openEnd: true }
+                    : timeRangeEntry, 0)   
+                    } : entry, action.payload)
+                };
         case SHOW_FROM_TIME_MODAL:
             return { ...state, 
                 entries: state.entries.map(

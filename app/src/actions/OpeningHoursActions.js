@@ -3,6 +3,7 @@ import {
     ADD_NEW_OH_ENTRY,
     DELETE_OH_ENTRY,
     ADD_NEW_OH_TIME_RANGE,
+    SET_OPEN_END,
     SHOW_FROM_TIME_MODAL,
     SHOW_TO_TIME_MODAL,
     SHOW_DAYS_SELECTION_MODAL,
@@ -18,6 +19,12 @@ export const addNewEntry = () => {
     };  
 };
 
+export const setOpenEnd = (row) => {
+    return { 
+        type: SET_OPEN_END,
+        payload: row
+    };  
+};
 export const addNewTimeRange = (row) => {
     return { 
         type: ADD_NEW_OH_TIME_RANGE,

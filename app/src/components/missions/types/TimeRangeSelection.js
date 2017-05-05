@@ -50,14 +50,10 @@ import { answerModalVisible } from '../../../actions/AnswerSelectionActions';
         this.props.answerModalVisible(false);
     }
 
-    getDateFromString(timeString) {
-        const time = timeString.split(':');
-        if (time.length > 1) {
-            console.log('create new date from ', time, ((time[0] * 3600) + (time[1] * 60)) * 1000);
-            return new Date(((time[0] * 3600) + (time[1] * 60)) * 1000);
+    renderOpenEnd() {
+        if (this.props.data.openEnd) {
+            return '+';
         }
-        console.log('new date');
-        return new Date();
     }
 
     render() {
@@ -84,7 +80,7 @@ import { answerModalVisible } from '../../../actions/AnswerSelectionActions';
                     mode='time'
                     titleIOS='To'
                 />
-                <Text style={textStyle}>{this.props.data.toTime}</Text>
+                <Text style={textStyle}>{this.props.data.toTime}{this.renderOpenEnd()}</Text>
                 </TouchableOpacity>
         </View>
     );

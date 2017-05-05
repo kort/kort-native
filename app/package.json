@@ -15,6 +15,7 @@
     "react-native-google-signin": "^0.8.1",
     "react-native-mapbox-gl": "^5.1.0",
     "react-native-modal-datetime-picker": "^4.2.1",
+    "react-native-modal-dropdown": "^0.4.2",
     "react-native-page-control": "^1.0.7",
     "react-native-rest-client": "^0.1.1",
     "react-native-router-flux": "^3.37.0",

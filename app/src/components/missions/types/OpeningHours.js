@@ -1,17 +1,32 @@
 import React, { Component } from 'react';
 import {
     View,
-    Text,
     ListView
 } from 'react-native';
 import { connect } from 'react-redux';
 import TimeRangeSelection from './TimeRangeSelection';
+import ModalDropdown from 'react-native-modal-dropdown';
 import DaySelection from './DaySelection';
 import { ButtonWithIcon } from '../../common';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import { showDaysSelectionModal, setDays, setFromTime, 
-    setToTime, showFromTimeModal, showToTimeModal, addNewEntry, removeEntry, addNewTimeRange } from '../../../actions/OpeningHoursActions';
+    setToTime, showFromTimeModal, showToTimeModal, addNewEntry, removeEntry, addNewTimeRange, setOpenEnd } from '../../../actions/OpeningHoursActions';
 
 class OpeningHours extends Component {
+
+    onSelectOption(idx, value, row) {
+        if (idx === '1') {
+            this.props.setOpenEnd(row);
+        } else {
+            this.props.addNewTimeRange(row);
+        }
+    }
+
+    adjustDropdownFrame(style) {
+        const newStyle = style;
+        newStyle.height = 70;
+        return style;
+    }
 
     renderTimeRange(timeRangeData, row, col) {
         return (
@@ -57,19 +72,27 @@ class OpeningHours extends Component {
 
     renderAddButtonOrTimeRange(timeRangeEntries, row) {
         if (timeRangeEntries.length === 1) {
+            if (timeRangeEntries[0].openEnd) {
+                return null;
+            }
             return (
                  <View style={styles.timeColStyle} key={`v${row}`}>
-                    <ButtonWithIcon 
-                                iconName='ios-add-circle' 
-                                onPress={() => this.props.addNewTimeRange(row)} 
-                                size={30}
-                    />
+                    <ModalDropdown 
+                        options={['New Time Entry', 'Open End']}
+                        animated={false}
+                        adjustFrame={style => this.adjustDropdownFrame(style)}
+                        onSelect={(idx, value) => this.onSelectOption(idx, value, row)}
+                    >
+                        <Ionicons 
+                            style={{ color: '#FFFFFF', alignSelf: 'center' }}
+                            size={30} 
+                            name={'ios-add-circle'} 
+                        />
+                    </ModalDropdown>
                 </View>
             );
         }
-        return (
-            this.renderTimeRange(timeRangeEntries[1], row, 1)
-        );
+        return (this.renderTimeRange(timeRangeEntries[1], row, 1));
     }
 
     render() {
@@ -128,4 +151,4 @@ const mapStateToProps = ({ openingHoursReducer }) => {
 };
 
 export default connect(mapStateToProps, 
-{showDaysSelectionModal, setDays, setFromTime, setToTime, showFromTimeModal, showToTimeModal, addNewEntry, removeEntry, addNewTimeRange })(OpeningHours);
+{showDaysSelectionModal, setDays, setFromTime, setToTime, showFromTimeModal, showToTimeModal, addNewEntry, removeEntry, addNewTimeRange, setOpenEnd })(OpeningHours);
