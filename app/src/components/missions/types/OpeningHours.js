@@ -33,13 +33,17 @@ class OpeningHours extends Component {
     }
 
     editOpeningHoursText() {
-        console.log('edit oh text', this.props.manuallyEdited);
         if (!this.props.manuallyEdited) {
             this.props.setAnswer(OpeningHoursRepresentation(this.props.entries));
         }
         this.setState({ showEditModal: true });
     }
 
+    manuallyEdited(text) {
+        this.props.setManuallyEdited(true);
+        this.props.setAnswer(text);
+    }
+    
     renderDropdownRow(rowData) {
         return (
             <Text style={styles.rowTextStyle}>
@@ -140,12 +144,6 @@ class OpeningHours extends Component {
             );
         }
         return null;
-    }
-
-    manuallyEdited(text) {
-        console.log('manually edited');
-        this.props.setManuallyEdited(true);
-        this.props.setAnswer(text);
     }
 
     render() {

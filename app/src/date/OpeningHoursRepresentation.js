@@ -4,7 +4,6 @@
  * @param {*} entries 
  */
 const OpeningHoursRepresentation = (entries) => {
-            console.log(entries);
     return (
         constructOHRep(entries)
     );
