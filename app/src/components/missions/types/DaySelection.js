@@ -89,4 +89,4 @@ const days = [
  };
 
 
-export default connect(null, {showDaysSelectionModal, setDays, answerModalVisible })(DaySelection);
+export default connect(null, { showDaysSelectionModal, setDays, answerModalVisible })(DaySelection);

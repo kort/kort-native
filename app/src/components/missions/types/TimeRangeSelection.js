@@ -33,7 +33,7 @@ import { answerModalVisible } from '../../../actions/AnswerSelectionActions';
         this.props.answerModalVisible(false);
     };
 
-    showFromModal = () =>  {
+    showFromModal = () => {
         this.props.showFromTimeModal(true, this.props.row, this.props.col);
         this.props.answerModalVisible(true);
     }

@@ -5,11 +5,11 @@ import {
     ListView
 } from 'react-native';
 import { connect } from 'react-redux';
-import TimeRangeSelection from './TimeRangeSelection';
 import ModalDropdown from 'react-native-modal-dropdown';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import TimeRangeSelection from './TimeRangeSelection';
 import DaySelection from './DaySelection';
 import { ButtonWithIcon } from '../../common';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import { showDaysSelectionModal, setDays, setFromTime, 
     setToTime, showFromTimeModal, showToTimeModal, addNewEntry, removeEntry, addNewTimeRange, setOpenEnd } from '../../../actions/OpeningHoursActions';
 
@@ -58,7 +58,6 @@ class OpeningHours extends Component {
     }
 
     renderRow(rowData) {
-        console.log('row', rowData);
         const { rowStyle, dayColStyle, deleteColStyle } = styles;
         return (
             <View style={rowStyle}>
@@ -168,4 +167,4 @@ const mapStateToProps = ({ openingHoursReducer }) => {
 };
 
 export default connect(mapStateToProps, 
-{showDaysSelectionModal, setDays, setFromTime, setToTime, showFromTimeModal, showToTimeModal, addNewEntry, removeEntry, addNewTimeRange, setOpenEnd })(OpeningHours);
+{ showDaysSelectionModal, setDays, setFromTime, setToTime, showFromTimeModal, showToTimeModal, addNewEntry, removeEntry, addNewTimeRange, setOpenEnd })(OpeningHours);
