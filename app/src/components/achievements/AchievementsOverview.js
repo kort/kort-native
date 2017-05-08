@@ -115,4 +115,5 @@ const mapStateToProps = ({ achievementsReducer }) => {
     };
 };
 
-export default connect(mapStateToProps, { downloadAchievements, clearErrorMsg })(AchievementsOverview);
+export default connect(mapStateToProps, { 
+    downloadAchievements, clearErrorMsg })(AchievementsOverview);

@@ -44,7 +44,9 @@ const days = [
                 <TouchableOpacity 
                     onPress={this.showModal}
                 >
-                    <Text style={styles.textStyle}>{this.props.data.formattedDays ? this.props.data.formattedDays : 'Days'}</Text>
+                    <Text style={styles.textStyle}>
+                        {this.props.data.formattedDays ? this.props.data.formattedDays : 'Days'}
+                    </Text>
                 </TouchableOpacity>
                 <Modal
                     visible={this.props.data.daysSelectionModalVisible}

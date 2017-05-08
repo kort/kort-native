@@ -4,9 +4,9 @@ import {
     TouchableWithoutFeedback
 } from 'react-native';
 import { connect } from 'react-redux';
+import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { CustomKeyboardAvoidingView, CustomSlidingView } from '../common';
-import * as Animatable from 'react-native-animatable';
 
 class MissionView extends Component {
 

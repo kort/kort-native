@@ -69,4 +69,8 @@ const styles = {
     }
 };
 
-module.exports = { MissionsTabIcon, AchievementsTabIcon, HighscoreTabIcon, ProfileTabIcon, SettingsTabIcon };
+module.exports = { MissionsTabIcon, 
+    AchievementsTabIcon, 
+    HighscoreTabIcon, 
+    ProfileTabIcon, 
+    SettingsTabIcon };

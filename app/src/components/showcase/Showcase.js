@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import {
     View,
     ScrollView,
-    Dimensions,
-    Image
+    Dimensions
 } from 'react-native';
 import {
     Actions

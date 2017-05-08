@@ -88,9 +88,15 @@ class ProfileOverview extends Component {
                         {this.renderMissionsToday()}
                     </View>
                     <View style={styles.descriptionStyle}>
-                        <Text style={styles.textStyle}>{this.props.user.koin_count} koins</Text>
-                        <Text style={styles.textStyle}>{this.props.user.mission_count} missions</Text>
-                        <Text style={styles.textStyle}>{this.props.user.mission_count_today} missions today</Text>
+                        <Text style={styles.textStyle}>
+                            {this.props.user.koin_count} koins
+                        </Text>
+                        <Text style={styles.textStyle}>
+                            {this.props.user.mission_count} missions
+                        </Text>
+                        <Text style={styles.textStyle}>
+                            {this.props.user.mission_count_today} missions today
+                        </Text>
                     </View>
                 </View>
                 <Popup 
@@ -109,7 +115,10 @@ class ProfileOverview extends Component {
             </View>
             );
         } 
-        return <Text style={[styles.textStyle, { paddingTop: 100, alignSelf: 'center' }]}>Please log in</Text>;
+        return (
+            <Text style={[styles.textStyle, { paddingTop: 100, alignSelf: 'center' }]}>
+                Please log in
+            </Text>);
     }
 
     render() {
@@ -209,4 +218,5 @@ const mapStateToProps = ({ authReducer }) => {
 };
 
 
-export default connect(mapStateToProps, { updateUser, logoutUser, showConfirmModal })(ProfileOverview);
+export default connect(mapStateToProps, 
+{ updateUser, logoutUser, showConfirmModal })(ProfileOverview);

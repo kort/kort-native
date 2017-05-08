@@ -47,7 +47,8 @@ class MissionsOverview extends Component {
             return (
                 <Spinner
                     size='small'
-                    style={this.props.mapModeFullScreen ? styles.spinnerFullScreen : styles.spinnerSmallScreen} 
+                    style={this.props.mapModeFullScreen ? 
+                    styles.spinnerFullScreen : styles.spinnerSmallScreen} 
                 />
             );
         }
@@ -100,7 +101,11 @@ const styles = {
 const mapStateToProps = ({ mapReducer, missionReducer }) => {
     const { mapModeFullScreen, accuracyThresholdReached } = mapReducer;
     const { missionsLoading, errorMsg, missionViewHeight } = missionReducer;
-    return { mapModeFullScreen, accuracyThresholdReached, missionsLoading, errorMsg, missionViewHeight };
+    return { mapModeFullScreen, 
+        accuracyThresholdReached,
+        missionsLoading,
+        errorMsg,
+        missionViewHeight };
 };
 
 

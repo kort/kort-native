@@ -165,7 +165,9 @@ class MissionSolver extends Component {
         return (
             <View style={[bgColor, { height: this.props.missionViewHeight }]}>
                 <View style={headerStyle}>
-                     <KortCoin animationStyle='normal'>{this.props.activeMission.koinReward}</KortCoin>
+                    <KortCoin animationStyle='normal'>
+                         {this.props.activeMission.koinReward}
+                    </KortCoin>
                     <Text style={missionTextStyle}>{this.props.activeMission.question}</Text>
                 </View>
                 <View style={containerStyle} >

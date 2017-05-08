@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import {
     View,
-    Platform,
-    Dimensions,
-    PixelRatio
+    Platform
 } from 'react-native';
 import Mapbox, { MapView } from 'react-native-mapbox-gl';
 import { connect } from 'react-redux';
@@ -27,9 +25,12 @@ class Map extends Component {
     componentWillReceiveProps(nextProps) {
         //fetch missions if location has changed
         if (nextProps.currentLocation.coords) {
-            if (!this.props.missionsLoading && this.props.errorMsg === null && CoordinateCalculations.calculateDistance(this.props.coordsOfDownload, nextProps.currentLocation.coords) 
+            if (!this.props.missionsLoading && this.props.errorMsg === null && 
+            CoordinateCalculations.calculateDistance(
+                this.props.coordsOfDownload, nextProps.currentLocation.coords) 
             > Config.DISTANCE_DIFF_IN_M_FOR_MISSION_FETCHING) {
-                this.props.downloadMissions(nextProps.currentLocation.coords, Config.RADIUS_IN_M_FOR_MISSION_FETCHING); 
+                this.props.downloadMissions(
+                    nextProps.currentLocation.coords, Config.RADIUS_IN_M_FOR_MISSION_FETCHING); 
             }
         }
         
@@ -111,7 +112,9 @@ class Map extends Component {
             //         }
             //     });
             // });
-            this.map.setCenterCoordinateZoomLevel(annotation.latitude, annotation.longitude, Config.MAPBOX_MISSION_ZOOM_LEVEL, true, null);
+            this.map.setCenterCoordinateZoomLevel(
+                annotation.latitude, annotation.longitude, 
+                Config.MAPBOX_MISSION_ZOOM_LEVEL, true, null);
     }
 
     centerMapAroundCurrentLocation() {
@@ -168,8 +171,6 @@ class Map extends Component {
 
 const styleURL = Config.MAPBOX_STYLE_URL ? Config.MAPBOX_STYLE_URL : Mapbox.mapStyles.streets;
 
-const deviceWidth = Dimensions.get('window').width * PixelRatio.get();
-
 const styles = {
     bgColor: {
         backgroundColor: '#395971',
@@ -200,9 +201,19 @@ const styles = {
 
 const mapStateToProps = ({ mapReducer, missionReducer, settingsReducer }) => {
     const { mapModeFullScreen, currentLocation } = mapReducer;
-    const { missionAnnotations, activeMission, missionsData, missionsLoading, coordsOfDownload, errorMsg } = missionReducer;
+    const { missionAnnotations, activeMission, missionsData, 
+        missionsLoading, coordsOfDownload, errorMsg } = missionReducer;
     const { stats, mapRotation } = settingsReducer;
-    return { mapModeFullScreen, currentLocation, missionAnnotations, activeMission, missionsData, missionsLoading, coordsOfDownload, errorMsg, stats, mapRotation };
+    return { mapModeFullScreen, 
+        currentLocation, 
+        missionAnnotations, 
+        activeMission, 
+        missionsData, 
+        missionsLoading, 
+        coordsOfDownload, 
+        errorMsg, 
+        stats, 
+        mapRotation };
 };
 
 

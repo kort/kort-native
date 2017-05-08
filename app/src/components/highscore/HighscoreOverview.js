@@ -4,8 +4,8 @@ import {
     Platform
 } from 'react-native';
 import SegmentedControlTab from 'react-native-segmented-control-tab';
-import HighscoreList from './HighscoreList';
 import { connect } from 'react-redux';
+import HighscoreList from './HighscoreList';
 import { tabChanged, clearErrorMsg } from '../../actions/HighscoreActions';
 import { Spinner, Popup } from '../common';
 

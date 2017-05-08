@@ -9,7 +9,8 @@ import { GoogleSignin } from 'react-native-google-signin';
 import { ModalSpinner, ModalWebView, Popup } from '../common';
 import LoginButtons from './LoginButtons';
 import Config from '../../constants/Config';
-import { loginUser, showWebView, verifyGoogleIdToken, parseURL, clearErrorMsg } from '../../actions/AuthActions';
+import { loginUser, showWebView, verifyGoogleIdToken, 
+    parseURL, clearErrorMsg } from '../../actions/AuthActions';
 
 class LoginBox extends Component {
 

@@ -9,7 +9,6 @@ const OpeningHoursRepresentation = (entries) => {
     );
 };
 
-
 function constructOHRep(entries) {
     let string = '';
 
@@ -42,7 +41,5 @@ const getTimeFromEntry = (timeEntry, prefix) => {
     }
     return '';
 };
-
-
 
 export default OpeningHoursRepresentation;

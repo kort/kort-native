@@ -33,7 +33,8 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, 
                 activeMission: action.payload.mission, 
                 missionViewHeight: action.payload.height,
-                missionAnnotations: createMissionAnnotations(action.payload.data, action.payload.id) };
+                missionAnnotations: createMissionAnnotations(
+                    action.payload.data, action.payload.id) };
         case MISSIONS_CLEAR_ERROR_MSG:
             return { ...state, errorMsg: null };  
         default:

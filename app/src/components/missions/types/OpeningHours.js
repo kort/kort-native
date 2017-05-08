@@ -12,7 +12,9 @@ import DaySelection from './DaySelection';
 import OpeningHoursRepresentation from '../../../date/OpeningHoursRepresentation';
 import { ButtonWithIcon, Button, ModalMultiInput } from '../../common';
 import { showDaysSelectionModal, setDays, setFromTime, 
-    setToTime, showFromTimeModal, showToTimeModal, addNewEntry, removeEntry, addNewTimeRange, setOpenEnd, setManuallyEdited } from '../../../actions/OpeningHoursActions';
+    setToTime, showFromTimeModal, showToTimeModal, addNewEntry, 
+    removeEntry, addNewTimeRange, setOpenEnd, 
+    setManuallyEdited } from '../../../actions/OpeningHoursActions';
 
 class OpeningHours extends Component {
 
@@ -227,4 +229,14 @@ const mapStateToProps = ({ openingHoursReducer }) => {
 };
 
 export default connect(mapStateToProps, 
-{ showDaysSelectionModal, setDays, setFromTime, setToTime, showFromTimeModal, showToTimeModal, addNewEntry, removeEntry, addNewTimeRange, setOpenEnd, setManuallyEdited })(OpeningHours);
+{ showDaysSelectionModal, 
+    setDays, 
+    setFromTime, 
+    setToTime, 
+    showFromTimeModal, 
+    showToTimeModal, 
+    addNewEntry, 
+    removeEntry, 
+    addNewTimeRange, 
+    setOpenEnd, 
+    setManuallyEdited })(OpeningHours);

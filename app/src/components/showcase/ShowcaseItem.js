@@ -1,12 +1,11 @@
 import React, { } from 'react';
 import {
     View,
-    Image,
     Text
 } from 'react-native';
 import { Button } from '../common';
 
-const ShowcaseItem = ({ title, description, buttonText, buttonAction, children, bordered }) => {
+const ShowcaseItem = ({ title, description, buttonText, buttonAction, children }) => {
     const { infoStyle, iconStyle, titleStyle, descriptionStyle, buttonStyle } = styles;
 
     return (
