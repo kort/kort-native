@@ -15,16 +15,14 @@ function constructOHRep(entries) {
 
     for (let i = 0; i < entries.length; ++i) {
         const entry = entries[i];
-        string += entry.formattedDays !== null ? entry.formattedDays : '';
-        string += ' ';
-
+        string += entry.formattedDays !== null ? `${entry.formattedDays}` : '';
         let timeEntry = entry.timeRangeEntries[0];
-        string += `${timeEntry.fromTime}-${timeEntry.toTime}`;
+        string += getTimeFromEntry(timeEntry, ' ');
         
         if (!entry.timeRangeEntries[0].openEnd) {
             if (entry.timeRangeEntries.length > 1) {
                 timeEntry = entry.timeRangeEntries[1];
-                string += `,${timeEntry.fromTime}-${timeEntry.toTime}`;  
+                string += getTimeFromEntry(timeEntry, ',');  
             }
         } else {
             string += '+';
@@ -37,6 +35,14 @@ function constructOHRep(entries) {
 
     return string;
 }
+
+const getTimeFromEntry = (timeEntry, prefix) => {
+    if (timeEntry.fromTime !== '' && timeEntry.toTime !== '') {
+        return `${prefix}${timeEntry.fromTime}-${timeEntry.toTime}`;
+    }
+    return '';
+};
+
 
 
 export default OpeningHoursRepresentation;
