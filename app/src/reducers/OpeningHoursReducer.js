@@ -1,3 +1,4 @@
+/* eslint-disable no-confusing-arrow, max-len */
 import {
     ADD_NEW_OH_ENTRY,
     DELETE_OH_ENTRY,

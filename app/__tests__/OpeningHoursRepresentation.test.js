@@ -38,7 +38,8 @@ test('test normal time range', () => {
 
 test('test two normal time ranges', () => {
     const openingHoursArray = [{
-            timeRangeEntries: [createTimeRange('08:00', '12:00', false), createTimeRange('13:00', '18:00', false)],
+            timeRangeEntries: [createTimeRange('08:00', '12:00', false), 
+              createTimeRange('13:00', '18:00', false)],
             formattedDays: 'Mo-Fr' }];
     const result = OpeningHoursRepresentation(openingHoursArray);
   expect(result).toBe('Mo-Fr 08:00-12:00,13:00-18:00');
@@ -54,10 +55,12 @@ test('test open hours', () => {
 
 test('test two normal time ranges on two days', () => {
     const openingHoursArray = [{
-            timeRangeEntries: [createTimeRange('08:00', '12:00', false), createTimeRange('13:00', '18:00', false)],
+            timeRangeEntries: [createTimeRange('08:00', '12:00', false), 
+              createTimeRange('13:00', '18:00', false)],
             formattedDays: 'Mo' },
             {
-            timeRangeEntries: [createTimeRange('08:00', '12:00', false), createTimeRange('13:00', '18:00', false)],
+            timeRangeEntries: [createTimeRange('08:00', '12:00', false), 
+              createTimeRange('13:00', '18:00', false)],
             formattedDays: 'We' }];
     const result = OpeningHoursRepresentation(openingHoursArray);
   expect(result).toBe('Mo 08:00-12:00,13:00-18:00;We 08:00-12:00,13:00-18:00');
