@@ -21,8 +21,8 @@ export default class KortAPI extends RestClient {
     return this.GET(`${Config.USER_INFO}/${userId}`);
   }
 
-  getMissions(lat, lon, radius) {
-    return this.GET(Config.MISSIONS, { lat, lon, radius });
+  getMissions(lat, lon, radius, lang) {
+    return this.GET(Config.MISSIONS, { lat, lon, radius, lang });
   }
 
   getHighscore(type, limit) {

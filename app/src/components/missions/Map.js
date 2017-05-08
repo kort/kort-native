@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import Mapbox, { MapView } from 'react-native-mapbox-gl';
 import { connect } from 'react-redux';
+import ReactNativeI18n from 'react-native-i18n';
 import Config from '../../constants/Config';
 import { showMapModeFullscreen } from '../../actions/MapActions';
 import { downloadMissions, startMission } from '../../actions/MissionActions';
@@ -30,7 +31,8 @@ class Map extends Component {
                 this.props.coordsOfDownload, nextProps.currentLocation.coords) 
             > Config.DISTANCE_DIFF_IN_M_FOR_MISSION_FETCHING) {
                 this.props.downloadMissions(
-                    nextProps.currentLocation.coords, Config.RADIUS_IN_M_FOR_MISSION_FETCHING); 
+                    nextProps.currentLocation.coords, Config.RADIUS_IN_M_FOR_MISSION_FETCHING,
+                    ReactNativeI18n.locale); 
             }
         }
         

@@ -8,12 +8,12 @@ import {
 } from './types';
 import KortAPI from '../data/KortAPI';
 
-export const downloadMissions = (coordinate, radius) => {
+export const downloadMissions = (coordinate, radius, language) => {
     const { latitude, longitude } = coordinate;
     return (dispatch) => {
         dispatch({ type: MISSIONS_DOWNLOAD, payload: null });
         const api = new KortAPI();
-        api.getMissions(latitude, longitude, radius)
+        api.getMissions(latitude, longitude, radius, language)
             .then(data => {
                 dispatch({
                     type: MISSIONS_DOWNLOADED_SUCCESS,
