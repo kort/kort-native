@@ -35,3 +35,9 @@ test('test over the weekend range mixed with single values', () => {
     const result = WeekdayRepresentation(weekdays);
   expect(result).toBe('We,Fr-Mo');
 });
+
+test('test two consecutive day ranges', () => {
+    const weekdays = [2, 3, 4, 6, 0];
+    const result = WeekdayRepresentation(weekdays);
+  expect(result).toBe('Mo,We-Fr,Su');
+});
