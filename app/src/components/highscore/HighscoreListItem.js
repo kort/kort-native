@@ -3,6 +3,7 @@ import {
         View,
         Text
      } from 'react-native';
+import I18n from 'react-native-i18n';
 
 class HighscoreListItem extends Component {
 
@@ -20,7 +21,7 @@ class HighscoreListItem extends Component {
                         <Text style={styles.textStyle}>{this.props.data.username}</Text>
                     </View>
                     <View style={styles.missionStyle}>
-                        <Text style={styles.textStyle}>Missions</Text>
+                        <Text style={styles.textStyle}>{I18n.t('highscore_missions')}</Text>
                         <Text style={styles.textStyleBold}>{this.props.data.mission_count}</Text>
                     </View>
                     <View style={styles.koinStyle}>

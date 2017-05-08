@@ -58,12 +58,13 @@ const English = {
     highscore_tab_month: 'Month',
     highscore_tab_week: 'Week',
     highscore_tab_day: 'Day',
+    highscore_missions: 'Missions',
 
     // Profile
     profile_login: 'Login',
     profile_logout: 'Logout',
-    profile_missions_today: 'missions',
-    profile_missions: 'missions today',
+    profile_missions: 'missions',
+    profile_missions_today: 'missions today',
 
     // Settings
     settings_general_settings: 'General Settings',

@@ -20,6 +20,9 @@ class HighscoreOverview extends Component {
         this.props.tabChanged(index);
     }
 
+    tabCategories = [I18n.t('highscore_tab_day'), I18n.t('highscore_tab_week'), 
+        I18n.t('highscore_tab_month'), I18n.t('highscore_tab_all_time')];
+
     renderSpinner() {
         if (this.props.downloading) {
             return (
@@ -41,7 +44,7 @@ class HighscoreOverview extends Component {
                     tabStyle={styles.tabStyle}
                     activeTabStyle={styles.activeTabStyle}
                     tabTextStyle={styles.tabTextStyle}
-                    values={tabCategories}
+                    values={this.tabCategories}
                     onTabPress={index => this.changeTab(index)}
                 />
                 <HighscoreList 
@@ -56,9 +59,6 @@ class HighscoreOverview extends Component {
         );
     }
 }
-
-const tabCategories = [I18n.t('highscore_tab_day'), I18n.t('highscore_tab_week'), 
-    I18n.t('highscore_tab_month'), I18n.t('highscore_tab_all_time')];
 
 const styles = {
     bgColor: {
