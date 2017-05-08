@@ -104,13 +104,14 @@ class Map extends Component {
             this.props.onOpenAnnotation();
 
             //check if mission behind mission panel below center
-            this.map.getCenterCoordinateZoomLevel(data => {
-                this.map.getDirection(direction => {
-                    if (annotation.latitude < data.latitude && direction === 0) {
-                        this.map.setCenterCoordinate(annotation.latitude, annotation.longitude, true, null);
-                    }
-                });
-            });
+            // this.map.getCenterCoordinateZoomLevel(data => {
+            //     this.map.getDirection(direction => {
+            //         if (annotation.latitude < data.latitude && direction === 0) {
+            //             this.map.setCenterCoordinate(annotation.latitude, annotation.longitude, true, null);
+            //         }
+            //     });
+            // });
+            this.map.setCenterCoordinateZoomLevel(annotation.latitude, annotation.longitude, Config.MAPBOX_MISSION_ZOOM_LEVEL, true, null);
     }
 
     centerMapAroundCurrentLocation() {
