@@ -134,6 +134,7 @@ dependencies {
     }
     compile 'com.google.android.gms:play-services-auth:9.2.1' // should be at least 9.0.0
     compile project(':reactnativemapboxgl')
+    compile project(':react-native-i18n')
 
 }
 

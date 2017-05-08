@@ -12,6 +12,7 @@ import com.facebook.soloader.SoLoader;
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
 import com.mapbox.reactnativemapboxgl.ReactNativeMapboxGLPackage;
 
+import com.i18n.reactnativei18n.ReactNativeI18n;  // <-- Add to ReactNativeI18n to the imports
 
 import java.util.Arrays;
 import java.util.List;
@@ -29,7 +30,9 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
           new RNGoogleSigninPackage(),
-          new ReactNativeMapboxGLPackage()
+          new ReactNativeMapboxGLPackage(),
+          new ReactNativeI18n() // <-- Add it to the packages list
+
       );
     }
   };
