@@ -1,6 +1,6 @@
 /**
  * this helper library transforms an array of date entries
- * into a according opening_hours OSM String
+ * into an according opening_hours OSM String
  * @param {*} entries 
  */
 const OpeningHoursRepresentation = (entries) => {
