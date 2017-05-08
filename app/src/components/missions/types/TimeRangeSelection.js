@@ -5,6 +5,7 @@ import {
     Text
 } from 'react-native';
 import { connect } from 'react-redux';
+import I18n from 'react-native-i18n';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import { setFromTime, 
     setToTime, showFromTimeModal, showToTimeModal } from '../../../actions/OpeningHoursActions';
@@ -63,14 +64,16 @@ import { answerModalVisible } from '../../../actions/AnswerSelectionActions';
         <View style={containerStyle}>
             <TouchableOpacity onPress={this.showFromModal.bind(this)}>
                 <Text style={textStyle}>
-                    {this.props.data.fromTime === '' ? 'From' : this.props.data.fromTime}
+                    {this.props.data.fromTime === '' ? 
+                        I18n.t('mission_answer_opening_hours_placeholder_from') : 
+                        this.props.data.fromTime}
                 </Text>
                 <DateTimePicker
                     isVisible={this.props.data.fromTimeModalVisible}
                     onConfirm={this.handleDatePickedFrom.bind(this)}
                     onCancel={this.hideFromModal.bind(this)}
                     mode='time'
-                    titleIOS='From'
+                    titleIOS={I18n.t('mission_answer_opening_hours_placeholder_from')}
                 />
                 </TouchableOpacity>
                 <Text style={textStyle}>-</Text>
@@ -80,10 +83,12 @@ import { answerModalVisible } from '../../../actions/AnswerSelectionActions';
                     onConfirm={this.handleDatePickedTo.bind(this)}
                     onCancel={this.hideToModal.bind(this)}
                     mode='time'
-                    titleIOS='To'
+                    titleIOS={I18n.t('mission_answer_opening_hours_placeholder_to')}
                 />
                 <Text style={textStyle}>
-                    {this.props.data.toTime === '' ? 'To' : this.props.data.toTime}
+                    {this.props.data.toTime === '' ?
+                        I18n.t('mission_answer_opening_hours_placeholder_to') : 
+                        this.props.data.toTime}
                     {this.renderOpenEnd()}
                 </Text>
                 </TouchableOpacity>

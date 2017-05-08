@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {} from 'react-native';
 import { connect } from 'react-redux';
+import I18n from 'react-native-i18n';
 import { answerModalVisible, 
          selectedAnswer, 
          setFreetextAvailable, 
@@ -27,7 +28,7 @@ class AnswerSelection extends Component {
     render() {
         return (
             <CustomSelectionView 
-                title='Choose your answer'
+                title={I18n.t('mission_answer_choose_your_answer')}
                 options={this.props.options} 
                 onSelection={(answer) => this.answerSelected(answer)}
                 style={styles.selectionViewStyle}

@@ -5,6 +5,7 @@ import {
     TouchableWithoutFeedback
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
+import I18n from 'react-native-i18n';
 import { Popup } from '../common/';
 
 class AchievementItem extends Component {
@@ -21,7 +22,8 @@ class AchievementItem extends Component {
 
     createMessage(message, achieved, achievementDate) {
         if (achieved) {
-            return `${message}\n\nCongratulations. You have earned this award on ${achievementDate}.`;
+            return I18n.t('achievements_message_congratulations_award', 
+                { message, achievementDate });
         }
         return message;
     }

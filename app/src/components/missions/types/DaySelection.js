@@ -7,21 +7,10 @@ import {
     TouchableOpacity
  } from 'react-native';
  import { connect } from 'react-redux';
+ import I18n from 'react-native-i18n';
 import SelectMultiple from 'react-native-select-multiple';
 import { showDaysSelectionModal, setDays } from '../../../actions/OpeningHoursActions';
 import { answerModalVisible } from '../../../actions/AnswerSelectionActions';
-
-const days = [
-    { value: 0, label: 'Monday' },
-    { value: 1, label: 'Tuesday' },
-    { value: 2, label: 'Wednesday' },
-    { value: 3, label: 'Thursday' },
-    { value: 4, label: 'Friday' },
-    { value: 5, label: 'Saturday' },
-    { value: 6, label: 'Sunday' },
-    { value: 10, label: 'Public Holiday' },
-    { value: 11, label: 'Open 24/7' }
-];
 
  class DaySelection extends Component {
 
@@ -38,6 +27,18 @@ const days = [
         this.props.answerModalVisible(false);
     }
 
+    days = [
+        { value: 0, label: I18n.t('mission_answer_opening_hours_monday') },
+        { value: 1, label: I18n.t('mission_answer_opening_hours_tuesday') },
+        { value: 2, label: I18n.t('mission_answer_opening_hours_wednesday') },
+        { value: 3, label: I18n.t('mission_answer_opening_hours_thursday') },
+        { value: 4, label: I18n.t('mission_answer_opening_hours_friday') },
+        { value: 5, label: I18n.t('mission_answer_opening_hours_saturday') },
+        { value: 6, label: I18n.t('mission_answer_opening_hours_sunday') },
+        { value: 10, label: I18n.t('mission_answer_opening_hours_public_holidays') },
+        { value: 11, label: I18n.t('mission_answer_opening_hours_24_7') }
+    ];
+
     render() {
         return (
             <View>
@@ -45,7 +46,8 @@ const days = [
                     onPress={this.showModal}
                 >
                     <Text style={styles.textStyle}>
-                        {this.props.data.formattedDays ? this.props.data.formattedDays : 'Days'}
+                        {this.props.data.formattedDays ? this.props.data.formattedDays : 
+                        I18n.t('mission_answer_opening_hours_placeholder_days')}
                     </Text>
                 </TouchableOpacity>
                 <Modal
@@ -58,7 +60,7 @@ const days = [
                 <View style={styles.containerStyle}>
                     <View style={styles.optionsStyle}>
                     <SelectMultiple
-                        items={days}
+                        items={this.days}
                         selectedItems={this.props.data.days}
                         onSelectionsChange={this.onSelectionsChange}
                     />
@@ -70,7 +72,6 @@ const days = [
             </View>
         );
     }
- 
 }
 
  const styles = {

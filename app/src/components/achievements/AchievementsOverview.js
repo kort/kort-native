@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import _ from 'lodash';
+import I18n from 'react-native-i18n';
 import AchievementItem from './AchievementItem';
 import { downloadAchievements, clearErrorMsg } from '../../actions/AchievementsActions';
 import { Spinner, Popup } from '../common';
@@ -64,7 +65,7 @@ class AchievementsOverview extends Component {
                 <Popup
                     visible={this.props.errorMsg !== null}
                     onAccept={this.onAccept.bind(this)}
-                    message='There was an error connecting to the server. Check your connectivity.'
+                    message={I18n.t('error_message_bad_connectivity')}
                 />
             </View>
         );

@@ -7,6 +7,7 @@ import {
 import { connect } from 'react-redux';
 import ModalDropdown from 'react-native-modal-dropdown';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import I18n from 'react-native-i18n';
 import TimeRangeSelection from './TimeRangeSelection';
 import DaySelection from './DaySelection';
 import OpeningHoursRepresentation from '../../../date/OpeningHoursRepresentation';
@@ -103,7 +104,8 @@ class OpeningHours extends Component {
             return (
                  <View style={styles.timeColStyle} key={`v${row}`}>
                     <ModalDropdown 
-                        options={['New Time Entry', 'Open End']}
+                        options={[I18n.t('mission_answer_opening_hours_add_time_entry'), 
+                            I18n.t('mission_answer_opening_hours_open_end')]}
                         animated={false}
                         showsVerticalScrollIndicator={false}
                         adjustFrame={style => this.adjustDropdownFrame(style)}

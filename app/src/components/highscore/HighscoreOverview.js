@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import SegmentedControlTab from 'react-native-segmented-control-tab';
 import { connect } from 'react-redux';
+import I18n from 'react-native-i18n';
 import HighscoreList from './HighscoreList';
 import { tabChanged, clearErrorMsg } from '../../actions/HighscoreActions';
 import { Spinner, Popup } from '../common';
@@ -49,14 +50,15 @@ class HighscoreOverview extends Component {
                 <Popup
                         visible={this.props.errorMsg !== null}
                         onAccept={this.onAccept.bind(this)}
-                        message='There was an error connecting to the server. Check your connectivity.'
+                        message={I18n.t('error_message_bad_connectivity')}
                 />
             </View>
         );
     }
 }
 
-const tabCategories = ['Day', 'Week', 'Month', 'All Time'];
+const tabCategories = [I18n.t('highscore_tab_day'), I18n.t('highscore_tab_week'), 
+    I18n.t('highscore_tab_month'), I18n.t('highscore_tab_all_time')];
 
 const styles = {
     bgColor: {

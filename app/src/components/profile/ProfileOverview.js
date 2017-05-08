@@ -11,13 +11,15 @@ import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import I18n from 'react-native-i18n';
 import { KortCoin, Popup } from '../common';
 import { updateUser, showConfirmModal, logoutUser } from '../../actions/AuthActions';
 
 class ProfileOverview extends Component {
 
     componentDidMount() {
-        Actions.refresh({ rightTitle: this.props.loggedIn ? 'Logout' : 'Login' });
+        Actions.refresh({ rightTitle: this.props.loggedIn ? 
+            I18n.t('profile_logout') : I18n.t('profile_login') });
     }
 
     onRefresh() {
@@ -92,10 +94,10 @@ class ProfileOverview extends Component {
                             {this.props.user.koin_count} koins
                         </Text>
                         <Text style={styles.textStyle}>
-                            {this.props.user.mission_count} missions
+                            {this.props.user.mission_count} {I18n.t('profile_missions')}
                         </Text>
                         <Text style={styles.textStyle}>
-                            {this.props.user.mission_count_today} missions today
+                            {this.props.user.mission_count_today} {I18n.t('profile_missions_today')}
                         </Text>
                     </View>
                 </View>
@@ -104,7 +106,7 @@ class ProfileOverview extends Component {
                     visible={this.props.showConfirm}
                     confirm
                     onDecline={() => this.props.showConfirmModal(false)}
-                    message='Do you really want to logout?'
+                    message={I18n.t('logout_message')}
                 >
                     <Icon 
                             style={{ color: '#395971', alignSelf: 'center' }}
@@ -117,7 +119,7 @@ class ProfileOverview extends Component {
         } 
         return (
             <Text style={[styles.textStyle, { paddingTop: 100, alignSelf: 'center' }]}>
-                Please log in
+                {I18n.t('login_please_login')}
             </Text>);
     }
 

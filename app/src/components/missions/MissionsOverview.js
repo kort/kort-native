@@ -3,6 +3,7 @@ import {
     View
 } from 'react-native';
 import { connect } from 'react-redux';
+import I18n from 'react-native-i18n';
 import Map from './Map';
 import MissionSolver from './MissionSolver';
 import MissionView from './MissionView';
@@ -68,12 +69,12 @@ class MissionsOverview extends Component {
                 <Popup
                         visible={this.props.accuracyThresholdReached && !this.state.hideModal}
                         onAccept={this.onInfoAccept.bind(this)}
-                        message='Your GPS signal is bad. Get outdoors.'
+                        message={I18n.t('error_message_bad_gps')}
                 />  
                 <Popup
                         visible={this.props.errorMsg !== null}
                         onAccept={this.onAccept.bind(this)}
-                        message='There was an error connecting to the server. Check your connectivity.'
+                        message={I18n.t('error_message_bad_connectivity')}
                 />     
              </View>
         );

@@ -6,6 +6,7 @@ import {
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux'; 
 import { GoogleSignin } from 'react-native-google-signin';
+import I18n from 'react-native-i18n';
 import { ModalSpinner, ModalWebView, Popup } from '../common';
 import LoginButtons from './LoginButtons';
 import Config from '../../constants/Config';
@@ -124,7 +125,7 @@ class LoginBox extends Component {
                 <Popup
                         visible={this.props.errorMsg !== null}
                         onAccept={this.onAccept.bind(this)}
-                        message='There was an error connecting to the server. Check your connectivity.'
+                        message={I18n.t('error_message_bad_connectivity')}
                 />       
             </View>
         );

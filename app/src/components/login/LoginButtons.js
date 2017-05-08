@@ -2,6 +2,7 @@ import React from 'react';
 import {
   View
 } from 'react-native';
+import I18n from 'react-native-i18n';
 import * as Animatable from 'react-native-animatable';
 import { Button, ButtonWithImage } from '../common';
 
@@ -16,22 +17,22 @@ const LoginButtons = ({ signInGoogle, signInOSM, signInFacebook, proceedWithoutL
                 <ButtonWithImage 
                     onPress={signInGoogle}
                     imgSource={'google'}
-                >Sign in with Google
+                >{I18n.t('login_button_sign_in_with', { provider: 'Google' })}
                 </ButtonWithImage> 
                 <ButtonWithImage 
                     onPress={signInOSM}
                     imgSource={'osm'}
-                >Sign in with OSM
+                >{I18n.t('login_button_sign_in_with', { provider: 'OSM' })}
                 </ButtonWithImage> 
                 <ButtonWithImage 
                     onPress={signInFacebook}
                     imgSource={'facebook'}
-                >Sign in with Facebook
+                >{I18n.t('login_button_sign_in_with', { provider: 'Facebook' })}
                 </ButtonWithImage>  
                 <Button 
                     style={{ marginTop: 20 }}
                     onPress={proceedWithoutLogin}
-                >Proceed without login
+                >{I18n.t('login_button_sign_in_without_login')}
                 </Button>          
             </View>
     );

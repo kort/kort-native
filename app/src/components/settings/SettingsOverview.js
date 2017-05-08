@@ -3,6 +3,7 @@ import {
     View,
     Platform
 } from 'react-native';
+import I18n from 'react-native-i18n';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import SettingsList from 'react-native-settings-list';
@@ -18,7 +19,7 @@ class SettingsOverview extends Component {
                     borderColor={styles.borderColor}
                 >
                     <SettingsList.Header 
-                        headerText='General Settings' 
+                        headerText={I18n.t('settings_general_settings')}
                         headerStyle={styles.headerStyle} 
                     />
                     <SettingsList.Item
@@ -26,8 +27,8 @@ class SettingsOverview extends Component {
                         switchState={this.props.stats}
                         switchOnValueChange={(value) => this.props.statsChanged(value)}
                         hasSwitch
-                        title='Send Statistics'
-                        titleInfo='Earn additional Koins'
+                        title={I18n.t('settings_send_stats')}
+                        titleInfo={I18n.t('settings_earn_additional_koins')}
                         titleInfoStyle={{ fontSize: 12 }}
                     />
                     <SettingsList.Item
@@ -35,20 +36,20 @@ class SettingsOverview extends Component {
                         switchState={this.props.mapRotation}
                         switchOnValueChange={(value) => this.props.mapRotationChanged(value)}
                         hasSwitch
-                        title='Allow Map Rotation'
+                        title={I18n.t('settings_allow_map_rotation')}
                     />
                     <SettingsList.Header 
-                        headerText='Info' 
+                        headerText={I18n.t('settings_info')}
                         headerStyle={styles.headerStyle}
                     />
                     <SettingsList.Item 
-                        title='Showcase' 
+                        title={I18n.t('settings_showcase')}
                         hasNavArrow 
                         arrowStyle={styles.arrowStyle} 
                         onPress={() => Actions.showcase()} 
                     />
                     <SettingsList.Item 
-                        title='About Kort' 
+                        title={I18n.t('settings_about_kort')} 
                         hasNavArrow 
                         arrowStyle={styles.arrowStyle} 
                         onPress={() => Actions.about()} 
@@ -81,7 +82,6 @@ const styles = {
 };
 
 const mapStateToProps = ({ settingsReducer }) => {
-    console.log('settings red', settingsReducer);
     const { stats, mapRotation } = settingsReducer;
     return { stats, mapRotation };
 };

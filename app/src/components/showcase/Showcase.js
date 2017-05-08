@@ -10,6 +10,7 @@ import {
 import PageControl from 'react-native-page-control';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import IconFA from 'react-native-vector-icons/FontAwesome';
+import I18n from 'react-native-i18n';
 import ShowcaseItem from './ShowcaseItem';
 
 class Showcase extends Component {
@@ -55,9 +56,9 @@ class Showcase extends Component {
                 >
                     <View style={[{ width: deviceWidth }, styles.pageStyle]}>
                         <ShowcaseItem 
-                            title='Collect Koins'
-                            description='Solve missions in order to collect Koins.'
-                            buttonText='Next'
+                            title={I18n.t('showcase_1_title')}
+                            description={I18n.t('showcase_1_desc')}
+                            buttonText={I18n.t('showcase_button_next')}
                             buttonAction={this.showNextPage.bind(this)}
                         >
                             <IconFA 
@@ -69,9 +70,9 @@ class Showcase extends Component {
                     </View>
                     <View style={[{ width: deviceWidth }, styles.pageStyle]}>
                         <ShowcaseItem 
-                            title='Reach achievements'
-                            description='Try to reach all the achievements.'
-                            buttonText='Next'
+                            title={I18n.t('showcase_2_title')}
+                            description={I18n.t('showcase_2_desc')}
+                            buttonText={I18n.t('showcase_button_next')}
                             buttonAction={this.showNextPage.bind(this)}
                         >
                             <IconFA 
@@ -83,9 +84,9 @@ class Showcase extends Component {
                     </View>
                     <View style={[{ width: deviceWidth }, styles.pageStyle]}>
                         <ShowcaseItem 
-                            title='Get into the highscore'
-                            description='By solving missions you have the change to get into the highscore. Can you make it?'
-                            buttonText='Next'
+                            title={I18n.t('showcase_3_title')}
+                            description={I18n.t('showcase_3_desc')}
+                            buttonText={I18n.t('showcase_button_next')}
                             buttonAction={this.showNextPage.bind(this)}
                         >
                             <IconFA 
@@ -97,9 +98,9 @@ class Showcase extends Component {
                     </View>
                     <View style={[{ width: deviceWidth }, styles.pageStyle]}>
                         <ShowcaseItem 
-                            title='Improve OpenStreetMaps'
-                            description='Your provided answers are validated and written back to OpenStreetMap.'
-                            buttonText="Let's start!"
+                            title={I18n.t('showcase_4_title')}
+                            description={I18n.t('showcase_4_desc')}
+                            buttonText={I18n.t('showcase_button_start')}
                             buttonAction={this.hideShowcase.bind(this)}
                         >
                             <Icon 
