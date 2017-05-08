@@ -46,6 +46,7 @@
 		B540C2AC1E3201CD0006E107 /* GoogleSignIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B540C2A51E3201CD0006E107 /* GoogleSignIn.framework */; };
 		B540C2AD1E3201CD0006E107 /* GoogleSymbolUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B540C2A61E3201CD0006E107 /* GoogleSymbolUtilities.framework */; };
 		B540C2AE1E3201CD0006E107 /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B540C2A71E3201CD0006E107 /* GoogleUtilities.framework */; };
+		B54FDA171EC0BA86006EB5E6 /* libRNI18n.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B54FDA141EC0BA4B006EB5E6 /* libRNI18n.a */; };
 		B58A49681E4C5BC0003D98B8 /* BritannicBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B58A494B1E4C5BBA003D98B8 /* BritannicBold.ttf */; };
 		B5E4DC941E40C52300F60511 /* Mapbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5E4DC931E40C52300F60511 /* Mapbox.framework */; };
 		B5E4DC951E40C52300F60511 /* Mapbox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B5E4DC931E40C52300F60511 /* Mapbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -242,6 +243,20 @@
 			remoteGlobalIDString = 9FD355121D3E4A2900D06170;
 			remoteInfo = RNGoogleSignin;
 		};
+		B54FDA131EC0BA4B006EB5E6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B54FD9F11EC0BA4B006EB5E6 /* RNI18n.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CDD7BF781B2D5125006FDA75;
+			remoteInfo = RNI18n;
+		};
+		B54FDA151EC0BA4B006EB5E6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B54FD9F11EC0BA4B006EB5E6 /* RNI18n.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CDD7BF831B2D5126006FDA75;
+			remoteInfo = RNI18nTests;
+		};
 		B5E4DC7D1E40C4D500F60511 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B5E4DC701E40C4D500F60511 /* RCTMapboxGL.xcodeproj */;
@@ -317,6 +332,7 @@
 		B540C2A51E3201CD0006E107 /* GoogleSignIn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSignIn.framework; sourceTree = "<group>"; };
 		B540C2A61E3201CD0006E107 /* GoogleSymbolUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSymbolUtilities.framework; sourceTree = "<group>"; };
 		B540C2A71E3201CD0006E107 /* GoogleUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleUtilities.framework; sourceTree = "<group>"; };
+		B54FD9F11EC0BA4B006EB5E6 /* RNI18n.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNI18n.xcodeproj; path = "../node_modules/react-native-i18n/RNI18n.xcodeproj"; sourceTree = "<group>"; };
 		B58A494B1E4C5BBA003D98B8 /* BritannicBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BritannicBold.ttf; sourceTree = "<group>"; };
 		B5E4DC701E40C4D500F60511 /* RCTMapboxGL.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTMapboxGL.xcodeproj; path = "../node_modules/react-native-mapbox-gl/ios/RCTMapboxGL.xcodeproj"; sourceTree = "<group>"; };
 		B5E4DC931E40C52300F60511 /* Mapbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Mapbox.framework; sourceTree = "<group>"; };
@@ -335,6 +351,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B54FDA171EC0BA86006EB5E6 /* libRNI18n.a in Frameworks */,
 				B5E4DC981E40C56F00F60511 /* libRCTMapboxGL.a in Frameworks */,
 				B540C29F1E3201990006E107 /* libz.tbd in Frameworks */,
 				B540C29D1E32018D0006E107 /* SystemConfiguration.framework in Frameworks */,
@@ -572,6 +589,7 @@
 		B540C2971E32017D0006E107 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B54FD9F11EC0BA4B006EB5E6 /* RNI18n.xcodeproj */,
 				B540C29E1E3201990006E107 /* libz.tbd */,
 				B540C29C1E32018D0006E107 /* SystemConfiguration.framework */,
 				B540C29A1E3201850006E107 /* SafariServices.framework */,
@@ -592,6 +610,15 @@
 				B540C2A71E3201CD0006E107 /* GoogleUtilities.framework */,
 			);
 			path = GoogleSdk;
+			sourceTree = "<group>";
+		};
+		B54FD9F21EC0BA4B006EB5E6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B54FDA141EC0BA4B006EB5E6 /* libRNI18n.a */,
+				B54FDA161EC0BA4B006EB5E6 /* RNI18nTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		B5E4DC711E40C4D500F60511 /* Products */ = {
@@ -731,6 +758,10 @@
 				{
 					ProductGroup = B540C2781E3201530006E107 /* Products */;
 					ProjectRef = B540C2771E3201530006E107 /* RNGoogleSignin.xcodeproj */;
+				},
+				{
+					ProductGroup = B54FD9F21EC0BA4B006EB5E6 /* Products */;
+					ProjectRef = B54FD9F11EC0BA4B006EB5E6 /* RNI18n.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -922,6 +953,20 @@
 			fileType = archive.ar;
 			path = libRNGoogleSignin.a;
 			remoteRef = B540C2941E3201530006E107 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B54FDA141EC0BA4B006EB5E6 /* libRNI18n.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNI18n.a;
+			remoteRef = B54FDA131EC0BA4B006EB5E6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B54FDA161EC0BA4B006EB5E6 /* RNI18nTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = RNI18nTests.xctest;
+			remoteRef = B54FDA151EC0BA4B006EB5E6 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		B5E4DC7E1E40C4D500F60511 /* libRCTMapboxGL.a */ = {
