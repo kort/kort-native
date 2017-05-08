@@ -5,20 +5,16 @@ import {
 import { connect } from 'react-redux';
 import store from 'react-native-simple-store';
 import { Actions } from 'react-native-router-flux';
-import I18n from 'react-native-i18n';
 import { loginUserSilently, logoutUser } from './actions/AuthActions';
 import { mapRotationChanged, statsChanged } from './actions/SettingsActions';
 import { SHOWCASE_SHOWN, USER, SETTINGS } from './storage/StorageKeys';
 /**
  * This class handles all loading from persistent storage and initiates the according actions
- * as well as i18n initialization
  * @extends Component
  */
 class AppLoader extends Component {
 
   componentDidMount() {
-      this.configureI18n();
-
       store.get(SETTINGS).then(settings => {
           if (settings) {
             this.props.mapRotationChanged(settings.mapRotation);
@@ -41,10 +37,6 @@ class AppLoader extends Component {
             });  
             }
         });      
-  }
-
-  configureI18n() {
-    I18n.fallbacks = true;
   }
 
     render() {

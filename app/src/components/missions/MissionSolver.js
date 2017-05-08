@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import _ from 'lodash';
+import I18n from 'react-native-i18n';
 import { answerSet, 
          answerModalVisible, 
          setFreetextAvailable } from '../../actions/AnswerSelectionActions';
@@ -53,7 +54,7 @@ class MissionSolver extends Component {
             this.setState({ 
                 showModal: true,
                 modalConfirm: false,
-                modalText: `Congratulations! You have earned ${mission.koinReward} additional Koins. Once your answer is validated you will get another ${mission.koinReward} Koins.`,
+                modalText: I18n.t('mission_message_reward', { koinReward: mission.koinReward }),
                 modalType: 'win'
             });
         } else {
@@ -61,7 +62,7 @@ class MissionSolver extends Component {
             this.setState({ 
                 showModal: true,
                 modalConfirm: false,
-                modalText: `Please enter a valid answer!\n\n${validationMessage}`,
+                modalText: I18n.t('mission_message_valid_answer', { validationMessage }),
                 modalType: 'validation'
             });
         }
@@ -72,7 +73,7 @@ class MissionSolver extends Component {
         this.setState({ 
             showModal: true,
             modalConfirm: true,
-            modalText: 'Do you really want to set this mission as unsolvable? It will be hidden from now on.',
+            modalText: I18n.t('mission_message_unsolvable'),
             modalType: 'unsolvable' 
         });
     }
@@ -117,7 +118,7 @@ class MissionSolver extends Component {
             const options = _.map(this.props.activeMission.inputType.options, 
                 (item, index) => { return { value: index, name: item }; });
             if (this.props.activeMission.inputType.name !== 'select') {
-                options.unshift({ value: -1, name: 'other:' });
+                options.unshift({ value: -1, name: I18n.t('mission_answer_options_other') });
             }
             return <AnswerSelection options={options} />;
         }
@@ -129,7 +130,7 @@ class MissionSolver extends Component {
         if (keyboardType !== '') {
             return (
                 <Input
-                    placeHolder='Type in your answer'
+                    placeHolder={I18n.t('mission_answer_placeholder')}
                     keyboardType={keyboardType}
                     value={this.props.answer}
                     onChangeText={value => this.props.answerSet(value)}

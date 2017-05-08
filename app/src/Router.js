@@ -5,6 +5,7 @@ import {
     Actions
 } from 'react-native-router-flux';
 import { connect } from 'react-redux';
+import I18n from 'react-native-i18n';
 import Showcase from './components/showcase/Showcase';
 import MissionsOverview from './components/missions/MissionsOverview';
 import AchievementsOverview from './components/achievements/AchievementsOverview';
@@ -47,11 +48,11 @@ class RouterComponent extends Component {
                     tabs
                     tabBarStyle={styles.tabBarStyle}
                 >
-                    <Scene key='missions' title='Missions' icon={MissionsTabIcon}>
+                    <Scene key='missions' title={I18n.t('tab_missions')} icon={MissionsTabIcon}>
                         <Scene
                             key='missionsOverview'
                             component={MissionsOverview}
-                            title='Missions'
+                            title={I18n.t('navbar_missions')}
                             initial
                             navigationBarStyle={styles.navBarStyle}
                             titleStyle={styles.navBarTitleStyle}
@@ -61,11 +62,15 @@ class RouterComponent extends Component {
                             panHandlers={null}
                         />
                     </Scene>
-                    <Scene key='achievements' title='Achievements' icon={AchievementsTabIcon}>
+                    <Scene 
+                        key='achievements' 
+                        title={I18n.t('tab_achievements')} 
+                        icon={AchievementsTabIcon}
+                    >
                         <Scene
                             key='achievementsOverview'
                             component={AchievementsOverview}
-                            title='Achievements'
+                            title={I18n.t('navbar_achievements')}
                             navigationBarStyle={styles.navBarStyle}
                             titleStyle={styles.navBarTitleStyle}
                             leftButtonImage={{ uri: 'kort_logo_small' }}
@@ -74,11 +79,11 @@ class RouterComponent extends Component {
                             panHandlers={null}
                         />
                     </Scene>
-                    <Scene key='highscore' title='Highscore' icon={HighscoreTabIcon}>
+                    <Scene key='highscore' title={I18n.t('tab_highscore')} icon={HighscoreTabIcon}>
                         <Scene
                             key='highscoreOverview'
                             component={HighscoreOverview}
-                            title='Highscore'
+                            title={I18n.t('navbar_highscore')}
                             navigationBarStyle={styles.navBarStyle}
                             titleStyle={styles.navBarTitleStyle}
                             leftButtonImage={{ uri: 'kort_logo_small' }}
@@ -87,11 +92,11 @@ class RouterComponent extends Component {
                             panHandlers={null}
                         />
                     </Scene>
-                    <Scene key='profile' title='Profile' icon={ProfileTabIcon}>
+                    <Scene key='profile' title={I18n.t('tab_profile')} icon={ProfileTabIcon}>
                         <Scene
                             key='profileOverview'
                             component={ProfileOverview}
-                            title='Profile'                            
+                            title={I18n.t('navbar_profile')}
                             navigationBarStyle={styles.navBarStyle}
                             titleStyle={styles.navBarTitleStyle}
                             leftButtonImage={{ uri: 'kort_logo_small' }}
@@ -103,11 +108,11 @@ class RouterComponent extends Component {
                             panHandlers={null}
                         />
                     </Scene>
-                    <Scene key='settings' title='Settings' icon={SettingsTabIcon}>
+                    <Scene key='settings' title={I18n.t('tab_settings')} icon={SettingsTabIcon}>
                         <Scene
                             key='settingsOverview'
                             component={SettingsOverview}
-                            title='Settings'                            
+                            title={I18n.t('navbar_settings')}
                             navigationBarStyle={styles.navBarStyle}
                             titleStyle={styles.navBarTitleStyle}
                             leftButtonImage={{ uri: 'kort_logo_small' }}
@@ -118,7 +123,7 @@ class RouterComponent extends Component {
                         <Scene
                                 key='about'
                                 component={About}
-                                title='About'
+                                title={I18n.t('navbar_about')}
                                 navigationBarStyle={styles.navBarStyle}
                                 titleStyle={styles.navBarTitleStyle}
                                 leftButtonIconStyle={{ tintColor: 'white' }}
