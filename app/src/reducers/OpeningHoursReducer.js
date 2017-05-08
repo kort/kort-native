@@ -13,8 +13,8 @@ import {
  } from '../actions/types';
 
  const INITIAL_STATE_TIME_RANGE_INSTANCE = {
-    fromTime: 'From',
-    toTime: 'To',
+    fromTime: '',
+    toTime: '',
     fromTimeModalVisible: false,
     toTimeModalVisible: false,
     openEnd: false

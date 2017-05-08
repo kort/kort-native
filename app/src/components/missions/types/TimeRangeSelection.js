@@ -62,7 +62,7 @@ import { answerModalVisible } from '../../../actions/AnswerSelectionActions';
         return (
         <View style={containerStyle}>
             <TouchableOpacity onPress={this.showFromModal.bind(this)}>
-                <Text style={textStyle}>{this.props.data.fromTime}</Text>
+                <Text style={textStyle}>{this.props.data.fromTime === '' ? 'From' : this.props.data.fromTime}</Text>
                 <DateTimePicker
                     isVisible={this.props.data.fromTimeModalVisible}
                     onConfirm={this.handleDatePickedFrom.bind(this)}
@@ -80,7 +80,7 @@ import { answerModalVisible } from '../../../actions/AnswerSelectionActions';
                     mode='time'
                     titleIOS='To'
                 />
-                <Text style={textStyle}>{this.props.data.toTime}{this.renderOpenEnd()}</Text>
+                <Text style={textStyle}>{this.props.data.toTime === '' ? 'To' : this.props.data.toTime}{this.renderOpenEnd()}</Text>
                 </TouchableOpacity>
         </View>
     );
