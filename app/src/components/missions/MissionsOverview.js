@@ -11,10 +11,11 @@ import { clearErrorMsg } from '../../actions/MissionActions';
 
 class MissionsOverview extends Component {
 
-    state = { showModal: false, missionActive: false };
+    state = { hideModal: false, missionActive: false };
 
     onInfoAccept() {
-        this.setState({ showModal: false });
+        console.log('hide gps', this.state.hideModal, this.props.accuracyThresholdReached);
+        this.setState({ hideModal: true });
     }
 
     onAccept() {
@@ -65,7 +66,7 @@ class MissionsOverview extends Component {
                 {this.renderSpinner()}
                 {this.renderMission()}
                 <Popup
-                        visible={this.props.accuracyThresholdReached && !this.state.showModal}
+                        visible={this.props.accuracyThresholdReached && !this.state.hideModal}
                         onAccept={this.onInfoAccept.bind(this)}
                         message='Your GPS signal is bad. Get outdoors.'
                 />  
