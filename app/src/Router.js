@@ -58,6 +58,7 @@ class RouterComponent extends Component {
                             leftButtonImage={{ uri: 'kort_logo_small' }}
                             leftButtonIconStyle={styles.logoStyle}
                             onLeft={() => this.showShowcase()}
+                            panHandlers={null}
                         />
                     </Scene>
                     <Scene key='achievements' title='Achievements' icon={AchievementsTabIcon}>
@@ -70,6 +71,7 @@ class RouterComponent extends Component {
                             leftButtonImage={{ uri: 'kort_logo_small' }}
                             leftButtonIconStyle={styles.logoStyle}
                             onLeft={() => this.showShowcase()}
+                            panHandlers={null}
                         />
                     </Scene>
                     <Scene key='highscore' title='Highscore' icon={HighscoreTabIcon}>
@@ -82,6 +84,7 @@ class RouterComponent extends Component {
                             leftButtonImage={{ uri: 'kort_logo_small' }}
                             leftButtonIconStyle={styles.logoStyle}
                             onLeft={() => this.showShowcase()}
+                            panHandlers={null}
                         />
                     </Scene>
                     <Scene key='profile' title='Profile' icon={ProfileTabIcon}>
@@ -97,6 +100,7 @@ class RouterComponent extends Component {
                             onRight={this.logInOrOut.bind(this)}
                             rightTitle=''
                             rightButtonTextStyle={styles.navBarTitleStyle}
+                            panHandlers={null}
                         />
                     </Scene>
                     <Scene key='settings' title='Settings' icon={SettingsTabIcon}>
@@ -109,6 +113,7 @@ class RouterComponent extends Component {
                             leftButtonImage={{ uri: 'kort_logo_small' }}
                             leftButtonIconStyle={styles.logoStyle}
                             onLeft={() => this.showShowcase()}
+                            panHandlers={null}
                         />
                         <Scene
                                 key='about'
