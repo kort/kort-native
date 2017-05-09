@@ -1,4 +1,5 @@
 import RestClient from 'react-native-rest-client';
+import ReactNativeI18n from 'react-native-i18n';
 import Config from '../constants/Config';
 
 export default class KortAPI extends RestClient {
@@ -21,8 +22,8 @@ export default class KortAPI extends RestClient {
     return this.GET(`${Config.USER_INFO}/${userId}`);
   }
 
-  getMissions(lat, lon, radius, lang) {
-    return this.GET(Config.MISSIONS, { lat, lon, radius, lang });
+  getMissions(lat, lon, radius) {
+    return this.GET(Config.MISSIONS, { lat, lon, radius, lang: this.getLocale() });
   }
 
   getHighscore(type, limit) {
@@ -31,7 +32,11 @@ export default class KortAPI extends RestClient {
   }
 
   getAchievements() {
-    return this.GET(Config.ACHIEVEMENTS);
+    return this.GET(Config.ACHIEVEMENTS, { lang: this.getLocale() });
+  }
+
+  getLocale() {
+    return ReactNativeI18n.locale;
   }
  
 }
