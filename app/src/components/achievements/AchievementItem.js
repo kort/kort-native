@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {
     View,
     Image,
-    TouchableWithoutFeedback
+    TouchableWithoutFeedback,
+    Dimensions
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import I18n from 'react-native-i18n';
@@ -74,9 +75,12 @@ class AchievementItem extends Component {
     }
 }
 
+const deviceWidth = Dimensions.get('window').width;
+
 const styles = {
     itemStyle: {
         backgroundColor: 'transparent',
+        margin: (deviceWidth <= 320) ? 0 : 5,
         height: 100,
         width: 100
     },
