@@ -18,7 +18,6 @@ class LoginBox extends Component {
     componentDidMount() {
         //init google play services
         GoogleSignin.hasPlayServices({ autoResolve: true }).then(() => {
-            console.log('logged in', this.props.loggedIn);
             if (this.props.loggedIn === null) {
                 this.configureGoogleSignIn();
             }
@@ -65,7 +64,6 @@ class LoginBox extends Component {
     }
 
     configureGoogleSignIn() {
-        console.log('google login configure');
         GoogleSignin.configure({
         iosClientId: Config.GOOGLE_IOS_CLIENT_ID, 
         webClientId: Config.GOOGLE_WEB_CLIENT_ID
@@ -82,7 +80,6 @@ class LoginBox extends Component {
     }
 
     signInGoogle() {
-        console.log('google login SIGIN');
         GoogleSignin.signIn()
         .then((user) => {
             console.log('signing in');
