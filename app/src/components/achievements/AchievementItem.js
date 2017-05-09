@@ -77,7 +77,6 @@ class AchievementItem extends Component {
 const styles = {
     itemStyle: {
         backgroundColor: 'transparent',
-        margin: 5,
         height: 100,
         width: 100
     },

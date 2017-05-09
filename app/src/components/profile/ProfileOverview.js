@@ -5,7 +5,8 @@ import {
     Image,
     Text,
     ScrollView,
-    RefreshControl
+    RefreshControl,
+    Dimensions
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
@@ -141,6 +142,8 @@ class ProfileOverview extends Component {
     }
 }
 
+const deviceWidth = Dimensions.get('window').width;
+
 const styles = {
     descriptionStyle: {
         height: 250,
@@ -162,7 +165,6 @@ const styles = {
         borderRadius: 5,
         borderWidth: 1,
         paddingLeft: 30,
-        paddingRight: 20,
         paddingTop: 20,
         paddingBottom: 20,
     },
@@ -196,8 +198,9 @@ const styles = {
     },
     textStyle: {
         color: 'white',
+        backgroundColor: 'transparent',
         textAlign: 'left',
-        fontSize: 20,
+        fontSize: (deviceWidth <= 320) ? 16 : 20,
     },
     userViewStyle: {
         flex: 1,
