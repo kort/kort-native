@@ -1,6 +1,10 @@
 /* eslint-disable react/no-multi-comp */
 import React from 'react';
-import { Text, View } from 'react-native';
+import { 
+    Text, 
+    View,
+    Dimensions
+ } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const TabIcon = ({ title, selected, iconName }) => {
@@ -20,6 +24,8 @@ const TabIcon = ({ title, selected, iconName }) => {
         </View>
     );
 };
+
+const deviceWidth = Dimensions.get('window').width;
 
 const MissionsTabIcon = ({ title, selected }) => {
   return <TabIcon title={title} selected={selected} iconName='map' />;
@@ -61,11 +67,11 @@ const styles = {
     },
     iconStyleUnselected: {
         color: '#657C8E',
-        fontSize: 11
+        fontSize: (deviceWidth <= 320) ? 9 : 10
     },
     iconStyleSelected: {
         color: '#ffffff',
-        fontSize: 11
+        fontSize: (deviceWidth <= 320) ? 9 : 10
     }
 };
 
