@@ -18,7 +18,7 @@ class LoginBox extends Component {
     componentDidMount() {
         //init google play services
         GoogleSignin.hasPlayServices({ autoResolve: true }).then(() => {
-            if (this.props.loggedIn === null) {
+            if (!this.props.loading) {
                 this.configureGoogleSignIn();
             }
         });
