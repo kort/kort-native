@@ -54,10 +54,10 @@ class Map extends Component {
         console.log('tap');       
         const d = new Date();
         const now = d.getTime();
-        if (now - this.state.firstTapAt > 500) {
+        if (now - this.state.firstTapAt > Config.MAPBOX_TAP_DELAY_IN_MS) {
             setTimeout(() => {
                 this.toggleFullscreen();
-            }, 500);        
+            }, Config.MAPBOX_TAP_DELAY_IN_MS);        
         }
         this.props.onTap(); 
         this.setState({ firstTapAt: d.getTime(), annotationOpen: false, activeMission: {} }); 
@@ -89,8 +89,8 @@ class Map extends Component {
         const d = new Date();
         const now = d.getTime();
         // 500ms between taps for not zooming, 500ms for not toggling when clicking on annotation
-        if (now - this.state.annotationOpenedAt > 500) {
-            if (now - this.state.firstTapAt > 500 && Platform.OS === 'ios') {
+        if (now - this.state.annotationOpenedAt > Config.MAPBOX_TAP_DELAY_IN_MS) {
+            if (now - this.state.firstTapAt > Config.MAPBOX_TAP_DELAY_IN_MS && Platform.OS === 'ios') {
                 this.props.showMapModeFullscreen(!this.props.mapModeFullScreen);
             } else if (Platform.OS === 'android') {
                 this.props.showMapModeFullscreen(!this.props.mapModeFullScreen);
