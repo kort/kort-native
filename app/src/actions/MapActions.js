@@ -2,7 +2,8 @@ import { Actions } from 'react-native-router-flux';
 import { 
     TOGGLE_MAPMODE_FULLSCREEN,
     LOCATION_UPDATE,
-    LOCATION_ACCURACY_INSUFFICIENT
+    LOCATION_ACCURACY_INSUFFICIENT,
+    UPDATE_CENTER_COORDINATES
 } from './types';
 
 export const showMapModeFullscreen = (show) => {
@@ -24,5 +25,12 @@ export const locationAccuracyInsufficient = (accuracyInsufficient) => {
     return { 
         type: LOCATION_ACCURACY_INSUFFICIENT,
         payload: accuracyInsufficient 
+    };  
+};
+
+export const updateCenterCoordinates = (coords) => {
+    return { 
+        type: UPDATE_CENTER_COORDINATES,
+        payload: coords 
     };  
 };

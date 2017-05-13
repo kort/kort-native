@@ -6,7 +6,7 @@ import {
 import Mapbox, { MapView } from 'react-native-mapbox-gl';
 import { connect } from 'react-redux';
 import Config from '../../constants/Config';
-import { showMapModeFullscreen } from '../../actions/MapActions';
+import { showMapModeFullscreen, updateCenterCoordinates } from '../../actions/MapActions';
 import { downloadMissions, startMission } from '../../actions/MissionActions';
 import { downloadAchievements } from '../../actions/AchievementsActions';
 import GeoLocation from '../../geolocation/GeoLocation';
@@ -30,7 +30,7 @@ class Map extends Component {
                 this.props.coordsOfDownload, nextProps.currentLocation.coords) 
             > Config.DISTANCE_DIFF_IN_M_FOR_MISSION_FETCHING) {
                 this.props.downloadMissions(
-                    nextProps.currentLocation.coords, Config.RADIUS_IN_M_FOR_MISSION_FETCHING); 
+                    nextProps.currentLocation.coords, Config.RADIUS_IN_M_FOR_MISSION_FETCHING, false); 
             }
         }
         
@@ -69,6 +69,9 @@ class Map extends Component {
             this.setState({ regionChange: true });
             this.map.selectAnnotation(this.props.activeMission.id);
         }
+        this.map.getCenterCoordinateZoomLevel(data => {
+            this.props.updateCenterCoordinates(data);
+        });
     }
 
     onOpenAnnotation(annotation) {
@@ -218,4 +221,4 @@ const mapStateToProps = ({ mapReducer, missionReducer, settingsReducer }) => {
 
 
 export default connect(mapStateToProps, 
-    { showMapModeFullscreen, downloadMissions, startMission, downloadAchievements })(Map);
+    { showMapModeFullscreen, downloadMissions, startMission, downloadAchievements, updateCenterCoordinates })(Map);

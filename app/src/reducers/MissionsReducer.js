@@ -28,7 +28,9 @@ export default (state = INITIAL_STATE, action) => {
                 missionsLoading: false, 
                 missionsData: action.payload.data, 
                 missionAnnotations: createMissionAnnotations(action.payload.data, null), 
-                coordsOfDownload: action.payload.coords };
+                coordsOfDownload: action.payload.coords === null ? 
+                    state.coordsOfDownload : action.payload.coords 
+            };
         case START_MISSION:
             return { ...state, 
                 activeMission: action.payload.mission, 

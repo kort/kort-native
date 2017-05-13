@@ -22,6 +22,7 @@ import {
     SettingsTabIcon
 } from './components/common/TabIcons';
 import { showConfirmModal, loginUserSilently, initUser, logoutUser } from './actions/AuthActions';
+import { downloadMissions } from './actions/MissionActions';
 
 class RouterComponent extends Component {
 
@@ -31,6 +32,10 @@ class RouterComponent extends Component {
         } else {
             Actions.pop();
         }
+    }
+
+    downloadMissionsFromMapCenter() {
+        this.props.downloadMissions(this.props.centerCoordinates, 5000, true);
     }
 
     showShowcase() {
@@ -59,6 +64,8 @@ class RouterComponent extends Component {
                             leftButtonImage={{ uri: 'kort_logo_small' }}
                             leftButtonIconStyle={styles.logoStyle}
                             onLeft={() => this.showShowcase()}
+                            onRight={this.downloadMissionsFromMapCenter.bind(this)}
+                            rightTitle='Download'
                             panHandlers={null}
                         />
                     </Scene>
@@ -156,10 +163,11 @@ const styles = {
     }
 };
 
-const mapStateToProps = ({ authReducer }) => {
+const mapStateToProps = ({ authReducer, mapReducer }) => {
+    const { centerCoordinates } = mapReducer;
     const { loggedIn } = authReducer;
-    return { loggedIn };
+    return { loggedIn, centerCoordinates };
 };
 
 export default connect(mapStateToProps, { 
-    showConfirmModal, loginUserSilently, initUser, logoutUser })(RouterComponent);
+    showConfirmModal, loginUserSilently, initUser, logoutUser, downloadMissions })(RouterComponent);

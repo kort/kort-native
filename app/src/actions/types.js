@@ -12,6 +12,7 @@ export const SHOW_CONFIRM_LOGOUT_MODAL = 'show_confirm_logout_modal';
 export const TOGGLE_MAPMODE_FULLSCREEN = 'toggle_mapmode_fullscreen';
 export const LOCATION_UPDATE = 'location_update';
 export const LOCATION_ACCURACY_INSUFFICIENT = 'location_accuracy_insufficient';
+export const UPDATE_CENTER_COORDINATES = 'update_center_coordinates';
 
 export const ANSWER_MODAL_VISIBLE = 'anwer_modal_visible';
 export const SELECTED_ANSWER = 'selected_answer';
