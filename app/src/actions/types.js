@@ -51,3 +51,7 @@ export const SHOW_DAYS_SELECTION_MODAL = 'show_days_modal';
 export const FROM_TIME = 'from_time';
 export const TO_TIME = 'to_time';
 export const DAYS = 'days';
+
+export const LEFT_CLICK = 'left_click';
+export const RIGHT_CLICK = 'right_click';
+

@@ -23,20 +23,9 @@ import {
 } from './components/common/TabIcons';
 import { showConfirmModal, loginUserSilently, initUser, logoutUser } from './actions/AuthActions';
 import { downloadMissions } from './actions/MissionActions';
+import { onRightClicked } from './actions/NavigationActions';
 
 class RouterComponent extends Component {
-
-    logInOrOut() {
-        if (this.props.loggedIn) {
-            this.props.showConfirmModal(true);        
-        } else {
-            Actions.pop();
-        }
-    }
-
-    downloadMissionsFromMapCenter() {
-        this.props.downloadMissions(this.props.centerCoordinates, 5000, true);
-    }
 
     showShowcase() {
         Actions.showcase();
@@ -64,7 +53,7 @@ class RouterComponent extends Component {
                             leftButtonImage={{ uri: 'kort_logo_small' }}
                             leftButtonIconStyle={styles.logoStyle}
                             onLeft={() => this.showShowcase()}
-                            onRight={this.downloadMissionsFromMapCenter.bind(this)}
+                            onRight={() => this.props.onRightClicked(true, 'mission')}
                             rightTitle='Download'
                             panHandlers={null}
                         />
@@ -109,7 +98,7 @@ class RouterComponent extends Component {
                             leftButtonImage={{ uri: 'kort_logo_small' }}
                             leftButtonIconStyle={styles.logoStyle}
                             onLeft={() => this.showShowcase()}
-                            onRight={this.logInOrOut.bind(this)}
+                            onRight={() => this.props.onRightClicked(true, 'profile')}
                             rightTitle=''
                             rightButtonTextStyle={styles.navBarTitleStyle}
                             panHandlers={null}
@@ -163,11 +152,9 @@ const styles = {
     }
 };
 
-const mapStateToProps = ({ authReducer, mapReducer }) => {
-    const { centerCoordinates } = mapReducer;
-    const { loggedIn } = authReducer;
-    return { loggedIn, centerCoordinates };
-};
-
-export default connect(mapStateToProps, { 
-    showConfirmModal, loginUserSilently, initUser, logoutUser, downloadMissions })(RouterComponent);
+export default connect(null, { showConfirmModal, 
+    loginUserSilently, 
+    initUser, 
+    logoutUser, 
+    downloadMissions, 
+    onRightClicked })(RouterComponent);

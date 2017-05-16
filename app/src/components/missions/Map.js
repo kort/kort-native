@@ -9,6 +9,7 @@ import Config from '../../constants/Config';
 import { showMapModeFullscreen, updateCenterCoordinates } from '../../actions/MapActions';
 import { downloadMissions, startMission } from '../../actions/MissionActions';
 import { downloadAchievements } from '../../actions/AchievementsActions';
+import { onRightClicked } from '../../actions/NavigationActions';
 import GeoLocation from '../../geolocation/GeoLocation';
 import CoordinateCalculations from '../../geolocation/CoordinateCalculations';
 import { RoundButton } from '../common';
@@ -47,6 +48,11 @@ class Map extends Component {
         // detect metric changes
         if (this.props.stats !== nextProps.stats) {
             Mapbox.setMetricsEnabled(nextProps.stats);
+        }
+
+        if (nextProps.currentView === 'mission' && nextProps.rightClicked) {
+            this.props.downloadMissions(this.props.centerCoordinates, 5000, true);
+            this.props.onRightClicked(false, '');
         }
     }
 
@@ -202,11 +208,12 @@ const styles = {
     
 };
 
-const mapStateToProps = ({ mapReducer, missionReducer, settingsReducer }) => {
-    const { mapModeFullScreen, currentLocation } = mapReducer;
+const mapStateToProps = ({ mapReducer, missionReducer, settingsReducer, navigationReducer }) => {
+    const { mapModeFullScreen, currentLocation, centerCoordinates } = mapReducer;
     const { missionAnnotations, activeMission, missionsData, 
         missionsLoading, coordsOfDownload, errorMsg } = missionReducer;
     const { stats, mapRotation } = settingsReducer;
+    const { rightClicked, currentView } = navigationReducer;
     return { mapModeFullScreen, 
         currentLocation, 
         missionAnnotations, 
@@ -216,9 +223,12 @@ const mapStateToProps = ({ mapReducer, missionReducer, settingsReducer }) => {
         coordsOfDownload, 
         errorMsg, 
         stats, 
-        mapRotation };
+        mapRotation,
+        rightClicked,
+        currentView,
+        centerCoordinates };
 };
 
 
 export default connect(mapStateToProps, 
-    { showMapModeFullscreen, downloadMissions, startMission, downloadAchievements, updateCenterCoordinates })(Map);
+    { showMapModeFullscreen, downloadMissions, startMission, downloadAchievements, updateCenterCoordinates, onRightClicked })(Map);

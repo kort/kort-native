@@ -7,6 +7,7 @@ import OpeningHoursReducer from './OpeningHoursReducer';
 import AchievementsReducer from './AchievementsReducer';
 import HighscoreReducer from './HighscoreReducer';
 import SettingsReducer from './SettingsReducer';
+import NavigationReducer from './NavigationReducer';
 
 export default combineReducers({
     authReducer: AuthReducer,
@@ -16,5 +17,6 @@ export default combineReducers({
     openingHoursReducer: OpeningHoursReducer,
     achievementsReducer: AchievementsReducer,
     highscoreReducer: HighscoreReducer,
-    settingsReducer: SettingsReducer
+    settingsReducer: SettingsReducer,
+    navigationReducer: NavigationReducer
 });

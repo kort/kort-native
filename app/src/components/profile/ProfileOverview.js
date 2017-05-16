@@ -15,6 +15,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import I18n from 'react-native-i18n';
 import { KortCoin, Popup } from '../common';
 import { updateUser, showConfirmModal, logoutUser } from '../../actions/AuthActions';
+import { onRightClicked } from '../../actions/NavigationActions';
 
 class ProfileOverview extends Component {
 
@@ -23,11 +24,26 @@ class ProfileOverview extends Component {
             I18n.t('profile_logout') : I18n.t('profile_login') });
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.currentView === 'profile' && nextProps.rightClicked) {
+            this.logInOrOut();
+            this.props.onRightClicked(false, '');
+        }
+    }
+
     onRefresh() {
         if (!this.props.loggedIn) {
             Actions.pop();
         } else {
             this.props.updateUser(this.props.user);
+        }
+    }
+
+    logInOrOut() {
+        if (this.props.loggedIn) {
+            this.props.showConfirmModal(true);        
+        } else {
+            Actions.pop();
         }
     }
 
@@ -216,12 +232,13 @@ const styles = {
     }
 };
 
-const mapStateToProps = ({ authReducer }) => {
+const mapStateToProps = ({ authReducer, navigationReducer }) => {
     console.log(authReducer);
     const { user, loggedIn, loading, showConfirm } = authReducer;
-    return { user, loggedIn, loading, showConfirm };
+    const { rightClicked, currentView } = navigationReducer;
+    return { user, loggedIn, loading, showConfirm, rightClicked, currentView };
 };
 
 
 export default connect(mapStateToProps, 
-{ updateUser, logoutUser, showConfirmModal })(ProfileOverview);
+{ updateUser, logoutUser, showConfirmModal, onRightClicked })(ProfileOverview);
