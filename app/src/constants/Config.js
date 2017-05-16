@@ -28,7 +28,6 @@ export default {
   MISSIONS: `/${API_VERSION}/missions`,
   HIGHSCORE: `/${API_VERSION}/highscore`,
   ACHIEVEMENTS: `/${API_VERSION}/achievements`,
-  ANSWER: `/${API_VERSION}/answer`,
 
   RADIUS_IN_M_FOR_MISSION_FETCHING: 5000,
   DISTANCE_DIFF_IN_M_FOR_MISSION_FETCHING: 1000,
