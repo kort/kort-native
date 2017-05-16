@@ -47,17 +47,17 @@ export default (state = INITIAL_STATE, action) => {
 export const createMissionAnnotations = (data, highlightedFeature) => {
     const annotations = [];
     for (const mission of data) {
-        if (highlightedFeature === mission.id && mission.geomType !== 'point') {
-                annotations.push({
-                id: 'geom',
-                type: mission.geomType,
-                coordinates: mission.coordinates,
-                strokeColor: '#395971',
-                strokeAlpha: 0.6,
-                fillAlpha: 0.6,
-                fillColor: '#395971'
-            });
-        }
+        // if (highlightedFeature === mission.id && mission.geomType !== 'point') {
+        //         annotations.push({
+        //         id: 'geom',
+        //         type: mission.geomType,
+        //         coordinates: mission.coordinates,
+        //         strokeColor: '#395971',
+        //         strokeAlpha: 0.6,
+        //         fillAlpha: 0.6,
+        //         fillColor: '#395971'
+        //     });
+        // }
         annotations.push({
             id: mission.id,
             type: 'point',
