@@ -13,7 +13,6 @@ const INITIAL_STATE = {
 };
 
 export default (state = INITIAL_STATE, action) => {
-    console.log(action);
     switch (action.type) {
         case TOGGLE_MAPMODE_FULLSCREEN:
             return { ...state, mapModeFullScreen: action.payload };

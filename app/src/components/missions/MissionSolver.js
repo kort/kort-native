@@ -240,7 +240,6 @@ const styles = {
 };
 
 const mapStateToProps = ({ answerReducer, missionReducer }) => {
-    console.log('mission', missionReducer);
     const { freetextType, answer } = answerReducer;
     const { activeMission, missionViewHeight } = missionReducer;
     return { freetextType, answer, activeMission, missionViewHeight };
