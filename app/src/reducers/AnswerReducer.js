@@ -7,7 +7,6 @@ import {
     ANSWER_MODAL_VISIBLE
  } from '../actions/types';
 
-//TODO selectedAnswer
 const INITIAL_STATE = {
     selectedAnswer: null,
     freetextType: '',

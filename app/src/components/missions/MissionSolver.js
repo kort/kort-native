@@ -42,10 +42,11 @@ class MissionSolver extends Component {
         const validationMessage = this.validateInput() ? '' : 
             mission.inputType.constraints.description;
         if (this.props.answer !== '' && validationMessage === '') {
-            console.log('win this');
-            this.props.showModal(false, I18n.t('mission_message_reward', { koinReward: mission.koinReward }), 'win');
+            this.props.showModal(false, I18n.t('mission_message_reward', 
+                { koinReward: mission.koinReward }), 'win');
         } else {
-            this.props.showModal(false, I18n.t('mission_message_valid_answer', { validationMessage }), 'validation');
+            this.props.showModal(false, I18n.t('mission_message_valid_answer', 
+                { validationMessage }), 'validation');
         }
     }
 
@@ -117,7 +118,6 @@ class MissionSolver extends Component {
 
     renderModalHeader() {
         if (this.props.modalType === 'win') {
-            console.log('win');
             return <KortCoin animationStyle='win'>{this.props.activeMission.koinReward}</KortCoin>;
         }
     }
@@ -217,9 +217,17 @@ const styles = {
 
 const mapStateToProps = ({ answerReducer, missionReducer }) => {
     console.log(answerReducer);
-    const { freetextType, answer, modalVisible, modalConfirm, modalText, modalType } = answerReducer;
+    const { freetextType, answer, modalVisible, 
+        modalConfirm, modalText, modalType } = answerReducer;
     const { activeMission, missionViewHeight } = missionReducer;
-    return { freetextType, answer, modalVisible, modalConfirm, modalText, modalType, activeMission, missionViewHeight };
+    return { freetextType, 
+        answer, 
+        modalVisible, 
+        modalConfirm, 
+        modalText, 
+        modalType, 
+        activeMission, 
+        missionViewHeight };
 };
 
 

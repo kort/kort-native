@@ -54,5 +54,3 @@ export const showModal = (modalConfirm, modalText, modalType) => {
         } 
     }; 
 };
-
-
