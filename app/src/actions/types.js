@@ -14,10 +14,12 @@ export const LOCATION_UPDATE = 'location_update';
 export const LOCATION_ACCURACY_INSUFFICIENT = 'location_accuracy_insufficient';
 export const UPDATE_CENTER_COORDINATES = 'update_center_coordinates';
 
-export const ANSWER_MODAL_VISIBLE = 'anwer_modal_visible';
 export const SELECTED_ANSWER = 'selected_answer';
 export const ANSWER_FREETEXT_AVAILABLE = 'answer_freetext_available';
 export const ANSWER_SET = 'answer_set';
+export const HIDE_MODAL = 'hide_answer_modal';
+export const SHOW_MODAL = 'show_answer_modal';
+export const ANSWER_MODAL_VISIBLE = 'answer_modal_visible';
 
 export const MISSIONS_DOWNLOAD = 'missions_download';
 export const MISSIONS_DOWNLOADED_SUCCESS = 'missions_downloaded_success';

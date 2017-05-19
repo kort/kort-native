@@ -7,7 +7,8 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import I18n from 'react-native-i18n';
 import { answerSet, 
-         answerModalVisible, 
+         hideModal,
+         showModal, 
          setFreetextAvailable } from '../../actions/AnswerSelectionActions';
 import AnswerSelection from './AnswerSelection';
 import { Input, 
@@ -18,13 +19,6 @@ import OpeningHours from './types/OpeningHours';
 
 class MissionSolver extends Component {
 
-    state = {
-        showModal: false,
-        modalConfirm: false,
-        modalText: '',
-        modalType: ''
-    }
-
     componentDidMount() {
         this.props.answerSet('');
         if (_.isEmpty(this.props.activeMission.options)) {
@@ -33,16 +27,14 @@ class MissionSolver extends Component {
     }
 
     onModalConfirm() {
-        this.setState({ showModal: false });
-        this.props.answerModalVisible(false);
-        if (this.state.modalType === 'unsolvable') {
+        this.props.hideModal(true);
+        if (this.props.modalType === 'unsolvable') {
             console.log('hide mission'); //TODO
         }
     }
 
     onModalDecline() {
-        this.setState({ showModal: false });  
-        this.props.answerModalVisible(false);
+        this.props.hideModal(true);
     }
 
     solveMission() {
@@ -50,32 +42,15 @@ class MissionSolver extends Component {
         const validationMessage = this.validateInput() ? '' : 
             mission.inputType.constraints.description;
         if (this.props.answer !== '' && validationMessage === '') {
-            this.props.answerModalVisible(true);
-            this.setState({ 
-                showModal: true,
-                modalConfirm: false,
-                modalText: I18n.t('mission_message_reward', { koinReward: mission.koinReward }),
-                modalType: 'win'
-            });
+            console.log('win this');
+            this.props.showModal(false, I18n.t('mission_message_reward', { koinReward: mission.koinReward }), 'win');
         } else {
-            this.props.answerModalVisible(true);
-            this.setState({ 
-                showModal: true,
-                modalConfirm: false,
-                modalText: I18n.t('mission_message_valid_answer', { validationMessage }),
-                modalType: 'validation'
-            });
+            this.props.showModal(false, I18n.t('mission_message_valid_answer', { validationMessage }), 'validation');
         }
     }
 
     confirmUnsolvable() {
-        this.props.answerModalVisible(true);
-        this.setState({ 
-            showModal: true,
-            modalConfirm: true,
-            modalText: I18n.t('mission_message_unsolvable'),
-            modalType: 'unsolvable' 
-        });
+        this.props.showModal(true, I18n.t('mission_message_unsolvable'), 'unsolvable');
     }
 
     validateInput() {
@@ -141,7 +116,8 @@ class MissionSolver extends Component {
     }
 
     renderModalHeader() {
-        if (this.state.modalType === 'win') {
+        if (this.props.modalType === 'win') {
+            console.log('win');
             return <KortCoin animationStyle='win'>{this.props.activeMission.koinReward}</KortCoin>;
         }
     }
@@ -150,10 +126,10 @@ class MissionSolver extends Component {
                 return (
                 <Popup 
                     onAccept={this.onModalConfirm.bind(this)}
-                    visible={this.state.showModal}
-                    confirm={this.state.modalConfirm}
+                    visible={this.props.modalVisible}
+                    confirm={this.props.modalConfirm}
                     onDecline={this.onModalDecline.bind(this)}
-                    message={this.state.modalText}
+                    message={this.props.modalText}
                 >
                      {this.renderModalHeader()}
                 </Popup>                    
@@ -240,11 +216,12 @@ const styles = {
 };
 
 const mapStateToProps = ({ answerReducer, missionReducer }) => {
-    const { freetextType, answer } = answerReducer;
+    console.log(answerReducer);
+    const { freetextType, answer, modalVisible, modalConfirm, modalText, modalType } = answerReducer;
     const { activeMission, missionViewHeight } = missionReducer;
-    return { freetextType, answer, activeMission, missionViewHeight };
+    return { freetextType, answer, modalVisible, modalConfirm, modalText, modalType, activeMission, missionViewHeight };
 };
 
 
 export default connect(mapStateToProps, 
-{ answerSet, answerModalVisible, setFreetextAvailable })(MissionSolver);
+{ answerSet, hideModal, showModal, setFreetextAvailable })(MissionSolver);

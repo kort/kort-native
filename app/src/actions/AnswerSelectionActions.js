@@ -1,8 +1,11 @@
 import { 
-    ANSWER_MODAL_VISIBLE,
     SELECTED_ANSWER,
     ANSWER_FREETEXT_AVAILABLE,
-    ANSWER_SET
+    ANSWER_SET,
+    HIDE_MODAL,
+    SHOW_MODAL,
+    ANSWER_MODAL_VISIBLE
+
 } from './types';
 
 export const answerModalVisible = (visible) => {
@@ -33,3 +36,23 @@ export const setFreetextAvailable = (freetextType) => {
         payload: freetextType 
     }; 
 };
+
+export const hideModal = (hide) => {
+        return { 
+        type: HIDE_MODAL,
+        payload: !hide 
+    }; 
+};
+
+export const showModal = (modalConfirm, modalText, modalType) => {
+        return { 
+        type: SHOW_MODAL,
+        payload: {
+            modalConfirm,
+            modalText,
+            modalType
+        } 
+    }; 
+};
+
+
