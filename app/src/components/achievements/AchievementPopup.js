@@ -20,7 +20,9 @@ class AchievementPopup extends Component {
     renderAnimatedImage(uri) {
         return (
             <Animatable.Image
-                animation="bounceIn" easing="ease-out" iterationCount={this.props.animateIndef ? 'infinite' : 1}
+                animation="bounceIn" 
+                easing="ease-out" 
+                iterationCount={this.props.animateIndef ? 'infinite' : 1}
                 style={styles.badgeStyle}
                 source={{ uri }}
                 defaultSource={{ uri: 'placeholderBadge' }}

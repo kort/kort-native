@@ -27,7 +27,8 @@ export default class KortAPI extends RestClient {
   }
 
   sendSolution(schemaId, errorId, solution) {
-    return this.POST(`${Config.MISSIONS}/${schemaId}/${errorId}/solution`, { solution, lang: this.getLocale() });
+    return this.POST(`${Config.MISSIONS}/${schemaId}/${errorId}/solution`, 
+      { solution, lang: this.getLocale() });
   }
 
   getHighscore(type, limit) {

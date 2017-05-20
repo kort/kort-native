@@ -266,7 +266,8 @@ const styles = {
 
 const mapStateToProps = ({ answerReducer, missionReducer, authReducer }) => {
     const { freetextType, answer, modalVisible, 
-        modalConfirm, modalText, modalType, sending, newAchievements, currentAchievementIndex, errorMsg } = answerReducer;
+        modalConfirm, modalText, modalType, sending, 
+        newAchievements, currentAchievementIndex, errorMsg } = answerReducer;
     const { activeMission, missionViewHeight } = missionReducer;
     const { user } = authReducer;
     return { freetextType, 
@@ -286,4 +287,9 @@ const mapStateToProps = ({ answerReducer, missionReducer, authReducer }) => {
 
 
 export default connect(mapStateToProps, 
-{ answerSet, hideModal, showModal, setFreetextAvailable, solveMission, showAchievements })(MissionSolver);
+{ answerSet, 
+    hideModal, 
+    showModal, 
+    setFreetextAvailable, 
+    solveMission, 
+    showAchievements })(MissionSolver);
