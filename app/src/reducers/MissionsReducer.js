@@ -3,7 +3,8 @@ import {
     MISSIONS_DOWNLOADED_SUCCESS,
     MISSIONS_DOWNLOADED_ERROR,
     MISSIONS_CLEAR_ERROR_MSG,
-    START_MISSION
+    START_MISSION,
+    SHOW_MISSION
  } from '../actions/types';
 import Config from '../constants/Config';
 
@@ -14,11 +15,14 @@ const INITIAL_STATE = {
     missionsLoading: false,
     coordsOfDownload: { latitude: 0, longitude: 0 },
     errorMsg: null,
-    missionViewHeight: 300
+    missionViewHeight: 300,
+    missionViewVisible: false
 };
 
 export default (state = INITIAL_STATE, action) => {
-    switch (action.type) {        
+    switch (action.type) {    
+        case SHOW_MISSION:
+            return { ...state, missionViewVisible: action.payload };      
         case MISSIONS_DOWNLOAD:
             return { ...state, missionsLoading: true };        
         case MISSIONS_DOWNLOADED_ERROR:

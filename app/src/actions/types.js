@@ -30,6 +30,7 @@ export const MISSIONS_DOWNLOADED_SUCCESS = 'missions_downloaded_success';
 export const MISSIONS_DOWNLOADED_ERROR = 'missions_downloaded_error';
 export const MISSIONS_CLEAR_ERROR_MSG = 'missions_clear_error_msg';
 export const START_MISSION = 'start_mission';
+export const SHOW_MISSION = 'show_mission';
 
 export const ACHIEVEMENTS_DOWNLOAD = 'achievements_download';
 export const ACHIEVEMENTS_DOWNLOADED_SUCCESS = 'achievements_downloaded_success';

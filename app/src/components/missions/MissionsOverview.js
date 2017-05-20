@@ -8,11 +8,11 @@ import Map from './Map';
 import MissionSolver from './MissionSolver';
 import MissionView from './MissionView';
 import { Spinner, Popup } from '../common';
-import { clearErrorMsg } from '../../actions/MissionActions';
+import { clearErrorMsg, showMission } from '../../actions/MissionActions';
 
 class MissionsOverview extends Component {
 
-    state = { hideModal: false, missionActive: false };
+    state = { hideModal: false };
 
     onInfoAccept() {
         console.log('hide gps', this.state.hideModal, this.props.accuracyThresholdReached);
@@ -24,15 +24,15 @@ class MissionsOverview extends Component {
     }
 
     onOpenAnnotation() {
-        this.setState({ missionActive: true });
+        this.props.showMission(true);
     }
 
     onTap() {
-        this.setState({ missionActive: false });
+        this.props.showMission(false);
     }
 
     renderMission() {
-        if (this.state.missionActive) {
+        if (this.props.missionViewVisible) {
             return (
                 <MissionView
                     heights={[100, this.props.missionViewHeight]}
@@ -102,13 +102,14 @@ const styles = {
 
 const mapStateToProps = ({ mapReducer, missionReducer }) => {
     const { mapModeFullScreen, accuracyThresholdReached } = mapReducer;
-    const { missionsLoading, errorMsg, missionViewHeight } = missionReducer;
+    const { missionsLoading, errorMsg, missionViewHeight, missionViewVisible } = missionReducer;
     return { mapModeFullScreen, 
         accuracyThresholdReached,
         missionsLoading,
         errorMsg,
-        missionViewHeight };
+        missionViewHeight,
+        missionViewVisible };
 };
 
 
-export default connect(mapStateToProps, { clearErrorMsg })(MissionsOverview);
+export default connect(mapStateToProps, { clearErrorMsg, showMission })(MissionsOverview);
