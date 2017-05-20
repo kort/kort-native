@@ -9,13 +9,16 @@ import I18n from 'react-native-i18n';
 import { answerSet, 
          hideModal,
          showModal, 
-         setFreetextAvailable } from '../../actions/AnswerSelectionActions';
+         setFreetextAvailable,
+         solveMission,
+        showAchievements } from '../../actions/AnswerSelectionActions';
 import AnswerSelection from './AnswerSelection';
 import { Input, 
         Button,
         KortCoin,
         Popup } from '../common';
 import OpeningHours from './types/OpeningHours';
+import AchievementPopup from '../achievements/AchievementPopup';
 
 class MissionSolver extends Component {
 
@@ -29,7 +32,13 @@ class MissionSolver extends Component {
     onModalConfirm() {
         this.props.hideModal(true);
         if (this.props.modalType === 'unsolvable') {
-            console.log('hide mission'); //TODO
+            const mission = this.props.activeMission;
+            this.props.solveMission(this.props.user.id, mission, '', false, 0);
+        }
+        console.log(this.props.newAchievements);
+        if (this.props.newAchievements.length > 0) {
+            console.log('new achievements');
+            this.props.showAchievements(0);
         }
     }
 
@@ -42,8 +51,7 @@ class MissionSolver extends Component {
         const validationMessage = this.validateInput() ? '' : 
             mission.inputType.constraints.description;
         if (this.props.answer !== '' && validationMessage === '') {
-            this.props.showModal(false, I18n.t('mission_message_reward', 
-                { koinReward: mission.koinReward }), 'win');
+            this.props.solveMission(this.props.user.id, mission, this.props.answer, true, 0);
         } else {
             this.props.showModal(false, I18n.t('mission_message_valid_answer', 
                 { validationMessage }), 'validation');
@@ -136,6 +144,29 @@ class MissionSolver extends Component {
             );
     }
 
+    showNextAchievementOrClose() {
+        if (this.props.currentAchievementIndex < this.props.newAchievements.length - 1) {
+            this.props.showAchievements(this.props.currentAchievementIndex + 1);
+        } else {
+            this.props.showAchievements(-1);
+        }
+    }
+
+    renderAchievementsModal() {
+        if (this.props.currentAchievementIndex > -1) {
+        const currentAchievement = this.props.newAchievements[this.props.currentAchievementIndex];
+             return (  
+                    <AchievementPopup
+                        visible
+                        onAccept={() => this.showNextAchievementOrClose()}
+                        achievement={currentAchievement}
+                        animateIndef
+                    />                
+            );
+        }
+       return null;
+    }
+
     render() {
         const { bgColor, missionTextStyle, headerStyle,
             containerStyle, unsolvableButtonStyle, completeMissionButtonStyle } = styles;
@@ -163,6 +194,7 @@ class MissionSolver extends Component {
                         </Button>
                </View>
                {this.renderModal()}
+               {this.renderAchievementsModal()}
             </View>
         );
     }
@@ -215,21 +247,26 @@ const styles = {
     }
 };
 
-const mapStateToProps = ({ answerReducer, missionReducer }) => {
-    console.log(answerReducer);
+const mapStateToProps = ({ answerReducer, missionReducer, authReducer }) => {
     const { freetextType, answer, modalVisible, 
-        modalConfirm, modalText, modalType } = answerReducer;
+        modalConfirm, modalText, modalType, sending, newAchievements, currentAchievementIndex, errorMsg } = answerReducer;
     const { activeMission, missionViewHeight } = missionReducer;
+    const { user } = authReducer;
     return { freetextType, 
         answer, 
         modalVisible, 
         modalConfirm, 
         modalText, 
         modalType, 
+        sending,
+        newAchievements,
+        currentAchievementIndex,
+        errorMsg,
         activeMission, 
-        missionViewHeight };
+        missionViewHeight,
+        user };
 };
 
 
 export default connect(mapStateToProps, 
-{ answerSet, hideModal, showModal, setFreetextAvailable })(MissionSolver);
+{ answerSet, hideModal, showModal, setFreetextAvailable, solveMission, showAchievements })(MissionSolver);

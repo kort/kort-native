@@ -4,7 +4,11 @@ import {
     ANSWER_SET,
     HIDE_MODAL,
     SHOW_MODAL,
-    ANSWER_MODAL_VISIBLE
+    ANSWER_MODAL_VISIBLE,
+    SOLUTION_FAIL,
+    SOLUTION_SUCCESS,
+    SEND_SOLUTION,
+    SHOW_NEW_ACHIEVEMENTS
  } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -15,11 +19,27 @@ const INITIAL_STATE = {
     modalConfirm: false,
     modalText: '',
     modalType: '',
-    answerModalVisible: false
+    answerModalVisible: false,
+    sending: false,
+    newAchievements: {},
+    currentAchievementIndex: -1,
+    errorMsg: '',
 };
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
+        case SHOW_NEW_ACHIEVEMENTS:
+            return { ...state, currentAchievementIndex: action.payload };
+        case SOLUTION_SUCCESS:
+            return { ...state, 
+                modalVisible: true, 
+                modalType: 'win',
+                modalText: action.payload.modalText,
+                newAchievements: action.payload.response };
+        case SOLUTION_FAIL:
+            return { ...state, errorMsg: action.payload };
+        case SEND_SOLUTION:
+            return { ...state, sending: true };
         case ANSWER_MODAL_VISIBLE:
             return { ...state, answerModalVisible: action.payload };
         case HIDE_MODAL:

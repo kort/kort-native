@@ -20,6 +20,10 @@ export const ANSWER_SET = 'answer_set';
 export const HIDE_MODAL = 'hide_answer_modal';
 export const SHOW_MODAL = 'show_answer_modal';
 export const ANSWER_MODAL_VISIBLE = 'answer_modal_visible';
+export const SEND_SOLUTION = 'send_solution';
+export const SOLUTION_SUCCESS = 'solution_success';
+export const SOLUTION_FAIL = 'solution_fail';
+export const SHOW_NEW_ACHIEVEMENTS = 'show_new_achievements';
 
 export const MISSIONS_DOWNLOAD = 'missions_download';
 export const MISSIONS_DOWNLOADED_SUCCESS = 'missions_downloaded_success';

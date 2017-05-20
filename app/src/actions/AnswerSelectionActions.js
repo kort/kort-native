@@ -1,12 +1,17 @@
+import I18n from 'react-native-i18n';
 import { 
     SELECTED_ANSWER,
     ANSWER_FREETEXT_AVAILABLE,
     ANSWER_SET,
     HIDE_MODAL,
     SHOW_MODAL,
-    ANSWER_MODAL_VISIBLE
-
+    ANSWER_MODAL_VISIBLE,
+    SEND_SOLUTION,
+    SOLUTION_SUCCESS,
+    SOLUTION_FAIL,
+    SHOW_NEW_ACHIEVEMENTS
 } from './types';
+import KortAPI from '../data/KortAPI';
 
 export const answerModalVisible = (visible) => {
     return { 
@@ -52,5 +57,45 @@ export const showModal = (modalConfirm, modalText, modalType) => {
             modalText,
             modalType
         } 
+    }; 
+};
+
+export const solveMission = (userId, mission, value, solved, additionalKoins) => {
+    return (dispatch) => {  
+    dispatch({ type: SEND_SOLUTION });
+    const api = new KortAPI();
+        const solution = {
+            koins: mission.koinReward + additionalKoins,
+            osm_id: mission.osmId,
+            solved: true,
+            userId,
+            value
+        };
+        api.sendSolution(mission.schema, mission.errorId, solution)
+            .then(response => {
+                if (solved) {
+                    dispatch({ 
+                        type: SOLUTION_SUCCESS,
+                        payload: {
+                            response,
+                            modalText: I18n.t('mission_message_reward', 
+                            { koinReward: mission.koinReward })
+                        }
+                    });
+                }    
+            })
+            .catch(errorMsg => {
+                dispatch({ 
+                    type: SOLUTION_FAIL,
+                    payload: errorMsg 
+                });
+            });
+    };
+};
+
+export const showAchievements = (show) => {
+        return { 
+        type: SHOW_NEW_ACHIEVEMENTS,
+        payload: show 
     }; 
 };
