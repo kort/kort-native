@@ -16,7 +16,8 @@ import AnswerSelection from './AnswerSelection';
 import { Input, 
         Button,
         KortCoin,
-        Popup } from '../common';
+        Popup,
+        ModalSpinner } from '../common';
 import OpeningHours from './types/OpeningHours';
 import AchievementPopup from '../achievements/AchievementPopup';
 
@@ -89,6 +90,14 @@ class MissionSolver extends Component {
         }
     }
 
+    showNextAchievementOrClose() {
+        if (this.props.currentAchievementIndex < this.props.newAchievements.length - 1) {
+            this.props.showAchievements(this.props.currentAchievementIndex + 1);
+        } else {
+            this.props.showAchievements(-1);
+        }
+    }
+
     renderAnswerSelection() {
         //TODO handle different types of mission in a nicer way
         if (this.props.activeMission.type === 'mission_opening_hours') {
@@ -144,14 +153,6 @@ class MissionSolver extends Component {
             );
     }
 
-    showNextAchievementOrClose() {
-        if (this.props.currentAchievementIndex < this.props.newAchievements.length - 1) {
-            this.props.showAchievements(this.props.currentAchievementIndex + 1);
-        } else {
-            this.props.showAchievements(-1);
-        }
-    }
-
     renderAchievementsModal() {
         if (this.props.currentAchievementIndex > -1) {
         const currentAchievement = this.props.newAchievements[this.props.currentAchievementIndex];
@@ -165,6 +166,21 @@ class MissionSolver extends Component {
             );
         }
        return null;
+    }
+
+    renderSending() {
+        return (
+            <View>
+                <ModalSpinner 
+                    visible={this.props.sending}
+                />
+                <Popup
+                    visible={this.props.errorMsg !== null}
+                    onAccept={() => this.props.hideModal(true)}
+                    message={I18n.t('error_message_bad_connectivity')}
+                />
+            </View>
+        );      
     }
 
     render() {
@@ -195,6 +211,7 @@ class MissionSolver extends Component {
                </View>
                {this.renderModal()}
                {this.renderAchievementsModal()}
+               {this.renderSending()}
             </View>
         );
     }

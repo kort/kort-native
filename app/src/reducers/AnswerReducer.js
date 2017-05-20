@@ -23,7 +23,7 @@ const INITIAL_STATE = {
     sending: false,
     newAchievements: {},
     currentAchievementIndex: -1,
-    errorMsg: '',
+    errorMsg: null,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -32,18 +32,19 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, currentAchievementIndex: action.payload };
         case SOLUTION_SUCCESS:
             return { ...state, 
+                sending: false,
                 modalVisible: true, 
                 modalType: 'win',
                 modalText: action.payload.modalText,
                 newAchievements: action.payload.response };
         case SOLUTION_FAIL:
-            return { ...state, errorMsg: action.payload };
+            return { ...state, sending: false, errorMsg: action.payload };
         case SEND_SOLUTION:
             return { ...state, sending: true };
         case ANSWER_MODAL_VISIBLE:
             return { ...state, answerModalVisible: action.payload };
         case HIDE_MODAL:
-            return { ...state, modalVisible: action.payload };
+            return { ...state, errorMsg: null, modalVisible: action.payload };
         case SHOW_MODAL:
             return { ...state, 
                 modalVisible: true, 
