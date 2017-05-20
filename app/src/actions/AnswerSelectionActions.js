@@ -74,7 +74,6 @@ export const solveMission = (userId, mission, value, solved, additionalKoins) =>
         api.sendSolution(mission.schema, mission.errorId, solution)
             .then(response => {
                 if (solved) {
-                    console.log('check');
                     dispatch({ 
                         type: SOLUTION_SUCCESS,
                         payload: {
@@ -86,7 +85,6 @@ export const solveMission = (userId, mission, value, solved, additionalKoins) =>
                 }    
             })
             .catch(errorMsg => {
-                console.log('fail', errorMsg);
                 dispatch({ 
                     type: SOLUTION_FAIL,
                     payload: errorMsg 
