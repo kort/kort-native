@@ -22,7 +22,6 @@ import {
     SettingsTabIcon
 } from './components/common/TabIcons';
 import { showConfirmModal, loginUserSilently, initUser, logoutUser } from './actions/AuthActions';
-import { downloadMissions } from './actions/MissionActions';
 import { onRightClicked } from './actions/NavigationActions';
 
 class RouterComponent extends Component {
@@ -156,5 +155,4 @@ export default connect(null, { showConfirmModal,
     loginUserSilently, 
     initUser, 
     logoutUser, 
-    downloadMissions, 
     onRightClicked })(RouterComponent);
