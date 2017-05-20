@@ -5,9 +5,7 @@ import {
     TouchableWithoutFeedback,
     Dimensions
 } from 'react-native';
-import * as Animatable from 'react-native-animatable';
-import I18n from 'react-native-i18n';
-import { Popup } from '../common/';
+import AchievementPopup from './AchievementPopup';
 
 class AchievementItem extends Component {
 
@@ -19,25 +17,6 @@ class AchievementItem extends Component {
 
     onAccept() {
         this.setState({ showModal: false });
-    }
-
-    createMessage(message, achieved, achievementDate) {
-        if (achieved) {
-            return I18n.t('achievements_message_congratulations_award', 
-                { message, achievementDate });
-        }
-        return message;
-    }
-
-    renderAnimatedImage(uri) {
-        return (
-            <Animatable.Image
-                animation="bounceIn" easing="ease-out" iterationCount={1}
-                style={styles.badgeStyle}
-                source={{ uri }}
-                defaultSource={{ uri: 'placeholderBadge' }}
-            />
-        );
     }
 
     renderImage(uri, achieved) {
@@ -53,21 +32,16 @@ class AchievementItem extends Component {
     }
 
     render() {
-        const { achievementImageURI, achievementDescription, 
-            achieved, achievementDate } = this.props.achievement;
+        const { achievementImageURI, achieved } = this.props.achievement;
         return (  
             <TouchableWithoutFeedback onPress={this.onRowPress.bind(this)}>
                 <View style={styles.itemStyle}>
                         {this.renderImage(achievementImageURI, achieved)}
-                    <Popup
+                    <AchievementPopup
                         visible={this.state.showModal}
                         onAccept={this.onAccept.bind(this)}
-                        message={this.createMessage(achievementDescription, 
-                            achieved, achievementDate)}
-                    >
-                        {achieved ? this.renderAnimatedImage(achievementImageURI) : 
-                            this.renderImage(achievementImageURI)}
-                    </Popup>
+                        achievement={this.props.achievement}
+                    />
                 </View>
             </TouchableWithoutFeedback>
 
