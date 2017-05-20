@@ -6,11 +6,11 @@ import {
 } from './types';
 import KortAPI from '../data/KortAPI';
 
-export const downloadAchievements = (hideSpinner) => {
+export const downloadAchievements = (hideSpinner, userId) => {
     return (dispatch) => {
         dispatch({ type: ACHIEVEMENTS_DOWNLOAD, payload: hideSpinner });
         const api = new KortAPI();
-        api.getAchievements()
+        api.getAchievements(userId)
             .then(data => {
                 //extend data for better UI XP, numberOfItemsInRow
                 const num = 3;

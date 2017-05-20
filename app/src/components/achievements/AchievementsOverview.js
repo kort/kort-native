@@ -14,7 +14,7 @@ import { Spinner, Popup } from '../common';
 class AchievementsOverview extends Component {
 
     componentWillMount() {
-        this.props.downloadAchievements(false);
+        this.props.downloadAchievements(false, this.props.user.id);
     }
 
     onAccept() {
@@ -22,7 +22,7 @@ class AchievementsOverview extends Component {
     }
 
     onRefresh() {
-        this.props.downloadAchievements(true);
+        this.props.downloadAchievements(true, this.props.user.id);
     }
 
     renderRow(rowData) {
@@ -106,13 +106,17 @@ const dataSource = new ListView.DataSource({
   rowHasChanged: (r1, r2) => r1 !== r2,
 });
 
-const mapStateToProps = ({ achievementsReducer }) => {
+const mapStateToProps = ({ achievementsReducer, authReducer }) => {
+    const { user } = authReducer;
     const { achievements, loading, downloading, errorMsg } = achievementsReducer;
+        console.log(achievements);
+
     return {
         dataSource: dataSource.cloneWithRows(achievements), 
         loading,
         downloading,
-        errorMsg
+        errorMsg,
+        user
     };
 };
 

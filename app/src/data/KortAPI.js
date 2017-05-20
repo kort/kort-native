@@ -26,13 +26,17 @@ export default class KortAPI extends RestClient {
     return this.GET(Config.MISSIONS, { lat, lon, radius, lang: this.getLocale() });
   }
 
+  sendSolution(schemaId, errorId, solution) {
+    return this.POST(`${Config.MISSIONS}/${schemaId}/${errorId}/solution`, { solution, lang: this.getLocale() });
+  }
+
   getHighscore(type, limit) {
     console.log(type, limit);
     return this.GET(Config.HIGHSCORE, { type, limit });
   }
 
-  getAchievements() {
-    return this.GET(Config.ACHIEVEMENTS, { lang: this.getLocale() });
+  getAchievements(userId) {
+    return this.GET(Config.ACHIEVEMENTS, { user_id: userId, lang: this.getLocale() });
   }
 
   getLocale() {

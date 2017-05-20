@@ -8,7 +8,6 @@ import { connect } from 'react-redux';
 import Config from '../../constants/Config';
 import { showMapModeFullscreen, updateCenterCoordinates } from '../../actions/MapActions';
 import { downloadMissions, startMission } from '../../actions/MissionActions';
-import { downloadAchievements } from '../../actions/AchievementsActions';
 import { onRightClicked } from '../../actions/NavigationActions';
 import GeoLocation from '../../geolocation/GeoLocation';
 import CoordinateCalculations from '../../geolocation/CoordinateCalculations';
@@ -231,4 +230,4 @@ const mapStateToProps = ({ mapReducer, missionReducer, settingsReducer, navigati
 
 
 export default connect(mapStateToProps, 
-    { showMapModeFullscreen, downloadMissions, startMission, downloadAchievements, updateCenterCoordinates, onRightClicked })(Map);
+    { showMapModeFullscreen, downloadMissions, startMission, updateCenterCoordinates, onRightClicked })(Map);
