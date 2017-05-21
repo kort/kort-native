@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import VersionNumber from 'react-native-version-number';
+import Hyperlink from 'react-native-hyperlink';
 import {
+    Linking,
     View,
     Platform,
     ScrollView,
@@ -12,13 +14,7 @@ import Config from '../../constants/Config';
 
 class About extends Component {
     
-
     render() {
-
-        const gitHubUrl = Config.KORT_GITHUB;
-        const uservoiceUrl = Config.KORT_USERVOICE;
-        const kortUrl = Config.KORT_WEBSITE;
-
         return (
             <View style={styles.bgColor} >
                 <ScrollView
@@ -32,15 +28,21 @@ class About extends Component {
             <Text style={styles.textTitle}>{I18n.t('about_version_title')}</Text>
             <Text style={styles.textSubTitle}>{VersionNumber.appVersion}</Text>
             <Text style={styles.textTitle}>{I18n.t('about_information_title')}</Text>
-            <Text style={styles.textSubTitle}>
-              {`${I18n.t('about_information_homepage')} ${kortUrl}`}
-            </Text>
-            <Text style={styles.textSubTitle}>
-              {`${I18n.t('about_information_feedback')} ${uservoiceUrl}`}
-            </Text>
-            <Text style={styles.textSubTitle}>
-              {`${I18n.t('about_information_bugs')} ${gitHubUrl}`}
-            </Text>
+            <Hyperlink onPress={url => Linking.openURL(url)}>
+                <Text style={styles.textSubTitle}>
+                {`${I18n.t('about_information_homepage')} ${Config.KORT_WEBSITE}`}
+                </Text>
+            </Hyperlink>
+            <Hyperlink onPress={url => Linking.openURL(url)}>
+                <Text style={styles.textSubTitle}>
+                {`${I18n.t('about_information_feedback')} ${Config.KORT_USERVOICE}`}
+                </Text>
+            </Hyperlink>
+            <Hyperlink onPress={url => Linking.openURL(url)}>
+                <Text style={styles.textSubTitle}>
+                {`${I18n.t('about_information_bugs')} ${Config.KORT_GITHUB}`}
+                </Text>
+            </Hyperlink>
             <Text style={styles.textTitle}>{I18n.t('about_developers_title')}</Text>
             <Text style={styles.textSubTitle}>Andreas Egloff</Text>
             <Text style={styles.textSubTitle}>Jürg Hunziker</Text>
@@ -51,15 +53,20 @@ class About extends Component {
             <Text style={styles.textSubTitle}>
               {I18n.t('about_project_advisor')} Prof. Stefan Keller
             </Text>
-            <Image style={styles.hsrlogo} source={require('../../../assets/images/about/hsr_logo.png')} />
+            <Image 
+                style={styles.hsrlogo} 
+                source={require('../../../assets/images/about/hsr_logo.png')} 
+            />
             <Text style={styles.textTitle}>{I18n.t('about_credits_title')}</Text>
             <Text style={styles.textSubTitle}>{I18n.t('about_credits_partner')} Liip AG</Text>
             <Text style={styles.textSubTitle}>
               {I18n.t('about_credits_tiledata')} Klokan Technologies
             </Text>
-            <Text style={styles.textSubTitle}>
-              {I18n.t('about_credits_markers')} Icon made by [author link] from www.flaticon.com
-            </Text>
+            <Hyperlink onPress={url => Linking.openURL(url)}>
+                <Text style={styles.textSubTitle}>
+                {I18n.t('about_credits_markers')} Icon made by Freepik from www.flaticon.com
+                </Text>
+            </Hyperlink>
             <Text style={styles.textTitle}>{I18n.t('about_legal_title')}</Text>
             <Text style={styles.textSubTitle}>{I18n.t('about_legal_message')}</Text>
           </View>
