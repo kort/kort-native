@@ -80,7 +80,7 @@ export const solveMission = (userId, mission, value, solved, additionalKoins) =>
                             response,
                             modalType: 'win',
                             modalText: I18n.t('mission_message_reward', 
-                            { koinReward: mission.koinReward })
+                            { koinReward: mission.koinReward, koins: solution.koins })
                         }
                     });
                 } else {

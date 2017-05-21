@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import SettingsList from 'react-native-settings-list';
 import { mapRotationChanged, statsChanged } from '../../actions/SettingsActions';
+import Config from '../../constants/Config';
 
 class SettingsOverview extends Component {
 
@@ -28,7 +29,8 @@ class SettingsOverview extends Component {
                         switchOnValueChange={(value) => this.props.statsChanged(value)}
                         hasSwitch
                         title={I18n.t('settings_send_stats')}
-                        titleInfo={I18n.t('settings_earn_additional_koins')}
+                        titleInfo={I18n.t('settings_earn_additional_koins', 
+                            { koins: Config.ADDITIONAL_KOINS_FOR_STATS })}
                         titleInfoStyle={{ fontSize: 12 }}
                     />
                     <SettingsList.Item

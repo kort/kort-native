@@ -62,7 +62,9 @@ class MissionSolver extends Component {
         const validationMessage = this.validateInput() ? '' : 
             mission.inputType.constraints.description;
         if (this.props.answer !== '' && validationMessage === '') {
-            this.props.solveMission(this.props.user.id, mission, this.props.answer, true, 0);
+            this.props.solveMission(
+                this.props.user.id, mission, this.props.answer, true, 
+                this.props.stats ? Config.ADDITIONAL_KOINS_FOR_STATS : 0);
         } else {
             this.props.showModal(false, I18n.t('mission_message_valid_answer', 
                 { validationMessage }), 'validation');
@@ -275,13 +277,15 @@ const styles = {
     }
 };
 
-const mapStateToProps = ({ answerReducer, missionReducer, authReducer, mapReducer }) => {
+const mapStateToProps = ({ answerReducer, missionReducer, 
+    authReducer, mapReducer, settingsReducer }) => {
     const { freetextType, answer, modalVisible, 
         modalConfirm, modalText, modalType, sending, 
         newAchievements, currentAchievementIndex, errorMsg } = answerReducer;
     const { activeMission, missionViewHeight } = missionReducer;
     const { user } = authReducer;
     const { centerCoordinates } = mapReducer;
+    const { stats } = settingsReducer;
     return { freetextType, 
         answer, 
         modalVisible, 
@@ -295,7 +299,8 @@ const mapStateToProps = ({ answerReducer, missionReducer, authReducer, mapReduce
         activeMission, 
         missionViewHeight,
         user,
-        centerCoordinates };
+        centerCoordinates,
+        stats };
 };
 
 
