@@ -67,6 +67,11 @@ class About extends Component {
                 {I18n.t('about_credits_markers')} Icon made by Freepik from www.flaticon.com
                 </Text>
             </Hyperlink>
+            <Hyperlink onPress={url => Linking.openURL(url)}>
+                <Text style={styles.textSubTitle}>
+                Fonts: FontAwesome, Ionicons, MaterialIcons
+                </Text>
+            </Hyperlink>
             <Text style={styles.textTitle}>{I18n.t('about_legal_title')}</Text>
             <Text style={styles.textSubTitle}>{I18n.t('about_legal_message')}</Text>
           </View>
