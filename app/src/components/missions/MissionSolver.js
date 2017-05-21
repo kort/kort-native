@@ -6,12 +6,14 @@ import {
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import I18n from 'react-native-i18n';
+import Config from '../../constants/Config';
 import { answerSet, 
          hideModal,
          showModal, 
          setFreetextAvailable,
          solveMission,
         showAchievements } from '../../actions/AnswerSelectionActions';
+import { showMission, downloadMissions } from '../../actions/MissionActions';
 import AnswerSelection from './AnswerSelection';
 import { Input, 
         Button,
@@ -31,20 +33,28 @@ class MissionSolver extends Component {
     }
 
     onModalConfirm() {
-        this.props.hideModal(true);
         if (this.props.modalType === 'unsolvable') {
             const mission = this.props.activeMission;
             this.props.solveMission(this.props.user.id, mission, '', false, 0);
-        }
-        console.log(this.props.newAchievements);
-        if (this.props.newAchievements.length > 0) {
-            console.log('new achievements');
-            this.props.showAchievements(0);
+        } else {
+            this.props.hideModal(true);
+
+            if (this.props.newAchievements.length > 0) {
+                this.props.showAchievements(0);
+            } else {
+                this.hideMission();
+            }
         }
     }
 
     onModalDecline() {
         this.props.hideModal(true);
+    }
+
+    hideMission() {
+        this.props.showMission(false);
+        this.props.downloadMissions(this.props.centerCoordinates, 
+        Config.RADIUS_IN_M_FOR_MISSION_FETCHING, true);
     }
 
     solveMission() {
@@ -95,6 +105,7 @@ class MissionSolver extends Component {
             this.props.showAchievements(this.props.currentAchievementIndex + 1);
         } else {
             this.props.showAchievements(-1);
+            this.hideMission();
         }
     }
 
@@ -264,12 +275,13 @@ const styles = {
     }
 };
 
-const mapStateToProps = ({ answerReducer, missionReducer, authReducer }) => {
+const mapStateToProps = ({ answerReducer, missionReducer, authReducer, mapReducer }) => {
     const { freetextType, answer, modalVisible, 
         modalConfirm, modalText, modalType, sending, 
         newAchievements, currentAchievementIndex, errorMsg } = answerReducer;
     const { activeMission, missionViewHeight } = missionReducer;
     const { user } = authReducer;
+    const { centerCoordinates } = mapReducer;
     return { freetextType, 
         answer, 
         modalVisible, 
@@ -282,7 +294,8 @@ const mapStateToProps = ({ answerReducer, missionReducer, authReducer }) => {
         errorMsg,
         activeMission, 
         missionViewHeight,
-        user };
+        user,
+        centerCoordinates };
 };
 
 
@@ -292,4 +305,6 @@ export default connect(mapStateToProps,
     showModal, 
     setFreetextAvailable, 
     solveMission, 
-    showAchievements })(MissionSolver);
+    showAchievements,
+    showMission,
+    downloadMissions })(MissionSolver);

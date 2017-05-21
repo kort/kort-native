@@ -29,12 +29,13 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case SHOW_NEW_ACHIEVEMENTS:
-            return { ...state, currentAchievementIndex: action.payload };
+            return { ...state, currentAchievementIndex: action.payload };          
         case SOLUTION_SUCCESS:
             return { ...state, 
                 sending: false,
                 modalVisible: true, 
-                modalType: 'win',
+                modalConfirm: false,
+                modalType: action.payload.modalType,
                 modalText: action.payload.modalText,
                 newAchievements: action.payload.response };
         case SOLUTION_FAIL:

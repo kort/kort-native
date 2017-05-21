@@ -67,7 +67,7 @@ export const solveMission = (userId, mission, value, solved, additionalKoins) =>
         const solution = {
             koins: mission.koinReward + additionalKoins,
             osm_id: mission.osmId,
-            solved: true,
+            solved,
             userId,
             value
         };
@@ -78,8 +78,18 @@ export const solveMission = (userId, mission, value, solved, additionalKoins) =>
                         type: SOLUTION_SUCCESS,
                         payload: {
                             response,
+                            modalType: 'win',
                             modalText: I18n.t('mission_message_reward', 
                             { koinReward: mission.koinReward })
+                        }
+                    });
+                } else {
+                    dispatch({ 
+                        type: SOLUTION_SUCCESS,
+                        payload: {
+                            response,
+                            modalType: 'unsolved',
+                            modalText: I18n.t('mission_message_unsolved')
                         }
                     });
                 }    
