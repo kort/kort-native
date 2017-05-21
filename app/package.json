@@ -25,6 +25,7 @@
     "react-native-settings-list": "^1.4.0",
     "react-native-simple-store": "^1.1.0",
     "react-native-vector-icons": "^4.0.0",
+    "react-native-version-number": "^0.1.2",
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",
     "redux-thunk": "^2.1.0"
