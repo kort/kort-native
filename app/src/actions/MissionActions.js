@@ -48,7 +48,7 @@ export const startMission = (data, id) => {
 };
 
 const determineMissionHeight = (mission) => {
-    if (mission.type === 'mission_opening_hours') {
+    if (mission.type === 'opening_hours') {
         return 400;
     }
     return 300;
