@@ -1,6 +1,6 @@
 /* eslint-disable no-useless-escape, spaced-comment, max-len */
 
-const English = {
+const German = {
 
     // Tabs
     tab_missions: 'Missions_de',
@@ -91,6 +91,25 @@ const English = {
     error_message_bad_connectivity: 'There was an error connecting to the server. Check your connectivity._de',
     error_message_bad_gps: 'Your GPS signal is bad. Get outdoors._de',
 
+     // About
+    about_version_title: 'Version_de',
+    about_information_title: 'More information_de',
+    about_information_homepage: 'Website\:_de',
+    about_information_feedback: 'Feedback/FAQ\:_de',
+    about_information_bugs: 'Report a bug\:_de',
+    about_developers_title: 'Developers_de',
+    about_project_title: 'Project_de',
+    about_project_advisor: 'Lead\:_de',
+    about_credits_title: 'Credits_de',
+    about_credits_partner: 'Partner\:_de',
+    about_credits_mapdata: 'Geo data\:_de',
+    about_credits_tiledata: 'Tiles\:_de',
+    about_credits_markers: 'Marker Icons\:_de',
+    about_credits_translation: 'Translation\:_de',
+    about_legal_title: 'Legal note\:_de',
+    about_legal_message: 'Please follow the guidelines of OpenStreetMap and don\'t use copyright protected sources without permission._de',
+
+
 };
 
-export default English;
+export default German;
