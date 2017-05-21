@@ -33,5 +33,10 @@ export default {
   DISTANCE_DIFF_IN_M_FOR_MISSION_FETCHING: 1000,
   ADDITIONAL_KOINS_FOR_STATS: 5,
 
-  HIGHSCORE_LIMIT: 10
+  HIGHSCORE_LIMIT: 10,
+
+  KORT_GITHUB: 'https://github.com/kort/kort-native',
+  KORT_USERVOICE: 'https://kort.uservoice.com/',
+  KORT_WEBSITE: 'www.kort.ch'
+
 };
