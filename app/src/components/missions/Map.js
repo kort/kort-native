@@ -50,7 +50,7 @@ class Map extends Component {
         }
 
         if (nextProps.currentView === 'mission' && nextProps.rightClicked) {
-            this.props.downloadMissions(this.props.centerCoordinates, 5000, true);
+            this.props.downloadMissions(this.props.centerCoordinates, Config.RADIUS_IN_M_FOR_MISSION_FETCHING, true);
             this.props.onRightClicked(false, '');
         }
     }
