@@ -80,10 +80,12 @@ class ProfileOverview extends Component {
     }
 
     renderProfileView() {
+        console.log(this.props.user.pic_url);
         if (this.props.loggedIn) {
             return (
                 <View style={styles.userViewStyle}>
                     <View style={styles.headerBoxStyle}>
+                        <View style={styles.imageContainerStyle}>
                         <Image
                             source={{ uri: this.props.user.pic_url }}
                             style={styles.imageStyle}
@@ -91,6 +93,7 @@ class ProfileOverview extends Component {
                         >
                         {this.renderProviderImage()}
                         </Image>
+                        </View>
                         <View style={styles.usernameBoxStyle}>
                             <Text style={styles.textStyle}>{this.props.user.username}</Text>
                         </View>
@@ -201,12 +204,14 @@ const styles = {
         borderRadius: 5,
         borderWidth: 1
     },
-    imageStyle: {
-        height: 80,
-        width: 80,
+    imageContainerStyle: {
         alignSelf: 'center',
         marginRight: 20,
         alignItems: 'flex-end',
+    },
+    imageStyle: {
+        height: 80,
+        width: 80
     },
     providerImageStyle: {
         height: 15,

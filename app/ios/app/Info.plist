@@ -61,6 +61,13 @@
 	<dict>
 		<key>NSExceptionDomains</key>
 		<dict>
+			<key>openstreetmap.org</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
 			<key>a592878d.ngrok.io</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
