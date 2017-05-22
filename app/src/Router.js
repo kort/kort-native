@@ -51,9 +51,10 @@ class RouterComponent extends Component {
                             titleStyle={styles.navBarTitleStyle}
                             leftButtonImage={{ uri: 'kort_logo_small' }}
                             leftButtonIconStyle={styles.logoStyle}
+                            rightButtonImage={{ uri: 'download_icon' }}
+                            rightButtonIconStyle={styles.downloadStyle}
                             onLeft={() => this.showShowcase()}
                             onRight={() => this.props.onRightClicked(true, 'mission')}
-                            rightTitle='Download'
                             panHandlers={null}
                         />
                     </Scene>
@@ -148,6 +149,11 @@ const styles = {
         marginLeft: 5, 
         height: 40, 
         width: 48 
+    },
+    downloadStyle: {
+        marginRight: 5, 
+        height: 34, 
+        width: 40  
     }
 };
 
