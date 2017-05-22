@@ -62,9 +62,21 @@ class About extends Component {
             <Text style={styles.textSubTitle}>
               {I18n.t('about_credits_tiledata')} Klokan Technologies
             </Text>
-            <Hyperlink onPress={url => Linking.openURL(url)}>
+            <Hyperlink 
+                onPress={url => Linking.openURL(url)}
+                linkText={url => {
+                    if (url === 'http://www.flaticon.com/authors/freepik') {
+                        return 'Freepik';
+                    } else if (url === 'http://www.flaticon.com/authors/cursor-creative') {
+                        return 'Cursor Creative';
+                    }
+                        return 'www.flaticon.com';
+                    }
+                }
+            >
                 <Text style={styles.textSubTitle}>
-                {I18n.t('about_credits_markers')} Icon made by Freepik from www.flaticon.com
+                {I18n.t('about_credits_markers')}
+                Icon made by http://www.flaticon.com/authors/freepik, http://www.flaticon.com/authors/cursor-creative from www.flaticon.com
                 </Text>
             </Hyperlink>
             <Hyperlink onPress={url => Linking.openURL(url)}>
