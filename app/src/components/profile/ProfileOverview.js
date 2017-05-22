@@ -80,7 +80,6 @@ class ProfileOverview extends Component {
     }
 
     renderProfileView() {
-        console.log(this.props.user.pic_url);
         if (this.props.loggedIn) {
             return (
                 <View style={styles.userViewStyle}>
