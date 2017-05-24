@@ -70,7 +70,7 @@ const English = {
     // Settings
     settings_general_settings: 'General Settings',
     settings_send_stats: 'Send Statistics',
-    settings_earn_additional_koins: 'Earn {{koins}} additional Koins',
+    settings_earn_additional_koins: 'Earn {{koins}} additional Koin',
     settings_allow_map_rotation: 'Allow Map Rotation',
     settings_info: 'Info',
     settings_showcase: 'Showcase',

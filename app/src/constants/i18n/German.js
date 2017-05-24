@@ -69,7 +69,7 @@ const German = {
     // Settings
     settings_general_settings: 'General Settings_de',
     settings_send_stats: 'Send Statistics_de',
-    settings_earn_additional_koins: 'Earn {{koins}} additional Koins_de',
+    settings_earn_additional_koins: 'Earn {{koins}} additional Koin_de',
     settings_allow_map_rotation: 'Allow Map Rotation_de',
     settings_info: 'Info_de',
     settings_showcase: 'Showcase_de',
