@@ -36,7 +36,7 @@ const loginUserFail = (dispatch, errorMsg) => {
     });
 };
 
-export const loginUser = (dispatch, user) => {
+export const loginUser = (dispatch, user, update) => {
         const apiSecure = new KortAPI(user.secret);
         apiSecure.getUserinfo(user.id)
         .then(response => {
@@ -44,7 +44,9 @@ export const loginUser = (dispatch, user) => {
             console.log('resp', response);
         })
         .catch(errorMsg => {
-            loginUserFail(dispatch, errorMsg);
+            if (!update) {
+                loginUserFail(dispatch, errorMsg);
+            }
         });
 };
 
@@ -80,12 +82,12 @@ export const secretReceived = (dispatch, user) => {
             type: SECRET_RECEIVED,
             payload: user
         });
-        loginUser(dispatch, user);
+        loginUser(dispatch, user, false);
 };
 
 export const updateUser = (user) => {
     return (dispatch) => {  
-        loginUser(dispatch, user);
+        loginUser(dispatch, user, true);
     };
 };
 
@@ -125,7 +127,7 @@ export const loginUserSilently = (user) => {
     console.log('login user silently');
     return (dispatch) => {
         dispatch({ type: LOGIN_USER });
-        loginUser(dispatch, user);
+        loginUser(dispatch, user, false);
     };
 };
 
