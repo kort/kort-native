@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {
     View,
-    Text
+    Text,
+    Linking
 } from 'react-native';
 import { connect } from 'react-redux';
 import _ from 'lodash';
@@ -19,7 +20,8 @@ import { Input,
         Button,
         KortCoin,
         Popup,
-        ModalSpinner } from '../common';
+        ModalSpinner,
+        ButtonWithImage } from '../common';
 import OpeningHours from './types/OpeningHours';
 import AchievementPopup from '../achievements/AchievementPopup';
 
@@ -111,6 +113,12 @@ class MissionSolver extends Component {
         }
     }
 
+    openOSM() {
+        const { osmId, osmType } = this.props.activeMission;
+        const url = `https://www.openstreetmap.org/${osmType}/${osmId}`;
+        Linking.openURL(url);
+    }
+
     renderAnswerSelection() {
         //TODO handle different types of mission in a nicer way
         if (this.props.activeMission.type === 'opening_hours') {
@@ -197,7 +205,7 @@ class MissionSolver extends Component {
     }
 
     render() {
-        const { bgColor, missionTextStyle, headerStyle,
+        const { bgColor, missionTextStyle, headerStyle, additionalButtonsStyle,
             containerStyle, unsolvableButtonStyle, completeMissionButtonStyle } = styles;
         return (
             <View style={[bgColor, { height: this.props.missionViewHeight }]}>
@@ -215,12 +223,20 @@ class MissionSolver extends Component {
                             style={completeMissionButtonStyle}
                         >Complete Mission
                         </Button>
+                        <View style={additionalButtonsStyle}>
+                        <ButtonWithImage
+                            style={{ borderWidth: 1, paddingRight: 20 }}
+                            onPress={() => this.openOSM()}
+                            imgSource={'osm'}
+                        >OSM
+                        </ButtonWithImage>
                         <Button
                             onPress={this.confirmUnsolvable.bind(this)}
                             style={unsolvableButtonStyle}
                         >
                             Unable to solve
                         </Button>
+                        </View>
                </View>
                {this.renderModal()}
                {this.renderAchievementsModal()}
@@ -274,6 +290,9 @@ const styles = {
     unsolvableButtonStyle: {
         alignSelf: 'center',
         width: 150, 
+    },
+    additionalButtonsStyle: {
+        flexDirection: 'row',
     }
 };
 
