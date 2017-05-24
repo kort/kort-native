@@ -5,7 +5,8 @@ import {
     MISSIONS_DOWNLOADED_ERROR,
     MISSIONS_CLEAR_ERROR_MSG,
     START_MISSION,
-    SHOW_MISSION
+    SHOW_MISSION,
+    DOWNLOAD_MISSION_GEOMETRY
 } from './types';
 import KortAPI from '../data/KortAPI';
 
@@ -67,3 +68,34 @@ export const showMission = (show) => {
         payload: show
     };
 };
+
+export const downloadMissionGeometry = (data, id) => {
+    const mission = _.find(data, { id });
+    const { osmType, osmId } = mission;
+    return (dispatch) => {
+        if (osmType !== 'node') {
+        const api = new KortAPI();
+        api.getMissionGeometry(osmType, osmId)
+            .then(response => {
+                dispatch({
+                    type: DOWNLOAD_MISSION_GEOMETRY,
+                    payload: {
+                        geom: response,
+                        type: osmType
+                    }
+                });
+            })
+            .catch(errorMsg => {    
+                console.log(errorMsg);
+            });
+        }
+        dispatch({
+            type: DOWNLOAD_MISSION_GEOMETRY,
+            payload: {
+                geom: null,
+                type: osmType
+            }
+        });
+    };
+};
+

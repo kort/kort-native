@@ -7,7 +7,7 @@ import Mapbox, { MapView } from 'react-native-mapbox-gl';
 import { connect } from 'react-redux';
 import Config from '../../constants/Config';
 import { showMapModeFullscreen, updateCenterCoordinates } from '../../actions/MapActions';
-import { downloadMissions, startMission } from '../../actions/MissionActions';
+import { downloadMissions, startMission, downloadMissionGeometry } from '../../actions/MissionActions';
 import { onRightClicked } from '../../actions/NavigationActions';
 import GeoLocation from '../../geolocation/GeoLocation';
 import CoordinateCalculations from '../../geolocation/CoordinateCalculations';
@@ -109,6 +109,7 @@ class Map extends Component {
     handleAnnotationOpen(annotation) {
         this.setState({ currentMission: annotation.id, annotationOpen: true });
             this.props.startMission(this.props.missionsData, annotation.id);
+            this.props.downloadMissionGeometry(this.props.missionsData, annotation.id);
             this.props.showMapModeFullscreen(true);
             this.props.onOpenAnnotation();
 
@@ -230,4 +231,4 @@ const mapStateToProps = ({ mapReducer, missionReducer, settingsReducer, navigati
 
 
 export default connect(mapStateToProps, 
-    { showMapModeFullscreen, downloadMissions, startMission, updateCenterCoordinates, onRightClicked })(Map);
+    { showMapModeFullscreen, downloadMissions, startMission, downloadMissionGeometry, updateCenterCoordinates, onRightClicked })(Map);
