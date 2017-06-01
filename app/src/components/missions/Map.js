@@ -142,11 +142,21 @@ class Map extends Component {
         }  
     }
 
+    toggleLayer() {
+        const oldStyle = Config.MAPBOX_STYLE_URL ? Config.MAPBOX_STYLE_URL : Mapbox.mapStyles.streets;
+        const newStyle = Mapbox.mapStyles.satellite;
+        if (styleURL === oldStyle) {
+            styleURL = newStyle;
+        } else {
+            styleURL = oldStyle;
+        }
+    }
+
     map = null;
 
     render() {
         const { bgColor, mapStyleFullScreen, mapStyleSmallScreen, 
-            locBtnFullScreen, locBtnSmallScreen } = styles;
+            locBtnFullScreen, locBtnSmallScreen, satBtnSmallScreen, satBtnFullScreen } = styles;
         return (
             <View style={bgColor}>
                 <GeoLocation />
@@ -173,12 +183,17 @@ class Map extends Component {
                     iconName='my-location' 
                     onPress={this.centerMapAroundCurrentLocation.bind(this)} 
                 />
+                <RoundButton 
+                    style={this.props.mapModeFullScreen ? satBtnFullScreen : satBtnSmallScreen} 
+                    iconName='layers' 
+                    onPress={this.toggleLayer.bind(this)} 
+                />
             </View>
         );
     }
 }
 
-const styleURL = Config.MAPBOX_STYLE_URL ? Config.MAPBOX_STYLE_URL : Mapbox.mapStyles.streets;
+let styleURL = Config.MAPBOX_STYLE_URL ? Config.MAPBOX_STYLE_URL : Mapbox.mapStyles.streets;
 
 const styles = {
     bgColor: {
@@ -204,6 +219,16 @@ const styles = {
         position: 'absolute',
         right: (Platform.OS === 'ios') ? 5 : 13,
         marginTop: (Platform.OS === 'ios') ? 115 : 126,
+    },
+    satBtnFullScreen: {
+        position: 'absolute',
+        right: (Platform.OS === 'ios') ? 5 : 13,
+        marginTop: (Platform.OS === 'ios') ? 51 + 50 : 72 + 50,
+    },
+    satBtnSmallScreen: {
+        position: 'absolute',
+        right: (Platform.OS === 'ios') ? 5 : 13,
+        marginTop: (Platform.OS === 'ios') ? 115 + 50 : 126 + 50,
     }
     
 };
