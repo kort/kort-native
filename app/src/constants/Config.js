@@ -13,7 +13,7 @@ export default {
   MAPBOX_ANNOTATION_SIZE: 30,
   MAPBOX_TAP_DELAY_IN_MS: 250,
 
-  API_URL: 'http://a592878d.ngrok.io',
+  API_URL: 'http://6f9a55b3.ngrok.io',
 
   DEEP_LINK_URL: 'kortapp://payload?',
 
