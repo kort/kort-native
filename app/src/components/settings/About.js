@@ -69,6 +69,8 @@ class About extends Component {
                         return 'Freepik';
                     } else if (url === 'http://www.flaticon.com/authors/cursor-creative') {
                         return 'Cursor Creative';
+                    } else if (url === 'http://www.flaticon.com/authors/hevngrafix') {
+                        return 'HevnGrafix';
                     }
                         return 'www.flaticon.com';
                     }
@@ -76,7 +78,7 @@ class About extends Component {
             >
                 <Text style={styles.textSubTitle}>
                 {I18n.t('about_credits_markers')}
-                Icon made by http://www.flaticon.com/authors/freepik, http://www.flaticon.com/authors/cursor-creative from www.flaticon.com
+                Icon made by http://www.flaticon.com/authors/freepik, http://www.flaticon.com/authors/cursor-creative, http://www.flaticon.com/authors/hevngrafix from www.flaticon.com
                 </Text>
             </Hyperlink>
             <Hyperlink onPress={url => Linking.openURL(url)}>
