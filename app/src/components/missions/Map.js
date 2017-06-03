@@ -74,7 +74,7 @@ class Map extends Component {
             this.setState({ regionChange: true });
              setTimeout(() => {
                 this.map.selectAnnotation(this.props.activeMission.id);
-            }, Config.MAPBOX_TAP_DELAY_IN_MS);        
+            }, Config.MAPBOX_DRAG_DELAY_IN_MS);        
         }
         this.map.getCenterCoordinateZoomLevel(data => {
             this.props.updateCenterCoordinates(data);
