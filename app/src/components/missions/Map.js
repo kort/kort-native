@@ -72,7 +72,9 @@ class Map extends Component {
         console.log('region changed');
         if (this.state.annotationOpen) {
             this.setState({ regionChange: true });
-            this.map.selectAnnotation(this.props.activeMission.id);
+             setTimeout(() => {
+                this.map.selectAnnotation(this.props.activeMission.id);
+            }, Config.MAPBOX_TAP_DELAY_IN_MS);        
         }
         this.map.getCenterCoordinateZoomLevel(data => {
             this.props.updateCenterCoordinates(data);
