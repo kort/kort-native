@@ -152,6 +152,10 @@ class Map extends Component {
         } else {
             styleURL = oldStyle;
         }
+        this.map.getCenterCoordinateZoomLevel(data => {
+            this.map.setCenterCoordinateZoomLevel(data.latitude, data.longitude, 
+            data.zoomLevel, true, null);
+        });
     }
 
     map = null;
