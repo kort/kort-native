@@ -145,7 +145,7 @@ class Map extends Component {
     }
 
     toggleLayer() {
-        const oldStyle = Config.MAPBOX_STYLE_URL ? Config.MAPBOX_STYLE_URL : Mapbox.mapStyles.streets;
+        const oldStyle = initialStyleURL;
         const newStyle = Mapbox.mapStyles.satellite;
         if (styleURL === oldStyle) {
             styleURL = newStyle;
@@ -199,7 +199,8 @@ class Map extends Component {
     }
 }
 
-let styleURL = `${Config.API_URL}/static/styles/bright-style.json`;
+const initialStyleURL = `${Config.API_URL}/static/styles/bright-style.json`;
+let styleURL = initialStyleURL;
 
 const styles = {
     bgColor: {
