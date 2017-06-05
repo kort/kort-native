@@ -199,7 +199,7 @@ class Map extends Component {
     }
 }
 
-let styleURL = Config.MAPBOX_STYLE_URL ? Config.MAPBOX_STYLE_URL : Mapbox.mapStyles.streets;
+let styleURL = `${Config.API_URL}/static/styles/bright-style.json`;
 
 const styles = {
     bgColor: {
