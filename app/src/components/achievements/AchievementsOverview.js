@@ -109,7 +109,6 @@ const dataSource = new ListView.DataSource({
 const mapStateToProps = ({ achievementsReducer, authReducer }) => {
     const { user } = authReducer;
     const { achievements, loading, downloading, errorMsg } = achievementsReducer;
-        console.log(achievements);
 
     return {
         dataSource: dataSource.cloneWithRows(achievements), 
