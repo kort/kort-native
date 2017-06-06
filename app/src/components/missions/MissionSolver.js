@@ -29,6 +29,7 @@ class MissionSolver extends Component {
 
     componentDidMount() {
         this.props.answerSet('');
+        this.props.setFreetextAvailable('');    
     }
 
     componentWillReceiveProps(nextProps) {
