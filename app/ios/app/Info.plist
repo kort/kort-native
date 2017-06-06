@@ -61,6 +61,13 @@
 	<dict>
 		<key>NSExceptionDomains</key>
 		<dict>
+			<key>free.tilehosting.com</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
 			<key>openstreetmap.org</key>
 			<dict>
 				<key>NSIncludesSubdomains</key>
