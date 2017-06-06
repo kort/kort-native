@@ -31,6 +31,14 @@ class MissionSolver extends Component {
         this.props.answerSet('');
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.activeMission.inputType.options.length === 0 || 
+            (nextProps.activeMission.inputType.options.length > 0 && 
+                nextProps.activeMission.inputType.name === 'select')) {
+            this.props.setFreetextAvailable(this.props.activeMission.inputType.name);
+        }
+    }
+
     onModalConfirm() {
         if (this.props.modalType === 'unsolvable') {
             const mission = this.props.activeMission;
@@ -118,7 +126,8 @@ class MissionSolver extends Component {
 
     renderAnswerSelection() {
         //TODO handle different types of mission in a nicer way
-        if (this.props.activeMission.type === 'opening_hours') {
+        console.log('type', this.props.activeMission);
+        if (this.props.activeMission.error_type === 'opening_hours') {
             return (<OpeningHours 
                 setAnswer={value => this.props.answerSet(value)}
                 answer={this.props.answer}
