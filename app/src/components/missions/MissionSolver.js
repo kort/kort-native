@@ -29,9 +29,6 @@ class MissionSolver extends Component {
 
     componentDidMount() {
         this.props.answerSet('');
-        if (_.isEmpty(this.props.activeMission.options)) {
-            this.props.setFreetextAvailable(this.props.activeMission.inputType.name);
-        }
     }
 
     onModalConfirm() {
@@ -131,10 +128,10 @@ class MissionSolver extends Component {
         if (!_.isEmpty(this.props.activeMission.inputType.options)) {
             const options = _.map(this.props.activeMission.inputType.options, 
                 (item, index) => { return { value: index, name: item }; });
-            if (this.props.activeMission.inputType.name !== 'select') {
-                options.unshift({ value: -1, name: I18n.t('mission_answer_options_other') });
-            }
             const sortedOptions = _.sortBy(options, 'name');
+            if (this.props.activeMission.inputType.name !== 'select') {
+                sortedOptions.unshift({ value: -1, name: I18n.t('mission_answer_options_other') });
+            }
             return <AnswerSelection options={sortedOptions} />;
         }
         return null;
