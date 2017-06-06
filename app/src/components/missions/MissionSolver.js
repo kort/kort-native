@@ -134,7 +134,8 @@ class MissionSolver extends Component {
             if (this.props.activeMission.inputType.name !== 'select') {
                 options.unshift({ value: -1, name: I18n.t('mission_answer_options_other') });
             }
-            return <AnswerSelection options={options} />;
+            const sortedOptions = _.sortBy(options, 'name');
+            return <AnswerSelection options={sortedOptions} />;
         }
         return null;
     }
