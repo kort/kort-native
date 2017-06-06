@@ -13,7 +13,7 @@ export default {
   MAPBOX_TAP_DELAY_IN_MS: 250,
   MAPBOX_DRAG_DELAY_IN_MS: 450,
 
-  API_URL: 'http://6f9a55b3.ngrok.io',
+  API_URL: 'http://3285b49a.ngrok.io',
 
   DEEP_LINK_URL: 'kortapp://payload?',
 
