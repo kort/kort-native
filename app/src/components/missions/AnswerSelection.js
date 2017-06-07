@@ -14,10 +14,10 @@ class AnswerSelection extends Component {
         this.props.selectedAnswer(answer);
         if (answer.value === -1) {
             this.props.setFreetextAvailable(this.props.activeMission.inputType.name);
-            this.props.answerSet('');
+            this.props.answerSet('', '');
         } else {
             this.props.setFreetextAvailable('');
-            this.props.answerSet(answer.name);
+            this.props.answerSet(answer.name, this.props.activeMission.inputType.values[answer.value]);
         }
     }
 

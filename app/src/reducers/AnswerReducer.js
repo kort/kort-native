@@ -15,6 +15,7 @@ const INITIAL_STATE = {
     selectedAnswer: null,
     freetextType: '',
     answer: '',
+    selectedOption: '',
     modalVisible: false,
     modalConfirm: false,
     modalText: '',
@@ -57,7 +58,9 @@ export default (state = INITIAL_STATE, action) => {
         case ANSWER_FREETEXT_AVAILABLE:
             return { ...state, freetextType: action.payload };
         case ANSWER_SET:
-            return { ...state, answer: action.payload };
+            return { ...state, 
+                answer: action.payload.answer, 
+                selectedOption: action.payload.option };
         default:
             return state;
     }

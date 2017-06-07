@@ -20,11 +20,11 @@ export const answerModalVisible = (visible) => {
     };  
 };
 
-export const answerSet = (answer) => {
-        console.log('answer set: ', answer);
+export const answerSet = (answer, option) => {
+        console.log('answer set: ', answer, option);
     return { 
         type: ANSWER_SET,
-        payload: answer 
+        payload: { answer, option } 
     };  
 };
 
@@ -60,7 +60,7 @@ export const showModal = (modalConfirm, modalText, modalType) => {
     }; 
 };
 
-export const solveMission = (userId, mission, value, solved, additionalKoins) => {
+export const solveMission = (userId, mission, value, option, solved, additionalKoins) => {
     return (dispatch) => {  
     dispatch({ type: SEND_SOLUTION });
     const api = new KortAPI();
@@ -69,7 +69,8 @@ export const solveMission = (userId, mission, value, solved, additionalKoins) =>
             osm_id: mission.osmId,
             solved,
             userId,
-            value
+            value,
+            option
         };
         api.sendSolution(mission.schema, mission.errorId, solution)
             .then(response => {

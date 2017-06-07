@@ -28,7 +28,7 @@ import AchievementPopup from '../achievements/AchievementPopup';
 class MissionSolver extends Component {
 
     componentDidMount() {
-        this.props.answerSet('');
+        this.props.answerSet('', '');
         this.props.setFreetextAvailable('');    
     }
 
@@ -71,7 +71,7 @@ class MissionSolver extends Component {
             mission.inputType.constraints.description;
         if (this.props.answer !== '' && validationMessage === '') {
             this.props.solveMission(
-                this.props.user.id, mission, this.props.answer, true, 
+                this.props.user.id, mission, this.props.answer, this.props.selectedOption, true, 
                 this.props.stats ? Config.ADDITIONAL_KOINS_FOR_STATS : 0);
         } else {
             this.props.showModal(false, I18n.t('mission_message_valid_answer', 
@@ -130,7 +130,7 @@ class MissionSolver extends Component {
         console.log('type', this.props.activeMission);
         if (this.props.activeMission.error_type === 'opening_hours') {
             return (<OpeningHours 
-                setAnswer={value => this.props.answerSet(value)}
+                setAnswer={value => this.props.answerSet(value, '')}
                 answer={this.props.answer}
             />);
         }
@@ -155,7 +155,7 @@ class MissionSolver extends Component {
                     placeHolder={I18n.t('mission_answer_placeholder')}
                     keyboardType={keyboardType}
                     value={this.props.answer}
-                    onChangeText={value => this.props.answerSet(value)}
+                    onChangeText={value => this.props.answerSet(value, '')}
                 />
             );
         }   
@@ -306,7 +306,7 @@ const styles = {
 
 const mapStateToProps = ({ answerReducer, missionReducer, 
     authReducer, mapReducer, settingsReducer }) => {
-    const { freetextType, answer, modalVisible, 
+    const { freetextType, answer, selectedOption, modalVisible, 
         modalConfirm, modalText, modalType, sending, 
         newAchievements, currentAchievementIndex, errorMsg } = answerReducer;
     const { activeMission, missionViewHeight } = missionReducer;
@@ -315,6 +315,7 @@ const mapStateToProps = ({ answerReducer, missionReducer,
     const { stats } = settingsReducer;
     return { freetextType, 
         answer, 
+        selectedOption,
         modalVisible, 
         modalConfirm, 
         modalText, 
