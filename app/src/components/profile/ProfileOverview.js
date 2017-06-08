@@ -15,7 +15,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import I18n from 'react-native-i18n';
 import { KortCoin, Popup } from '../common';
 import { updateUser, showConfirmModal, logoutUser } from '../../actions/AuthActions';
-import { onRightClicked } from '../../actions/NavigationActions';
+import { onRightClicked, forceViewUpdateProfile } from '../../actions/NavigationActions';
 
 class ProfileOverview extends Component {
 
@@ -28,6 +28,10 @@ class ProfileOverview extends Component {
         if (nextProps.currentView === 'profile' && nextProps.rightClicked) {
             this.logInOrOut();
             this.props.onRightClicked(false, '');
+        }
+        if (nextProps.updateProfileView) {
+            this.props.forceViewUpdateProfile(false);
+            this.props.updateUser(this.props.user);
         }
     }
 
@@ -239,10 +243,10 @@ const styles = {
 const mapStateToProps = ({ authReducer, navigationReducer }) => {
     console.log(authReducer);
     const { user, loggedIn, loading, showConfirm } = authReducer;
-    const { rightClicked, currentView } = navigationReducer;
-    return { user, loggedIn, loading, showConfirm, rightClicked, currentView };
+    const { rightClicked, currentView, updateProfileView } = navigationReducer;
+    return { user, loggedIn, loading, showConfirm, rightClicked, currentView, updateProfileView };
 };
 
 
 export default connect(mapStateToProps, 
-{ updateUser, logoutUser, showConfirmModal, onRightClicked })(ProfileOverview);
+{ updateUser, logoutUser, showConfirmModal, onRightClicked, forceViewUpdateProfile })(ProfileOverview);

@@ -5,6 +5,7 @@ import {
      } from 'react-native';
 import { connect } from 'react-redux';
 import { downloadHighscore } from '../../actions/HighscoreActions';
+import { forceViewUpdateHighscore } from '../../actions/NavigationActions';
 import HighscoreListItem from './HighscoreListItem';
 
 
@@ -18,6 +19,11 @@ class HighscoreList extends Component {
         if (nextProps.currentTab !== this.props.currentTab) {
             this.props.downloadHighscore(nextProps.currentTab, false);
             this.scrollview.scrollTo({ x: 0, y: 0, animated: true });
+        }
+
+        if (nextProps.updateHighscoreView) {
+            this.props.downloadHighscore(this.props.currentTab, true);
+            this.props.forceViewUpdateHighscore(false);
         }
     }
 
@@ -63,13 +69,15 @@ const dataSource = new ListView.DataSource({
   rowHasChanged: (r1, r2) => r1 !== r2,
 });
 
-const mapStateToProps = ({ highscoreReducer }) => {
+const mapStateToProps = ({ highscoreReducer, navigationReducer }) => {
     const { highscore, loading, currentTab } = highscoreReducer;
+    const { updateHighscoreView } = navigationReducer;
     return {
         dataSource: dataSource.cloneWithRows(highscore), 
         loading,
-        currentTab
+        currentTab,
+        updateHighscoreView
     };
 };
 
-export default connect(mapStateToProps, { downloadHighscore })(HighscoreList);
+export default connect(mapStateToProps, { downloadHighscore, forceViewUpdateHighscore })(HighscoreList);

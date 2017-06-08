@@ -24,6 +24,7 @@ export const SEND_SOLUTION = 'send_solution';
 export const SOLUTION_SUCCESS = 'solution_success';
 export const SOLUTION_FAIL = 'solution_fail';
 export const SHOW_NEW_ACHIEVEMENTS = 'show_new_achievements';
+export const RESET_SOLUTION_SENT = 'reset_solution_sent';
 
 export const MISSIONS_DOWNLOAD = 'missions_download';
 export const MISSIONS_DOWNLOADED_SUCCESS = 'missions_downloaded_success';
@@ -62,4 +63,6 @@ export const DAYS = 'days';
 
 export const LEFT_CLICK = 'left_click';
 export const RIGHT_CLICK = 'right_click';
-
+export const UPDATE_VIEW_ACHIEVEMENTS = 'update_view_achievements';
+export const UPDATE_VIEW_HIGHSCORE = 'update_view_highscore';
+export const UPDATE_VIEW_PROFILE = 'update_view_profile';

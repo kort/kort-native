@@ -9,7 +9,8 @@ import {
     SEND_SOLUTION,
     SOLUTION_SUCCESS,
     SOLUTION_FAIL,
-    SHOW_NEW_ACHIEVEMENTS
+    SHOW_NEW_ACHIEVEMENTS,
+    RESET_SOLUTION_SENT
 } from './types';
 import KortAPI from '../data/KortAPI';
 
@@ -108,5 +109,11 @@ export const showAchievements = (show) => {
         return { 
         type: SHOW_NEW_ACHIEVEMENTS,
         payload: show 
+    }; 
+};
+
+export const resetSolutionSent = () => {
+        return { 
+        type: RESET_SOLUTION_SENT
     }; 
 };

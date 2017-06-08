@@ -13,8 +13,12 @@ import { answerSet,
          showModal, 
          setFreetextAvailable,
          solveMission,
-        showAchievements } from '../../actions/AnswerSelectionActions';
+        showAchievements,
+        resetSolutionSent } from '../../actions/AnswerSelectionActions';
 import { showMission, downloadMissions } from '../../actions/MissionActions';
+import { forceViewUpdateAchievements, 
+         forceViewUpdateHighscore, 
+         forceViewUpdateProfile } from '../../actions/NavigationActions';
 import AnswerSelection from './AnswerSelection';
 import { Input, 
         Button,
@@ -37,6 +41,15 @@ class MissionSolver extends Component {
             (nextProps.activeMission.inputType.options.length > 0 && 
                 nextProps.activeMission.inputType.name === 'select')) {
             this.props.setFreetextAvailable(this.props.activeMission.inputType.name);
+        }
+
+        if (nextProps.solutionSent) {
+            this.props.forceViewUpdateProfile(true);
+            this.props.forceViewUpdateHighscore(true);
+            if (nextProps.newAchievements.length > 0) {
+                this.props.forceViewUpdateAchievements(true);
+            }
+            this.props.resetSolutionSent();
         }
     }
 
@@ -305,12 +318,13 @@ const styles = {
 };
 
 const mapStateToProps = ({ answerReducer, missionReducer, 
-    authReducer, mapReducer, settingsReducer }) => {
+    authReducer, mapReducer, settingsReducer, navigationReducer }) => {
     const { freetextType, answer, selectedOption, modalVisible, 
         modalConfirm, modalText, modalType, sending, 
-        newAchievements, currentAchievementIndex, errorMsg } = answerReducer;
+        newAchievements, currentAchievementIndex, errorMsg, solutionSent } = answerReducer;
     const { activeMission, missionViewHeight } = missionReducer;
     const { user } = authReducer;
+    const { updateHighscoreView, updateProfileView, updateAchievementsView } = navigationReducer;
     const { centerCoordinates } = mapReducer;
     const { stats } = settingsReducer;
     return { freetextType, 
@@ -328,7 +342,11 @@ const mapStateToProps = ({ answerReducer, missionReducer,
         missionViewHeight,
         user,
         centerCoordinates,
-        stats };
+        stats,
+        updateHighscoreView,
+        updateAchievementsView,
+        updateProfileView,
+        solutionSent };
 };
 
 
@@ -340,4 +358,8 @@ export default connect(mapStateToProps,
     solveMission, 
     showAchievements,
     showMission,
-    downloadMissions })(MissionSolver);
+    downloadMissions,
+    forceViewUpdateAchievements,
+    forceViewUpdateHighscore,
+    forceViewUpdateProfile,
+    resetSolutionSent })(MissionSolver);

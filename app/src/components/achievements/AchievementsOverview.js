@@ -9,12 +9,20 @@ import _ from 'lodash';
 import I18n from 'react-native-i18n';
 import AchievementItem from './AchievementItem';
 import { downloadAchievements, clearErrorMsg } from '../../actions/AchievementsActions';
+import { forceViewUpdateAchievements } from '../../actions/NavigationActions';
 import { Spinner, Popup } from '../common';
 
 class AchievementsOverview extends Component {
 
     componentWillMount() {
         this.props.downloadAchievements(false, this.props.user.id);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.updateAchievementsView) {
+            this.props.downloadAchievements(false, this.props.user.id);
+            this.props.forceViewUpdateAchievements(false);
+        }
     }
 
     onAccept() {
@@ -106,18 +114,20 @@ const dataSource = new ListView.DataSource({
   rowHasChanged: (r1, r2) => r1 !== r2,
 });
 
-const mapStateToProps = ({ achievementsReducer, authReducer }) => {
+const mapStateToProps = ({ achievementsReducer, authReducer, navigationReducer }) => {
     const { user } = authReducer;
     const { achievements, loading, downloading, errorMsg } = achievementsReducer;
+    const { updateAchievementsView } = navigationReducer;
 
     return {
         dataSource: dataSource.cloneWithRows(achievements), 
         loading,
         downloading,
         errorMsg,
-        user
+        user,
+        updateAchievementsView
     };
 };
 
 export default connect(mapStateToProps, { 
-    downloadAchievements, clearErrorMsg })(AchievementsOverview);
+    downloadAchievements, clearErrorMsg, forceViewUpdateAchievements })(AchievementsOverview);
