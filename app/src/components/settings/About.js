@@ -59,9 +59,14 @@ class About extends Component {
             />
             <Text style={styles.textTitle}>{I18n.t('about_credits_title')}</Text>
             <Text style={styles.textSubTitle}>{I18n.t('about_credits_partner')} Liip AG</Text>
+            <Hyperlink 
+                onPress={url => Linking.openURL(url)}
+                linkText={() => { return 'OpenMapTiles.com'; }}
+            >
             <Text style={styles.textSubTitle}>
-              {I18n.t('about_credits_tiledata')} Klokan Technologies
+              {I18n.t('about_credits_tiledata')} https://openmaptiles.com/hosting/, Klokan Technologies
             </Text>
+            </Hyperlink>
             <Hyperlink 
                 onPress={url => Linking.openURL(url)}
                 linkText={url => {
@@ -77,8 +82,7 @@ class About extends Component {
                 }
             >
                 <Text style={styles.textSubTitle}>
-                {I18n.t('about_credits_markers')}
-                Icon made by http://www.flaticon.com/authors/freepik, http://www.flaticon.com/authors/cursor-creative, http://www.flaticon.com/authors/hevngrafix from www.flaticon.com
+                {I18n.t('about_credits_markers')} Icon made by http://www.flaticon.com/authors/freepik, http://www.flaticon.com/authors/cursor-creative, http://www.flaticon.com/authors/hevngrafix from www.flaticon.com
                 </Text>
             </Hyperlink>
             <Hyperlink onPress={url => Linking.openURL(url)}>
@@ -86,6 +90,13 @@ class About extends Component {
                 Fonts: FontAwesome, Ionicons, MaterialIcons
                 </Text>
             </Hyperlink>
+            <Hyperlink 
+                onPress={url => Linking.openURL(url)}
+                linkText={() => { return 'Transifex'; }}
+            >
+                <Text style={styles.textSubTitle}>{I18n.t('about_credits_translation')} https://www.transifex.com/odi/kort/</Text>
+            </Hyperlink>
+            <Text style={styles.textSubTitle}>Libraries: libs</Text>
             <Text style={styles.textTitle}>{I18n.t('about_legal_title')}</Text>
             <Text style={styles.textSubTitle}>{I18n.t('about_legal_message')}</Text>
           </View>
