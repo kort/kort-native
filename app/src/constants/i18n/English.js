@@ -30,6 +30,7 @@ const English = {
     // Missions
     mission_message_unsolvable: 'Do you really want to set this mission as unsolvable? It will be hidden from now on.',
     mission_message_valid_answer: 'Please enter a valid answer!\n\n{{validationMessage}}',
+    not_logged_in_error: 'Please log in first.',
     mission_message_reward: 'Congratulations! You have earned {{koins}} additional Koins. Once your answer is validated you will get another {{koinReward}} Koins.',
     mission_message_unsolved: 'The mission has been marked as unsolvable',
     mission_answer_options_other: 'other:',

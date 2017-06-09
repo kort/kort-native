@@ -57,7 +57,7 @@ class MissionSolver extends Component {
         if (this.props.modalType === 'unsolvable') {
             const mission = this.props.activeMission;
             this.props.solveMission(this.props.user.id, mission, '', false, 0);
-        } else {
+        } else if (this.props.modalType !== 'notLoggedIn') {
             this.props.hideModal(true);
 
             if (this.props.newAchievements.length > 0) {
@@ -65,6 +65,8 @@ class MissionSolver extends Component {
             } else {
                 this.hideMission();
             }
+        } else {
+            this.props.hideModal(true);
         }
     }
 
@@ -82,7 +84,9 @@ class MissionSolver extends Component {
         const mission = this.props.activeMission;
         const validationMessage = this.validateInput() ? '' : 
             mission.inputType.constraints.description;
-        if (this.props.answer !== '' && validationMessage === '') {
+        if (!this.props.user.loggedIn) {
+             this.props.showModal(false, I18n.t('not_logged_in_error'), 'notLoggedIn');
+        } else if (this.props.answer !== '' && validationMessage === '') {
             this.props.solveMission(
                 this.props.user.id, mission, this.props.answer, this.props.selectedOption, true, 
                 this.props.stats ? Config.ADDITIONAL_KOINS_FOR_STATS : 0);
