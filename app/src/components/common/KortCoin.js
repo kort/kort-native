@@ -20,7 +20,7 @@ class KortCoin extends Component {
                 iterationCount="infinite" 
                 style={[styles.koinStyle]}
                 source={{ uri: 'koin' }}
-                defaultSource={{ uri: 'placeholderBadge' }}
+                defaultSource={{ uri: 'placeholder_badge' }}
             >
                 <Text style={styles.amountStyle}>{this.props.children}</Text>
             </Animatable.Image>

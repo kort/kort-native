@@ -92,7 +92,7 @@ class ProfileOverview extends Component {
                         <Image
                             source={{ uri: this.props.user.pic_url }}
                             style={styles.imageStyle}
-                            defaultSource={{ uri: 'placeholderBadge' }}
+                            defaultSource={{ uri: 'placeholder_badge' }}
                         >
                         {this.renderProviderImage()}
                         </Image>

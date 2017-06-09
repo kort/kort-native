@@ -29,7 +29,7 @@ import {
                     <Image
                         source={{ uri: this.props.imageURI }}
                         style={styles.imageStyle}
-                        defaultSource={{ uri: 'placeholderBadge' }}
+                        defaultSource={{ uri: 'placeholder_badge' }}
                     />
                 </View>
             );

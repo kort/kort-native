@@ -24,7 +24,7 @@ class AchievementItem extends Component {
                     <Image
                         style={styles.badgeStyle}
                         source={{ uri }}
-                        defaultSource={{ uri: 'placeholderBadge' }}
+                        defaultSource={{ uri: 'placeholder_badge' }}
                     >
                             <View style={achieved ? {} : styles.notAchievedStyle} />
                     </Image>

@@ -25,7 +25,7 @@ class AchievementPopup extends Component {
                 iterationCount={this.props.animateIndef ? 'infinite' : 1}
                 style={styles.badgeStyle}
                 source={{ uri }}
-                defaultSource={{ uri: 'placeholderBadge' }}
+                defaultSource={{ uri: 'placeholder_badge' }}
             />
         );
     }
@@ -35,7 +35,7 @@ class AchievementPopup extends Component {
             <Image
                 style={styles.badgeStyle}
                 source={{ uri }}
-                defaultSource={{ uri: 'placeholderBadge' }}
+                defaultSource={{ uri: 'placeholder_badge' }}
             >
                     <View style={achieved ? {} : styles.notAchievedStyle} />
             </Image>
