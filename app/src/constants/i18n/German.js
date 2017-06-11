@@ -32,6 +32,7 @@ const German = {
     mission_message_valid_answer: 'Please enter a valid answer!\n\n{{validationMessage}}_de',
     not_logged_in_error: 'Please log in first._de',
     mission_message_reward: 'Congratulations! You have earned {{koins}} additional Koins. Once your answer is validated you will get another {{koinReward}} Koins._de',
+    mission_message_not_within_perimeter: 'You have to solve at least {{missionCount}} missions in order to being able to solve missions further away than {{distance}}m from your current location._de',
     mission_message_unsolved: 'The mission has been marked as unsolvable_de',
     mission_answer_options_other: 'other:_de',
     mission_answer_placeholder: 'Type in your answer_de',

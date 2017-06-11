@@ -28,6 +28,7 @@ import { Input,
         ButtonWithImage } from '../common';
 import OpeningHours from './types/OpeningHours';
 import AchievementPopup from '../achievements/AchievementPopup';
+import CoordinateCalculations from '../../geolocation/CoordinateCalculations';
 
 class MissionSolver extends Component {
 
@@ -80,12 +81,32 @@ class MissionSolver extends Component {
         Config.RADIUS_IN_M_FOR_MISSION_FETCHING, true);
     }
 
+    /*
+        true if mission is within 5km perimeter of location or user has at least 20 missions solved
+    */
+    checkIfMissionInsidePerimeter() {
+        const latitude = this.props.activeMission.annotationCoordinate[0];
+        const longitude = this.props.activeMission.annotationCoordinate[1];
+        if (this.props.user.mission_count >= Config.NO_OF_MISSIONS_FOR_PERIMETER_CHECK) {
+            return true;
+        } else if (this.props.currentLocation && CoordinateCalculations.calculateDistance(
+                { latitude, longitude }, this.props.currentLocation.coords) 
+                <= Config.RADIUS_IN_M_FOR_MISSION_SOLVING) {
+                    return true;
+            }
+        return false;
+    }
+
     solveMission() {
         const mission = this.props.activeMission;
         const validationMessage = this.validateInput() ? '' : 
             mission.inputType.constraints.description;
         if (!this.props.user.loggedIn) {
              this.props.showModal(false, I18n.t('not_logged_in_error'), 'notLoggedIn');
+        } else if (!this.checkIfMissionInsidePerimeter()) {
+            this.props.showModal(false, I18n.t('mission_message_not_within_perimeter', 
+                { missionCount: Config.NO_OF_MISSIONS_FOR_PERIMETER_CHECK,
+                  distance: Config.RADIUS_IN_M_FOR_MISSION_SOLVING }));
         } else if (this.props.answer !== '' && validationMessage === '') {
             this.props.solveMission(
                 this.props.user.id, mission, this.props.answer, this.props.selectedOption, true, 
@@ -329,7 +350,7 @@ const mapStateToProps = ({ answerReducer, missionReducer,
     const { activeMission, missionViewHeight } = missionReducer;
     const { user } = authReducer;
     const { updateHighscoreView, updateProfileView, updateAchievementsView } = navigationReducer;
-    const { centerCoordinates } = mapReducer;
+    const { centerCoordinates, currentLocation } = mapReducer;
     const { stats } = settingsReducer;
     return { freetextType, 
         answer, 
@@ -346,6 +367,7 @@ const mapStateToProps = ({ answerReducer, missionReducer,
         missionViewHeight,
         user,
         centerCoordinates,
+        currentLocation,
         stats,
         updateHighscoreView,
         updateAchievementsView,
