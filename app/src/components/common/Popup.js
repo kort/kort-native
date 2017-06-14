@@ -42,6 +42,15 @@ import {
         }
     }
 
+    renderTitle(title) {
+        if (title) {
+            return (
+                <Text style={styles.titleStyle}>{title}</Text>
+            );
+        }
+        return null;
+    }
+
     render() {
         const { boxStyle,
                 textBoxStyle, 
@@ -60,7 +69,7 @@ import {
                     <View style={boxStyle}>
                         {this.renderHeader()}
                         <View style={textBoxStyle}>
-
+                            {this.renderTitle(this.props.title)}
                             <Text style={textStyle}>{this.props.message}</Text>
                         </View>
                         <View style={buttonBoxStyle}>
@@ -104,6 +113,11 @@ import {
          backgroundColor: 'transparent'
      },
      textStyle: {
+         color: '#202931'
+     },
+     titleStyle: {
+         textAlign: 'center',
+         fontWeight: 'bold',
          color: '#202931'
      },
      buttonStyle: {

@@ -43,12 +43,13 @@ class AchievementPopup extends Component {
     }
 
     render() {
-        const { achievementImageURI, achievementDescription, 
+        const { achievementImageURI, achievementTitle, achievementDescription, 
             achieved, achievementDate } = this.props.achievement;
         return (  
             <Popup
                 visible={this.props.visible}
                 onAccept={this.props.onAccept}
+                title={achievementTitle}
                 message={this.createMessage(achievementDescription, 
                     achieved, achievementDate)}
             >
