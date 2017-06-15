@@ -8,6 +8,7 @@ export const SHOW_WEBVIEW = 'show_webview';
 export const VERIFY_GOOGLE_TOKEN_ID = 'verify_google_token_id';
 export const SECRET_RECEIVED = 'secret_received';
 export const SHOW_CONFIRM_LOGOUT_MODAL = 'show_confirm_logout_modal';
+export const HIDE_LOADING_MODAL = 'hide_loading_modal';
 
 export const TOGGLE_MAPMODE_FULLSCREEN = 'toggle_mapmode_fullscreen';
 export const LOCATION_UPDATE = 'location_update';

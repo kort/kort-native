@@ -9,6 +9,7 @@ import Config from '../../constants/Config';
 import { showMapModeFullscreen, updateCenterCoordinates } from '../../actions/MapActions';
 import { downloadMissions, startMission, downloadMissionGeometry } from '../../actions/MissionActions';
 import { onRightClicked } from '../../actions/NavigationActions';
+import { hideLoadingModal } from '../../actions/AuthActions';
 import GeoLocation from '../../geolocation/GeoLocation';
 import CoordinateCalculations from '../../geolocation/CoordinateCalculations';
 import { RoundButton } from '../common';
@@ -20,6 +21,8 @@ class Map extends Component {
     componentDidMount() {
         console.log(Config.MAPBOX_ACCESS_TOKEN);
         Mapbox.setAccessToken(Config.MAPBOX_ACCESS_TOKEN);
+
+        this.props.hideLoadingModal();
     }
 
     componentWillReceiveProps(nextProps) {
@@ -263,4 +266,4 @@ const mapStateToProps = ({ mapReducer, missionReducer, settingsReducer, navigati
 
 
 export default connect(mapStateToProps, 
-    { showMapModeFullscreen, downloadMissions, startMission, downloadMissionGeometry, updateCenterCoordinates, onRightClicked })(Map);
+    { showMapModeFullscreen, downloadMissions, startMission, downloadMissionGeometry, updateCenterCoordinates, onRightClicked, hideLoadingModal })(Map);

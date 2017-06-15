@@ -7,7 +7,8 @@ import {
     SHOW_WEBVIEW,
     VERIFY_GOOGLE_TOKEN_ID,
     SECRET_RECEIVED,
-    SHOW_CONFIRM_LOGOUT_MODAL
+    SHOW_CONFIRM_LOGOUT_MODAL,
+    HIDE_LOADING_MODAL
  } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -54,6 +55,8 @@ export default (state = INITIAL_STATE, action) => {
                     };
         case SHOW_CONFIRM_LOGOUT_MODAL:
             return { ...state, showConfirm: action.payload };
+        case HIDE_LOADING_MODAL:
+            return { ...state, loading: false };
         default:
             return state;
     }
