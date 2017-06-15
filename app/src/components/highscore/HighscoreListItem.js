@@ -13,8 +13,8 @@ class HighscoreListItem extends Component {
             <View style={styles.itemStyle}>
                 <View style={[styles.cellStyle, this.props.ownScore ? { backgroundColor: '#657C8E' } : {}]}>
                     <View style={styles.rankStyle}>
-                        <View style={styles.rankIconStyle}>
-                            <Text style={styles.textStyleRank}>{this.props.data.rank}</Text>
+                        <View style={[styles.rankIconStyle, this.props.ownScore ? { backgroundColor: 'white' } : {}]}>
+                            <Text style={[styles.textStyleRank, this.props.ownScore ? { color: '#395971' } : {}]}>{this.props.data.rank}</Text>
                         </View>
                     </View>
                     <View style={styles.userStyle}>
