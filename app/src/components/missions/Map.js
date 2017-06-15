@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {
     View,
-    Platform
+    Platform,
+    Text
 } from 'react-native';
 import Mapbox, { MapView } from 'react-native-mapbox-gl';
 import { connect } from 'react-redux';
@@ -162,7 +163,7 @@ class Map extends Component {
     map = null;
 
     render() {
-        const { bgColor, mapStyleFullScreen, mapStyleSmallScreen, 
+        const { bgColor, mapStyleFullScreen, mapStyleSmallScreen, copyrightStyle,
             locBtnFullScreen, locBtnSmallScreen, satBtnSmallScreen, satBtnFullScreen } = styles;
         return (
             <View style={bgColor}>
@@ -195,6 +196,7 @@ class Map extends Component {
                     iconName='layers' 
                     onPress={this.toggleLayer.bind(this)} 
                 />
+                <Text style={[copyrightStyle, this.props.mapModeFullScreen ? {} : { paddingBottom: 50 }]}>© Mapbox, OpenMapTiles, OpenStreetMap</Text>
             </View>
         );
     }
@@ -237,6 +239,13 @@ const styles = {
         position: 'absolute',
         right: (Platform.OS === 'ios') ? 5 : 13,
         marginTop: (Platform.OS === 'ios') ? 115 + 50 : 126 + 50,
+    },
+    copyrightStyle: {
+        position: 'absolute',
+        backgroundColor: 'transparent',
+        left: 5,
+        bottom: 5,
+        fontSize: 10
     }
     
 };
