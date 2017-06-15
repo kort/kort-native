@@ -11,7 +11,7 @@ class HighscoreListItem extends Component {
     render() {
         return (
             <View style={styles.itemStyle}>
-                <View style={styles.cellStyle}>
+                <View style={[styles.cellStyle, this.props.ownScore ? { backgroundColor: '#657C8E' } : {}]}>
                     <View style={styles.rankStyle}>
                         <View style={styles.rankIconStyle}>
                             <Text style={styles.textStyleRank}>{this.props.data.rank}</Text>

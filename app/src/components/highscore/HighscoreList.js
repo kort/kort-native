@@ -34,7 +34,10 @@ class HighscoreList extends Component {
     scrollview = null;    
 
     renderRow(rowData) {
-        return <HighscoreListItem data={rowData} />;
+        return (<HighscoreListItem 
+                    data={rowData} 
+                    ownScore={this.props.user.id === rowData.user_id} 
+        />);
     }
 
     render() {
@@ -69,14 +72,16 @@ const dataSource = new ListView.DataSource({
   rowHasChanged: (r1, r2) => r1 !== r2,
 });
 
-const mapStateToProps = ({ highscoreReducer, navigationReducer }) => {
+const mapStateToProps = ({ highscoreReducer, navigationReducer, authReducer }) => {
     const { highscore, loading, currentTab } = highscoreReducer;
     const { updateHighscoreView } = navigationReducer;
+    const { user } = authReducer;
     return {
         dataSource: dataSource.cloneWithRows(highscore), 
         loading,
         currentTab,
-        updateHighscoreView
+        updateHighscoreView,
+        user
     };
 };
 
