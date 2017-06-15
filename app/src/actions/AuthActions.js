@@ -13,8 +13,7 @@ import {
     VERIFY_GOOGLE_TOKEN_ID,
     SECRET_RECEIVED,
     SHOW_WEBVIEW,
-    SHOW_CONFIRM_LOGOUT_MODAL,
-    HIDE_LOADING_MODAL
+    SHOW_CONFIRM_LOGOUT_MODAL
 } from './types';
 import Config from '../constants/Config'; 
 
@@ -74,13 +73,6 @@ export const showConfirmModal = (show) => {
    return { 
         type: SHOW_CONFIRM_LOGOUT_MODAL,
         payload: show 
-    };   
-};
-
-export const hideLoadingModal = () => {
-   return { 
-        type: HIDE_LOADING_MODAL,
-        payload: null 
     };   
 };
 

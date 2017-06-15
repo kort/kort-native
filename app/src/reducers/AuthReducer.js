@@ -8,7 +8,6 @@ import {
     VERIFY_GOOGLE_TOKEN_ID,
     SECRET_RECEIVED,
     SHOW_CONFIRM_LOGOUT_MODAL,
-    HIDE_LOADING_MODAL
  } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -49,14 +48,12 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, ...INITIAL_STATE, loading: true };
         case SECRET_RECEIVED: 
             return { ...state, 
-                     loading: true, 
+                     loading: false, 
                      loggedIn: false, 
                      user: action.payload
                     };
         case SHOW_CONFIRM_LOGOUT_MODAL:
             return { ...state, showConfirm: action.payload };
-        case HIDE_LOADING_MODAL:
-            return { ...state, loading: false };
         default:
             return state;
     }

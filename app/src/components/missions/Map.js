@@ -21,8 +21,6 @@ class Map extends Component {
     componentDidMount() {
         console.log(Config.MAPBOX_ACCESS_TOKEN);
         Mapbox.setAccessToken(Config.MAPBOX_ACCESS_TOKEN);
-
-        this.props.hideLoadingModal();
     }
 
     componentWillReceiveProps(nextProps) {
