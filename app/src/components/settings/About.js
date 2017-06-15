@@ -15,59 +15,60 @@ import Config from '../../constants/Config';
 class About extends Component {
     
     render() {
+        const { bgColor, scrollView, container, containerAbout, kortlogo,
+         hsrlogo, textTitle, textSubTitle, linkStyle } = styles;
         return (
-            <View style={styles.bgColor} >
+            <View style={bgColor} >
                 <ScrollView
                     automaticallyAdjustContentInsets={false}
                     scrollEventThrottle={200}
-                    style={styles.scrollView}
+                    style={scrollView}
                 >
-        <View style={styles.container}>
-          <View style={styles.containerAbout}>
-            <Image style={styles.kortlogo} source={{ uri: 'kort_logo' }} />
-            <Text style={styles.textTitle}>{I18n.t('about_version_title')}</Text>
-            <Text style={styles.textSubTitle}>{VersionNumber.appVersion}</Text>
-            <Text style={styles.textTitle}>{I18n.t('about_information_title')}</Text>
-            <Hyperlink onPress={url => Linking.openURL(url)}>
-                <Text style={styles.textSubTitle}>
+        <View style={container}>
+          <View style={containerAbout}>
+            <Image style={kortlogo} source={{ uri: 'kort_logo' }} />
+            <Text style={textTitle}>{I18n.t('about_version_title')}</Text>
+            <Text style={textSubTitle}>{VersionNumber.appVersion}</Text>
+            <Text style={textSubTitle}>{I18n.t('about_legal_message')}</Text>
+            <Text style={textTitle}>{I18n.t('about_information_title')}</Text>
+            <Hyperlink linkStyle={linkStyle} onPress={url => Linking.openURL(url)}>
+                <Text style={textSubTitle}>
                 {`${I18n.t('about_information_homepage')} ${Config.KORT_WEBSITE}`}
                 </Text>
             </Hyperlink>
-            <Hyperlink onPress={url => Linking.openURL(url)}>
-                <Text style={styles.textSubTitle}>
+            <Hyperlink linkStyle={linkStyle} onPress={url => Linking.openURL(url)}>
+                <Text style={textSubTitle}>
                 {`${I18n.t('about_information_feedback')} ${Config.KORT_USERVOICE}`}
                 </Text>
             </Hyperlink>
-            <Hyperlink onPress={url => Linking.openURL(url)}>
-                <Text style={styles.textSubTitle}>
+            <Hyperlink linkStyle={linkStyle} onPress={url => Linking.openURL(url)}>
+                <Text style={textSubTitle}>
                 {`${I18n.t('about_information_bugs')} ${Config.KORT_GITHUB}`}
                 </Text>
             </Hyperlink>
-            <Text style={styles.textTitle}>{I18n.t('about_developers_title')}</Text>
-            <Text style={styles.textSubTitle}>Andreas Egloff</Text>
-            <Text style={styles.textSubTitle}>Jürg Hunziker</Text>
-            <Text style={styles.textSubTitle}>Stefan Oderbolz</Text>
-            <Text style={styles.textTitle}>{I18n.t('about_project_title')}</Text>
-            <Text style={styles.textSubTitle}>Master's Thesis 2017</Text>
-            <Text style={styles.textSubTitle}>HSR Hochschule für Technik Rapperswil</Text>
-            <Text style={styles.textSubTitle}>
+            <Text style={textTitle}>{I18n.t('about_project_title')}</Text>
+            <Text style={textSubTitle}>Master's Thesis 2017 by Andreas Egloff</Text>
+            <Text style={textSubTitle}>HSR Hochschule für Technik Rapperswil</Text>
+            <Text style={textSubTitle}>
               {I18n.t('about_project_advisor')} Prof. Stefan Keller
             </Text>
             <Image 
-                style={styles.hsrlogo} 
+                style={hsrlogo} 
                 source={require('../../../assets/images/about/hsr_logo.png')} 
             />
-            <Text style={styles.textTitle}>{I18n.t('about_credits_title')}</Text>
-            <Text style={styles.textSubTitle}>{I18n.t('about_credits_partner')} Liip AG</Text>
+            <Text style={textTitle}>{I18n.t('about_credits_title')}</Text>
+            <Text style={textSubTitle}>Data: OpenStreetMap contributors, KeepRight, Overpass</Text>
             <Hyperlink 
+                linkStyle={linkStyle}
                 onPress={url => Linking.openURL(url)}
                 linkText={() => { return 'OpenMapTiles.com'; }}
             >
-            <Text style={styles.textSubTitle}>
-              {I18n.t('about_credits_tiledata')} https://openmaptiles.com/hosting/, Klokan Technologies
+            <Text style={textSubTitle}>
+              {I18n.t('about_credits_tiledata')} https://openmaptiles.com/hosting/ (Klokan Technologies), Mapbox
             </Text>
             </Hyperlink>
             <Hyperlink 
+                linkStyle={linkStyle}
                 onPress={url => Linking.openURL(url)}
                 linkText={url => {
                     if (url === 'http://www.flaticon.com/authors/freepik') {
@@ -81,24 +82,27 @@ class About extends Component {
                     }
                 }
             >
-                <Text style={styles.textSubTitle}>
+                <Text style={textSubTitle}>
                 {I18n.t('about_credits_markers')} Icon made by http://www.flaticon.com/authors/freepik, http://www.flaticon.com/authors/cursor-creative, http://www.flaticon.com/authors/hevngrafix from www.flaticon.com
                 </Text>
             </Hyperlink>
-            <Hyperlink onPress={url => Linking.openURL(url)}>
-                <Text style={styles.textSubTitle}>
+            <Hyperlink linkStyle={linkStyle} onPress={url => Linking.openURL(url)}>
+                <Text style={textSubTitle}>
                 Fonts: FontAwesome, Ionicons, MaterialIcons
                 </Text>
             </Hyperlink>
             <Hyperlink 
+                linkStyle={linkStyle}
                 onPress={url => Linking.openURL(url)}
                 linkText={() => { return 'Transifex'; }}
             >
-                <Text style={styles.textSubTitle}>{I18n.t('about_credits_translation')} https://www.transifex.com/odi/kort/</Text>
+                <Text style={textSubTitle}>{I18n.t('about_credits_translation')} https://www.transifex.com/odi/kort/</Text>
             </Hyperlink>
-            <Text style={styles.textSubTitle}>Libraries: libs</Text>
-            <Text style={styles.textTitle}>{I18n.t('about_legal_title')}</Text>
-            <Text style={styles.textSubTitle}>{I18n.t('about_legal_message')}</Text>
+            <Text style={textSubTitle}>Software Libraries: </Text>
+            <Text style={textTitle}>{I18n.t('about_thanks')}</Text>
+            <Text style={textSubTitle}>
+            Stefan Oderbolz (Liip), Jürg Hunziker (Liip), Reto Senn (bitforge), Pirmin Kalberer (Sourcepole), E. Sivro, S. Fritschi, M. Melchiori, D. Mülhaupt, A. Egli, C. Schumacher, {I18n.t('about_many_more')}
+            </Text>
           </View>
         </View>
       </ScrollView>
@@ -156,6 +160,9 @@ const styles = {
     height: 40,
     width: 150,
   },
+  linkStyle: {
+      textDecorationLine: 'underline'
+  }
 };
 
 

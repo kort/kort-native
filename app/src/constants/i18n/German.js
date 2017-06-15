@@ -97,20 +97,18 @@ const German = {
     about_version_title: 'Version_de',
     about_information_title: 'More information_de',
     about_information_homepage: 'Website\:_de',
-    about_information_feedback: 'Feedback/FAQ\:_de',
+    about_information_feedback: 'Feedback and FAQ\:_de',
     about_information_bugs: 'Report a bug\:_de',
-    about_developers_title: 'Developers_de',
     about_project_title: 'Project_de',
     about_project_advisor: 'Lead\:_de',
     about_credits_title: 'Credits_de',
-    about_credits_partner: 'Partner\:_de',
     about_credits_mapdata: 'Geo data\:_de',
     about_credits_tiledata: 'Tiles\:_de',
     about_credits_markers: 'Marker Icons\:_de',
     about_credits_translation: 'Translation\:_de',
-    about_legal_title: 'Legal note\:_de',
     about_legal_message: 'Please follow the guidelines of OpenStreetMap and don\'t use copyright protected sources without permission._de',
-
+    about_thanks: 'Thanks to_de',
+    about_many_more: 'and many more_de'
 
 };
 

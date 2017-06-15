@@ -98,20 +98,18 @@ const English = {
     about_version_title: 'Version',
     about_information_title: 'More information',
     about_information_homepage: 'Website\:',
-    about_information_feedback: 'Feedback/FAQ\:',
+    about_information_feedback: 'Feedback and FAQ\:',
     about_information_bugs: 'Report a bug\:',
-    about_developers_title: 'Developers',
     about_project_title: 'Project',
     about_project_advisor: 'Lead\:',
     about_credits_title: 'Credits',
-    about_credits_partner: 'Partner\:',
     about_credits_mapdata: 'Geo data\:',
     about_credits_tiledata: 'Tiles\:',
     about_credits_markers: 'Marker Icons\:',
     about_credits_translation: 'Translation\:',
-    about_legal_title: 'Legal note\:',
     about_legal_message: 'Please follow the guidelines of OpenStreetMap and don\'t use copyright protected sources without permission.',
-
+    about_thanks: 'Thanks to',
+    about_many_more: 'and many more'
 };
 
 export default English;
