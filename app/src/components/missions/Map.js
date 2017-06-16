@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {
     View,
     Platform,
-    Text
+    Text,
+    Linking
 } from 'react-native';
 import Mapbox, { MapView } from 'react-native-mapbox-gl';
 import { connect } from 'react-redux';
@@ -14,6 +15,7 @@ import { hideLoadingModal } from '../../actions/AuthActions';
 import GeoLocation from '../../geolocation/GeoLocation';
 import CoordinateCalculations from '../../geolocation/CoordinateCalculations';
 import { RoundButton } from '../common';
+import Hyperlink from 'react-native-hyperlink';
 
 class Map extends Component {
 
@@ -163,7 +165,7 @@ class Map extends Component {
     map = null;
 
     render() {
-        const { bgColor, mapStyleFullScreen, mapStyleSmallScreen, copyrightStyle,
+        const { bgColor, mapStyleFullScreen, mapStyleSmallScreen, copyrightStyle, linkStyle,
             locBtnFullScreen, locBtnSmallScreen, satBtnSmallScreen, satBtnFullScreen } = styles;
         return (
             <View style={bgColor}>
@@ -196,7 +198,22 @@ class Map extends Component {
                     iconName='layers' 
                     onPress={this.toggleLayer.bind(this)} 
                 />
-                <Text style={[copyrightStyle, this.props.mapModeFullScreen ? {} : { paddingBottom: 50 }]}>© Mapbox, OpenMapTiles, OpenStreetMap</Text>
+                <Hyperlink 
+                    linkStyle={linkStyle}
+                    onPress={url => Linking.openURL(url)}
+                    linkText={url => {
+                        if (url === 'https://www.mapbox.com/') {
+                            return 'Mapbox';
+                        } else if (url === 'https://openmaptiles.org/') {
+                            return 'OpenMapTiles';
+                        } else if (url === 'https://www.openstreetmap.org/copyright') {
+                            return 'OpenStreetMap contributors';
+                        }
+                    }}
+                >
+                <Text style={[copyrightStyle, this.props.mapModeFullScreen ? {} : { paddingBottom: 50 }]}>
+                    © https://www.mapbox.com/,  https://openmaptiles.org/,  https://www.openstreetmap.org/copyright</Text>
+                </Hyperlink>
             </View>
         );
     }
@@ -246,6 +263,9 @@ const styles = {
         left: 5,
         bottom: 5,
         fontSize: 10
+    },
+    linkStyle: {
+      textDecorationLine: 'underline'
     }
     
 };
