@@ -1,5 +1,5 @@
-import English from './English';
-import German from './German';
+import English from './English.json';
+import German from './German.json';
 
 const Translations = {
   en: English,
