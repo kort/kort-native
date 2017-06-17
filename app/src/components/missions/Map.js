@@ -7,15 +7,17 @@ import {
 } from 'react-native';
 import Mapbox, { MapView } from 'react-native-mapbox-gl';
 import { connect } from 'react-redux';
+import Hyperlink from 'react-native-hyperlink';
 import Config from '../../constants/Config';
 import { showMapModeFullscreen, updateCenterCoordinates } from '../../actions/MapActions';
-import { downloadMissions, startMission, downloadMissionGeometry } from '../../actions/MissionActions';
+import { downloadMissions, 
+    startMission, 
+    downloadMissionGeometry } from '../../actions/MissionActions';
 import { onRightClicked } from '../../actions/NavigationActions';
 import { hideLoadingModal } from '../../actions/AuthActions';
 import GeoLocation from '../../geolocation/GeoLocation';
 import CoordinateCalculations from '../../geolocation/CoordinateCalculations';
 import { RoundButton } from '../common';
-import Hyperlink from 'react-native-hyperlink';
 
 class Map extends Component {
 
