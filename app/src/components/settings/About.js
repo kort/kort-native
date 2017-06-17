@@ -57,14 +57,19 @@ class About extends Component {
                 source={require('../../../assets/images/about/hsr_logo.png')} 
             />
             <Text style={textTitle}>{I18n.t('about_credits_title')}</Text>
-            <Text style={textSubTitle}>Data: OpenStreetMap contributors, KeepRight, Overpass</Text>
+            <Text style={textSubTitle}>Data:{'\n'}
+                OpenStreetMap contributors{'\n'}
+                KeepRight{'\n'}
+                Overpass</Text>
             <Hyperlink 
                 linkStyle={linkStyle}
                 onPress={url => Linking.openURL(url)}
                 linkText={() => { return 'OpenMapTiles.com'; }}
             >
             <Text style={textSubTitle}>
-              {I18n.t('about_credits_tiledata')} https://openmaptiles.com/hosting/ (Klokan Technologies), Mapbox
+              {I18n.t('about_credits_tiledata')}{'\n'}
+              https://openmaptiles.com/hosting/ (Klokan Technologies){'\n'}
+              Mapbox
             </Text>
             </Hyperlink>
             <Hyperlink 
@@ -83,12 +88,19 @@ class About extends Component {
                 }
             >
                 <Text style={textSubTitle}>
-                {I18n.t('about_credits_markers')} Icon made by http://www.flaticon.com/authors/freepik, http://www.flaticon.com/authors/cursor-creative, http://www.flaticon.com/authors/hevngrafix from www.flaticon.com
+                {I18n.t('about_credits_markers')} Icon made by{'\n'}
+                http://www.flaticon.com/authors/freepik{'\n'}
+                http://www.flaticon.com/authors/cursor-creative{'\n'}
+                http://www.flaticon.com/authors/hevngrafix{'\n'}
+                from www.flaticon.com
                 </Text>
             </Hyperlink>
             <Hyperlink linkStyle={linkStyle} onPress={url => Linking.openURL(url)}>
                 <Text style={textSubTitle}>
-                Fonts: FontAwesome, Ionicons, MaterialIcons
+                Fonts:{'\n'}
+                FontAwesome{'\n'}
+                Ionicons{'\n'}
+                MaterialIcons
                 </Text>
             </Hyperlink>
             <Hyperlink 
@@ -96,12 +108,46 @@ class About extends Component {
                 onPress={url => Linking.openURL(url)}
                 linkText={() => { return 'Transifex'; }}
             >
-                <Text style={textSubTitle}>{I18n.t('about_credits_translation')} https://www.transifex.com/odi/kort/</Text>
+                <Text style={textSubTitle}>{I18n.t('about_credits_translation')}{'\n'}
+                    https://www.transifex.com/odi/kort/</Text>
             </Hyperlink>
-            <Text style={textSubTitle}>Software Libraries: </Text>
+            <Text style={textSubTitle}>Software Libraries:{'\n'}
+                    lodash{'\n'}
+                    react{'\n'}
+                    react-native{'\n'}
+                    react-native-animatable{'\n'}
+                    react-native-google-signin{'\n'}
+                    react-native-hyperlink{'\n'}
+                    react-native-i18n{'\n'}
+                    react-native-mapbox-gl{'\n'}
+                    react-native-modal-datetime-picker{'\n'}
+                    react-native-modal-dropdown{'\n'}
+                    react-native-page-control{'\n'}
+                    react-native-rest-client{'\n'}
+                    react-native-router-flux{'\n'}
+                    react-native-segmented-control-tab{'\n'}
+                    react-native-select-multiple{'\n'}
+                    react-native-settings-list{'\n'}
+                    react-native-simple-store{'\n'}
+                    react-native-vector-icons{'\n'}
+                    react-native-version-number{'\n'}
+                    react-redux{'\n'}
+                    redux{'\n'}
+                    redux-thunk
+            </Text>
             <Text style={textTitle}>{I18n.t('about_thanks')}</Text>
             <Text style={textSubTitle}>
-            Stefan Oderbolz (Liip), Jürg Hunziker (Liip), Reto Senn (bitforge), Pirmin Kalberer (Sourcepole), E. Sivro, S. Fritschi, M. Melchiori, D. Mülhaupt, A. Egli, C. Schumacher, {I18n.t('about_many_more')}
+            Stefan Oderbolz (Liip){'\n'}
+            Jürg Hunziker (Liip){'\n'}
+            Reto Senn (bitforge){'\n'}
+            Pirmin Kalberer (Sourcepole){'\n'}
+            E. Sivro{'\n'}
+            S. Fritschi{'\n'}
+            M. Melchiori{'\n'}
+            D. Mülhaupt{'\n'}
+            A. Egli{'\n'}
+            C. Schumacher{'\n'}
+            {I18n.t('about_many_more')}
             </Text>
           </View>
         </View>
