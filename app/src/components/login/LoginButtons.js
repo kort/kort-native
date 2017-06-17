@@ -24,11 +24,11 @@ const LoginButtons = ({ signInGoogle, signInOSM, signInFacebook, proceedWithoutL
                     imgSource={'osm'}
                 >{I18n.t('login_button_sign_in_with', { provider: 'OSM' })}
                 </ButtonWithImage> 
-                <ButtonWithImage 
+                {/*<ButtonWithImage 
                     onPress={signInFacebook}
                     imgSource={'facebook'}
                 >{I18n.t('login_button_sign_in_with', { provider: 'Facebook' })}
-                </ButtonWithImage>  
+                </ButtonWithImage>  */}
                 <Button 
                     style={{ marginTop: 20 }}
                     onPress={proceedWithoutLogin}
