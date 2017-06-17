@@ -221,7 +221,7 @@ class MissionSolver extends Component {
     }
 
     renderAchievementsModal() {
-        if (this.props.currentAchievementIndex > -1) {
+        if (this.props.currentAchievementIndex > -1 && this.validateInput() !== '') {
         const currentAchievement = this.props.newAchievements[this.props.currentAchievementIndex];
              return (  
                     <AchievementPopup
