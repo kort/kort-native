@@ -7,7 +7,7 @@
     "tab_settings": "Einstellungen",
 
     // Navigation Bar
-    "navbar_missions": "Missionsen",
+    "navbar_missions": "Missionen",
     "navbar_achievements": "Auszeichnungen",
     "navbar_highscore": "Highscore",
     "navbar_profile": "Profil",
@@ -58,6 +58,7 @@
     "highscore_tab_month": "Monat",
     "highscore_tab_week": "Woche",
     "highscore_tab_day": "Tag",
+    "highscore_missions": "Missionen",
 
     // Profile
     "profile_login": "Einloggen",
