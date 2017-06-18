@@ -57,7 +57,7 @@ class MissionSolver extends Component {
     onModalConfirm() {
         if (this.props.modalType === 'unsolvable') {
             const mission = this.props.activeMission;
-            this.props.solveMission(this.props.user.id, mission, '', false, 0);
+            this.props.solveMission(this.props.user.id, mission, '', '', false, 0);
         } else if (this.props.modalType !== 'notLoggedIn') {
             this.props.hideModal(true);
 
