@@ -78,7 +78,7 @@ class MissionSolver extends Component {
     hideMission() {
         this.props.showMission(false);
         this.props.downloadMissions(this.props.centerCoordinates, 
-        Config.RADIUS_IN_M_FOR_MISSION_FETCHING, true);
+        Config.RADIUS_IN_M_FOR_MISSION_FETCHING, true, this.props.user.id);
     }
 
     /*

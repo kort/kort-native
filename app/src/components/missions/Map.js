@@ -36,7 +36,7 @@ class Map extends Component {
                 this.props.coordsOfDownload, nextProps.currentLocation.coords) 
             > Config.DISTANCE_DIFF_IN_M_FOR_MISSION_FETCHING) {
                 this.props.downloadMissions(
-                    nextProps.currentLocation.coords, Config.RADIUS_IN_M_FOR_MISSION_FETCHING, false); 
+                    nextProps.currentLocation.coords, Config.RADIUS_IN_M_FOR_MISSION_FETCHING, false, this.props.user.id); 
             }
         }
         
@@ -56,7 +56,7 @@ class Map extends Component {
         }
 
         if (nextProps.currentView === 'mission' && nextProps.rightClicked) {
-            this.props.downloadMissions(this.props.centerCoordinates, Config.RADIUS_IN_M_FOR_MISSION_FETCHING, true);
+            this.props.downloadMissions(this.props.centerCoordinates, Config.RADIUS_IN_M_FOR_MISSION_FETCHING, true, this.props.user.id);
             this.props.onRightClicked(false, '');
         }
     }
@@ -272,8 +272,9 @@ const styles = {
     
 };
 
-const mapStateToProps = ({ mapReducer, missionReducer, settingsReducer, navigationReducer }) => {
+const mapStateToProps = ({ mapReducer, missionReducer, settingsReducer, navigationReducer, authReducer }) => {
     const { mapModeFullScreen, currentLocation, centerCoordinates } = mapReducer;
+    const { user } = authReducer;
     const { missionAnnotations, activeMission, missionsData, 
         missionsLoading, coordsOfDownload, errorMsg } = missionReducer;
     const { stats, mapRotation } = settingsReducer;
@@ -290,7 +291,8 @@ const mapStateToProps = ({ mapReducer, missionReducer, settingsReducer, navigati
         mapRotation,
         rightClicked,
         currentView,
-        centerCoordinates };
+        centerCoordinates,
+        user };
 };
 
 

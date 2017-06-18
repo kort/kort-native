@@ -22,8 +22,8 @@ export default class KortAPI extends RestClient {
     return this.GET(`${Config.USER_INFO}/${userId}`);
   }
 
-  getMissions(lat, lon, radius) {
-    return this.GET(Config.MISSIONS, { lat, lon, radius, lang: this.getLocale() });
+  getMissions(lat, lon, radius, userId) {
+    return this.GET(Config.MISSIONS, { lat, lon, radius, lang: this.getLocale(), user_id: userId });
   }
 
   getMissionGeometry(osmType, osmId) {

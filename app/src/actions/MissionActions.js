@@ -10,13 +10,13 @@ import {
 } from './types';
 import KortAPI from '../data/KortAPI';
 
-export const downloadMissions = (coordinate, radius, manual) => {
+export const downloadMissions = (coordinate, radius, manual, userId) => {
     const { latitude, longitude } = coordinate;
     console.log('download', latitude, longitude);
     return (dispatch) => {
         dispatch({ type: MISSIONS_DOWNLOAD, payload: null });
         const api = new KortAPI();
-        api.getMissions(latitude, longitude, radius)
+        api.getMissions(latitude, longitude, radius, userId)
             .then(data => {
                 dispatch({
                     type: MISSIONS_DOWNLOADED_SUCCESS,
