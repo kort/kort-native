@@ -30,9 +30,10 @@ export default class KortAPI extends RestClient {
     return this.GET(`${Config.MISSIONS}/osm/${osmType}/${osmId}`);
   }
 
-  sendSolution(schemaId, errorId, solution) {
-    return this.POST(`${Config.MISSIONS}/${schemaId}/${errorId}/solution`, 
-      { solution, lang: this.getLocale() });
+  sendSolution(schemaId, errorId, newSolution) {
+    const solution = Object.assign({}, newSolution);
+    solution.lang = this.getLocale();
+    return this.POST(`${Config.MISSIONS}/${schemaId}/${errorId}/solution`, { solution });
   }
 
   getHighscore(type, limit) {
