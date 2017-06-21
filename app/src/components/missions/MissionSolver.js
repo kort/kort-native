@@ -61,7 +61,7 @@ class MissionSolver extends Component {
         } else if (this.props.modalType !== 'notLoggedIn') {
             this.props.hideModal(true);
 
-            if (this.props.newAchievements.length > 0) {
+            if (this.props.newAchievements.length > 0 && this.validateInput()) {
                 this.props.showAchievements(0);
             } else {
                 this.hideMission();
@@ -164,8 +164,6 @@ class MissionSolver extends Component {
     }
 
     renderAnswerSelection() {
-        //TODO handle different types of mission in a nicer way
-        console.log('type', this.props.activeMission);
         if (this.props.activeMission.error_type === 'opening_hours') {
             return (<OpeningHours 
                 setAnswer={value => this.props.answerSet(value, '')}
