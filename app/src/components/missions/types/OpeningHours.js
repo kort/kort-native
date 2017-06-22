@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {
     View,
     Text,
-    ListView
+    ListView,
+    Dimensions
 } from 'react-native';
 import { connect } from 'react-redux';
 import ModalDropdown from 'react-native-modal-dropdown';
@@ -188,6 +189,8 @@ const dataSource = new ListView.DataSource({
   rowHasChanged: (r1, r2) => r1 !== r2,
 });
 
+const deviceWidth = Dimensions.get('window').width;
+
 const styles = {
     buttonStyle: {
         alignSelf: 'center',
@@ -214,7 +217,7 @@ const styles = {
         justifyContent: 'center'
     },
     dayColStyle: {
-        width: 120,
+        width: (deviceWidth <= 320) ? 80 : 120,
         alignItems: 'center',
         justifyContent: 'center'
     },
