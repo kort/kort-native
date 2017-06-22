@@ -48,6 +48,8 @@
     "mission_answer_opening_hours_open_end": "Open End",
     "mission_answer_opening_hours_placeholder_from": "Von",
     "mission_answer_opening_hours_placeholder_to": "Bis",
+    "mission_answer_opening_hours_edit_result": "Resultat",
+    "mission_answer_opening_hours_edit_reset": "Reset",
 
 
     // Achievements

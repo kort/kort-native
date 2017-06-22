@@ -48,7 +48,8 @@
     "mission_answer_opening_hours_open_end": "Open End",
     "mission_answer_opening_hours_placeholder_from": "From",
     "mission_answer_opening_hours_placeholder_to": "To",
-
+    "mission_answer_opening_hours_edit_result": "Result",
+    "mission_answer_opening_hours_edit_reset": "Reset",
 
     // Achievements
     "achievements_message_congratulations_award": "{{message}}\n\nCongratulations. You have earned this award on {{achievementDate}}.",

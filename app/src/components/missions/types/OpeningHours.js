@@ -132,7 +132,7 @@ class OpeningHours extends Component {
                 <Button 
                         style={styles.buttonStyle}
                         onPress={this.editOpeningHoursText.bind(this)}
-                >Edit Result
+                >{I18n.t('mission_answer_opening_hours_edit_result')}
                 </Button>
             );
         }
@@ -145,7 +145,7 @@ class OpeningHours extends Component {
                 <Button 
                         style={styles.buttonStyle}
                         onPress={() => this.props.setManuallyEdited(false)}
-                >Reset
+                >{I18n.t('mission_answer_opening_hours_edit_reset')}
                 </Button>
             );
         }
