@@ -9,7 +9,7 @@ export default class KortAPI extends RestClient {
       headers: {
         Authorization: `${authToken}`
       },
-      simulatedDelay: 2000
+      simulatedDelay: 0
     });
   }
   
