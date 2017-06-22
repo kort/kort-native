@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import ModalDropdown from 'react-native-modal-dropdown';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import I18n from 'react-native-i18n';
+import _ from 'lodash';
 import TimeRangeSelection from './TimeRangeSelection';
 import DaySelection from './DaySelection';
 import OpeningHoursRepresentation from '../../../date/OpeningHoursRepresentation';
@@ -152,14 +153,15 @@ class OpeningHours extends Component {
     }
 
     render() {
+        const isEmpty = _.isEmpty(this.props.entries);
         return (
-            <View style={styles.openingHoursStyle}>
+            <View style={isEmpty ? styles.openingHoursStyleEmpty : styles.openingHoursStyle}>
                 <ListView 
                     dataSource={this.props.dataSource}
                     renderRow={(rowData) => this.renderRow(rowData)}
                     enableEmptySections
                 />
-                <View style={{ flexDirection: 'row' }}>
+                <View style={isEmpty ? styles.noRowStyle : styles.simpleRowStyle}>
                     <View style={styles.deleteColStyle}>
                     <ButtonWithIcon 
                                 iconName='ios-add-circle' 
@@ -192,6 +194,12 @@ const dataSource = new ListView.DataSource({
 const deviceWidth = Dimensions.get('window').width;
 
 const styles = {
+    noRowStyle: {
+        alignItems: 'center'
+    },
+    simpleRowStyle: {
+        flexDirection: 'row'
+    },
     buttonStyle: {
         alignSelf: 'center',
         width: 100, 
@@ -201,6 +209,9 @@ const styles = {
         color: '#395971',
         height: 30,
         fontWeight: 'bold'
+    },
+    openingHoursStyleEmpty: {
+        height: 50,
     },
     openingHoursStyle: {
         height: 180,
