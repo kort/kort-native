@@ -28,6 +28,8 @@
     "mission_message_unsolvable": "Willst du wirklich diese Missionen als unlösbar markieren? Diese Missionen wird von nun an nicht mehr angezeigt.",
     "mission_message_valid_answer": "Bitte eine gültige Antwort eingeben!\n\n{{validationMessage}}",
     "not_logged_in_error": "Bitte zuerst einloggen.",
+    "mission_complete_mission": "Mission lösen",
+    "mission_complete_unable_to_solve": "Nicht lösbar",
     "mission_message_reward": "Gratulation! Du hast zusätzliche {{koins}} Koins gewonnen. Sobald deine Antwort validiert wurde erhälst du weitere {{koinReward}} Koins.",
     "mission_message_not_within_perimeter": "Du musst mindestens {{missionCount}} Missionen lösen um weitere Mission weiter weg als {{distance}}m lösen zu können.",
     "mission_message_unsolved": "Die Mission wurde als unlösbar markiert.",

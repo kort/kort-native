@@ -28,6 +28,8 @@
     "mission_message_unsolvable": "Do you really want to set this mission as unsolvable? It will be hidden from now on.",
     "mission_message_valid_answer": "Please enter a valid answer!\n\n{{validationMessage}}",
     "not_logged_in_error": "Please log in first.",
+    "mission_complete_mission": "Complete Mission",
+    "mission_complete_unable_to_solve": "Unable to solve",
     "mission_message_reward": "Congratulations! You have earned {{koins}} additional Koins. Once your answer is validated you will get another {{koinReward}} Koins.",
     "mission_message_not_within_perimeter": "You have to solve at least {{missionCount}} missions in order to being able to solve missions further away than {{distance}}m from your current location.",
     "mission_message_unsolved": "The mission has been marked as unsolvable",

@@ -267,7 +267,7 @@ class MissionSolver extends Component {
                         <Button
                             onPress={this.solveMission.bind(this)}
                             style={completeMissionButtonStyle}
-                        >Complete Mission
+                        >{I18n.t('mission_complete_mission')}
                         </Button>
                         <View style={additionalButtonsStyle}>
                         <ButtonWithImage
@@ -280,7 +280,7 @@ class MissionSolver extends Component {
                             onPress={this.confirmUnsolvable.bind(this)}
                             style={unsolvableButtonStyle}
                         >
-                            Unable to solve
+                            {I18n.t('mission_complete_unable_to_solve')}
                         </Button>
                         </View>
                </View>
