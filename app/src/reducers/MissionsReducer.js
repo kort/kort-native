@@ -55,7 +55,6 @@ export const createMissionAnnotations = (data, highlightedGeometry) => {
     const annotations = [];
     for (const mission of data) {
         if (highlightedGeometry && highlightedGeometry.geom) {
-            //TODO polygon -> relation
                 let mapboxType = 'point';
                 if (highlightedGeometry.type === 'way') {
                     mapboxType = 'polyline';
