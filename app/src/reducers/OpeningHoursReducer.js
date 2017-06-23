@@ -10,7 +10,8 @@ import {
     SHOW_DAYS_SELECTION_MODAL,
     TO_TIME,
     FROM_TIME,
-    DAYS
+    DAYS,
+    SET_INITIAL_STATE
  } from '../actions/types';
 
  const INITIAL_STATE_TIME_RANGE_INSTANCE = {
@@ -47,6 +48,11 @@ const createNewTimeRange = () => {
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
+        case SET_INITIAL_STATE:
+        for (let i = state.entries.length; i > 0; --i) {
+            state.entries.pop();
+        }
+        return { ...state }; 
         case MANUALLY_EDITED:
         return { ...state, manuallyEdited: action.payload };
         case ADD_NEW_OH_ENTRY:

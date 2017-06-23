@@ -17,15 +17,23 @@ import { ButtonWithIcon, Button, ModalMultiInput } from '../../common';
 import { showDaysSelectionModal, setDays, setFromTime, 
     setToTime, showFromTimeModal, showToTimeModal, addNewEntry, 
     removeEntry, addNewTimeRange, setOpenEnd, 
-    setManuallyEdited } from '../../../actions/OpeningHoursActions';
+    setManuallyEdited,
+    setInitialState } from '../../../actions/OpeningHoursActions';
 
 class OpeningHours extends Component {
 
     state={ showEditModal: false };
 
+    componentDidMount() {
+        this.props.setInitialState();
+    }
+
     onSelectOption(idx, value, row) {
         if (idx === '1') {
             this.props.setOpenEnd(row);
+            setTimeout(() => {
+                this.dataChanged();
+            }, 500);          
         } else {
             this.props.addNewTimeRange(row);
         }
@@ -42,6 +50,11 @@ class OpeningHours extends Component {
             this.props.setAnswer(OpeningHoursRepresentation(this.props.entries));
         }
         this.setState({ showEditModal: true });
+    }
+
+    dataChanged() {
+        this.props.setAnswer(OpeningHoursRepresentation(this.props.entries));
+        console.log('answer ' + OpeningHoursRepresentation(this.props.entries));
     }
 
     manuallyEdited(text) {
@@ -64,6 +77,7 @@ class OpeningHours extends Component {
                         data={timeRangeData}
                         row={row}
                         col={col}
+                        dataChanged={this.dataChanged.bind(this)}
                     />
                 </View>
         );
@@ -91,6 +105,7 @@ class OpeningHours extends Component {
                     <View style={dayColStyle}>
                         <DaySelection
                         data={rowData}
+                        dataChanged={this.dataChanged.bind(this)}
                         />
                     </View>
                     {this.renderTimeRangeEntries(rowData)}
@@ -255,4 +270,5 @@ export default connect(mapStateToProps,
     removeEntry, 
     addNewTimeRange, 
     setOpenEnd, 
-    setManuallyEdited })(OpeningHours);
+    setManuallyEdited,
+    setInitialState })(OpeningHours);

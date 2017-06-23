@@ -10,9 +10,16 @@ import {
     SHOW_DAYS_SELECTION_MODAL,
     TO_TIME,
     FROM_TIME,
-    DAYS
+    DAYS,
+    SET_INITIAL_STATE
 } from './types';
 import WeekdayRepresentation from '../date/WeekdayRepresentation';
+
+export const setInitialState = () => {
+      return { 
+        type: SET_INITIAL_STATE
+    };    
+};
 
 export const addNewEntry = () => {
     return { 

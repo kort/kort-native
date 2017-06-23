@@ -25,6 +25,7 @@ import { answerModalVisible } from '../../../actions/AnswerSelectionActions';
     hideModal = () => {
         this.props.showDaysSelectionModal(false, this.props.data.row);
         this.props.answerModalVisible(false);
+        this.props.dataChanged();
     }
 
     days = [

@@ -26,12 +26,18 @@ import { answerModalVisible } from '../../../actions/AnswerSelectionActions';
         this.props.setFromTime(`${this.get2DigitHours(date)}:${this.get2DigitMinutes(date)}`,
             this.props.row, this.props.col);  
         this.props.answerModalVisible(false);
+        setTimeout(() => {
+                this.props.dataChanged();
+            }, 500);        
     };
 
     handleDatePickedTo = (date) => {
         this.props.setToTime(`${this.get2DigitHours(date)}:${this.get2DigitMinutes(date)}`,
             this.props.row, this.props.col);  
         this.props.answerModalVisible(false);
+        setTimeout(() => {
+                this.props.dataChanged();
+            }, 500);  
     };
 
     showFromModal = () => {
