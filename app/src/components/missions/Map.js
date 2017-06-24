@@ -23,8 +23,7 @@ class Map extends Component {
 
     state = { firstTapAt: 0, annotationOpen: false, annotationOpenedAt: 0, regionChange: false };
 
-    componentDidMount() {
-        console.log(Config.MAPBOX_ACCESS_TOKEN);
+    componentWillMount() {
         Mapbox.setAccessToken(Config.MAPBOX_ACCESS_TOKEN);
     }
 
