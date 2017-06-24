@@ -18,9 +18,7 @@ class LoginBox extends Component {
     componentDidMount() {
         //init google play services
         GoogleSignin.hasPlayServices({ autoResolve: true }).then(() => {
-            if (!this.props.loading) {
                 this.configureGoogleSignIn();
-            }
         });
         //init deep linking listeners
         Linking.addEventListener('url', this.appWokeUp);
@@ -66,25 +64,17 @@ class LoginBox extends Component {
     configureGoogleSignIn() {
         GoogleSignin.configure({
         iosClientId: Config.GOOGLE_IOS_CLIENT_ID, 
-        webClientId: Config.GOOGLE_WEB_CLIENT_ID
+        webClientId: Config.GOOGLE_WEB_CLIENT_ID,
+        offlineAccess: false    //idToken was sometimes NULL with offlineAccess true
         })
         .then(() => {
-                GoogleSignin.currentUserAsync().then((user) => {
-                this.setState({ user });
-                if (user) {
-                    console.log(GoogleSignin.currentUser());
-                    this.verifyGoogleIdToken(user.idToken);
-                }
-            }).done();
+                //do nothing
         });
     }
 
     signInGoogle() {
         GoogleSignin.signIn()
         .then((user) => {
-            console.log('signing in');
-            this.setState({ user });
-            console.log(this.state.user);
             if (user) {
                 this.verifyGoogleIdToken(user.idToken);
             }
