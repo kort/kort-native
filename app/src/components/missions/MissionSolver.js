@@ -29,6 +29,7 @@ import { Input,
 import OpeningHours from './types/OpeningHours';
 import AchievementPopup from '../achievements/AchievementPopup';
 import CoordinateCalculations from '../../geolocation/CoordinateCalculations';
+import OpeningHoursVerifier from '../../date/OpenHoursVerifier';
 
 class MissionSolver extends Component {
 
@@ -58,6 +59,8 @@ class MissionSolver extends Component {
         if (this.props.modalType === 'unsolvable') {
             const mission = this.props.activeMission;
             this.props.solveMission(this.props.user.id, mission, '', '', false, 0);
+        } else if (this.props.modalType === 'validation') {
+            this.props.hideModal(true);
         } else if (this.props.modalType !== 'notLoggedIn') {
             this.props.hideModal(true);
 
@@ -129,6 +132,8 @@ class MissionSolver extends Component {
             } else if (upperBound && lowerBound) {
                 return lowerBound <= parseFloat(this.props.answer) && 
                     parseFloat(this.props.answer) <= upperBound;
+            } else if (this.props.activeMission.error_type === 'opening_hours') {
+                return OpeningHoursVerifier(this.props.answer);
             }
         return true;
     }

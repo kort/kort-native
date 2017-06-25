@@ -113,6 +113,7 @@ class About extends Component {
             </Hyperlink>
             <Text style={textSubTitle}>Software Libraries:{'\n'}
                     lodash{'\n'}
+                    opening_hours{'\n'}
                     react{'\n'}
                     react-native{'\n'}
                     react-native-animatable{'\n'}

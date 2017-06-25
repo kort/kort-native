@@ -54,7 +54,6 @@ class OpeningHours extends Component {
 
     dataChanged() {
         this.props.setAnswer(OpeningHoursRepresentation(this.props.entries));
-        console.log('answer ' + OpeningHoursRepresentation(this.props.entries));
     }
 
     manuallyEdited(text) {

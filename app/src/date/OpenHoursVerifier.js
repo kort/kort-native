@@ -1,22 +1,29 @@
-// import oh from 'opening_hours ';
+import opening_hours from 'opening_hours';
 
-// /**
-//  * this helper library verifies any oh string
-//  * with the help of the opening_hours library
-//  * @param {*} entries 
-//  */
-// const OpeningHoursVerifier = (oh_string) => {
-//     return (
-//         verifyOHRepresentation(oh_string)
-//     );
-// };
+/**
+ * this helper library verifies any oh string
+ * with the help of the opening_hours library
+ * @param {*} entries 
+ */
+const OpeningHoursVerifier = (ohString) => {
+    return (
+        verifyOHRepresentation(ohString)
+    );
+};
 
+function verifyOHRepresentation(ohString) {
+    try {
+        const oh = new opening_hours(ohString, nominatimObject);
+        return true;
+    } catch (e) {
+        //error in formatting oh string -> not valid
+        console.log(e);
+        return false;
+    }
+}
 
-// function verifyOHRepresentation(oh_string) {
-//     var oh = new opening_hours(oh_string);
+// as long as there is no further requirements it is sufficient to take just one country code
+// instead of making a request each time to nominatim
+const nominatimObject = { address: { country_code: 'de' } };
 
-//     return true;
-// }
-
-
-// export default OpeningHoursVerifier;
+export default OpeningHoursVerifier;
