@@ -14,7 +14,7 @@ function constructOHRep(entries) {
 
     for (let i = 0; i < entries.length; ++i) {
         const entry = entries[i];
-        string += entry.formattedDays !== null ? `${entry.formattedDays}` : '';
+        string += entry.formattedDays != null ? `${entry.formattedDays}` : '';
         let timeEntry = entry.timeRangeEntries[0];
         string += getTimeFromEntry(timeEntry, ' ');
         
