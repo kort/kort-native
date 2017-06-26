@@ -1,6 +1,6 @@
 import SecretConfig from './SecretConfig';
 
-const API_VERSION = 'v0.1';
+const API_VERSION = 'v1.0';
 
 export default {
 
