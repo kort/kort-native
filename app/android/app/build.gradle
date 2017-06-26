@@ -82,6 +82,16 @@ def enableSeparateBuildPerCPUArchitecture = false
  */
 def enableProguardInReleaseBuilds = false
 
+gradle.taskGraph.whenReady { taskGraph ->
+    if(taskGraph.hasTask(assembleRelease) || taskGraph.hasTask(installRelease)) {
+        // Only execute when we are trying to assemble a release build
+        def passKeystore = System.console().readLine("\nKeystore password: ")
+        def passKey = System.console().readLine("\nKey password: ")
+        android.signingConfigs.release.storePassword = passKeystore
+        android.signingConfigs.release.keyPassword = passKey
+    }
+}
+
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
@@ -91,7 +101,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 22
         versionCode 1
-        versionName "1.0"
+        versionName "1.0-b1"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -99,9 +109,9 @@ android {
     signingConfigs {
         release {
             storeFile file("my-release-key.keystore")
-            storePassword System.console().readLine("\nKeystore password: ")
+            storePassword "" // REQUIRED otherwise cannot be overwritten
             keyAlias "kort-alias"
-            keyPassword System.console().readLine("\nKey password: ")
+            keyPassword "" // REQUIRED otherwise cannot be overwritten
         }
     }
     splits {
