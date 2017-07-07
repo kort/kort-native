@@ -88,7 +88,7 @@
     "showcase_4_title": "Improve OpenStreetMaps",
     "showcase_4_desc": "Your provided answers are validated and written back to OpenStreetMap.",
     "showcase_button_next": "Next",
-    "showcase_button_start": "Let\"s start",
+    "showcase_button_start": "Let\'s start",
 
     // Error
     "error_message_bad_connectivity": "There was an error connecting to the server. Check your connectivity.",
@@ -107,7 +107,7 @@
     "about_credits_tiledata": "Tiles:",
     "about_credits_markers": "Marker Icons:",
     "about_credits_translation": "Translation:",
-    "about_legal_message": "Please follow the guidelines of OpenStreetMap and don\"t use copyright protected sources without permission.",
+    "about_legal_message": "Please follow the guidelines of OpenStreetMap and don\'t use copyright protected sources without permission.",
     "about_thanks": "Thanks to",
     "about_many_more": "and many more"
 }
