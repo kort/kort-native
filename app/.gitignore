@@ -59,3 +59,6 @@ fastlane/screenshots
 # custom ignors
 SecretConfig.js
 google-services.json
+
+# ignore generated snapshot tests
+*.snap
