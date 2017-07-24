@@ -43,6 +43,14 @@
     "preset": "react-native",
     "setupFiles": [
       "./jest/setup.js"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/build/",
+      "/__tests__/snapshot/Showcase.test.js",
+      "/__tests__/snapshot/LoginOverview.test.js",
+      "/__tests__/snapshot/ProfileOverview.test.js",
+      "/__tests__/snapshot/SettingsOverview.test.js"
     ]
   }
 }
