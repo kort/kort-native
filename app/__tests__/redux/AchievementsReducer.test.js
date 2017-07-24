@@ -25,4 +25,48 @@ describe('achievements reducer', () => {
       }
     );
   });
+
+  it('download achievements', () => {
+    expect(
+      reducer([], {
+        type: types.ACHIEVEMENTS_DOWNLOAD,
+        payload: true
+      })
+    ).toEqual(
+      {
+        downloading: true,
+        loading: true
+      }
+    );
+  });
+
+    it('download error', () => {
+    expect(
+      reducer([], {
+        type: types.ACHIEVEMENTS_DOWNLOADED_ERROR,
+        payload: 'error'
+      })
+    ).toEqual(
+      {
+        downloading: false,
+        errorMsg: 'error',
+        loading: false
+      }
+    );
+  });
+
+  it('download success', () => {
+    expect(
+      reducer([], {
+        type: types.ACHIEVEMENTS_DOWNLOADED_SUCCESS,
+        payload: {}
+      })
+    ).toEqual(
+      {
+        downloading: false,
+        loading: false,
+        achievements: {}
+      }
+    );
+  });
 });

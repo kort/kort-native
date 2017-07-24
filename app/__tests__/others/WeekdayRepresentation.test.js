@@ -1,4 +1,4 @@
-import WeekdayRepresentation from '../src/date/WeekdayRepresentation';
+import WeekdayRepresentation from '../../src/date/WeekdayRepresentation';
 
 test('test empty weekdays', () => {
     const weekdays = [];

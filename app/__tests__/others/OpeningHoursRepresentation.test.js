@@ -1,4 +1,4 @@
-import OpeningHoursRepresentation from '../src/date/OpeningHoursRepresentation';
+import OpeningHoursRepresentation from '../../src/date/OpeningHoursRepresentation';
 
 const createTimeRange = (fromTime, toTime, openEnd) => {
     return { fromTime, toTime, openEnd };
