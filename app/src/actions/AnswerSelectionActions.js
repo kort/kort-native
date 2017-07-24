@@ -65,7 +65,8 @@ export const solveMission = (userId, mission, value, option, solved, additionalK
     return (dispatch) => {  
     dispatch({ type: SEND_SOLUTION });
     const api = new KortAPI();
-        const newKoinCount = additionalKoins !== 0 ? `${mission.koinReward} + ${additionalKoins}` : mission.koinReward;
+        const newKoinCount = additionalKoins !== 0 ?
+         `${mission.koinReward} + ${additionalKoins}` : mission.koinReward;
         const solution = {
             koins: mission.koinReward + additionalKoins,
             osm_id: mission.osmId,
