@@ -62,3 +62,6 @@ google-services.json
 
 # ignore generated snapshot tests
 *.snap
+
+# ignore coverage
+coverage/
