@@ -1,0 +1,8 @@
+/* eslint-disable max-len */
+export default {
+
+  GOOGLE_IOS_CLIENT_ID: 'YOUR_GOOGLE_IOS_CLIENT_ID',
+  GOOGLE_WEB_CLIENT_ID: 'YOUR_GOOGLE_WEB_CLIENT_ID',
+
+  MAPBOX_ACCESS_TOKEN: 'YOUR_MAPBOX_TOKEN'
+};
