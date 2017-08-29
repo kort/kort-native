@@ -93,8 +93,6 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string></string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
 	<key>UIAppFonts</key>
