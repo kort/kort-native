@@ -13,7 +13,7 @@ export default {
   MAPBOX_TAP_DELAY_IN_MS: 250,
   MAPBOX_DRAG_DELAY_IN_MS: 450,
 
-  API_URL: 'https://kort.dev.ifs.hsr.ch',
+  API_URL: 'https://prod.kort.dev.ifs.hsr.ch',
 
   DEEP_LINK_URL: 'kortapp://payload?',
 
