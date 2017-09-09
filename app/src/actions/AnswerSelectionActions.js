@@ -61,17 +61,17 @@ export const showModal = (modalConfirm, modalText, modalType) => {
     }; 
 };
 
-export const solveMission = (userId, mission, value, option, solved, additionalKoins) => {
+export const solveMission = (user, mission, value, option, solved, additionalKoins) => {
     return (dispatch) => {  
     dispatch({ type: SEND_SOLUTION });
-    const api = new KortAPI();
+    const api = new KortAPI(user.secret);
         const newKoinCount = additionalKoins !== 0 ?
          `${mission.koinReward} + ${additionalKoins}` : mission.koinReward;
         const solution = {
             koins: mission.koinReward + additionalKoins,
             osm_id: mission.osmId,
             solved,
-            userId,
+            userId: user.id,
             value,
             option
         };
