@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {
     Scene,
     Router,
-    Actions
+    Actions,
+    ActionConst
 } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import I18n from 'react-native-i18n';
@@ -35,12 +36,12 @@ class RouterComponent extends Component {
         <Router>
 
             <Scene key='auth' component={LoginOverview} hideNavBar />
-            <Scene key='root' animation='fade'>
-                <Scene
+            <Scene key='root' animation='fade' type={ActionConst.RESET}>
+            <Scene
                     key='tabbar'
                     tabs
                     tabBarStyle={styles.tabBarStyle}
-                >
+            >
                     <Scene key='missions' title={I18n.t('tab_missions')} icon={MissionsTabIcon}>
                         <Scene
                             key='missionsOverview'

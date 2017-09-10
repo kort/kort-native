@@ -37,7 +37,7 @@ class ProfileOverview extends Component {
 
     onRefresh() {
         if (!this.props.loggedIn) {
-            Actions.pop();
+            Actions.auth(); 
         } else {
             this.props.updateUser(this.props.user);
         }
@@ -47,13 +47,13 @@ class ProfileOverview extends Component {
         if (this.props.loggedIn) {
             this.props.showConfirmModal(true);        
         } else {
-            Actions.pop();
+            Actions.auth();
         }
     }
 
     logout() {
         this.props.logoutUser();
-        Actions.pop();
+        Actions.auth();
     }
 
     renderProviderImage() {

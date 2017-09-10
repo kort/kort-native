@@ -150,7 +150,9 @@ class CustomSelectionView extends Component {
 
 			<Modal
 				visible={this.state.modalVisible}
-				onRequestClose={() =>{alert("Modal has been closed.")}}
+				onRequestClose={() =>{
+					this.setState({ modalVisible: false });
+				}}
 				transparent={true}
 			>
 				<TouchableOpacity onPress={()=> this.openOption()}>
