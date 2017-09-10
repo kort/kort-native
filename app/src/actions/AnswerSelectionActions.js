@@ -68,7 +68,7 @@ export const solveMission = (user, mission, value, option, solved, additionalKoi
         const newKoinCount = additionalKoins !== 0 ?
          `${mission.koinReward} + ${additionalKoins}` : mission.koinReward;
         const solution = {
-            koins: mission.koinReward + additionalKoins,
+            stats_enabled: additionalKoins !== 0,
             osm_id: mission.osmId,
             solved,
             userId: user.id,
