@@ -1,8 +1,6 @@
 [![Build Status](https://travis-ci.org/kort/kort-native.svg?branch=master)](https://travis-ci.org/kort/kort-native)
 # kort-native
-Kort Native is the next iteration of the known Kort webapp.
-It is currently available in beta for iOS and Android and will be released later in summer 17.
-
+Kort Native is the next iteration of the known Kort webapp. It was first released end of september 2017 (as promised :-)). See iOS and Android stores.
 
 Kort is a serious game aimed to improve OpenStreetMap data using the concepts of crowdsourcing and gamification.
 
